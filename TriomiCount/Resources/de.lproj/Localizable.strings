@@ -1,0 +1,57 @@
+/*
+  Localizable.strings
+  TriomiCount
+
+  Created by Marvin Lee Kobert on 04.03.22.
+  
+*/
+
+// Simple constants
+"Yes" = "Ja";
+"No" = "Nein";
+"Reset" = "Zurücksetzen";
+
+// HomeView
+"navigation_link.new_game" = "Neues Spiel";
+"navigation_link.resume" = "Weiterspielen";
+"navigation_link.players" = "Spieler";
+"navigation_link.games" = "Spiele";
+
+// GameOnboardingView
+"gameOnboardingView.participationHeaderText" = "Bitte wähle die Spieler aus, die mitspielen sollen.";
+"gameOnboardingView.button.add_new_player" = "Neuen Spieler erstellen";
+"gameOnboardingView.button.start_game" = "Spiel starten";
+"gameOnboardingView.button.back_to_main_menu" = "Zurück zum Hauptmenü";
+
+// GameView
+"gameView.headerLabel.total_score" = "Punkte";
+"gameView.headerLabel.this_turn_score" = "Diese Runde";
+"gameView.scoreSlider.label_text" = "Wie viele Punkte ist deine Karte wert?";
+"gameView.drawnToggle.label_text" = "Musstest du nachziehen?";
+"gameView.timesDrawnPicker.label_text" = "Wie oft musstest du nachziehen?";
+"gameView.playedCardPicker.label_text" = "Konntest du deine Karte ausspielen?";
+"gameView.nextPlayerButton.label_text" = "Nächster Spieler";
+"gameView.exitGameButton.label_text" = "Spiel verlassen";
+"gameView.endGameButton.label_text" = "Spiel beenden";
+
+// GameResultsView
+"gameResultsView.game_results" = "Spielergebnis";
+"gameResultsView.name" = "Name";
+"gameResultsView.name" = "Punkte";
+"gameResultsView.mainMenuButton.label_text" = "Zurück zum Hauptmenü";
+
+// AddNewPlayerView
+"addNewPlayerView.nameLabel.label_text" = "Wie ist dein Name?";
+"addNewPlayerView.createButton.label_text" = "Erstellen";
+"addNewPlayerView.alertTextFieldEmpty.title" = "Textfeld ist leer!";
+"addNewPlayerView.alertTextFieldEmpty.message" = "Ups! Es sieht so aus, als hättest du mir deinen Namen nicht verraten. Trag ihn bitte in das Textfeld ein.";
+"addNewPlayerView.alertNameToLong.title" = "Bist du sicher?";
+"addNewPlayerView.alertNameToLong.message" = "Schau nochmal, bist du dir sicher das dein Name so lang ist?";
+
+// PlayerDetailView
+"playerDetailView.name" = "Name";
+"playerDetailView.highscore" = "Highscore";
+"playerDetailView.lastScore" = "Punkte im letzten Spiel";
+"playerDetailView.createdOn" = "Erstellt am";
+"playerDetailView.numberOfGamesWon" = "Gewonnene Spiele";
+"playerDetailView.numberOfGamesPlayed" = "Gespielte Spiele";

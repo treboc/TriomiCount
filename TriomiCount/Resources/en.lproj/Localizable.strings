@@ -1,0 +1,55 @@
+/*
+  Localizable.strings
+  TriomiCount
+
+  Created by Marvin Lee Kobert on 04.03.22.
+  
+*/
+// HomeView
+"navigation_link.new_game" = "New Game";
+"navigation_link.resume" = "Resume";
+"navigation_link.players" = "Players";
+"navigation_link.games" = "Games";
+
+// GameOnboardingView
+"gameOnboardingView.participationHeaderText" = "Please chose the players who are participating in the game.";
+"gameOnboardingView.button.add_new_player" = "Add New Player";
+"gameOnboardingView.button.start_game" = "Start Game";
+"gameOnboardingView.button.back_to_main_menu" = "Back to Main Menu";
+
+// GameView
+"gameView.headerLabel.total_score" = "Total score";
+"gameView.headerLabel.this_turn_score" = "This turn";
+"gameView.scoreSlider.label_text" = "How many points is your card worth?";
+"gameView.drawnToggle.label_text" = "Did you have to draw a card?";
+"gameView.timesDrawnPicker.label_text" = "How many times did you have to draw?";
+"gameView.playedCardPicker.label_text" = "Were you able to play the card?";
+"gameView.playedCardPicker.yes" = "Ja";
+"gameView.playedCardPicker.no" = "Nein";
+"gameView.nextPlayerButton.label_text" = "Next Player";
+"gameView.exitGameButton.label_text" = "Exit Game";
+"gameView.endGameButton.label_text" = "End Game";
+
+// GameResultsView
+"gameResultsView.game_results" = "Game Results";
+"gameResultsView.name" = "Name";
+"gameResultsView.name" = "Points";
+"gameResultsView.mainMenuButton.label_text" = "Main menu";
+
+// AddNewPlayerView
+"addNewPlayerView.nameLabel.label_text" = "What's your name?";
+"addNewPlayerView.createButton.label_text" = "Create";
+"addNewPlayerView.alertTextFieldEmpty.title" = "Textfield is empty!";
+"addNewPlayerView.alertTextFieldEmpty.message" = "Oups! It looks like you haven't told me your name yet. Please enter it in the text box.";
+"addNewPlayerView.alertNameToLong.title" = "Are you sure?";
+"addNewPlayerView.alertNameToLong.message" = "Look again. Are you sure, your name is that long?";
+
+// PlayerDetailView
+"playerDetailView.name" = "Name";
+"playerDetailView.highscore" = "Highscore";
+"playerDetailView.lastScore" = "Last Score";
+"playerDetailView.createdOn" = "Created On";
+"playerDetailView.numberOfGamesWon" = "Number Of Games Won";
+"playerDetailView.numberOfGamesPlayed" = "Number Of Games Played";
+
+// Rules

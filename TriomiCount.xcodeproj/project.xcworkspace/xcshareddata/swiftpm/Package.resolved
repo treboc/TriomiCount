@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "PageSheet",
+        "repositoryURL": "https://github.com/ericlewis/PageSheet",
+        "state": {
+          "branch": null,
+          "revision": "3a2dd57c136ab173d7bc3baea78fc07454762375",
+          "version": "1.2.5"
+        }
+      },
+      {
+        "package": "ViewModifierBuilder",
+        "repositoryURL": "https://github.com/ericlewis/ViewModifierBuilder",
+        "state": {
+          "branch": null,
+          "revision": "2537f7a6fa12408ff1d9672cfadd5bb5f1546db7",
+          "version": "0.9.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

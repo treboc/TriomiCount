@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Game" representedClassName="Game" syncable="YES">
+        <attribute name="endedOn_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="hasEnded_" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="id_" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="startedOn_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="winnerID_" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="players" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Player" inverseName="games" inverseEntity="Player"/>
+        <relationship name="turns" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Turn" inverseName="game" inverseEntity="Turn"/>
+    </entity>
+    <entity name="GameScoreDict" representedClassName="GameScoreDict" syncable="YES">
+        <attribute name="gameKey" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="playerID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="scoreValue" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="gameScoresDicts" inverseEntity="Player"/>
+    </entity>
+    <entity name="Player" representedClassName="Player" syncable="YES">
+        <attribute name="createdOn_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="currentScore_" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="gameScores_" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="highscore_" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id_" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name_" optional="YES" attributeType="String"/>
+        <attribute name="position_" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="players" inverseEntity="Game"/>
+        <relationship name="gameScoresDicts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GameScoreDict" inverseName="player" inverseEntity="GameScoreDict"/>
+        <relationship name="playerInTurn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Turn" inverseName="playersInTurn" inverseEntity="Turn"/>
+    </entity>
+    <entity name="Turn" representedClassName="Turn" syncable="YES">
+        <attribute name="createdOn_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id_" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="turnCounter_" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="turns" inverseEntity="Game"/>
+        <relationship name="playersInTurn" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Player" inverseName="playerInTurn" inverseEntity="Player"/>
+    </entity>
+    <elements>
+        <element name="GameScoreDict" positionX="-36" positionY="198" width="128" height="104"/>
+        <element name="Player" positionX="160" positionY="192" width="128" height="179"/>
+        <element name="Game" positionX="-36" positionY="189" width="128" height="134"/>
+        <element name="Turn" positionX="-230.140625" positionY="36" width="309.88671875" height="104"/>
+    </elements>
+</model>
