@@ -10,14 +10,12 @@ import SwiftUI
 @main
 struct TriomiCountApp: App {
     @AppStorage("isDarkMode") private var isDarkMode: Bool = true
-    let appState = AppState()
-    
+
     var body: some Scene {
         WindowGroup {
             HomeView()
                 .preferredColorScheme(isDarkMode ? .dark : .light)
                 .environment(\.managedObjectContext, PersistentStore.shared.context)
-                .environmentObject(appState)
                 .onAppear {
                     UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
                 }

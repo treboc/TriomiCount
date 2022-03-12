@@ -6,18 +6,19 @@
 //
 
 import SwiftUI
+import PageSheetCore
 
 struct GameOnboardingView: View {
   @StateObject var vm: GameOnboardingViewModel = GameOnboardingViewModel()
   @Environment(\.dismiss) private var dismiss
-  @State private var sheetIsPresented: Bool = false
+  @State private var showAddPlayerPage: Bool = false
   
   @FetchRequest(fetchRequest: Player.allPlayersFR(), animation: .default)
   var players: FetchedResults<Player>
   
   var body: some View {
     ZStack {
-      Color("SecondaryBackground")
+      Color.primaryBackground
         .ignoresSafeArea()
       
       VStack {
@@ -25,8 +26,12 @@ struct GameOnboardingView: View {
           .multilineTextAlignment(.center)
           .padding()
           .frame(maxWidth: .infinity)
-          .background(Color(UIColor.quaternaryLabel))
+          .background(Color.secondaryBackground)
           .cornerRadius(10)
+          .overlay(
+            RoundedRectangle(cornerRadius: 10)
+              .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
+          )
           .padding(.horizontal)
           .listRowSeparator(.hidden)
         
@@ -38,25 +43,30 @@ struct GameOnboardingView: View {
               .padding(.horizontal)
           }
         }
-        
-        CustomButton(title: "gameOnboardingView.button.add_new_player") {
-          sheetIsPresented.toggle()
+
+        VStack(spacing: 10) {
+          Button("gameOnboardingView.button.add_new_player") {
+            showAddPlayerPage.toggle()
+          }
+
+          CustomNavLink(title: "gameOnboardingView.button.start_game", destination: GameView(vm: GameViewModel(vm.chosenPlayers)))
+            .disabled(vm.chosenPlayers.isEmpty)
+
+          Button("gameOnboardingView.button.back_to_main_menu") {
+            dismiss()
+          }
         }
-        
-        CustomNavLink(title: "gameOnboardingView.button.start_game", destination: GameView(vm: GameViewModel(vm.chosenPlayers)))
-          .disabled(vm.chosenPlayers.isEmpty)
-        
-        CustomButton(title: "gameOnboardingView.button.back_to_main_menu") {
-          dismiss()
-        }
+        .buttonStyle(.offsetStyle)
       }
       .padding(.vertical)
       .onDisappear {
         vm.resetState(of: players)
       }
       .tint(Color("AccentColor"))
-      .popover(isPresented: $sheetIsPresented, arrowEdge: .top) {
+      .pageSheet(isPresented: $showAddPlayerPage) {
         AddNewPlayerView()
+          .sheetPreference(.detents([PageSheet.Detent.medium()]))
+          .sheetPreference(.grabberVisible(true))
       }
     }
     .navigationBarHidden(true)

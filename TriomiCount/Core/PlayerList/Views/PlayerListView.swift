@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PlayerListView: View {
     @State private var showAddNewPlayerView: Bool = false
-    @State private var selectedSort: PlayerSort = .default
+    @State private var selectedSort: PlayerListSort = .default
     
     @State private var searchTerm: String = ""
 
@@ -31,7 +31,7 @@ struct PlayerListView: View {
         }
     }
     
-    @FetchRequest(sortDescriptors: PlayerSort.default.descriptors, animation: .default)
+    @FetchRequest(sortDescriptors: PlayerListSort.default.descriptors, animation: .default)
     private var players: FetchedResults<Player>
     
     var body: some View {
@@ -56,7 +56,7 @@ struct PlayerListView: View {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     PlayerListSortView(
                         selectedSortItem: $selectedSort,
-                        sorts: PlayerSort.sorts)
+                        sorts: PlayerListSort.sorts)
                         .onChange(of: selectedSort) { _ in
                             players.sortDescriptors = selectedSort.descriptors
                         }
@@ -68,8 +68,8 @@ struct PlayerListView: View {
                     })
                 }
             }
-            .popover(isPresented: $showAddNewPlayerView) {
-                AddNewPlayerView()
+            .pageSheet(isPresented: $showAddNewPlayerView) {
+              AddNewPlayerView()
             }
             
         }

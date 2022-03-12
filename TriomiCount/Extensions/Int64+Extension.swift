@@ -3,8 +3,6 @@
 //  TriomiCount
 //
 //  Created by Marvin Lee Kobert on 01.03.22.
-//
-// by: https://stackoverflow.com/questions/36376897/swift-2-0-format-1000s-into-a-friendly-ks
 
 import Foundation
 

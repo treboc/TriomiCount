@@ -10,7 +10,6 @@ import SwiftUI
 struct GameView: View {
   @StateObject var vm: GameViewModel
   @Environment(\.dismiss) private var dismiss
-  @EnvironmentObject var appState: AppState
   
   private var showTimesDrawnView: Bool {
     return vm.drawn
@@ -19,25 +18,22 @@ struct GameView: View {
   private var showPlayedCardView: Bool {
     return vm.timesDrawn == 3 && vm.drawn
   }
-  
-  // ALERT - Exit Game
 
   // ENDGAMEVIEW PROPERTIES
   @State private var endPointsTextFieldText: String = ""
-  
   @State private var isAnimated: Bool = false
-  
+
   //MARK: Body
   var body: some View {
     ZStack {
-      Color("SecondaryBackground")
+      Color.primaryBackground
         .ignoresSafeArea()
       
       switch vm.gameState {
       case .playing:
         VStack(spacing: 10) {
           headerLabel
-          
+
           scoreSlider
           
           optionsView
@@ -53,20 +49,15 @@ struct GameView: View {
         }
         .scaleEffect(isAnimated ? 1.05 : 1.0)
         .animation(.spring(), value: isAnimated)
-        .onChange(of: vm.currentPlayerOnTurn, perform: { _ in
-          animateView()
-        })
         .onAppear(perform: resetUIState)
         .tint(.accentColor)
         .padding()
       case .isEnding:
         SubmitPointsAfterGameView()
           .environmentObject(vm)
-          .environmentObject(appState)
       case .ended:
         GameResultsView()
           .environmentObject(vm)
-          .environmentObject(appState)
       case .exited:
         Text("Game was exited.")
       }
@@ -125,13 +116,18 @@ extension GameView {
       }
       
     }
+    .animation(.none, value: vm.currentPlayerOnTurn)
     .padding()
     .frame(maxWidth: .infinity)
-    .background(Color(UIColor.quaternaryLabel))
+    .background(Color.secondaryBackground)
     .cornerRadius(10)
+    .overlay(
+      RoundedRectangle(cornerRadius: 10)
+        .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
+    )
     .padding(.bottom, 20)
   }
-  
+
   private var scoreSlider: some View {
     VStack(alignment: .center, spacing: 10) {
       Text("gameView.scoreSlider.label_text")
@@ -140,6 +136,9 @@ extension GameView {
           .monospacedDigit()
           .frame(minWidth: 20)
         Slider(value: $vm.scoreSliderValue, in: 0...15, step: 1)
+          .onChange(of: vm.scoreSliderValue) { _ in
+            HapticManager.shared.impact(style: .light)
+          }
       }
     }
     .padding()
@@ -201,6 +200,7 @@ extension GameView {
   private var nextPlayerButton: some View {
     Button {
       vm.nextPlayer()
+      toggleScaleAnimation()
       resetUIState()
       HapticManager.shared.notification(type: .success)
     } label: {
@@ -275,9 +275,7 @@ extension GameView {
     } label: {
       Text("Reset")
     }
-    
   }
-  
 }
 
 
@@ -297,21 +295,14 @@ extension GameView {
   }
   
   private func exitGame() {
-    appState.gameOnboardingIsShown.toggle()
-    if appState.gameOnboardingIsShown == false {
-      self.dismiss()
-    }
-    
+    dismiss()
     HapticManager.shared.notification(type: .success)
   }
   
-  private func animateView() {
-    withAnimation {
-      HapticManager.shared.notification(type: .success)
+  private func toggleScaleAnimation() {
       isAnimated = true
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
         isAnimated = false
       }
-    }
   }
 }

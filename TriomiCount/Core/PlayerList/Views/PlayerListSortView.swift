@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct PlayerListSortView: View {
-    @Binding var selectedSortItem: PlayerSort
-    let sorts: [PlayerSort]
+    @Binding var selectedSortItem: PlayerListSort
+    let sorts: [PlayerListSort]
     
     var body: some View {
         Menu {
@@ -27,9 +27,9 @@ struct PlayerListSortView: View {
 }
 
 struct PlayerListSortView_Previews: PreviewProvider {
-    @State static var sort = PlayerSort.default
+    @State static var sort = PlayerListSort.default
     
     static var previews: some View {
-        PlayerListSortView(selectedSortItem: $sort, sorts: PlayerSort.sorts)
+        PlayerListSortView(selectedSortItem: $sort, sorts: PlayerListSort.sorts)
     }
 }

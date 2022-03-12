@@ -10,6 +10,7 @@
 "Yes" = "Ja";
 "No" = "Nein";
 "Reset" = "Zurücksetzen";
+"Cancel" = "Abbrechen";
 
 // HomeView
 "navigation_link.new_game" = "Neues Spiel";

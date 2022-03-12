@@ -9,11 +9,11 @@ import SwiftUI
 
 struct GameResultsView: View {
   @EnvironmentObject var vm: GameViewModel
-  @EnvironmentObject var appstate: AppState
-  
+  @Environment(\.dismiss) private var dismiss
+
   var body: some View {
     ZStack {
-      Color("SecondaryBackground")
+      Color.primaryBackground
         .ignoresSafeArea()
       
       VStack {
@@ -50,27 +50,12 @@ struct GameResultsView: View {
         Spacer()
         
         Button("Main menu") {
-          NavigationUtil.popToRootView()
+          dismiss()
         }
+        .buttonStyle(.offsetStyle)
+        .padding(.bottom, 50)
       }
       Spacer()
     }
-    .padding(.vertical, 30)
   }
-  
-  
 }
-
-
-//struct GameResultsView_Previews: PreviewProvider {
-//    static let vm = GameViewModel(Player.allPlayers())
-//
-//    static var previews: some View {
-//        Group {
-//            GameResultsView()
-//                .environmentObject(vm)
-//                .preferredColorScheme(.dark)
-//            GameResultsView()
-//        }
-//    }
-//}

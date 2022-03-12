@@ -17,10 +17,7 @@ struct PrimaryNavigationLink<Destination: View>: View {
         } label: {
             Text(labelTextStringKey)
                 .fontWeight(.semibold)
-                .frame(maxWidth: .infinity)
         }
-        .buttonStyle(.borderedProminent)
-        .controlSize(.large)
-        .padding(.horizontal, 50)
+        .buttonStyle(.offsetStyle)
     }
 }

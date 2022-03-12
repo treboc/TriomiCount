@@ -31,10 +31,7 @@ struct CustomNavLink<Destination: View>: View {
         NavigationLink(destination: destination) {
             Text(title)
                 .fontWeight(.semibold)
-                .frame(maxWidth: .infinity)
         }
-        .padding(.horizontal)
-        .buttonStyle(.borderedProminent)
-        .controlSize(.large)
+        .buttonStyle(.offsetStyle)
     }
 }

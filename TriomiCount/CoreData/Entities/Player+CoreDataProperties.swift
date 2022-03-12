@@ -10,15 +10,10 @@ import Foundation
 import CoreData
 
 extension Player {
-  @nonobjc public class func fetchRequest() -> NSFetchRequest<Player> {
-    return NSFetchRequest<Player>(entityName: "Player")
-  }
-  
   @NSManaged public var createdOn_: Date?
   @NSManaged public var currentScore_: Int64
   @NSManaged public var highscore_: Int64
   @NSManaged public var id_: UUID?
-//  @NSManaged public var isChosen_: Bool
   @NSManaged public var name_: String?
   @NSManaged public var position_: Int16
   @NSManaged public var games: NSSet?
@@ -65,11 +60,6 @@ extension Player {
     set { highscore_ = newValue }
   }
   
-//  var isChosen: Bool {
-//    get { isChosen_ }
-//    set { isChosen_ = newValue}
-//  }
-  
   var createdOn: Date {
     get { createdOn_ ?? Date() }
     set { createdOn_ = newValue }
@@ -98,19 +88,19 @@ extension Player {
   // MARK: - Useful Fetch Requests
   
   class func allPlayersFR() -> NSFetchRequest<Player> {
-    let request: NSFetchRequest<Player> = Player.fetchRequest()
+    let request: NSFetchRequest<Player> = NSFetchRequest<Player>(entityName: "Player")
     request.sortDescriptors = [NSSortDescriptor(key: "createdOn_", ascending: true)]
     return request
   }
   
   class func allPlayersByHighscoreFR() -> NSFetchRequest<Player> {
-    let request: NSFetchRequest<Player> = Player.fetchRequest()
+    let request: NSFetchRequest<Player> = NSFetchRequest<Player>(entityName: "Player")
     request.sortDescriptors = [NSSortDescriptor(key: "highscore_", ascending: false)]
     return request
   }
   
   class func fetchPlayersBy(_ sortDescriptorKey: String, ascending: Bool) -> NSFetchRequest<Player> {
-    let request: NSFetchRequest<Player> = Player.fetchRequest()
+    let request: NSFetchRequest<Player> = NSFetchRequest<Player>(entityName: "Player")
     request.sortDescriptors = [NSSortDescriptor(key: sortDescriptorKey, ascending: ascending)]
     return request
   }

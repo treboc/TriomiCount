@@ -11,13 +11,12 @@ import Combine
 // MARK: - Components / Properties / Views for GameEndingState
 struct SubmitPointsAfterGameView: View {
     @EnvironmentObject var vm: GameViewModel
-    @EnvironmentObject var appstate: AppState
     @FocusState private var textFieldIsFocused: Bool
     @State var endPoints: String = ""
     
     var body: some View {
         ZStack {
-            Color("SecondaryBackground")
+          Color.primaryBackground
                 .ignoresSafeArea()
             
             VStack(spacing: 30) {

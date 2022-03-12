@@ -7,49 +7,55 @@
 
 import SwiftUI
 import PageSheet
+import SFSafeSymbols
 
 struct HomeView: View {
   @State private var showSettingsView: Bool = false
-  @EnvironmentObject var appState: AppState
   @AppStorage("isDarkMode") private var isDarkMode: Bool = true
   
   @State private var logoIsAnimated: Bool = true
-  
   @State private var lastSession: Game?
   
   var body: some View {
     NavigationView {
       ZStack {
         // Background Layer
-        Color("SecondaryBackground")
+        Color.primaryBackground
           .ignoresSafeArea()
         
         // Foreground Layer
         VStack {
           settingsButton
+            .padding([.top, .trailing], 10)
           
-          VStack(spacing: 30) {
+          VStack(spacing: 20) {
             
             Spacer()
             
             LogoBackground()
             
             Spacer(minLength: 20)
-            
-            if lastSession != nil {
-              PrimaryNavigationLink(destinationView: GameView(vm: GameViewModel(game: lastSession)), labelTextStringKey: "navigation_link.resume")
+
+            VStack(spacing: 15) {
+              if lastSession != nil {
+                PrimaryNavigationLink(destinationView: GameView(vm: GameViewModel(game: lastSession)), labelTextStringKey: "navigation_link.resume")
+              }
+
+              PrimaryNavigationLink(destinationView: GameOnboardingView(), labelTextStringKey: "navigation_link.new_game")
+
+              PrimaryNavigationLink(destinationView: PlayerListView(), labelTextStringKey: "navigation_link.players")
+
+              PrimaryNavigationLink(destinationView: GamesListView(), labelTextStringKey: "navigation_link.games")
             }
-            
-            PrimaryNavigationLink(destinationView: GameOnboardingView(), labelTextStringKey: "navigation_link.new_game")
-            
-            PrimaryNavigationLink(destinationView: PlayerListView(), labelTextStringKey: "navigation_link.players")
-            
-            PrimaryNavigationLink(destinationView: GamesListView(), labelTextStringKey: "navigation_link.games")
-            
+            .frame(maxWidth: .infinity)
+            .frame(height: UIScreen.main.bounds.height * 0.35)
+            .padding(.horizontal, 50)
+            .padding(.bottom, 20)
+
             Spacer()
           }
           .navigationBarHidden(true)
-          .tint(Color("AccentColor"))
+          .tint(Color.accentColor)
         }
         .onAppear {
           lastSession = Game.getLastNotFinishedSession(context: PersistentStore.shared.context)
@@ -69,16 +75,47 @@ struct MainMenuView_Previews: PreviewProvider {
     Group {
       HomeView()
         .previewDevice("iPhone 12")
-        .preferredColorScheme(.light)
-        .previewInterfaceOrientation(.portrait)
-      
-      HomeView()
-        .previewDevice("iPhone 12")
         .preferredColorScheme(.dark)
         .previewInterfaceOrientation(.portrait)
+//      HomeView()
+//        .previewDevice("iPhone 12")
+//        .preferredColorScheme(.dark)
+//        .previewInterfaceOrientation(.portrait)
+//        .dynamicTypeSize(.xSmall)
+//      HomeView()
+//        .previewDevice("iPhone 12")
+//        .preferredColorScheme(.dark)
+//        .previewInterfaceOrientation(.portrait)
+//        .dynamicTypeSize(.small)
+//      HomeView()
+//        .previewDevice("iPhone 12")
+//        .preferredColorScheme(.dark)
+//        .previewInterfaceOrientation(.portrait)
+//        .dynamicTypeSize(.medium)
+//      HomeView()
+//        .previewDevice("iPhone 12")
+//        .preferredColorScheme(.dark)
+//        .previewInterfaceOrientation(.portrait)
+//        .dynamicTypeSize(.large)
+//      HomeView()
+//        .previewDevice("iPhone 12")
+//        .preferredColorScheme(.dark)
+//        .previewInterfaceOrientation(.portrait)
+//        .dynamicTypeSize(.xLarge)
+//      HomeView()
+//        .previewDevice("iPhone 12")
+//        .preferredColorScheme(.dark)
+//        .previewInterfaceOrientation(.portrait)
+//        .dynamicTypeSize(.xxLarge)
+//      HomeView()
+//        .previewDevice("iPhone 12")
+//        .preferredColorScheme(.dark)
+//        .previewInterfaceOrientation(.portrait)
+//        .dynamicTypeSize(.xxxLarge)
     }
   }
 }
+
 
 
 // MARK: - Components
@@ -89,13 +126,14 @@ extension HomeView {
       Button {
         showSettingsView.toggle()
       } label: {
-        Image(systemName: "wrench.and.screwdriver.fill")
+        Image(systemSymbol: .wrenchAndScrewdriverFill)
           .padding(8)
           .overlay {
             Circle()
               .strokeBorder(lineWidth: 2, antialiased: true)
           }
       }
+      .foregroundColor(Color.accentColor)
       .accessibilityLabel("Settings")
     }
     .padding([.trailing, .top], 10)

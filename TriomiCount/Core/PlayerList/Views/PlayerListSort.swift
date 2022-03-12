@@ -1,5 +1,5 @@
 //
-//  PlayerSort.swift
+//  PlayerListSort.swift
 //  TriomiCount
 //
 //  Created by Marvin Lee Kobert on 23.02.22.
@@ -8,37 +8,37 @@
 import Foundation
 import CoreData
 
-struct PlayerSort: Hashable, Identifiable {
+struct PlayerListSort: Hashable, Identifiable {
     let id: Int
     let name: String
     let descriptors: [SortDescriptor<Player>]
     
-    static let sorts: [PlayerSort] = [
-        PlayerSort(
+    static let sorts: [PlayerListSort] = [
+        PlayerListSort(
             id: 0,
             name: "Highscore (high to low)",
             descriptors: [
                 SortDescriptor(\.highscore_, order: .reverse)
             ]),
-        PlayerSort(
+        PlayerListSort(
             id: 1,
             name: "Highscore (low to high)",
             descriptors: [
                 SortDescriptor(\.highscore_, order: .forward)
             ]),
-        PlayerSort(
+        PlayerListSort(
             id: 2,
             name: "Name (A…Z)",
             descriptors: [
                 SortDescriptor(\.name_, order: .forward)
             ]),
-        PlayerSort(
+        PlayerListSort(
             id: 3,
             name: "Name (Z…A)",
             descriptors: [
                 SortDescriptor(\.name_, order: .reverse),
             ]),
-        PlayerSort(
+        PlayerListSort(
             id: 2,
             name: "Last created",
             descriptors: [
@@ -46,5 +46,5 @@ struct PlayerSort: Hashable, Identifiable {
             ]),
     ]
     
-    static var `default`: PlayerSort { sorts[0] }
+    static var `default`: PlayerListSort { sorts[0] }
 }
