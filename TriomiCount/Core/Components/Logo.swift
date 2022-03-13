@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UIKit
 
 struct Logo: View {
   struct CurvedTriangle: Shape {
@@ -29,7 +28,7 @@ struct Logo: View {
   }
 
   let height: CGFloat = 300
-  let font: Font = Font.custom("HerrVonMuellerhoff-Regular", fixedSize: 120)
+  let font: Font = Font.custom("PhotographSignature", fixedSize: 120)
 
   var body: some View {
     ZStack {
@@ -70,7 +69,6 @@ struct Logo: View {
         .font(font)
         .shadow(color: .primary.opacity(0.8), radius: 10, x: 0, y: 0)
         .offset(x: 15, y: 30)
-
     }
     .offset(x: -30)
     .rotationEffect(Angle(degrees: -20))

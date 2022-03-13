@@ -31,7 +31,11 @@ struct GameView: View {
         VStack(spacing: 20) {
           headerLabel
 
+          Spacer(minLength: 0)
+
           centerView
+
+          Spacer()
 
           VStack {
             nextPlayerButton
@@ -122,25 +126,11 @@ extension GameView {
     )
   }
 
-  private var scoreSlider: some View {
-    VStack(alignment: .leading, spacing: 30) {
-      Text("gameView.scoreSlider.label_text")
-        .font(.headline)
-      HStack(spacing: 20) {
-        Text(String(format: "%02d", Int(vm.scoreSliderValue)))
-          .monospacedDigit()
-          .frame(minWidth: 20)
-        Slider(value: $vm.scoreSliderValue, in: 0...15, step: 1)
-          .onChange(of: vm.scoreSliderValue) { _ in
-            HapticManager.shared.impact(style: .light)
-          }
-      }
-    }
-  }
+
 
   private var centerView: some View {
     VStack(spacing: 20) {
-      scoreSlider
+      scoreSliderView
       divider
       timesDrawnPickerView
       divider
@@ -155,6 +145,22 @@ extension GameView {
         .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
     )
     .overlay( circularResetButton, alignment: .topTrailing )
+  }
+
+  private var scoreSliderView: some View {
+    VStack(alignment: .leading, spacing: 30) {
+      Text("gameView.scoreSlider.label_text")
+        .font(.headline)
+      HStack(spacing: 20) {
+        Text(String(format: "%02d", Int(vm.scoreSliderValue)))
+          .monospacedDigit()
+          .frame(minWidth: 20)
+        Slider(value: $vm.scoreSliderValue, in: 0...15, step: 1)
+          .onChange(of: vm.scoreSliderValue) { _ in
+            HapticManager.shared.impact(style: .light)
+          }
+      }
+    }
   }
 
   private var timesDrawnPickerView: some View {
@@ -178,6 +184,7 @@ extension GameView {
       .fill(Color.tertiaryBackground)
       .frame(height: 2)
       .frame(maxWidth: .infinity)
+      .padding(.horizontal, 20)
   }
 
   private var nextPlayerButton: some View {
