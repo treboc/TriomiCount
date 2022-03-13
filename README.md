@@ -1,4 +1,6 @@
-![Logo](./logo.png)
+<p align="center">
+    <img src="https://github.com/vogelfrey/TriomiCount/blob/main/logo.png" width=600>
+</p>
 
 # TriomiCount
 This is my first bigger project. Currently I'm working on it as my main project, while learning.
