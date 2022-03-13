@@ -1,13 +1,14 @@
 //
-//  LogoBackground.swift
+//  Logo.swift
 //  TriomiCount
 //
 //  Created by Marvin Lee Kobert on 13.02.22.
 //
 
 import SwiftUI
+import UIKit
 
-struct LogoBackground: View {
+struct Logo: View {
   struct CurvedTriangle: Shape {
     var control: CGFloat = 5
 
@@ -27,13 +28,14 @@ struct LogoBackground: View {
     }
   }
 
-  var height: CGFloat = 300
+  let height: CGFloat = 300
+  let font: Font = Font.custom("HerrVonMuellerhoff-Regular", fixedSize: 120)
 
   var body: some View {
     ZStack {
       ZStack {
         CurvedTriangle()
-          .fill(Color.accentColor)
+          .fill(Color.primaryAccentColor)
           .shadow(radius: 5, x: 5, y: 5)
 
         VStack {
@@ -60,12 +62,12 @@ struct LogoBackground: View {
       .offset(y: -30)
 
       Text("Triomi")
-        .font(.custom("PhotographSignature", fixedSize: 120))
+        .font(font)
         .shadow(color: .primary.opacity(0.8), radius: 10, x: 0, y: 0)
         .offset(x: 15, y: -50)
 
       Text("Count")
-        .font(.custom("PhotographSignature", fixedSize: 120))
+        .font(font)
         .shadow(color: .primary.opacity(0.8), radius: 10, x: 0, y: 0)
         .offset(x: 15, y: 30)
 
@@ -79,6 +81,6 @@ struct LogoBackground: View {
 
 struct LogoBackground_Previews: PreviewProvider {
   static var previews: some View {
-    LogoBackground()
+    Logo()
   }
 }

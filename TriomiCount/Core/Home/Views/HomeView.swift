@@ -26,13 +26,13 @@ struct HomeView: View {
         // Foreground Layer
         VStack {
           settingsButton
-            .padding([.top, .trailing], 10)
-          
+
           VStack(spacing: 20) {
             
             Spacer()
             
-            LogoBackground()
+            Logo()
+              .offset(y: -40)
             
             Spacer(minLength: 20)
 
@@ -48,14 +48,14 @@ struct HomeView: View {
               PrimaryNavigationLink(destinationView: GamesListView(), labelTextStringKey: "navigation_link.games")
             }
             .frame(maxWidth: .infinity)
-            .frame(height: UIScreen.main.bounds.height * 0.35)
+//            .frame(height: UIScreen.main.bounds.height * 0.35)
             .padding(.horizontal, 50)
             .padding(.bottom, 20)
 
             Spacer()
           }
           .navigationBarHidden(true)
-          .tint(Color.accentColor)
+          .tint(Color.primaryAccentColor)
         }
         .onAppear {
           lastSession = Game.getLastNotFinishedSession(context: PersistentStore.shared.context)
@@ -77,41 +77,41 @@ struct MainMenuView_Previews: PreviewProvider {
         .previewDevice("iPhone 12")
         .preferredColorScheme(.dark)
         .previewInterfaceOrientation(.portrait)
-//      HomeView()
-//        .previewDevice("iPhone 12")
-//        .preferredColorScheme(.dark)
-//        .previewInterfaceOrientation(.portrait)
-//        .dynamicTypeSize(.xSmall)
-//      HomeView()
-//        .previewDevice("iPhone 12")
-//        .preferredColorScheme(.dark)
-//        .previewInterfaceOrientation(.portrait)
-//        .dynamicTypeSize(.small)
-//      HomeView()
-//        .previewDevice("iPhone 12")
-//        .preferredColorScheme(.dark)
-//        .previewInterfaceOrientation(.portrait)
-//        .dynamicTypeSize(.medium)
-//      HomeView()
-//        .previewDevice("iPhone 12")
-//        .preferredColorScheme(.dark)
-//        .previewInterfaceOrientation(.portrait)
-//        .dynamicTypeSize(.large)
-//      HomeView()
-//        .previewDevice("iPhone 12")
-//        .preferredColorScheme(.dark)
-//        .previewInterfaceOrientation(.portrait)
-//        .dynamicTypeSize(.xLarge)
-//      HomeView()
-//        .previewDevice("iPhone 12")
-//        .preferredColorScheme(.dark)
-//        .previewInterfaceOrientation(.portrait)
-//        .dynamicTypeSize(.xxLarge)
-//      HomeView()
-//        .previewDevice("iPhone 12")
-//        .preferredColorScheme(.dark)
-//        .previewInterfaceOrientation(.portrait)
-//        .dynamicTypeSize(.xxxLarge)
+      //      HomeView()
+      //        .previewDevice("iPhone 12")
+      //        .preferredColorScheme(.dark)
+      //        .previewInterfaceOrientation(.portrait)
+      //        .dynamicTypeSize(.xSmall)
+      //      HomeView()
+      //        .previewDevice("iPhone 12")
+      //        .preferredColorScheme(.dark)
+      //        .previewInterfaceOrientation(.portrait)
+      //        .dynamicTypeSize(.small)
+      //      HomeView()
+      //        .previewDevice("iPhone 12")
+      //        .preferredColorScheme(.dark)
+      //        .previewInterfaceOrientation(.portrait)
+      //        .dynamicTypeSize(.medium)
+      //      HomeView()
+      //        .previewDevice("iPhone 12")
+      //        .preferredColorScheme(.dark)
+      //        .previewInterfaceOrientation(.portrait)
+      //        .dynamicTypeSize(.large)
+      //      HomeView()
+      //        .previewDevice("iPhone 12")
+      //        .preferredColorScheme(.dark)
+      //        .previewInterfaceOrientation(.portrait)
+      //        .dynamicTypeSize(.xLarge)
+      //      HomeView()
+      //        .previewDevice("iPhone 12")
+      //        .preferredColorScheme(.dark)
+      //        .previewInterfaceOrientation(.portrait)
+      //        .dynamicTypeSize(.xxLarge)
+      //      HomeView()
+      //        .previewDevice("iPhone 12")
+      //        .preferredColorScheme(.dark)
+      //        .previewInterfaceOrientation(.portrait)
+      //        .dynamicTypeSize(.xxxLarge)
     }
   }
 }
@@ -123,21 +123,13 @@ extension HomeView {
   var settingsButton: some View {
     HStack {
       Spacer()
-      Button {
+
+      Button("\(Image(systemSymbol: .wrenchAndScrewdriverFill))") {
         showSettingsView.toggle()
-      } label: {
-        Image(systemSymbol: .wrenchAndScrewdriverFill)
-          .padding(8)
-          .overlay {
-            Circle()
-              .strokeBorder(lineWidth: 2, antialiased: true)
-          }
       }
-      .foregroundColor(Color.accentColor)
-      .accessibilityLabel("Settings")
+      .buttonStyle(.circularOffsetStyle)
     }
-    .padding([.trailing, .top], 10)
+    .padding()
   }
 }
-
 

@@ -4,17 +4,17 @@
 //
 //  Created by Marvin Lee Kobert on 27.01.22.
 //
-
 import SwiftUI
 
 struct PlayerDetailView: View {
   let player: Player
-  @Environment(\.presentationMode) var presentationMode
+  //  @Environment(\.presentationMode) var presentationMode
+  @Environment(\.dismiss) private var dismiss
   @State private var showDeletePlayerAlert: Bool = false
   
   var body: some View {
     ZStack {
-      Color("SecondaryBackground")
+      Color.primaryBackground
         .ignoresSafeArea()
       
       VStack(spacing: 20) {
@@ -30,8 +30,18 @@ struct PlayerDetailView: View {
         }
         
         Spacer()
-        
-        deletePlayerButton
+
+        HStack {
+          Button("Zurück") {
+            dismiss()
+          }
+          .buttonStyle(.offsetStyle)
+
+          Button("Delete Player", role: .destructive) {
+            showDeletePlayerAlert.toggle()
+          }
+          .buttonStyle(OffsetOnTapStyle(role: .destructive))
+        }
       }
       .padding([.horizontal, .top], 20)
       .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -42,13 +52,13 @@ struct PlayerDetailView: View {
       }, message: {
         Text("Are you sure that you want to delete \(player.name)? The data can't be restored.")
       })
+      .navigationBarHidden(true)
     }
   }
-  
-  
+
   func deletePlayerAndDismissView() {
     Player.deletePlayer(player)
-    presentationMode.wrappedValue.dismiss()
+    dismiss()
   }
 }
 
@@ -60,14 +70,6 @@ struct PlayerDetailView_Previews: PreviewProvider {
 }
 
 extension PlayerDetailView {
-  var deletePlayerButton: some View {
-    Button("Delete Player", role: .destructive) {
-      showDeletePlayerAlert.toggle()
-    }
-    .buttonStyle(.borderedProminent)
-    .controlSize(.large)
-  }
-  
   struct PlayerDetailSection: View {
     let sectionTitle: String
     let sectionContent: Text
@@ -85,9 +87,12 @@ extension PlayerDetailView {
       .multilineTextAlignment(.center)
       .padding()
       .frame(maxWidth: .infinity, maxHeight: 60)
-      .background(.ultraThinMaterial)
+      .background(Color.secondaryBackground)
       .cornerRadius(10)
-      .padding(.vertical, 3)
+      .overlay(
+        RoundedRectangle(cornerRadius: 10)
+          .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
+      )
     }
   }
   
@@ -103,6 +108,10 @@ extension PlayerDetailView {
               .font(.largeTitle)
           )
           .frame(width: 100, height: 100)
+          .overlay(
+            Circle()
+              .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
+          )
         Text(player.name)
       }
     }

@@ -45,34 +45,37 @@ class GameViewModel: ObservableObject {
       self.game = Game(players: players, context: context)
     }
   }
-  
-  
+
   // 2) calculate the current points the player gets for laying the card
   @Published var playerScore: Int = 0
   @Published var scoreSliderValue: Float = 0
-  @Published var drawn: Bool = false
-  @Published var timesDrawn: Int = 1
+  @Published var timesDrawn: Int = 0
   @Published var playedCard: Bool = true
   
   var calculatedScore: Int64 {
     var calculatedScore = self.scoreSliderValue
     
-    if drawn && timesDrawn != 3 {
+    if timesDrawn != 3 {
       calculatedScore = Float(scoreSliderValue) - Float(timesDrawn * 5)
     }
     
-    if drawn && timesDrawn == 3 && playedCard {
+    if timesDrawn == 3 && playedCard {
       calculatedScore = scoreSliderValue - 15
     }
     
-    if drawn && timesDrawn == 3 && !playedCard {
+    if timesDrawn == 3 && !playedCard {
       calculatedScore = -25
     }
     
     return Int64(calculatedScore)
   }
-  
-  
+
+  func resetTurnState() {
+    scoreSliderValue = 0
+    timesDrawn = 0
+    playedCard = true
+  }
+
   func nextPlayer() {
     // update the current player with the score from the currentTurnScore
     updateScore(of: currentPlayerOnTurn, with: calculatedScore)
@@ -84,6 +87,7 @@ class GameViewModel: ObservableObject {
     game.addToTurns(newTurn)
     
     saveGameState()
+    resetTurnState()
   }
   
   func updateScore(of player: Player?, with score: Int64) {

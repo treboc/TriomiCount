@@ -19,9 +19,14 @@ struct OffsetOnTapStyle: ButtonStyle {
   let primaryColor: Color
   let secondaryColor: Color
 
-  init(_ primaryColor: Color = Color.accentColor, _ secondaryColor: Color = Color.secondaryAccentColor) {
-    self.primaryColor = primaryColor
-    self.secondaryColor = secondaryColor
+  public init(primaryColor: Color = Color.primaryAccentColor, secondaryColor: Color = Color.secondaryAccentColor, role: ButtonRole = .cancel) {
+    if role == .destructive {
+      self.primaryColor = Color.destructiveButtonPrimaryColor
+      self.secondaryColor = Color.destructiveButtonSecondaryColor
+    } else {
+      self.primaryColor = primaryColor
+      self.secondaryColor = secondaryColor
+    }
   }
 
   func makeBody(configuration: Configuration) -> some View {
@@ -44,7 +49,6 @@ struct OffsetOnTapStyle: ButtonStyle {
           .cornerRadius(15)
       )
       .animation(.none, value: configuration.isPressed)
-      .padding(.horizontal)
       .onChange(of: configuration.isPressed) { newValue in
         if newValue {
           HapticManager.shared.impact(style: .light)
@@ -53,6 +57,6 @@ struct OffsetOnTapStyle: ButtonStyle {
       .if(!isEnabled) { view in
         view.grayscale(1)
       }
-
   }
 }
+

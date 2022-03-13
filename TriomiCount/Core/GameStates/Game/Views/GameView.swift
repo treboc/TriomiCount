@@ -6,17 +6,14 @@
 //
 
 import SwiftUI
+import SFSafeSymbols
 
 struct GameView: View {
   @StateObject var vm: GameViewModel
   @Environment(\.dismiss) private var dismiss
-  
-  private var showTimesDrawnView: Bool {
-    return vm.drawn
-  }
-  
+
   private var showPlayedCardView: Bool {
-    return vm.timesDrawn == 3 && vm.drawn
+    return vm.timesDrawn == 3
   }
 
   // ENDGAMEVIEW PROPERTIES
@@ -31,26 +28,24 @@ struct GameView: View {
       
       switch vm.gameState {
       case .playing:
-        VStack(spacing: 10) {
+        VStack(spacing: 20) {
           headerLabel
 
-          scoreSlider
-          
-          optionsView
-          
-          Spacer()
-          
-          nextPlayerButton
-          
-          HStack {
-            exitGameButton
-            endGameButton
+          centerView
+
+          VStack {
+            nextPlayerButton
+            HStack {
+              exitGameButton
+              endGameButton
+            }
           }
         }
+        .padding(.vertical, 10)
         .scaleEffect(isAnimated ? 1.05 : 1.0)
-        .animation(.spring(), value: isAnimated)
-        .onAppear(perform: resetUIState)
-        .tint(.accentColor)
+        .animation(.default, value: isAnimated)
+        .onAppear(perform: vm.resetTurnState)
+        .tint(.primaryAccentColor)
         .padding()
       case .isEnding:
         SubmitPointsAfterGameView()
@@ -94,7 +89,7 @@ extension GameView {
         .bold()
       
       HStack {
-        VStack(spacing: 5) {
+        VStack(alignment: .leading, spacing: 5) {
           Text("gameView.headerLabel.total_score")
             .font(.headline)
             .fontWeight(.semibold)
@@ -104,7 +99,7 @@ extension GameView {
         .lineLimit(1)
         Spacer()
         
-        VStack(spacing: 5) {
+        VStack(alignment: .trailing, spacing: 5) {
           Text("gameView.headerLabel.this_turn_score")
             .font(.headline)
             .fontWeight(.semibold)
@@ -125,12 +120,12 @@ extension GameView {
       RoundedRectangle(cornerRadius: 10)
         .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
     )
-    .padding(.bottom, 20)
   }
 
   private var scoreSlider: some View {
-    VStack(alignment: .center, spacing: 10) {
+    VStack(alignment: .leading, spacing: 30) {
       Text("gameView.scoreSlider.label_text")
+        .font(.headline)
       HStack(spacing: 20) {
         Text(String(format: "%02d", Int(vm.scoreSliderValue)))
           .monospacedDigit()
@@ -141,168 +136,104 @@ extension GameView {
           }
       }
     }
-    .padding()
-    .frame(height: UIScreen.main.bounds.height * 0.25)
-    .frame(maxWidth: .infinity)
-    .background(Color(UIColor.quaternaryLabel))
-    .cornerRadius(10)
   }
-  
-  private var drawnToggle: some View {
-    VStack(spacing: 30) {
-      Text("gameView.drawnToggle.label_text")
-      Button {
-        vm.drawn = true
-      } label: {
-        Text("Yes")
-          .padding()
-          .frame(maxWidth: .infinity)
-          .background(Color.accentColor)
-          .foregroundColor(Color.white)
-          .cornerRadius(10)
-      }
-    }
-  }
-  
-  private var timesDrawnPicker: some View {
+
+  private var centerView: some View {
     VStack(spacing: 20) {
+      scoreSlider
+      divider
+      timesDrawnPickerView
+      divider
+      playedCardPicker
+    }
+    .padding(.top, 20)
+    .padding()
+    .frame(maxWidth: .infinity)
+    .cornerRadius(10)
+    .overlay(
+      RoundedRectangle(cornerRadius: 10)
+        .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
+    )
+    .overlay( circularResetButton, alignment: .topTrailing )
+  }
+
+  private var timesDrawnPickerView: some View {
+    VStack(alignment: .leading, spacing: 30) {
       Text("gameView.timesDrawnPicker.label_text")
-        .multilineTextAlignment(.center)
-        .frame(height: 55)
-      Picker("How many times did you draw?", selection: $vm.timesDrawn.animation(.default)) {
-        Text("1").tag(1)
-        Text("2").tag(2)
-        Text("3").tag(3)
-      }
-      .pickerStyle(.segmented)
+        .font(.headline)
+      CardsDrawnPicker(selection: $vm.timesDrawn)
     }
-    .padding()
-    .frame(maxWidth: .infinity)
-    .cornerRadius(10)
   }
-  
+
   private var playedCardPicker: some View {
-    VStack(spacing: 20) {
+    VStack(alignment: .leading, spacing: 20) {
       Text("gameView.playedCardPicker.label_text")
-        .multilineTextAlignment(.center)
-        .frame(height: 55)
-      Picker("Were you able to play the card?", selection: $vm.playedCard.animation(.default)) {
-        Text("Yes").tag(true)
-        Text("No").tag(false)
-      }
-      .pickerStyle(.segmented)
+        .font(.headline)
+      PlayedCardPicker(selection: $vm.playedCard)
     }
-    .padding()
-    .frame(maxWidth: .infinity)
-    .cornerRadius(10)
   }
-  
+
+  private var divider: some View {
+    RoundedRectangle(cornerRadius: 1)
+      .fill(Color.tertiaryBackground)
+      .frame(height: 2)
+      .frame(maxWidth: .infinity)
+  }
+
   private var nextPlayerButton: some View {
-    Button {
+    Button("gameView.nextPlayerButton.label_text") {
       vm.nextPlayer()
       toggleScaleAnimation()
-      resetUIState()
       HapticManager.shared.notification(type: .success)
-    } label: {
-      Text("gameView.nextPlayerButton.label_text")
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(Color.accentColor)
-        .foregroundColor(.white)
-        .cornerRadius(10)
     }
+    .buttonStyle(.offsetStyle)
   }
-  
+
   private var exitGameButton: some View {
-    Button {
+    Button("gameView.exitGameButton.label_text") {
       if vm.game.turns?.count != nil {
         vm.showExitGameAlert.toggle()
       } else {
         exitGame()
       }
-    } label: {
-      Text("gameView.exitGameButton.label_text")
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(Color.accentColor)
-        .foregroundColor(.white)
-        .cornerRadius(10)
     }
+    .buttonStyle(.offsetStyle)
   }
-  
+
   private var endGameButton: some View {
-    Button {
-      //TODO: - Add function to end the game!
+    Button("gameView.endGameButton.label_text") {
       vm.showEndGameAlert.toggle()
       HapticManager.shared.notification(type: .success)
-    } label: {
-      Text("gameView.endGameButton.label_text")
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(Color.accentColor)
-        .foregroundColor(Color.white)
-        .cornerRadius(10)
     }
+    .buttonStyle(.offsetStyle)
     .disabled(vm.game.turns?.count == 0)
   }
-  
-  private var optionsView: some View {
-    VStack {
-      if !vm.drawn && vm.timesDrawn != 3 {
-        drawnToggle
-      } else if vm.drawn && vm.timesDrawn != 3 {
-        timesDrawnPicker
-        Spacer()
-        resetUIButton
-      } else if vm.drawn && vm.timesDrawn == 3 {
-        playedCardPicker
-        Spacer()
-        resetUIButton
-      } else {
-        drawnToggle.hidden()
-      }
+
+  //  private func offsetStyledButton(_ text: String) -> some View {
+  //
+  //  }
+
+  private var circularResetButton: some View {
+    Button("\(Image(systemSymbol: .arrowUturnBackwardCircle))") {
+      vm.resetTurnState()
     }
-    .padding()
-    .frame(height: UIScreen.main.bounds.height * 0.25)
-    .frame(maxWidth: .infinity)
-    .background(Color(UIColor.quaternaryLabel))
-    .cornerRadius(10)
-  }
-  
-  private var resetUIButton: some View {
-    Button {
-      resetToggles()
-    } label: {
-      Text("Reset")
-    }
+    .buttonStyle(.circularOffsetStyle)
+    .offset(x: -10, y: -10)
   }
 }
 
 
 //MARK: - UI Methods
 extension GameView {
-  private func resetUIState() {
-    vm.scoreSliderValue = 0
-    vm.drawn = false
-    vm.timesDrawn = 1
-    vm.playedCard = false
-  }
-  
-  private func resetToggles() {
-    vm.drawn = false
-    vm.timesDrawn = 1
-    vm.playedCard = false
-  }
-  
   private func exitGame() {
     dismiss()
     HapticManager.shared.notification(type: .success)
   }
-  
+
   private func toggleScaleAnimation() {
-      isAnimated = true
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-        isAnimated = false
-      }
+    isAnimated = true
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      isAnimated = false
+    }
   }
 }

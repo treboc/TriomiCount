@@ -10,15 +10,7 @@ import SwiftUI
 extension Color {
 
   // --- Accent Colors
-  public static var primaryAccent: Color {
-    Color("PrimaryAccent")
-  }
-
-  public static var secondaryAccent: Color {
-    Color("SecondaryAccent")
-  }
-
-  public static var accentColor: Color {
+  public static var primaryAccentColor: Color {
     Color("PrimaryAccentColor")
   }
 
@@ -28,6 +20,16 @@ extension Color {
 
   public static var TertiaryAccentColor: Color {
     Color("TertiaryAccentColor")
+  }
+
+  // --- Destructive Button Colors
+
+  public static var destructiveButtonPrimaryColor: Color {
+    Color("DestructiveButtonPrimaryColor")
+  }
+
+  public static var destructiveButtonSecondaryColor: Color {
+    Color("DestructiveButtonSecondaryColor")
   }
 
   // --- Background Colors

@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct PrimaryNavigationLink<Destination: View>: View {
-    let destinationView: Destination
-    let labelTextStringKey: LocalizedStringKey
-    
-    var body: some View {
-        NavigationLink {
-            destinationView
-        } label: {
-            Text(labelTextStringKey)
-                .fontWeight(.semibold)
-        }
-        .buttonStyle(.offsetStyle)
+  let destinationView: Destination
+  let labelTextStringKey: LocalizedStringKey
+  
+  var body: some View {
+    NavigationLink {
+      destinationView
+    } label: {
+      Text(labelTextStringKey)
+        .fontWeight(.semibold)
     }
+    .buttonStyle(.offsetStyle)
+  }
 }

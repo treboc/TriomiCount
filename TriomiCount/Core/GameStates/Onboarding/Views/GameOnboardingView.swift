@@ -33,7 +33,6 @@ struct GameOnboardingView: View {
               .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
           )
           .padding(.horizontal)
-          .listRowSeparator(.hidden)
         
         ScrollView {
           ForEach(players) { player in
@@ -57,12 +56,12 @@ struct GameOnboardingView: View {
           }
         }
         .buttonStyle(.offsetStyle)
+        .padding(.horizontal)
       }
       .padding(.vertical)
       .onDisappear {
         vm.resetState(of: players)
       }
-      .tint(Color("AccentColor"))
       .pageSheet(isPresented: $showAddPlayerPage) {
         AddNewPlayerView()
           .sheetPreference(.detents([PageSheet.Detent.medium()]))

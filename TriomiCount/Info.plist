@@ -5,6 +5,9 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>PhotographSignature.ttf</string>
+		<string>SmoothStone-Regular.otf</string>
+		<string>Handletter.otf</string>
+		<string>HerrVonMuellerhoff-Regular.ttf</string>
 	</array>
 </dict>
 </plist>

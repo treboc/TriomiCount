@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08093A6827DD4CA90061352D /* CircularOffsetStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08093A6727DD4CA90061352D /* CircularOffsetStyle.swift */; };
+		0827298227DDE74C00E48F4D /* CardsDrawnPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0827298127DDE74C00E48F4D /* CardsDrawnPicker.swift */; };
+		0827298427DE488900E48F4D /* PlayedCardPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0827298327DE488900E48F4D /* PlayedCardPicker.swift */; };
 		08288175279EF8D10064C9E8 /* AddNewPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08288174279EF8D10064C9E8 /* AddNewPlayerView.swift */; };
 		0828817A279F42AB0064C9E8 /* PhotographSignature.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08288178279F42440064C9E8 /* PhotographSignature.ttf */; };
 		082C53F927ABE69D00AB5CD7 /* TriomiCount.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 082C53F727ABE69D00AB5CD7 /* TriomiCount.xcdatamodeld */; };
@@ -47,7 +50,10 @@
 		08A2C64127A341E70076C196 /* PlayerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A2C64027A341E70076C196 /* PlayerDetailView.swift */; };
 		08A2C64327A34BBB0076C196 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A2C64227A34BBB0076C196 /* SettingsView.swift */; };
 		08AD236127AA912600BBDB16 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AD236027AA912600BBDB16 /* HapticsManager.swift */; };
-		08B3E2F327B9AA02009E4DD7 /* LogoBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3E2F227B9AA02009E4DD7 /* LogoBackground.swift */; };
+		08B3E2F327B9AA02009E4DD7 /* Logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3E2F227B9AA02009E4DD7 /* Logo.swift */; };
+		08B724F427DE5EE800E986D6 /* SmoothStone-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 08B724F327DE5EE800E986D6 /* SmoothStone-Regular.otf */; };
+		08B724F627DE60ED00E986D6 /* Handletter.otf in Resources */ = {isa = PBXBuildFile; fileRef = 08B724F527DE60ED00E986D6 /* Handletter.otf */; };
+		08B724F827DE78AB00E986D6 /* HerrVonMuellerhoff-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08B724F727DE78AB00E986D6 /* HerrVonMuellerhoff-Regular.ttf */; };
 		08BBB1F627A08F98001CD3DF /* GameOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBB1F527A08F98001CD3DF /* GameOnboardingView.swift */; };
 		08BBB1FA27A0A1D3001CD3DF /* GameOnboardingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBB1F927A0A1D3001CD3DF /* GameOnboardingRowView.swift */; };
 		08BE48D8279CA0FA00EA431F /* TriomiCountApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE48D7279CA0FA00EA431F /* TriomiCountApp.swift */; };
@@ -60,6 +66,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08093A6727DD4CA90061352D /* CircularOffsetStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularOffsetStyle.swift; sourceTree = "<group>"; };
+		0827298127DDE74C00E48F4D /* CardsDrawnPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsDrawnPicker.swift; sourceTree = "<group>"; };
+		0827298327DE488900E48F4D /* PlayedCardPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayedCardPicker.swift; sourceTree = "<group>"; };
 		08288174279EF8D10064C9E8 /* AddNewPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPlayerView.swift; sourceTree = "<group>"; };
 		08288178279F42440064C9E8 /* PhotographSignature.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PhotographSignature.ttf; sourceTree = "<group>"; };
 		0828817B279F434C0064C9E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,7 +107,10 @@
 		08A2C64027A341E70076C196 /* PlayerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailView.swift; sourceTree = "<group>"; };
 		08A2C64227A34BBB0076C196 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		08AD236027AA912600BBDB16 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
-		08B3E2F227B9AA02009E4DD7 /* LogoBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoBackground.swift; sourceTree = "<group>"; };
+		08B3E2F227B9AA02009E4DD7 /* Logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logo.swift; sourceTree = "<group>"; };
+		08B724F327DE5EE800E986D6 /* SmoothStone-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SmoothStone-Regular.otf"; sourceTree = "<group>"; };
+		08B724F527DE60ED00E986D6 /* Handletter.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Handletter.otf; sourceTree = "<group>"; };
+		08B724F727DE78AB00E986D6 /* HerrVonMuellerhoff-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HerrVonMuellerhoff-Regular.ttf"; sourceTree = "<group>"; };
 		08BBB1F527A08F98001CD3DF /* GameOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOnboardingView.swift; sourceTree = "<group>"; };
 		08BBB1F927A0A1D3001CD3DF /* GameOnboardingRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOnboardingRowView.swift; sourceTree = "<group>"; };
 		08BE48D4279CA0FA00EA431F /* TriomiCount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TriomiCount.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,7 +141,10 @@
 		08288179279F42570064C9E8 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				08B724F527DE60ED00E986D6 /* Handletter.otf */,
+				08B724F327DE5EE800E986D6 /* SmoothStone-Regular.otf */,
 				08288178279F42440064C9E8 /* PhotographSignature.ttf */,
+				08B724F727DE78AB00E986D6 /* HerrVonMuellerhoff-Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -162,8 +177,11 @@
 		083512A027DC13E500065228 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
+				0827298127DDE74C00E48F4D /* CardsDrawnPicker.swift */,
+				0827298327DE488900E48F4D /* PlayedCardPicker.swift */,
 				084F63EA27BE342E00FB61A3 /* CustomButton.swift */,
 				083512A827DC15DA00065228 /* OffsetOnTapStyle.swift */,
+				08093A6727DD4CA90061352D /* CircularOffsetStyle.swift */,
 				083974DC27D2A172002B90E4 /* PrimaryNavigationLink.swift */,
 			);
 			path = "UI Components";
@@ -381,7 +399,7 @@
 			isa = PBXGroup;
 			children = (
 				083512A027DC13E500065228 /* UI Components */,
-				08B3E2F227B9AA02009E4DD7 /* LogoBackground.swift */,
+				08B3E2F227B9AA02009E4DD7 /* Logo.swift */,
 				08288174279EF8D10064C9E8 /* AddNewPlayerView.swift */,
 				08AD236027AA912600BBDB16 /* HapticsManager.swift */,
 			);
@@ -458,9 +476,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0828817A279F42AB0064C9E8 /* PhotographSignature.ttf in Resources */,
+				08B724F627DE60ED00E986D6 /* Handletter.otf in Resources */,
 				0888914A27D573E900061754 /* Localizable.strings in Resources */,
 				0896440C27A526CE0091C6F8 /* Colors.xcassets in Resources */,
 				08BE48DF279CA0FB00EA431F /* Preview Assets.xcassets in Resources */,
+				08B724F427DE5EE800E986D6 /* SmoothStone-Regular.otf in Resources */,
+				08B724F827DE78AB00E986D6 /* HerrVonMuellerhoff-Regular.ttf in Resources */,
 				08BE48DC279CA0FB00EA431F /* Icon.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -485,16 +506,18 @@
 				08AD236127AA912600BBDB16 /* HapticsManager.swift in Sources */,
 				082C53F927ABE69D00AB5CD7 /* TriomiCount.xcdatamodeld in Sources */,
 				085924C927C6DCA300364259 /* PlayerListSort.swift in Sources */,
-				08B3E2F327B9AA02009E4DD7 /* LogoBackground.swift in Sources */,
+				08B3E2F327B9AA02009E4DD7 /* Logo.swift in Sources */,
 				0835129C27DC123700065228 /* Turn+CoreDataClass.swift in Sources */,
 				0835129927DC123700065228 /* Game+CoreDataClass.swift in Sources */,
 				08D562A427B30BA7009C72B1 /* View+Extension.swift in Sources */,
 				08BE48EA279CA14900EA431F /* HomeView.swift in Sources */,
+				0827298227DDE74C00E48F4D /* CardsDrawnPicker.swift in Sources */,
 				089CA6F9279EA4B9007E34E8 /* PlayerListView.swift in Sources */,
 				0835129D27DC123700065228 /* GameScoreDict+CoreDataProperties.swift in Sources */,
 				085B664427B02D00000CCC99 /* String+Extension.swift in Sources */,
 				083BFD5027CABB7200B5BE50 /* SubmitPointsAfterGameView.swift in Sources */,
 				0896440E27A527F30091C6F8 /* Color+Extenstion.swift in Sources */,
+				0827298427DE488900E48F4D /* PlayedCardPicker.swift in Sources */,
 				082C540127ABE88F00AB5CD7 /* PersistentStore.swift in Sources */,
 				0835129827DC123700065228 /* Turn+CoreDataProperties.swift in Sources */,
 				08BE48D8279CA0FA00EA431F /* TriomiCountApp.swift in Sources */,
@@ -506,6 +529,7 @@
 				0835129E27DC123700065228 /* Game+CoreDataProperties.swift in Sources */,
 				08A2C64127A341E70076C196 /* PlayerDetailView.swift in Sources */,
 				0859748327CD7CAC0030A4E5 /* GameResultsView.swift in Sources */,
+				08093A6827DD4CA90061352D /* CircularOffsetStyle.swift in Sources */,
 				087179E027ADDD9A0005C074 /* NSManagedObject+Extensions.swift in Sources */,
 				083512A927DC15DA00065228 /* OffsetOnTapStyle.swift in Sources */,
 				083974DB27D294F7002B90E4 /* GamesListView.swift in Sources */,

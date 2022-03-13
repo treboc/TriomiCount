@@ -13,7 +13,7 @@ struct GameOnboardingRowView: View {
 
   var body: some View {
     ZStack {
-      Color.accentColor
+      Color.primaryAccentColor
       HStack {
         ZStack {
           Image(systemName: "circle.dotted")

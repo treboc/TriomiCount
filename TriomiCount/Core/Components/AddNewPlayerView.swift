@@ -28,7 +28,7 @@ struct AddNewPlayerView: View {
           Button("Cancel") {
             dismiss()
           }
-          .foregroundColor(.accentColor)
+          .foregroundColor(.primaryAccentColor)
           .padding(.top)
         }
 
@@ -66,6 +66,7 @@ struct AddNewPlayerView: View {
             .frame(maxWidth: .infinity)
         }
         .buttonStyle(.offsetStyle)
+        .padding(.horizontal, 20)
 
         Spacer()
         Spacer()
@@ -106,7 +107,7 @@ struct AddNewPlayerView: View {
     }
     return false
   }
-
+  
   func createPlayer() {
     nameTextFieldText = nameTextFieldText.trimmingCharacters(in: .whitespacesAndNewlines)
 

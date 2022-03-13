@@ -34,7 +34,7 @@ struct SubmitPointsAfterGameView: View {
                     .onSubmit {
                         addPoints()
                     }
-                    // Make sure the maximum input is 999, because more than this is not realistic and it avoids errors in the system b/c of too high scores.
+                    // Make sure the maximum input is 999 (no more as 3 digits), because more than this is not realistic and it avoids errors in the system b/c of too high scores.
                     .onReceive(Just(endPoints)) { value in
                         if value.count > 3 {
                             endPoints.removeLast()
@@ -46,7 +46,7 @@ struct SubmitPointsAfterGameView: View {
                     Text("Submit")
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.accentColor)
+                        .background(Color.primaryAccentColor)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
