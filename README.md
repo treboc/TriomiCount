@@ -20,7 +20,7 @@ Key features right now:
 <p float="left">
   <img src="./screenshots/main_menu.png" width="200" />
   <img src="./screenshots/game.png" width="200" />
-  <img src="./screenshots/player_detail.png" width="200" />
+  <img src="./screenshots/player_details.png" width="200" />
 </p>
 
 ## Why something niche like this!?
