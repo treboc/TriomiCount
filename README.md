@@ -17,8 +17,11 @@ Key features right now:
 * light / dark mode
 
 ## Screenshots
-Main Menu:
-![Main Menu](./screenshots/mainMenu.png)
+<p float="left">
+  <img src="./screenshots/main_menu.png" width="200" />
+  <img src="./screenshots/game.png" width="200" />
+  <img src="./screenshots/player_detail.png" width="200" />
+</p>
 
 ## Why something niche like this!?
 I like playing the game, but was annoyed that I'd to write down our scores by hand and the next time we'd played, the last scores were gone.
