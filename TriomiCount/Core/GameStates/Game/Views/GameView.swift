@@ -28,14 +28,14 @@ struct GameView: View {
       
       switch vm.gameState {
       case .playing:
-        VStack(spacing: 20) {
+        VStack {
           headerLabel
 
-          Spacer(minLength: 0)
+          Spacer(minLength: 10)
 
           centerView
 
-          Spacer()
+          Spacer(minLength: 10)
 
           VStack {
             nextPlayerButton
@@ -73,7 +73,6 @@ struct GameView: View {
       Button("Cancel", role: .cancel, action: {})
       Button(AlertContext.endGame.buttonTitle, action: { vm.endingGame() })
     }
-    
   }
 }
 
@@ -136,7 +135,6 @@ extension GameView {
       divider
       playedCardPicker
     }
-    .padding(.top, 20)
     .padding()
     .frame(maxWidth: .infinity)
     .cornerRadius(10)
@@ -144,13 +142,14 @@ extension GameView {
       RoundedRectangle(cornerRadius: 10)
         .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
     )
-    .overlay( circularResetButton, alignment: .topTrailing )
+    .overlay( circularResetButton.offset(x: 10, y: -5), alignment: .topTrailing )
   }
 
   private var scoreSliderView: some View {
-    VStack(alignment: .leading, spacing: 30) {
+    VStack(alignment: .leading) {
       Text("gameView.scoreSlider.label_text")
         .font(.headline)
+
       HStack(spacing: 20) {
         Text(String(format: "%02d", Int(vm.scoreSliderValue)))
           .monospacedDigit()
@@ -164,7 +163,7 @@ extension GameView {
   }
 
   private var timesDrawnPickerView: some View {
-    VStack(alignment: .leading, spacing: 30) {
+    VStack(alignment: .leading) {
       Text("gameView.timesDrawnPicker.label_text")
         .font(.headline)
       CardsDrawnPicker(selection: $vm.timesDrawn)
@@ -172,7 +171,7 @@ extension GameView {
   }
 
   private var playedCardPicker: some View {
-    VStack(alignment: .leading, spacing: 20) {
+    VStack(alignment: .leading) {
       Text("gameView.playedCardPicker.label_text")
         .font(.headline)
       PlayedCardPicker(selection: $vm.playedCard)
@@ -233,7 +232,8 @@ extension GameView {
 //MARK: - UI Methods
 extension GameView {
   private func exitGame() {
-    dismiss()
+//    dismiss()
+    NavigationUtil.popToRootView()
     HapticManager.shared.notification(type: .success)
   }
 

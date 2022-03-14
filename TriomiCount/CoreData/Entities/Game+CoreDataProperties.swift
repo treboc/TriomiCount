@@ -87,7 +87,6 @@ extension Game {
 
 // MARK: - Class Functions
 extension Game {
-  
   class func getLastNotFinishedSession(context: NSManagedObjectContext) -> Game? {
     let predicate = NSPredicate(format: "hasEnded_ = false")
     let fetchRequest: NSFetchRequest<Game> = NSFetchRequest<Game>(entityName: Game.description())
@@ -95,6 +94,14 @@ extension Game {
     do {
       let result = try context.fetch(fetchRequest)
       guard let lastSession = result.last else { return nil }
+
+      // deleting all older, not finished sessions, but the last
+      for session in result {
+        if (session != lastSession) && (!session.hasEnded) {
+          PersistentStore.shared.context.delete(session)
+        }
+      }
+
       if !lastSession.hasEnded { return lastSession }
     } catch let error as NSError {
       print("Could not find any session that has not ended. Error: \(error.localizedDescription)")

@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct GamesListView: View {
-  @FetchRequest(sortDescriptors: [], animation: .default) private var games: FetchedResults<Game>
+  @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Game.hasEnded_, ascending: true)], animation: .default) private var games: FetchedResults<Game>
   
   var body: some View {
     List {

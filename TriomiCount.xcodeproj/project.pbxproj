@@ -51,9 +51,6 @@
 		08A2C64327A34BBB0076C196 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A2C64227A34BBB0076C196 /* SettingsView.swift */; };
 		08AD236127AA912600BBDB16 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AD236027AA912600BBDB16 /* HapticsManager.swift */; };
 		08B3E2F327B9AA02009E4DD7 /* Logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3E2F227B9AA02009E4DD7 /* Logo.swift */; };
-		08B724F427DE5EE800E986D6 /* SmoothStone-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 08B724F327DE5EE800E986D6 /* SmoothStone-Regular.otf */; };
-		08B724F627DE60ED00E986D6 /* Handletter.otf in Resources */ = {isa = PBXBuildFile; fileRef = 08B724F527DE60ED00E986D6 /* Handletter.otf */; };
-		08B724F827DE78AB00E986D6 /* HerrVonMuellerhoff-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08B724F727DE78AB00E986D6 /* HerrVonMuellerhoff-Regular.ttf */; };
 		08BBB1F627A08F98001CD3DF /* GameOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBB1F527A08F98001CD3DF /* GameOnboardingView.swift */; };
 		08BBB1FA27A0A1D3001CD3DF /* GameOnboardingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBB1F927A0A1D3001CD3DF /* GameOnboardingRowView.swift */; };
 		08BE48D8279CA0FA00EA431F /* TriomiCountApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE48D7279CA0FA00EA431F /* TriomiCountApp.swift */; };
@@ -108,9 +105,6 @@
 		08A2C64227A34BBB0076C196 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		08AD236027AA912600BBDB16 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		08B3E2F227B9AA02009E4DD7 /* Logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logo.swift; sourceTree = "<group>"; };
-		08B724F327DE5EE800E986D6 /* SmoothStone-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SmoothStone-Regular.otf"; sourceTree = "<group>"; };
-		08B724F527DE60ED00E986D6 /* Handletter.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Handletter.otf; sourceTree = "<group>"; };
-		08B724F727DE78AB00E986D6 /* HerrVonMuellerhoff-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HerrVonMuellerhoff-Regular.ttf"; sourceTree = "<group>"; };
 		08BBB1F527A08F98001CD3DF /* GameOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOnboardingView.swift; sourceTree = "<group>"; };
 		08BBB1F927A0A1D3001CD3DF /* GameOnboardingRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOnboardingRowView.swift; sourceTree = "<group>"; };
 		08BE48D4279CA0FA00EA431F /* TriomiCount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TriomiCount.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,10 +135,7 @@
 		08288179279F42570064C9E8 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				08B724F527DE60ED00E986D6 /* Handletter.otf */,
-				08B724F327DE5EE800E986D6 /* SmoothStone-Regular.otf */,
 				08288178279F42440064C9E8 /* PhotographSignature.ttf */,
-				08B724F727DE78AB00E986D6 /* HerrVonMuellerhoff-Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -476,12 +467,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0828817A279F42AB0064C9E8 /* PhotographSignature.ttf in Resources */,
-				08B724F627DE60ED00E986D6 /* Handletter.otf in Resources */,
 				0888914A27D573E900061754 /* Localizable.strings in Resources */,
 				0896440C27A526CE0091C6F8 /* Colors.xcassets in Resources */,
 				08BE48DF279CA0FB00EA431F /* Preview Assets.xcassets in Resources */,
-				08B724F427DE5EE800E986D6 /* SmoothStone-Regular.otf in Resources */,
-				08B724F827DE78AB00E986D6 /* HerrVonMuellerhoff-Regular.ttf in Resources */,
 				08BE48DC279CA0FB00EA431F /* Icon.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
