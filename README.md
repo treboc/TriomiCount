@@ -18,9 +18,9 @@ Key features right now:
 
 ## Screenshots
 <p float="left">
-  <img src="./screenshots/main_menu.png" width="200" />
-  <img src="./screenshots/game.png" width="200" />
-  <img src="./screenshots/player_details.png" width="200" />
+  <img src="./screenshots/main_menu.png" width="300" />
+  <img src="./screenshots/game.png" width="300" />
+  <img src="./screenshots/player_details.png" width="300" />
 </p>
 
 ## Why something niche like this!?
@@ -33,4 +33,4 @@ I'm far more interested in building something – atleast for us – useful, th
 * iOS 15.0+
 
 ## License
-The project is licenced under [GNU General Public License version 3](./LICENSE)
+The project is licenced under [GNU General Public License version 2](./LICENSE).
