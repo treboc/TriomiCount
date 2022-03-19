@@ -42,7 +42,7 @@
 "gameResultsView.mainMenuButton.label_text" = "Zurück zum Hauptmenü";
 
 // AddNewPlayerView
-"addNewPlayerView.nameLabel.label_text" = "Wie ist dein Name?";
+"addNewPlayerView.nameLabel.label_text" = "Verrate mir bitte deinen Namen!";
 "addNewPlayerView.createButton.label_text" = "Erstellen";
 "addNewPlayerView.alertTextFieldEmpty.title" = "Textfeld ist leer!";
 "addNewPlayerView.alertTextFieldEmpty.message" = "Ups! Es sieht so aus, als hättest du mir deinen Namen nicht verraten. Trag ihn bitte in das Textfeld ein.";

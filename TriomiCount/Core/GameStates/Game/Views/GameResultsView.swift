@@ -34,7 +34,7 @@ struct GameResultsView: View {
         
         Divider()
         
-        ForEach(vm.game.playersArray) { player in
+        ForEach(vm.game?.playersArray ?? []) { player in
           HStack {
             Text(player.name)
               .font(.title2)

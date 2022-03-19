@@ -20,8 +20,12 @@ extension Turn {
     self.game = game
     self.id = UUID()
     self.createdOn = Date()
+
+    if let players = game.players {
+      self.addToPlayersInTurn(players)
+    }
   }
-  
+
   @nonobjc public class func fetchRequest() -> NSFetchRequest<Turn> {
     return NSFetchRequest<Turn>(entityName: "Turn")
   }

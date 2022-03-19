@@ -7,8 +7,11 @@
 
 import Foundation
 import SwiftUI
+import PageSheetCore
 
 class GameViewModel: ObservableObject {
+  @EnvironmentObject var appState: AppState
+
   enum GameState: Equatable {
     case exited
     case playing
@@ -17,33 +20,39 @@ class GameViewModel: ObservableObject {
   }
   
   // MARK: - GameState Playing
-  // 1) create a childViewContext to work on temporary copies of the players in the game
   let store = PersistentStore.shared
   let context = PersistentStore.shared.context
   
-  @Published var game: Game
+  @Published var game: Game?
   @Published var gameState: GameState = .playing
-  
-  var currentPlayerOnTurn: Player? {
-    let playersCount = game.playersArray.count
-    let turnsCount = game.turnsArray.count
-    
-    if turnsCount != 0 {
-      return game.playersArray[turnsCount % playersCount]
-    } else {
-      if let firstPlayer = game.playersArray.first {
-        return firstPlayer
-      }
+  @Published var currentPlayerOnTurn: Player?
+
+  //  var currentPlayerOnTurn: Player? {
+  //    if let playersCount = game?.playersArray.count,
+  //       let turnsCount = game?.playersArray.count {
+  //
+  //      if turnsCount != 0 {
+  //        return game!.playersArray[turnsCount % playersCount]
+  //      } else {
+  //        if let firstPlayer = game?.playersArray.first {
+  //          return firstPlayer
+  //        }
+  //      }
+  //    }
+  //    return nil
+  //  }
+
+  init(lastGame: Game) {
+    if (lastGame.players?.count != 0) {
+      self.game = lastGame
+      self.currentPlayerOnTurn = getCurrentPlayerOnTurn()
     }
-    return nil
   }
-  
-  init(_ players: [Player] = [], game: Game? = nil) {
-    if let game = game {
-      self.game = game
-    } else {
-      self.game = Game(players: players, context: context)
-    }
+
+  init(_ players: [Player] = []) {
+    guard !players.isEmpty else { return }
+    self.game = Game(players: players, context: context)
+    self.currentPlayerOnTurn = getCurrentPlayerOnTurn()
   }
 
   // 2) calculate the current points the player gets for laying the card
@@ -77,23 +86,41 @@ class GameViewModel: ObservableObject {
   }
 
   func nextPlayer() {
+    guard let game = game else { return }
     // update the current player with the score from the currentTurnScore
     updateScore(of: currentPlayerOnTurn, with: calculatedScore)
     
     // append the actual turn to the turns-array to keep track of the turns, but also in the childViewContext, so that if the game is set back all models are untouched
-    let newTurn = Turn(self.game)
-    guard let player = currentPlayerOnTurn else { return }
-    newTurn.addToPlayersInTurn(player)
+    let newTurn = Turn(game)
     game.addToTurns(newTurn)
-    
+
+    currentPlayerOnTurn = getCurrentPlayerOnTurn()
+
     saveGameState()
     resetTurnState()
   }
-  
+
   func updateScore(of player: Player?, with score: Int64) {
     if let player = player {
       player.currentScore += score
     }
+  }
+
+  func getCurrentPlayerOnTurn() -> Player? {
+    guard let game = self.game else { return nil }
+
+    let playersCount = game.playersArray.count
+    let turnsCount = game.turnsArray.count
+
+    if turnsCount != 0 {
+      return game.playersArray[turnsCount % playersCount]
+
+    } else {
+      if let firstPlayer = game.playersArray.first {
+        return firstPlayer
+      }
+    }
+    return nil
   }
   
   // MARK: - GameState Ending
@@ -114,6 +141,10 @@ class GameViewModel: ObservableObject {
   @Published var scoreOfPlayersWithoutLastPlayer: Int64 = 0
   
   func endingGame() {
+    guard let game = game else {
+      return
+    }
+
     lastPlayer = currentPlayerOnTurn
     endGameAlertMessage = "The last card was played out by \(lastPlayer?.name ?? "UNKNOWN")."
     if game.players?.count == 1 {
@@ -145,6 +176,7 @@ class GameViewModel: ObservableObject {
   // MARK: - GameState Ended
   
   func endGame() {
+    guard let game = game else { return }
     // Currently: For every player, save the current score to the highscore, if it's higher.
     // Want to: End the game, get all points correctly and only save the players highscore, if it's a new record.
     if let lastPlayer = lastPlayer {
@@ -172,7 +204,9 @@ class GameViewModel: ObservableObject {
   }
   
   func saveGameState() {
-    store.persist(game)
+    if let game = game {
+      store.persist(game)
+    }
   }
   
 }

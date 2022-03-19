@@ -15,6 +15,8 @@ struct AddNewPlayerView: View {
   @State private var alertTitle: LocalizedStringKey = ""
   @State private var alertMessage: LocalizedStringKey = ""
 
+  @State private var nameTooShort: Bool = false
+
   @State private var nameTextFieldText: String = ""
 
   var body: some View {
@@ -35,7 +37,7 @@ struct AddNewPlayerView: View {
         Spacer()
 
         Text("addNewPlayerView.nameLabel.label_text")
-          .font(.title)
+          .font(.title3)
           .fontWeight(.semibold)
           .padding(.leading, 20)
 
@@ -58,6 +60,21 @@ struct AddNewPlayerView: View {
           .onSubmit {
             createPlayer()
           }
+          .onChange(of: nameTextFieldText, perform: { newValue in
+            if !(newValue == "") {
+              withAnimation {
+                nameTooShort = false
+              }
+            }
+          })
+          .overlay(
+            Text("textfield is empty!".uppercased())
+              .font(.subheadline)
+              .foregroundColor(.red)
+              .offset(x: nameTooShort ? 25 : -300, y: 20)
+            , alignment: .bottomLeading
+          )
+
 
         Button {
           createPlayer()
@@ -114,8 +131,11 @@ struct AddNewPlayerView: View {
     if nameTextFieldText.isValidName() {
       Player.addNewPlayer(name: nameTextFieldText)
       dismiss()
+      nameTooShort = false
     } else {
-      showAlert()
+      withAnimation {
+        nameTooShort = true
+      }
     }
   }
 }

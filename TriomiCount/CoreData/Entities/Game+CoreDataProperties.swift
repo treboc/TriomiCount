@@ -87,6 +87,10 @@ extension Game {
 
 // MARK: - Class Functions
 extension Game {
+  /// 1) get all not yet finished games
+  /// 2) make sure, there's atleast one not finished game
+  /// 3) loop over all, delete all but not the latest
+
   class func getLastNotFinishedSession(context: NSManagedObjectContext) -> Game? {
     let predicate = NSPredicate(format: "hasEnded_ = false")
     let fetchRequest: NSFetchRequest<Game> = NSFetchRequest<Game>(entityName: Game.description())

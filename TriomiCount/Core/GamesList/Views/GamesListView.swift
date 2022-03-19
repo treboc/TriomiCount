@@ -23,6 +23,7 @@ struct GamesListView: View {
 }
 
 struct GameDetailView: View {
+  @Environment(\.dismiss) var dismiss
   let game: Game
   
   var body: some View {
@@ -66,6 +67,11 @@ struct GameDetailView: View {
           }
           
         }
+      }
+
+      Button("Delete") {
+        PersistentStore.shared.context.delete(game)
+        dismiss()
       }
     }
     

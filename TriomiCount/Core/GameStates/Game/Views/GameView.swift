@@ -10,14 +10,8 @@ import SFSafeSymbols
 
 struct GameView: View {
   @StateObject var vm: GameViewModel
+  @EnvironmentObject var appState: AppState
   @Environment(\.dismiss) private var dismiss
-
-  private var showPlayedCardView: Bool {
-    return vm.timesDrawn == 3
-  }
-
-  // ENDGAMEVIEW PROPERTIES
-  @State private var endPointsTextFieldText: String = ""
   @State private var isAnimated: Bool = false
 
   //MARK: Body
@@ -45,7 +39,6 @@ struct GameView: View {
             }
           }
         }
-        .padding(.vertical, 10)
         .scaleEffect(isAnimated ? 1.05 : 1.0)
         .animation(.default, value: isAnimated)
         .onAppear(perform: vm.resetTurnState)
@@ -87,7 +80,7 @@ struct PlayerView_Previews: PreviewProvider {
 extension GameView {
   private var headerLabel: some View {
     VStack(alignment: .center, spacing: 10) {
-      Text(vm.currentPlayerOnTurn?.name ?? "No current player.")
+      Text(vm.currentPlayerOnTurn?.name ?? "Unknown Player")
         .font(.title)
         .bold()
       
@@ -125,8 +118,6 @@ extension GameView {
     )
   }
 
-
-
   private var centerView: some View {
     VStack(spacing: 20) {
       scoreSliderView
@@ -142,7 +133,7 @@ extension GameView {
       RoundedRectangle(cornerRadius: 10)
         .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
     )
-    .overlay( circularResetButton.offset(x: 10, y: -5), alignment: .topTrailing )
+    .overlay( circularResetButton.offset(x: 10, y: -15), alignment: .topTrailing )
   }
 
   private var scoreSliderView: some View {
@@ -197,7 +188,7 @@ extension GameView {
 
   private var exitGameButton: some View {
     Button("gameView.exitGameButton.label_text") {
-      if vm.game.turns?.count != nil {
+      if vm.game?.turns?.count != nil {
         vm.showExitGameAlert.toggle()
       } else {
         exitGame()
@@ -212,12 +203,8 @@ extension GameView {
       HapticManager.shared.notification(type: .success)
     }
     .buttonStyle(.offsetStyle)
-    .disabled(vm.game.turns?.count == 0)
+    .disabled(vm.game?.turns?.count == 0)
   }
-
-  //  private func offsetStyledButton(_ text: String) -> some View {
-  //
-  //  }
 
   private var circularResetButton: some View {
     Button("\(Image(systemSymbol: .arrowUturnBackwardCircle))") {
@@ -232,8 +219,7 @@ extension GameView {
 //MARK: - UI Methods
 extension GameView {
   private func exitGame() {
-//    dismiss()
-    NavigationUtil.popToRootView()
+    appState.homeViewID = UUID()
     HapticManager.shared.notification(type: .success)
   }
 
