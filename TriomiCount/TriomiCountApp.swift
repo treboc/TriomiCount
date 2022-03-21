@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 struct TriomiCountApp: App {
-//  @AppStorage("isDarkMode") private var isDarkMode: Bool = true
   @AppStorage("selectedAppearance") private var selectedAppearance: Int = 2
   @StateObject private var appState = AppState()
 
@@ -17,7 +16,6 @@ struct TriomiCountApp: App {
     WindowGroup {
       HomeView()
         .id(appState.homeViewID)
-//        .preferredColorScheme(isDarkMode ? .dark : .light)
         .preferredColorScheme(selectedAppearance == 1 ? .light : selectedAppearance == 2 ? .dark : nil)
         .environment(\.managedObjectContext, PersistentStore.shared.context)
         .environmentObject(appState)

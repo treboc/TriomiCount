@@ -16,7 +16,6 @@ struct AddNewPlayerView: View {
   @State private var alertMessage: LocalizedStringKey = ""
 
   @State private var nameTooShort: Bool = false
-
   @State private var nameTextFieldText: String = ""
 
   var body: some View {
@@ -41,7 +40,7 @@ struct AddNewPlayerView: View {
           .fontWeight(.semibold)
           .padding(.leading, 20)
 
-        TextField("", text: $nameTextFieldText)
+        TextField("Name's coming..", text: $nameTextFieldText)
           .padding(.leading, 10)
           .frame(height: 55)
           .frame(maxWidth: .infinity)
@@ -61,10 +60,10 @@ struct AddNewPlayerView: View {
             createPlayer()
           }
           .onChange(of: nameTextFieldText, perform: { newValue in
-            if !(newValue == "") {
-              withAnimation {
-                nameTooShort = false
-              }
+            if (newValue.isEmpty) {
+              nameTooShort = true
+            } else {
+              nameTooShort = false
             }
           })
           .overlay(
@@ -72,6 +71,7 @@ struct AddNewPlayerView: View {
               .font(.subheadline)
               .foregroundColor(.red)
               .offset(x: nameTooShort ? 25 : -300, y: 20)
+              .animation(.default, value: nameTooShort)
             , alignment: .bottomLeading
           )
 
@@ -131,11 +131,8 @@ struct AddNewPlayerView: View {
     if nameTextFieldText.isValidName() {
       Player.addNewPlayer(name: nameTextFieldText)
       dismiss()
-      nameTooShort = false
     } else {
-      withAnimation {
-        nameTooShort = true
-      }
+      nameTooShort = true
     }
   }
 }

@@ -11,14 +11,15 @@ import SwiftUI
 
 struct PlayedCardPicker: View {
   @Binding var selection: Bool
+  @Binding var timesDrawn: Int
 
   var body: some View {
     HStack {
-      ButtonToPick(title: "Yes", selection: $selection) {
+      ButtonToPick(title: "Yes", selection: $selection, timesDrawn: $timesDrawn) {
         self.selection = true
       }
 
-      ButtonToPick(title: "No", selection: $selection) {
+      ButtonToPick(title: "No", selection: $selection, timesDrawn: $timesDrawn) {
         self.selection = false
       }
     }
@@ -31,6 +32,7 @@ struct PlayedCardPicker: View {
   struct ButtonToPick: View {
     let title: LocalizedStringKey
     @Binding var selection: Bool
+    @Binding var timesDrawn: Int
     let action: () -> Void
 
     var isSelected: Bool {
@@ -67,7 +69,12 @@ struct PlayedCardPicker: View {
           .cornerRadius(15)
         )
         .onTapGesture {
-          action()
+          if timesDrawn == 3 {
+            action()
+          }
+        }
+        .if(timesDrawn != 3) { view in
+          view.grayscale(1)
         }
     }
   }

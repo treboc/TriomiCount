@@ -48,7 +48,7 @@ struct GameOnboardingView: View {
             showAddPlayerPage.toggle()
           }
 
-          CustomNavLink(title: "gameOnboardingView.button.start_game", destination: GameView(vm: GameViewModel(vm.chosenPlayers)))
+          CustomNavLink(title: "gameOnboardingView.button.start_game", destination: GameMainView(vm: GameViewModel(vm.chosenPlayers)))
             .disabled(vm.chosenPlayers.isEmpty)
 
           Button("gameOnboardingView.button.back_to_main_menu") {

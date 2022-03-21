@@ -10,8 +10,6 @@ import SwiftUI
 import PageSheetCore
 
 class GameViewModel: ObservableObject {
-  @EnvironmentObject var appState: AppState
-
   enum GameState: Equatable {
     case exited
     case playing
@@ -208,5 +206,6 @@ class GameViewModel: ObservableObject {
       store.persist(game)
     }
   }
-  
+
+
 }

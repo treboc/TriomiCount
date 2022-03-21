@@ -18,11 +18,13 @@ struct OffsetOnTapStyle: ButtonStyle {
 
   let primaryColor: Color
   let secondaryColor: Color
+  var borderColor: Color = .secondaryBackground
 
   public init(primaryColor: Color = Color.primaryAccentColor, secondaryColor: Color = Color.secondaryAccentColor, role: ButtonRole = .cancel) {
     if role == .destructive {
       self.primaryColor = Color.destructiveButtonPrimaryColor
       self.secondaryColor = Color.destructiveButtonSecondaryColor
+      self.borderColor = .secondaryBackground.opacity(0.4)
     } else {
       self.primaryColor = primaryColor
       self.secondaryColor = secondaryColor
@@ -40,7 +42,7 @@ struct OffsetOnTapStyle: ButtonStyle {
       .font(.headline.bold())
       .overlay(
         RoundedRectangle(cornerRadius: 15, style: .continuous)
-          .strokeBorder(Color.secondaryBackground, lineWidth: 2)
+          .strokeBorder(borderColor, lineWidth: 2)
       )
       .offset(y: configuration.isPressed ? 0 : -4)
       .background(

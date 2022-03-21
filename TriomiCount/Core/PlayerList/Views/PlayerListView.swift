@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PageSheet
 
 struct PlayerListView: View {
   @State private var showAddPlayerPage: Bool = false
@@ -57,6 +58,8 @@ struct PlayerListView: View {
       }
       .pageSheet(isPresented: $showAddPlayerPage) {
         AddNewPlayerView()
+          .sheetPreference(.detents([PageSheet.Detent.medium()]))
+          .sheetPreference(.grabberVisible(true))
       }
       .navigationBarHidden(true)
     }

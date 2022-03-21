@@ -10,11 +10,9 @@ import PageSheet
 import SFSafeSymbols
 
 struct HomeView: View {
-  @EnvironmentObject var appState: AppState
-
-  @State private var showSettingsView: Bool = false
-//  @AppStorage("isDarkMode") private var isDarkMode: Bool = true
+  @State private var showSettings: Bool = false
   @AppStorage("selectedAppearance") private var selectedAppearance = 0
+  @EnvironmentObject var appState: AppState
 
   @State private var logoIsAnimated: Bool = true
   @State private var lastSession: Game?
@@ -29,19 +27,14 @@ struct HomeView: View {
         // Foreground Layer
         VStack {
           settingsButton
-
           VStack(spacing: 20) {
-            
             Spacer()
-            
             Logo()
               .offset(y: -40)
-            
             Spacer(minLength: 20)
-
             VStack(spacing: 15) {
               if lastSession != nil {
-                PrimaryNavigationLink(destinationView: GameView(vm: GameViewModel(lastGame: lastSession!)), labelTextStringKey: "navigation_link.resume")
+                PrimaryNavigationLink(destinationView: GameMainView(vm: GameViewModel(lastGame: lastSession!)), labelTextStringKey: "navigation_link.resume")
               }
               PrimaryNavigationLink(destinationView: GameOnboardingView().id(appState.onboardingScreen), labelTextStringKey: "navigation_link.new_game")
               PrimaryNavigationLink(destinationView: PlayerListView(), labelTextStringKey: "navigation_link.players")
@@ -50,7 +43,6 @@ struct HomeView: View {
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 50)
             .padding(.bottom, 20)
-
             Spacer()
           }
           .navigationBarHidden(true)
@@ -61,8 +53,7 @@ struct HomeView: View {
         }
       }
     }
-    .pageSheet(isPresented: $showSettingsView) {
-//      SettingsView(isDarkMode: $isDarkMode)
+    .pageSheet(isPresented: $showSettings) {
       SettingsView(selectedAppearance: $selectedAppearance)
         .sheetPreference(.grabberVisible(true))
         .preferredColorScheme(selectedAppearance == 1 ? .light : selectedAppearance == 2 ? .dark : nil)
@@ -89,7 +80,7 @@ extension HomeView {
       Spacer()
 
       Button("\(Image(systemSymbol: .wrenchAndScrewdriverFill))") {
-        showSettingsView.toggle()
+        showSettings.toggle()
       }
       .buttonStyle(.circularOffsetStyle)
     }

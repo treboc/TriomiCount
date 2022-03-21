@@ -1,10 +1,11 @@
 /*
-  Localizable.strings
-  TriomiCount
+ Localizable.strings
+ TriomiCount
 
-  Created by Marvin Lee Kobert on 04.03.22.
-  
-*/
+ Created by Marvin Lee Kobert on 04.03.22.
+
+ */
+
 // HomeView
 "navigation_link.new_game" = "New Game";
 "navigation_link.resume" = "Resume";
@@ -24,8 +25,8 @@
 "gameView.drawnToggle.label_text" = "Did you have to draw a card?";
 "gameView.timesDrawnPicker.label_text" = "How many times did you have to draw?";
 "gameView.playedCardPicker.label_text" = "Were you able to play the card?";
-"gameView.playedCardPicker.yes" = "Ja";
-"gameView.playedCardPicker.no" = "Nein";
+"gameView.playedCardPicker.yes" = "Yes";
+"gameView.playedCardPicker.no" = "No";
 "gameView.nextPlayerButton.label_text" = "Next Player";
 "gameView.exitGameButton.label_text" = "Exit Game";
 "gameView.endGameButton.label_text" = "End Game";
@@ -52,4 +53,14 @@
 "playerDetailView.numberOfGamesWon" = "Number Of Games Won";
 "playerDetailView.numberOfGamesPlayed" = "Number Of Games Played";
 
+// SettingsView
+"settingsView.settings" = "Settings";
+"settingsView.colorScheme.light" = "Light";
+"settingsView.colorScheme.dark" = "Dark";
+"settingsView.colorScheme.system" = "System";
+
 // Rules
+// Beginning
+"rules.title" = "Rules";
+"rules.beginning.title" = "Beginning";
+"rules.beginning.first" = "Zu Beginn des Spiels liegen alle Steine mit der Oberseite nach unten auf dem Tisch und werden gemischt. Die Spieler ziehen ihre jeweiligen Steine zufällig. Die Anzahl der Steine, die jeder Spieler zieht, hängt von der Anzahl der Mitspieler ab: bei 2 Spielern zieht jeder 9 Steine, bei 4 z. B. nur 7. Einer der Spieler notiert für alle ständig die erzielten Punkte. Der Spieler mit dem höchsten Tripelstein (einem Stein mit 3 gleichen Zahlen) beginnt das Spiel, indem er diesen Stein ablegt. Dafür bekommt er 10 Punkte plus die Summe der Zahlen des Steins. Ausnahme: wenn als Tripelstein der Nullerstein (also der mit 3 Nullen) gelegt wird, so bekommt der Spieler, der ihn ablegt, 40 Punkte gut geschrieben. Sollte kein Spieler einen Tripelstein legen können oder wollen, so beginnt der Spieler mit dem höchsten Stein, d. h. mit dem Stein, der die höchste Zahlsumme besitzt. Wenn zwei oder mehr Spieler gleich hohe Steine besitzen, dann beginnt der Spieler mit dem nächsthöheren Einzelstein. Der Spieler, der ihn ablegt, bekommt allerdings nur die Summe des Steins gutgeschrieben.";

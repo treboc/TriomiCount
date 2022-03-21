@@ -2,11 +2,10 @@
 //  GameView.swift
 //  TriomiCount
 //
-//  Created by Marvin Lee Kobert on 22.01.22.
+//  Created by Marvin Lee Kobert on 19.03.22.
 //
 
 import SwiftUI
-import SFSafeSymbols
 
 struct GameView: View {
   @StateObject var vm: GameViewModel
@@ -14,51 +13,34 @@ struct GameView: View {
   @Environment(\.dismiss) private var dismiss
   @State private var isAnimated: Bool = false
 
-  //MARK: Body
   var body: some View {
-    ZStack {
-      Color.primaryBackground
-        .ignoresSafeArea()
-      
-      switch vm.gameState {
-      case .playing:
-        VStack {
-          headerLabel
+    VStack {
+      header
 
-          Spacer(minLength: 10)
+      Spacer(minLength: 10)
 
-          centerView
+      center
 
-          Spacer(minLength: 10)
+      Spacer(minLength: 10)
 
-          VStack {
-            nextPlayerButton
-            HStack {
-              exitGameButton
-              endGameButton
-            }
-          }
+      VStack {
+        nextPlayerButton
+        HStack {
+          exitGameButton
+          endGameButton
         }
-        .scaleEffect(isAnimated ? 1.05 : 1.0)
-        .animation(.default, value: isAnimated)
-        .onAppear(perform: vm.resetTurnState)
-        .tint(.primaryAccentColor)
-        .padding()
-      case .isEnding:
-        SubmitPointsAfterGameView()
-          .environmentObject(vm)
-      case .ended:
-        GameResultsView()
-          .environmentObject(vm)
-      case .exited:
-        Text("Game was exited.")
       }
     }
-    .navigationBarHidden(true)
-    .navigationBarBackButtonHidden(true)
+    .scaleEffect(isAnimated ? 1.05 : 1.0)
+    .animation(.default, value: isAnimated)
+    .onAppear(perform: vm.resetTurnState)
+    .tint(.primaryAccentColor)
+    .padding()
     .alert(AlertContext.exitGame.title, isPresented: $vm.showExitGameAlert) {
       Button("Cancel", role: .cancel) {}
-      Button(AlertContext.exitGame.buttonTitle) { exitGame() }
+      Button(AlertContext.exitGame.buttonTitle) {
+        exitGame()
+      }
     } message: {
       Text(AlertContext.exitGame.message)
     }
@@ -69,21 +51,14 @@ struct GameView: View {
   }
 }
 
-struct PlayerView_Previews: PreviewProvider {
-  static var previews: some View {
-    GameView(vm: GameViewModel(Player.allPlayers()))
-      .environment(\.managedObjectContext, PersistentStore.preview.context)
-  }
-}
-
 //MARK: UI Components
 extension GameView {
-  private var headerLabel: some View {
+  private var header: some View {
     VStack(alignment: .center, spacing: 10) {
       Text(vm.currentPlayerOnTurn?.name ?? "Unknown Player")
         .font(.title)
         .bold()
-      
+
       HStack {
         VStack(alignment: .leading, spacing: 5) {
           Text("gameView.headerLabel.total_score")
@@ -94,7 +69,7 @@ extension GameView {
         }
         .lineLimit(1)
         Spacer()
-        
+
         VStack(alignment: .trailing, spacing: 5) {
           Text("gameView.headerLabel.this_turn_score")
             .font(.headline)
@@ -105,7 +80,7 @@ extension GameView {
         }
         .lineLimit(1)
       }
-      
+
     }
     .animation(.none, value: vm.currentPlayerOnTurn)
     .padding()
@@ -118,13 +93,13 @@ extension GameView {
     )
   }
 
-  private var centerView: some View {
+  private var center: some View {
     VStack(spacing: 20) {
-      scoreSliderView
+      scoreSliderStack
       divider
-      timesDrawnPickerView
+      timesDrawnStack
       divider
-      playedCardPicker
+      playedCardStack
     }
     .padding()
     .frame(maxWidth: .infinity)
@@ -136,7 +111,7 @@ extension GameView {
     .overlay( circularResetButton.offset(x: 10, y: -15), alignment: .topTrailing )
   }
 
-  private var scoreSliderView: some View {
+  private var scoreSliderStack: some View {
     VStack(alignment: .leading) {
       Text("gameView.scoreSlider.label_text")
         .font(.headline)
@@ -153,19 +128,19 @@ extension GameView {
     }
   }
 
-  private var timesDrawnPickerView: some View {
+  private var timesDrawnStack: some View {
     VStack(alignment: .leading) {
       Text("gameView.timesDrawnPicker.label_text")
         .font(.headline)
-      CardsDrawnPicker(selection: $vm.timesDrawn)
+      TimesDrawnPicker(selection: $vm.timesDrawn)
     }
   }
 
-  private var playedCardPicker: some View {
+  private var playedCardStack: some View {
     VStack(alignment: .leading) {
       Text("gameView.playedCardPicker.label_text")
         .font(.headline)
-      PlayedCardPicker(selection: $vm.playedCard)
+      PlayedCardPicker(selection: $vm.playedCard, timesDrawn: $vm.timesDrawn)
     }
   }
 
@@ -215,18 +190,17 @@ extension GameView {
   }
 }
 
-
-//MARK: - UI Methods
+// MARK: - UI Methods
 extension GameView {
-  private func exitGame() {
-    appState.homeViewID = UUID()
-    HapticManager.shared.notification(type: .success)
-  }
-
   private func toggleScaleAnimation() {
     isAnimated = true
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
       isAnimated = false
     }
   }
+
+  func exitGame() {
+   appState.homeViewID = UUID()
+   HapticManager.shared.notification(type: .success)
+ }
 }
