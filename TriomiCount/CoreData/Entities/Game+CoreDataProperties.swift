@@ -46,6 +46,7 @@ extension Game {
     
     for player in players {
       player.currentScore = 0
+      player.increaseGamesPlayed()
       player.isChosen = false
     }
     

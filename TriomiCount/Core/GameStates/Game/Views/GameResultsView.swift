@@ -17,7 +17,7 @@ struct GameResultsView: View {
         Text("Game Results")
           .font(.largeTitle)
           .fontWeight(.semibold)
-          .padding(.bottom, 50)
+          .padding(.bottom, 20)
 
         HStack {
           Text("Name")
@@ -25,11 +25,10 @@ struct GameResultsView: View {
           Spacer()
           Text("Points")
         }
-        .padding(.horizontal, 30)
 
         Divider()
 
-        ForEach(vm.game?.playersArray ?? []) { player in
+        ForEach(vm.game?.playersArray.sorted(by: { $0.currentScore > $1.currentScore }) ?? []) { player in
           HStack {
             Text(player.name)
               .font(.title2)
@@ -39,7 +38,6 @@ struct GameResultsView: View {
             Text("\(player.currentScore) Pts.")
           }
         }
-        .padding(.horizontal, 30)
         .padding([.bottom, .top], 15)
 
         Spacer()
@@ -50,6 +48,8 @@ struct GameResultsView: View {
         .buttonStyle(.offsetStyle)
         .padding(.bottom, 50)
       }
+      .padding(.horizontal, 30)
+
       Spacer()
     }
   }

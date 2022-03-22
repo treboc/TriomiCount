@@ -25,21 +25,6 @@ class GameViewModel: ObservableObject {
   @Published var gameState: GameState = .playing
   @Published var currentPlayerOnTurn: Player?
 
-  //  var currentPlayerOnTurn: Player? {
-  //    if let playersCount = game?.playersArray.count,
-  //       let turnsCount = game?.playersArray.count {
-  //
-  //      if turnsCount != 0 {
-  //        return game!.playersArray[turnsCount % playersCount]
-  //      } else {
-  //        if let firstPlayer = game?.playersArray.first {
-  //          return firstPlayer
-  //        }
-  //      }
-  //    }
-  //    return nil
-  //  }
-
   init(lastGame: Game) {
     if (lastGame.players?.count != 0) {
       self.game = lastGame
@@ -60,20 +45,20 @@ class GameViewModel: ObservableObject {
   @Published var playedCard: Bool = true
   
   var calculatedScore: Int64 {
-    var calculatedScore = self.scoreSliderValue
-    
+        var calculatedScore = self.scoreSliderValue
+
     if timesDrawn != 3 {
       calculatedScore = Float(scoreSliderValue) - Float(timesDrawn * 5)
     }
-    
+
     if timesDrawn == 3 && playedCard {
       calculatedScore = scoreSliderValue - 15
     }
-    
+
     if timesDrawn == 3 && !playedCard {
       calculatedScore = -25
     }
-    
+
     return Int64(calculatedScore)
   }
 
@@ -139,9 +124,7 @@ class GameViewModel: ObservableObject {
   @Published var scoreOfPlayersWithoutLastPlayer: Int64 = 0
   
   func endingGame() {
-    guard let game = game else {
-      return
-    }
+    guard let game = game else { return }
 
     lastPlayer = currentPlayerOnTurn
     endGameAlertMessage = "The last card was played out by \(lastPlayer?.name ?? "UNKNOWN")."
@@ -185,7 +168,9 @@ class GameViewModel: ObservableObject {
       lastPlayer.currentScore += scoreOfPlayersWithoutLastPlayer
       
       // GET WINNER WITH HIGHEST SCORE
-      game.winnerID = game.playersArray.sorted(by: { $0.currentScore > $1.currentScore }).first!.id
+      let winner = game.playersArray.sorted(by: { $0.currentScore > $1.currentScore }).first!
+      winner.increaseGamesWon()
+      game.winnerID = winner.id
       
       for player in game.playersArray {
         if player.currentScore > player.highscore {

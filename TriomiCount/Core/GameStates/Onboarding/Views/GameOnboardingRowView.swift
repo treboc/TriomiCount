@@ -54,9 +54,10 @@ struct GameOnboardingRowView: View {
 }
 
 //struct NewGameChoosePlayerListRowView_Previews: PreviewProvider {
+//  static let players: [Player] = Player.allPlayers()
+//
 //  static var previews: some View {
-//    GameOnboardingRowView(player: Player(context: PersistentStore.previewGameOnBoardingRowView.context), position: 1)
+//    GameOnboardingRowView(player: players.first!, position: 1)
 //      .padding()
-//      .environment(\.managedObjectContext, PersistentStore.previewGameOnBoardingRowView.context)
 //  }
 //}

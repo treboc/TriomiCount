@@ -20,6 +20,8 @@
         <attribute name="createdOn_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="currentScore_" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="gameScores_" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="gamesPlayed" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="gamesWon" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="highscore_" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id_" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name_" optional="YES" attributeType="String"/>
@@ -38,7 +40,7 @@
     <elements>
         <element name="Game" positionX="-36" positionY="189" width="128" height="134"/>
         <element name="GameScoreDict" positionX="-36" positionY="198" width="128" height="104"/>
-        <element name="Player" positionX="160" positionY="192" width="128" height="179"/>
+        <element name="Player" positionX="160" positionY="192" width="128" height="14"/>
         <element name="Turn" positionX="-230.140625" positionY="36" width="309.88671875" height="104"/>
     </elements>
 </model>

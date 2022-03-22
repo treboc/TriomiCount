@@ -17,6 +17,8 @@ extension Player {
   @NSManaged public var name_: String?
   @NSManaged public var position_: Int16
   @NSManaged public var games: NSSet?
+  @NSManaged public var gamesPlayed: Int
+  @NSManaged public var gamesWon: Int
   @NSManaged public var playerInTurn: Turn?
   @NSManaged public var gameScores_: [String]?
     
@@ -77,13 +79,13 @@ extension Player {
     return name.count > 0
   }
   
-  var gamesWon: Int {
-    return Game.allGames().filter({ $0.winnerID == self.id }).count
-  }
-  
-  var gamesPlayed: Int {
-    return Game.allGames().filter({ $0.playersArray.contains(where: { $0.id == self.id }) }).count
-  }
+//  var gamesWon: Int {
+//    return Game.allGames().filter({ $0.winnerID == self.id }).count
+//  }
+//
+//  var gamesPlayed: Int {
+//    return Game.allGames().filter({ $0.playersArray.contains(where: { $0.id == self.id }) }).count
+//  }
   
   // MARK: - Useful Fetch Requests
   
@@ -139,6 +141,8 @@ extension Player {
     newPlayer.name = name
     newPlayer.id = UUID()
     newPlayer.createdOn = Date()
+    newPlayer.gamesPlayed = 0
+    newPlayer.gamesWon = 0
     PersistentStore.shared.saveContext(context: context)
   }
   
@@ -155,6 +159,14 @@ extension Player {
   
   func updateScore(score: Int64) {
     self.currentScore += score
+  }
+
+  func increaseGamesWon() {
+    gamesWon += 1
+  }
+
+  func increaseGamesPlayed() {
+    gamesPlayed += 1
   }
 }
 
