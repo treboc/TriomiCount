@@ -47,6 +47,8 @@ struct GameView: View {
     .alert(AlertContext.endGame.title, isPresented: $vm.showEndGameAlert) {
       Button("Cancel", role: .cancel, action: {})
       Button(AlertContext.endGame.buttonTitle, action: { vm.endingGame() })
+    } message: {
+      Text(AlertContext.endGame.message)
     }
   }
 }

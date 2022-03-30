@@ -107,15 +107,16 @@ class GameViewModel: ObservableObject {
   }
   
   // MARK: - GameState Ending
+  /// Game will end
+  /// 1) setting up some needed properties
+  /// 2) get the last player, who was on turn when the game ended, because he gets bonus points and all the points left of the other players
+  /// 3) filter out all other players into their own array
+  /// 4) loop over this array to ask for their points left on their hand
+  /// 5) after getting points from the last player, call endGame(), to calculate all the points, saving them and then step over to display the GameResultsView
   
-  // Alert for ending the game
+  // Alert for ending and exiting the game
   @Published var showEndGameAlert: Bool = false
-  let endGameAlertTitle: String = "Are you sure?"
-  var endGameAlertMessage: String = "The last card is played out by PLAYER ON TURN."
-  
   @Published var showExitGameAlert: Bool = false
-  let exitGameAlertTitle: String = "Are you sure?"
-  let exitGameAlertMessage: String = "Are you sure you want to exit the game? The state of the game is not saved!"
   
   var lastPlayer: Player?
   @Published var playersWithoutLastPlayer: [Player] = []
@@ -127,16 +128,9 @@ class GameViewModel: ObservableObject {
     guard let game = game else { return }
 
     lastPlayer = currentPlayerOnTurn
-    endGameAlertMessage = "The last card was played out by \(lastPlayer?.name ?? "UNKNOWN")."
-    if game.players?.count == 1 {
-      endGame()
-    }
+    if game.players?.count == 1 { endGame() }
     
-    // Get playerOnTurn of the last turn.
-    playersWithoutLastPlayer = game.playersArray.filter({ player in
-      player != currentPlayerOnTurn
-    })
-    
+    playersWithoutLastPlayer = game.playersArray.filter({ $0 != currentPlayerOnTurn })
     if let player = playersWithoutLastPlayer.first {
       playerToAskForPoints = player
       gameState = .isEnding
@@ -147,6 +141,10 @@ class GameViewModel: ObservableObject {
     scoreOfPlayersWithoutLastPlayer += points
     
     playerToAskForPointsIndex += 1
+    getNextPlayerToAskForPoints()
+  }
+  
+  func getNextPlayerToAskForPoints() {
     if playerToAskForPointsIndex < playersWithoutLastPlayer.count {
       playerToAskForPoints = playersWithoutLastPlayer[playerToAskForPointsIndex]
     } else {

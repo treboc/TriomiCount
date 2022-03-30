@@ -19,11 +19,12 @@ extension String {
         
         return initials
     }
-    
-    func isValidName() -> Bool {
-        if !self.isEmpty && self.count < 15 {
-            return true
-        }
-        return false
-    }
+  
+  var isValidName: Bool {
+    !self.isEmpty && self.count < 15
+  }
+  
+  var isInt: Bool {
+    return Int(self) != nil
+  }
 }

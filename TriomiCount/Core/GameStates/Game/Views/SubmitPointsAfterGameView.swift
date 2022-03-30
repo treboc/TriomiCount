@@ -13,9 +13,9 @@ struct SubmitPointsAfterGameView: View {
   @EnvironmentObject var vm: GameViewModel
   @FocusState private var textFieldIsFocused: Bool
   @State var endPoints: String = ""
+  @State var endPointsIsInt: Bool = true
   
   var body: some View {
-    ZStack {
       VStack(spacing: 30) {
         Text("How much points do you have left, \(vm.playerToAskForPoints?.name ?? "NO PLAYER")?")
           .font(.headline)
@@ -28,9 +28,17 @@ struct SubmitPointsAfterGameView: View {
           .keyboardType(.numberPad)
           .submitLabel(.go)
           .focused($textFieldIsFocused)
+          .overlayedAlert(with: "Please enter a valid number!", bool: endPointsIsInt)
           .onSubmit {
             addPoints()
           }
+          .onChange(of: endPoints, perform: { newValue in
+            if newValue.isInt {
+              endPointsIsInt = true
+            } else {
+              endPointsIsInt = false
+            }
+          })
         // Make sure the maximum input is 999 (no more as 3 digits), because more than this is not realistic and it avoids errors in the system b/c of too high scores.
           .onReceive(Just(endPoints)) { value in
             if value.count > 3 {
@@ -39,10 +47,14 @@ struct SubmitPointsAfterGameView: View {
           }
         
         Button("Submit") {
-          addPoints()
+          if endPoints.isInt {
+            addPoints()
+          } else {
+            endPointsIsInt = false
+          }
         }
         .buttonStyle(.offsetStyle)
-        .disabled(endPoints.isEmpty)
+        .disabled(!endPoints.isInt)
       }
       .onAppear {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -50,7 +62,6 @@ struct SubmitPointsAfterGameView: View {
         }
       }
       .padding()
-    }
   }
   
   func addPoints() {
