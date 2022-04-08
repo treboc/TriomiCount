@@ -9,6 +9,10 @@
 import Foundation
 import CoreData
 
+@objc(Game)
+public class Game: NSManagedObject {
+}
+
 extension Game {
   @nonobjc public class func fetchRequest() -> NSFetchRequest<Game> {
     return NSFetchRequest<Game>(entityName: "Game")
@@ -36,6 +40,38 @@ extension Game {
     return playersSet.sorted {
       $0.position < $1.position
     }
+  }
+
+  var playedBy: String {
+    var playerNames: [String] = []
+    for player in playersArray {
+      playerNames.append(player.wrappedName)
+    }
+
+    if playerNames.count == 2 {
+      return playerNames.joined(separator: " and ")
+    } else if playerNames.count > 2 {
+      return playerNames.dropLast().joined(separator: ", ") + ", and " + playerNames.last!
+    } else {
+      return ""
+    }
+  }
+
+  var startedOnAsString: String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .short
+    return formatter.string(from: self.wrappedStartedOn)
+  }
+
+  var winner: String {
+    if let objectIDURL = URL(string: wrappedWinnerID) {
+      let coordinator: NSPersistentStoreCoordinator = PersistentStore.shared.persistentContainer.persistentStoreCoordinator
+      if let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectIDURL) {
+        let winner = PersistentStore.shared.context.object(with: managedObjectID) as? Player
+        return winner?.wrappedName ?? "No Player with this ID found."
+      }
+    }
+    return "There is no winner."
   }
 
   convenience init(players: [Player], context: NSManagedObjectContext) {
@@ -70,8 +106,8 @@ extension Game {
     set { hasEnded = newValue }
   }
 
-  public var wrappedWinnerID: String? {
-    get { winnerID }
+  public var wrappedWinnerID: String {
+    get { winnerID ?? "No ID found." }
     set { winnerID = newValue }
   }
 }

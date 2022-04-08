@@ -60,11 +60,27 @@
 "playerDetailView.deleteButton.title" = "Delete Player";
 "playerDetailView.backButton.title" = "Back";
 
+// GamesListView
+"gameListView.button.back_to_main_menu" = "Back to Main Menu";
+"gameListView.sessions" = "Sessions";
+
+// GameListRowView
+"gameListRowView.session" = "Session";
+"gameListRowView.playedBy" = "Played with:";
+
 // SettingsView
 "settingsView.settings" = "Settings";
 "settingsView.colorScheme.light" = "Light";
 "settingsView.colorScheme.dark" = "Dark";
 "settingsView.colorScheme.system" = "System";
+
+// Alerts
+"exitGameAlert.title" = "Are you sure?";
+"exitGameAlert.message" = "You're about to leave the game. It's possible that it is not saved..";
+"exitGameAlert.buttonTitle" = "Yes, I'm sure.";
+"endGameAlert.title" = "Session end";
+"endGameAlert.message" = "Congratulations, but make sure that the player on turn is the player who placed the last tile.";
+"endGameAlert.buttonTitle" = "Yes, I'm sure.";
 
 // Rules
 // Beginning

@@ -24,9 +24,9 @@ struct GamesListView: View {
           .padding()
           .frame(maxWidth: .infinity)
           .background(Color.secondaryBackground)
-          .cornerRadius(10)
+          .cornerRadius(20)
           .overlay(
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: 20)
               .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
           )
           .padding(.horizontal)

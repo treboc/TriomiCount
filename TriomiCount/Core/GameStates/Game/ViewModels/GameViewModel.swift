@@ -24,6 +24,8 @@ class GameViewModel: ObservableObject {
   @Published var gameState: GameState = .playing
   @Published var currentPlayerOnTurn: Player?
 
+  @AppStorage("gameID") var gameID: Int = 0
+
   init(lastGame: Game) {
     if lastGame.players?.count != 0 {
       self.game = lastGame
@@ -193,18 +195,17 @@ class GameViewModel: ObservableObject {
       // GET WINNER WITH HIGHEST SCORE
       let winner = game.playersArray.sorted(by: { $0.currentScore > $1.currentScore }).first!
       winner.increaseGamesWon()
-      game.wrappedWinnerID = winner.objectID.description
+      game.wrappedWinnerID = winner.objectID.uriRepresentation().absoluteString
 
       for player in game.playersArray {
         if player.currentScore > player.highscore {
           player.highscore = player.currentScore
         }
-        _ = GameScoreDict.init(gameKey: game.objectID.description, player: player)
-        store.saveContext(context: context)
+        _ = GameScoreDict.init(gameKey: game.objectID.uriRepresentation().absoluteString, player: player)
       }
 
-      Game.incrementalID += 1
-      game.id = Game.incrementalID
+      gameID += 1
+      game.id = Int16(gameID)
 
       game.hasEnded = true
       gameState = .ended

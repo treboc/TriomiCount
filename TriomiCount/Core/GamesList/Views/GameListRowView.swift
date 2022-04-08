@@ -12,24 +12,43 @@ struct GameListRowView: View {
   let game: Game
 
   var body: some View {
-    ZStack {
-      Color("SecondaryAccentColor").opacity(0.5).cornerRadius(10)
+    ZStack(alignment: .topLeading) {
+      Color("SecondaryAccentColor")
+        .opacity(1)
+        .cornerRadius(20)
 
-      HStack {
-        Text("\(game.id)")
+      HStack(alignment: .firstTextBaseline) {
+        VStack(alignment: .leading, spacing: 3) {
+          Text("gameListRowView.session")
+            .font(.title2.bold())
+          +
+          Text(" #\(game.id)")
+            .font(.title2.bold())
+
+          HStack(alignment: .firstTextBaseline) {
+            Text(LocalizedStringKey("gameListRowView.playedBy")).bold()
+            Text(game.playedBy)
+              .multilineTextAlignment(.leading)
+          }
+          .font(.subheadline)
+        }
+
+        Spacer()
+
+        Text(game.startedOnAsString)
       }
       .foregroundColor(.white)
       .padding(.horizontal)
+      .padding(.vertical, 10)
     }
-    .frame(height: 65)
     .frame(maxWidth: .infinity)
     .listRowSeparator(.hidden)
     .enableInjection()
   }
 
-    #if DEBUG
-      @ObservedObject private var iO = Inject.observer
-    #endif
+#if DEBUG
+  @ObservedObject private var iO = Inject.observer
+#endif
 }
 
 struct GameListRowView_Previews: PreviewProvider {

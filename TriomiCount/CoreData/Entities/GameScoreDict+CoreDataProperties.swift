@@ -26,23 +26,34 @@ extension GameScoreDict {
     self.id = UUID()
     self.gameKey = gameKey
     self.scoreValue = player.currentScore
-    self.playerID = player.objectID.description
+    self.playerID = player.objectID.uriRepresentation().absoluteString
+  }
+
+  var playerName: String {
+    if let objectIDURL = URL(string: playerID) {
+      let coordinator: NSPersistentStoreCoordinator = PersistentStore.shared.persistentContainer.persistentStoreCoordinator
+      if let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectIDURL) {
+        let player = PersistentStore.shared.context.object(with: managedObjectID) as? Player
+        return player?.wrappedName ?? "No Player with this ID found."
+      }
+    }
+    return "No Player found"
+
   }
 }
 
 extension GameScoreDict: Identifiable {}
 
 extension GameScoreDict {
-  // finds an NSManagedObject with the given UUID (there should only be one, really)
-  class func getGameScoreDictWith(gameKey: UUID,
-                                  context: NSManagedObjectContext = PersistentStore.shared.context)
-                                  -> GameScoreDict? {
+  // finds an NSManagedObject with the given GameID (there should only be one, really)
+  class func getGameScoreDictWith(gameKey: String, context: NSManagedObjectContext = PersistentStore.shared.context) -> [GameScoreDict]? {
     let fetchRequest: NSFetchRequest<GameScoreDict> =
-                                    NSFetchRequest<GameScoreDict>(entityName: GameScoreDict.description())
+    NSFetchRequest<GameScoreDict>(entityName: GameScoreDict.description())
     fetchRequest.predicate = NSPredicate(format: "gameKey == %@", gameKey as CVarArg)
     do {
       let results = try context.fetch(fetchRequest)
-      return results.first
+      print(results.count)
+      return results
     } catch let error as NSError {
       NSLog("Error fetching NSManagedObjects \(Self.description()): \(error.localizedDescription), \(error.userInfo)")
     }
@@ -51,9 +62,9 @@ extension GameScoreDict {
 
   class func getGameScoreDictsWith(gameKey: NSManagedObjectID,
                                    context: NSManagedObjectContext = PersistentStore.shared.context)
-                                   -> [GameScoreDict]? {
+  -> [GameScoreDict]? {
     let fetchRequest: NSFetchRequest<GameScoreDict> =
-                                     NSFetchRequest<GameScoreDict>(entityName: GameScoreDict.description())
+    NSFetchRequest<GameScoreDict>(entityName: GameScoreDict.description())
     fetchRequest.predicate = NSPredicate(format: "gameKey == %@", gameKey as CVarArg)
     do {
       let results = try context.fetch(fetchRequest)

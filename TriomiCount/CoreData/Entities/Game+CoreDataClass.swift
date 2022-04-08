@@ -1,19 +1,19 @@
+////
+////  Game+CoreDataClass.swift
+////  TriomiCount
+////
+////  Created by Marvin Lee Kobert on 04.03.22.
+////
+////
 //
-//  Game+CoreDataClass.swift
-//  TriomiCount
+//import Foundation
+//import CoreData
 //
-//  Created by Marvin Lee Kobert on 04.03.22.
-//
-//
-
-import Foundation
-import CoreData
-
-@objc(Game)
-public class Game: NSManagedObject {
-  static var incrementalID: Int16 = 0 {
-    didSet {
-      print(incrementalID)
-    }
-  }
-}
+//@objc(Game)
+//public class Game: NSManagedObject {
+//  static var incrementalID: Int16 = 0 {
+//    didSet {
+//      print(incrementalID)
+//    }
+//  }
+//}

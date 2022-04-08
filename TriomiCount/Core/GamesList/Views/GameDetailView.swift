@@ -5,6 +5,8 @@
 //  Created by Marvin Lee Kobert on 31.03.22.
 //
 
+import CoreData
+import Inject
 import SwiftUI
 
 struct GameDetailView: View {
@@ -12,65 +14,97 @@ struct GameDetailView: View {
   let game: Game
 
   var body: some View {
-    VStack {
-      HStack {
-        Text("Game-ID")
-        Spacer()
-        Text(game.id.debugDescription)
-      }
+    ZStack(alignment: .topLeading) {
+      Color.primaryBackground
+      .ignoresSafeArea()
 
-      Divider()
-
-      HStack {
-        Text("Startet on:")
-        Spacer()
-        Text(game.wrappedStartedOn.formatted(date: .abbreviated, time: .shortened))
-      }
-
-      Divider()
-
-      HStack {
-        Text("The last player on turn is:")
-        Spacer()
-        Text(game.playersArray.first?.name ?? "Unknown")
-      }
-
-      Divider()
-
-      VStack {
+      VStack(alignment: .center) {
         HStack {
-          Text("Name")
-          Spacer()
-          Text("Score")
+          Text(LocalizedStringKey("gameListRowView.session")) +
+          Text(" #\(game.id)")
+        }
+        .font(.largeTitle)
+        .padding()
+        .frame(maxWidth: .infinity)
+
+        GameDetailSection("Mitgespielt haben:") {
+          Text(game.playedBy)
         }
 
-        ForEach(game.playersArray) { player in
-          HStack {
-            Text(player.wrappedName)
-            Spacer()
-            Text("\(player.getPlayersGameScore(ofGame: game.objectID) ?? 0)")
+        GameDetailSection("Gewonnen hat:") {
+          Text(game.winner)
+        }
+
+        GameDetailSection("Punkte wie folgt:") {
+          VStack(alignment: .leading) {
+            ForEach(GameScoreDict.getGameScoreDictWith(gameKey: game.objectID.uriRepresentation().absoluteString)!) { dict in
+              HStack {
+                Text(dict.playerName)
+                  .frame(minWidth: 50, alignment: .leading)
+                Spacer()
+                Text("\(dict.scoreValue)")
+                  .frame(minWidth: 50, alignment: .trailing)
+              }
+            }
           }
         }
-      }
 
-      Button("Delete") {
-        PersistentStore.shared.context.delete(game)
-        dismiss()
+        Spacer()
+
+        Button("gameOnboardingView.button.back_to_main_menu") {
+          dismiss()
+        }
+        .buttonStyle(.offsetStyle)
       }
+      .padding(.horizontal)
     }
-
-    Divider()
-
-    HStack {
-      if game.hasEnded {
-        Text("Game finished.")
-      }
-    }
+    .enableInjection()
+    .navigationBarHidden(true)
+    .navigationBarBackButtonHidden(true)
   }
+
+#if DEBUG
+  @ObservedObject private var iO = Inject.observer
+#endif
 }
 
 struct GameDetailView_Previews: PreviewProvider {
     static var previews: some View {
       GameDetailView(game: Game.allGames().first!)
     }
+}
+
+extension GameDetailView {
+  struct GameDetailSection<Content: View>: View {
+    let sectionTitle: String
+    let content: Content
+
+    init(_ sectionTitle: String, @ViewBuilder content: () -> Content) {
+      self.sectionTitle = sectionTitle
+      self.content = content()
+    }
+
+    var body: some View {
+      HStack {
+        VStack(alignment: .leading) {
+          Text(NSLocalizedString(sectionTitle, comment: "").uppercased())
+            .font(.caption)
+            .padding(.bottom, 2)
+          content
+            .padding(.leading, 10)
+        }
+        Spacer()
+      }
+      .multilineTextAlignment(.center)
+      .padding()
+      .frame(maxWidth: .infinity)
+      .background(Color.secondaryBackground)
+      .cornerRadius(20)
+      .overlay(
+        RoundedRectangle(cornerRadius: 20)
+          .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
+      )
+    }
+  }
+
 }

@@ -6,13 +6,6 @@
   
 */
 
-// Simple constants
-"Yes" = "Ja";
-"No" = "Nein";
-"Reset" = "Zurücksetzen";
-"Cancel" = "Abbrechen";
-"Back" = "Zurück";
-
 // HomeView
 "navigation_link.new_game" = "Neues Spiel";
 "navigation_link.resume" = "Weiterspielen";
@@ -32,6 +25,8 @@
 "gameView.drawnToggle.label_text" = "Musstest du nachziehen?";
 "gameView.timesDrawnPicker.label_text" = "Wie oft musstest du nachziehen?";
 "gameView.playedCardPicker.label_text" = "Konntest du deine Karte ausspielen?";
+"gameView.playedCardPicker.yes" = "Yes";
+"gameView.playedCardPicker.no" = "No";
 "gameView.bonusEventPicker.label_text" = "Bekommst du Bonuspunkte?";
 "gameView.bonusEventPicker.none" = "Keine";
 "gameView.bonusEventPicker.bridge" = "Brücke";
@@ -62,6 +57,16 @@
 "playerDetailView.createdOn" = "Erstellt am";
 "playerDetailView.numberOfGamesWon" = "Gewonnene Spiele";
 "playerDetailView.numberOfGamesPlayed" = "Gespielte Spiele";
+"playerDetailView.deleteButton.title" = "Spieler löschen";
+"playerDetailView.backButton.title" = "Zurück";
+
+// GamesListView
+"gameListView.button.back_to_main_menu" = "Zurück zum Hauptmenü";
+"gameListView.sessions" = "Spiele";
+
+// GameListRowView
+"gameListRowView.session" = "Spiel";
+"gameListRowView.playedBy" = "Gespielt von:";
 
 // SettingsView
 "settingsView.settings" = "Einstellungen";
@@ -76,8 +81,6 @@
 "endGameAlert.title" = "Spiel wird beendet";
 "endGameAlert.message" = "Herzlichen Glückwunsch! Achtet darauf, dass der Spieler an der Reihe ist, der den letzten Stein gelegt hat.";
 "endGameAlert.buttonTitle" = "Ja, ich bin sicher.";
-
-
 
 // Rules
 // Beginning
@@ -119,3 +122,10 @@ Wenn du den Stein ablegen konntest, ist der Wert auf dem Stein mit den Strafpunk
 2. Ein Sechseck beenden - 50 Punkte.
 3. Zwei Sechsecke beenden - 60 Punkte.
 4. Drei Sechsecke beenden - 70 Punkte.";
+
+// Simple constants
+"Yes" = "Ja";
+"No" = "Nein";
+"Reset" = "Zurücksetzen";
+"Cancel" = "Abbrechen";
+"Back" = "Zurück";
