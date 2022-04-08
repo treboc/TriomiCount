@@ -9,16 +9,22 @@ import SwiftUI
 import Combine
 
 // MARK: - Components / Properties / Views for GameEndingState
-struct SubmitPointsAfterGameView: View {
-  @EnvironmentObject var vm: GameViewModel
+struct SubmitPointsView: View {
+  @EnvironmentObject var viewModel: GameViewModel
   @FocusState private var textFieldIsFocused: Bool
   @State var endPoints: String = ""
   @State var endPointsIsInt: Bool = true
-  
+
   var body: some View {
-      VStack(spacing: 30) {
-        Text("How much points do you have left, \(vm.playerToAskForPoints?.name ?? "NO PLAYER")?")
-          .font(.headline)
+    ZStack {
+      Color.clear.ignoresSafeArea()
+
+      VStack(alignment: .leading, spacing: 30) {
+        VStack(alignment: .leading, spacing: 0) {
+          Text("How much points do you have left,")
+          Text("\(viewModel.playerToAskForPoints?.name ?? "")?")
+        }
+        .font(.headline)
         TextField("e.g. 42", text: $endPoints)
           .padding(.leading, 10)
           .frame(height: 55)
@@ -39,34 +45,53 @@ struct SubmitPointsAfterGameView: View {
               endPointsIsInt = false
             }
           })
-        // Make sure the maximum input is 999 (no more as 3 digits), because more than this is not realistic and it avoids errors in the system b/c of too high scores.
+          /* Make sure the maximum input is 999 (no more as 3 digits),
+             because more than this is not realistic and it avoids
+             errors in the system b/c of too high scores. */
           .onReceive(Just(endPoints)) { value in
             if value.count > 3 {
               endPoints.removeLast()
             }
           }
-        
-        Button("Submit") {
-          if endPoints.isInt {
-            addPoints()
-          } else {
-            endPointsIsInt = false
+
+        HStack {
+          if viewModel.playerToAskForPointsIndex != 0 {
+            Button("Back") {
+              viewModel.playerToAskForPointsIndex -= 1
+            }
+            .buttonStyle(.offsetStyle)
           }
+
+          Button(viewModel.playerToAskForPointsIndex ==
+                 viewModel.playersWithoutLastPlayer.count - 1 ? "Submit" : "Next") {
+            if endPoints.isInt {
+              addPoints()
+            } else {
+              endPointsIsInt = false
+            }
+          }
+          .buttonStyle(.offsetStyle)
+          .disabled(!endPoints.isInt)
         }
-        .buttonStyle(.offsetStyle)
-        .disabled(!endPoints.isInt)
       }
+      .padding()
+      .background(
+        RoundedRectangle(cornerRadius: 10)
+          .stroke(Color.tertiaryBackground, lineWidth: 2)
+          .background(Color.primaryBackground)
+      )
       .onAppear {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
           textFieldIsFocused.toggle()
         }
       }
       .padding()
+    }
   }
-  
+
   func addPoints() {
     if let endPoints = Int64(endPoints) {
-      vm.addPoints(with: endPoints)
+      viewModel.addPoints(with: endPoints)
       self.endPoints = ""
     }
   }
@@ -74,6 +99,7 @@ struct SubmitPointsAfterGameView: View {
 
 struct SubmitPointsAfterGameView_Previews: PreviewProvider {
   static var previews: some View {
-    SubmitPointsAfterGameView()
+    //    SubmitPointsPageView(playerToAskForPoints: Player.allPlayers().first!)
+    SubmitPointsView()
   }
 }

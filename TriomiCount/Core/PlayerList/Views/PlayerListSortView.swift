@@ -11,7 +11,7 @@ import SFSafeSymbols
 struct PlayerListSortView: View {
   @Binding var selectedSortItem: PlayerListSort
   let sorts: [PlayerListSort]
-  
+
   var body: some View {
     Menu {
       Picker("Sort By", selection: $selectedSortItem) {
@@ -29,7 +29,7 @@ struct PlayerListSortView: View {
 
 struct PlayerListSortView_Previews: PreviewProvider {
   @State static var sort = PlayerListSort.default
-  
+
   static var previews: some View {
     PlayerListSortView(selectedSortItem: $sort, sorts: PlayerListSort.sorts)
   }

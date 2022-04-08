@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct GameResultsView: View {
-  @EnvironmentObject var vm: GameViewModel
-  @Environment(\.dismiss) private var dismiss
+  @EnvironmentObject var viewModel: GameViewModel
+  @EnvironmentObject var appState: AppState
 
   var body: some View {
     ZStack {
@@ -28,9 +28,9 @@ struct GameResultsView: View {
 
         Divider()
 
-        ForEach(vm.game?.playersArray.sorted(by: { $0.currentScore > $1.currentScore }) ?? []) { player in
+        ForEach(viewModel.game?.playersArray.sorted(by: { $0.currentScore > $1.currentScore }) ?? []) { player in
           HStack {
-            Text(player.name)
+            Text(player.wrappedName)
               .font(.title2)
 
             Spacer()
@@ -43,7 +43,7 @@ struct GameResultsView: View {
         Spacer()
 
         Button("Main menu") {
-          dismiss()
+          appState.onboardingScreen = UUID()
         }
         .buttonStyle(.offsetStyle)
         .padding(.bottom, 50)

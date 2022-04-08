@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct Logo: View {
-  struct CurvedTriangle: Shape {
-    var control: CGFloat = 5
+  let font: Font = Font.custom("PhotographSignature", fixedSize: 120)
 
+  struct CurvedTriangle: Shape {
     func path(in rect: CGRect) -> Path {
       var path = Path()
 
@@ -26,9 +26,6 @@ struct Logo: View {
       return path
     }
   }
-
-  let height: CGFloat = 300
-  let font: Font = Font.custom("PhotographSignature", fixedSize: 120)
 
   var body: some View {
     ZStack {
@@ -70,12 +67,11 @@ struct Logo: View {
         .shadow(color: .primary.opacity(0.8), radius: 10, x: 0, y: 0)
         .offset(x: 15, y: 30)
     }
-    .offset(x: -30)
+    .offset(x: -20, y: -40)
     .rotationEffect(Angle(degrees: -20))
     .accessibilityHidden(true)
   }
 }
-
 
 struct LogoBackground_Previews: PreviewProvider {
   static var previews: some View {

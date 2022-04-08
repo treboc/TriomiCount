@@ -16,11 +16,15 @@ extension ButtonStyle where Self == OffsetOnTapStyle {
 struct OffsetOnTapStyle: ButtonStyle {
   @Environment(\.isEnabled) var isEnabled
 
+  let height: CGFloat = UIScreen.main.bounds.height / 16
+
   let primaryColor: Color
   let secondaryColor: Color
   var borderColor: Color = .secondaryBackground
 
-  public init(primaryColor: Color = Color.primaryAccentColor, secondaryColor: Color = Color.secondaryAccentColor, role: ButtonRole = .cancel) {
+  init(primaryColor: Color = Color.primaryAccentColor,
+       secondaryColor: Color = Color.secondaryAccentColor,
+       role: ButtonRole = .cancel) {
     if role == .destructive {
       self.primaryColor = Color.destructiveButtonPrimaryColor
       self.secondaryColor = Color.destructiveButtonSecondaryColor
@@ -34,21 +38,21 @@ struct OffsetOnTapStyle: ButtonStyle {
   func makeBody(configuration: Configuration) -> some View {
     configuration.label
       .font(.headline)
-      .frame(height: 55)
+      .frame(height: height)
       .frame(maxWidth: .infinity)
       .background(primaryColor)
       .cornerRadius(20)
-      .foregroundColor(.label)
+      .foregroundColor(.white)
       .font(.headline.bold())
       .overlay(
-        RoundedRectangle(cornerRadius: 15, style: .continuous)
+        RoundedRectangle(cornerRadius: 20, style: .continuous)
           .strokeBorder(borderColor, lineWidth: 2)
       )
       .offset(y: configuration.isPressed ? 0 : -4)
       .background(
         secondaryColor
-          .frame(height: 55)
-          .cornerRadius(15)
+          .frame(height: height)
+          .cornerRadius(20)
       )
       .animation(.none, value: configuration.isPressed)
       .onChange(of: configuration.isPressed) { newValue in
@@ -61,4 +65,3 @@ struct OffsetOnTapStyle: ButtonStyle {
       }
   }
 }
-

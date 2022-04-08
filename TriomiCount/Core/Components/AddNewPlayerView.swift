@@ -36,16 +36,18 @@ struct AddNewPlayerView: View {
         Spacer()
 
         Text("addNewPlayerView.nameLabel.label_text")
+          .underline()
           .font(.title3)
           .fontWeight(.semibold)
           .padding(.leading, 20)
 
-        TextField("Name's coming..", text: $nameTextFieldText)
+        TextField("addNewPlayerView.nameLabel.textfield_text", text: $nameTextFieldText)
+          .foregroundColor(.label)
           .padding(.leading, 10)
           .frame(height: 55)
           .frame(maxWidth: .infinity)
           .background(Color.secondaryBackground)
-          .cornerRadius(10)
+          .cornerRadius(20)
           .padding(.horizontal, 20)
           .textInputAutocapitalization(.words)
           .textContentType(.givenName)
@@ -60,10 +62,10 @@ struct AddNewPlayerView: View {
             createPlayer()
           }
           .onChange(of: nameTextFieldText, perform: { _ in
-            if (nameTextFieldText.isEmpty) {
+            if nameTextFieldText.isEmpty {
               alertMessage = "addNewPlayerView.alertTextFieldEmpty.message"
               nameIsValid = false
-            } else if (nameTextFieldText.count > 20) {
+            } else if nameTextFieldText.count > 20 {
               alertMessage = "addNewPlayerView.alertNameToLong.message"
               nameIsValid = false
             } else {
@@ -99,7 +101,7 @@ struct AddNewPlayerView: View {
       textFieldIsFocused.toggle()
     }
   }
-  
+
   func createPlayer() {
     nameTextFieldText = nameTextFieldText.trimmingCharacters(in: .whitespacesAndNewlines)
 
@@ -113,33 +115,8 @@ struct AddNewPlayerView: View {
   }
 }
 
-struct AddNewPlayerView_Preview: PreviewProvider {
+struct AddNewPlayerView_Previews: PreviewProvider {
   static var previews: some View {
     AddNewPlayerView()
-  }
-}
-
-
-struct OverlayedAlert: ViewModifier {
-  let message: LocalizedStringKey
-  let bool: Bool
-  
-  func body(content: Content) -> some View {
-    content
-      .overlay(
-        Text(message)
-          .textCase(.uppercase)
-          .font(.subheadline)
-          .foregroundColor(.red)
-          .offset(x: bool ? -300 : 25, y: 20)
-          .animation(.default, value: bool)
-        , alignment: .bottomLeading
-      )
-  }
-}
-
-extension View {
-  func overlayedAlert(with message: LocalizedStringKey, bool: Bool) -> some View {
-    modifier(OverlayedAlert(message: message, bool: bool))
   }
 }

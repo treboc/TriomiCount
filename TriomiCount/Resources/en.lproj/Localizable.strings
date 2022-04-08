@@ -27,6 +27,12 @@
 "gameView.playedCardPicker.label_text" = "Were you able to play the card?";
 "gameView.playedCardPicker.yes" = "Yes";
 "gameView.playedCardPicker.no" = "No";
+"gameView.bonusEventPicker.label_text" = "Do you get some bonus points?";
+"gameView.bonusEventPicker.none" = "None";
+"gameView.bonusEventPicker.bridge" = "Bridge";
+"gameView.bonusEventPicker.hexagon" = "Hexagon";
+"gameView.bonusEventPicker.twoHexagons" = "Two Hexagons";
+"gameView.bonusEventPicker.threeHexagons" = "Three Hexagons";
 "gameView.nextPlayerButton.label_text" = "Next Player";
 "gameView.exitGameButton.label_text" = "Exit Game";
 "gameView.endGameButton.label_text" = "End Game";
@@ -39,6 +45,7 @@
 
 // AddNewPlayerView
 "addNewPlayerView.nameLabel.label_text" = "Tell me your name, please!";
+"addNewPlayerView.nameLabel.textfield_text" = "Name's coming..";
 "addNewPlayerView.createButton.label_text" = "Create";
 "addNewPlayerView.alertTextFieldEmpty.message" = "Textfield is empty!";
 "addNewPlayerView.alertNameToLong.message" = "I'm sorry, your name is too long!";
@@ -50,6 +57,8 @@
 "playerDetailView.createdOn" = "Created On";
 "playerDetailView.numberOfGamesWon" = "Number Of Games Won";
 "playerDetailView.numberOfGamesPlayed" = "Number Of Games Played";
+"playerDetailView.deleteButton.title" = "Delete Player";
+"playerDetailView.backButton.title" = "Back";
 
 // SettingsView
 "settingsView.settings" = "Settings";
@@ -60,5 +69,41 @@
 // Rules
 // Beginning
 "rules.title" = "Rules";
-"rules.beginning.title" = "Beginning";
-"rules.beginning.first" = "Zu Beginn des Spiels liegen alle Steine mit der Oberseite nach unten auf dem Tisch und werden gemischt. Die Spieler ziehen ihre jeweiligen Steine zufällig. Die Anzahl der Steine, die jeder Spieler zieht, hängt von der Anzahl der Mitspieler ab: bei 2 Spielern zieht jeder 9 Steine, bei 4 z. B. nur 7. Einer der Spieler notiert für alle ständig die erzielten Punkte. Der Spieler mit dem höchsten Tripelstein (einem Stein mit 3 gleichen Zahlen) beginnt das Spiel, indem er diesen Stein ablegt. Dafür bekommt er 10 Punkte plus die Summe der Zahlen des Steins. Ausnahme: wenn als Tripelstein der Nullerstein (also der mit 3 Nullen) gelegt wird, so bekommt der Spieler, der ihn ablegt, 40 Punkte gut geschrieben. Sollte kein Spieler einen Tripelstein legen können oder wollen, so beginnt der Spieler mit dem höchsten Stein, d. h. mit dem Stein, der die höchste Zahlsumme besitzt. Wenn zwei oder mehr Spieler gleich hohe Steine besitzen, dann beginnt der Spieler mit dem nächsthöheren Einzelstein. Der Spieler, der ihn ablegt, bekommt allerdings nur die Summe des Steins gutgeschrieben.";
+"rules.setup.header" = "Setup";
+"rules.setup.body" = "Mix the tiles face down on the table. One player tracks the score with the help of this app.
+
+Number of tiles:
+- 2 players, 9 tiles per player
+- 3 to 4 players, 7 tiles
+- 5 to 6 players, 6 tiles
+
+Place them on your rack, with the numbered side up, so you can see them.
+For getting the first player, there are different ways.
+
+**First variant:**
+All players are picking up a tile from the “well” and the player with the highest valued stone begins. This player places a random tile from the well as his first play.
+
+**Second variant:**
+The player with the highest valued stone, with three of the same numbers (e.g. 5 - 5 -5, then 4 - 4 - 4, and so on) on his rack, begins by playing this stone out as his first play.";
+
+"rules.letsGo.header" = "Let's go";
+"rules.letsGo.body" = "Now each player places a stone with two numbers on each corner, matching the respective corners of a tile that already lies on the table.
+
+It is important to ensure that all three corners fit, if you place a tile in between other tiles.
+
+If the player on turn can’t or does not want to place a tile, he has to buy one from the well.
+
+This will lead to 5 penalty points for each bought tile. It is possible to buy three tiles per round. If you can’t place a tile after buying 3, you get another 10 penalty points (25 total for this round), and the next player is on turn.
+
+If you can place a tile after buying, the value of this tile is added to the penalty points (e.g. -10 + 8 → -2 points for this turn.)";
+
+"rules.endOfGame.header" = "End of the Game";
+"rules.endOfGame.body" = "The player that placed his last tile out of his rack will get 25 bonus points and the combined points of all tiles, that are now still on the other players racks.";
+
+"rules.bonusPoints.header" = "Bonus Points";
+"rules.bonusPoints.body" = "It is possible to get some bonus points for special moves:
+
+1. Bridge (one matching Edge and a matching corner) - 40 points.
+2. Completing a hexagon - 50 points.
+3. Two hexagons at the same time - 60 points.
+4. Three hexagons at the same time - 70 points.";

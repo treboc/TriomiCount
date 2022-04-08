@@ -1,34 +1,41 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "PageSheet",
-        "repositoryURL": "https://github.com/ericlewis/PageSheet",
-        "state": {
-          "branch": null,
-          "revision": "3a2dd57c136ab173d7bc3baea78fc07454762375",
-          "version": "1.2.5"
-        }
-      },
-      {
-        "package": "SFSafeSymbols",
-        "repositoryURL": "https://github.com/SFSafeSymbols/SFSafeSymbols",
-        "state": {
-          "branch": null,
-          "revision": "c61de7a6e9eb1520d32316b06d5932accd974e70",
-          "version": "2.1.3"
-        }
-      },
-      {
-        "package": "ViewModifierBuilder",
-        "repositoryURL": "https://github.com/ericlewis/ViewModifierBuilder",
-        "state": {
-          "branch": null,
-          "revision": "2537f7a6fa12408ff1d9672cfadd5bb5f1546db7",
-          "version": "0.9.0"
-        }
+  "pins" : [
+    {
+      "identity" : "inject",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/krzysztofzablocki/Inject.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "345eb1a1ff0871ab759092f0e5a867cd02a0b4ac"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "pagesheet",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ericlewis/PageSheet",
+      "state" : {
+        "revision" : "3a2dd57c136ab173d7bc3baea78fc07454762375",
+        "version" : "1.2.5"
+      }
+    },
+    {
+      "identity" : "sfsafesymbols",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SFSafeSymbols/SFSafeSymbols",
+      "state" : {
+        "revision" : "c61de7a6e9eb1520d32316b06d5932accd974e70",
+        "version" : "2.1.3"
+      }
+    },
+    {
+      "identity" : "viewmodifierbuilder",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ericlewis/ViewModifierBuilder",
+      "state" : {
+        "revision" : "2537f7a6fa12408ff1d9672cfadd5bb5f1546db7",
+        "version" : "0.9.0"
+      }
+    }
+  ],
+  "version" : 2
 }

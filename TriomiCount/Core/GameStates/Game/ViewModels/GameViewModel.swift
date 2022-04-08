@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import PageSheetCore
 
 class GameViewModel: ObservableObject {
   enum GameState: Equatable {
@@ -16,17 +15,17 @@ class GameViewModel: ObservableObject {
     case isEnding
     case ended
   }
-  
+
   // MARK: - GameState Playing
   let store = PersistentStore.shared
   let context = PersistentStore.shared.context
-  
+
   @Published var game: Game?
   @Published var gameState: GameState = .playing
   @Published var currentPlayerOnTurn: Player?
 
   init(lastGame: Game) {
-    if (lastGame.players?.count != 0) {
+    if lastGame.players?.count != 0 {
       self.game = lastGame
       self.currentPlayerOnTurn = getCurrentPlayerOnTurn()
     }
@@ -39,16 +38,25 @@ class GameViewModel: ObservableObject {
   }
 
   // 2) calculate the current points the player gets for laying the card
-  @Published var playerScore: Int = 0
   @Published var scoreSliderValue: Float = 0
   @Published var timesDrawn: Int = 0
   @Published var playedCard: Bool = true
-  
+  @Published var bonusEvent: BonusEvent = .none
+  @Published var bonusEventPickerOverlayIsShown = false
+
+  enum BonusEvent: LocalizedStringKey, CaseIterable {
+    case none = "gameView.bonusEventPicker.none"
+    case bridge = "gameView.bonusEventPicker.bridge"
+    case hexagon = "gameView.bonusEventPicker.hexagon"
+    case twoHexagons = "gameView.bonusEventPicker.twoHexagons"
+    case threeHexagons = "gameView.bonusEventPicker.threeHexagons"
+  }
+
   var calculatedScore: Int64 {
-        var calculatedScore = self.scoreSliderValue
+    var calculatedScore = self.scoreSliderValue
 
     if timesDrawn != 3 {
-      calculatedScore = Float(scoreSliderValue) - Float(timesDrawn * 5)
+      calculatedScore = scoreSliderValue - Float(timesDrawn * 5)
     }
 
     if timesDrawn == 3 && playedCard {
@@ -59,6 +67,19 @@ class GameViewModel: ObservableObject {
       calculatedScore = -25
     }
 
+    switch bonusEvent {
+    case .none:
+      break
+    case .bridge:
+      calculatedScore += 40
+    case .hexagon:
+      calculatedScore += 50
+    case .twoHexagons:
+      calculatedScore += 60
+    case .threeHexagons:
+      calculatedScore += 70
+    }
+
     return Int64(calculatedScore)
   }
 
@@ -66,14 +87,16 @@ class GameViewModel: ObservableObject {
     scoreSliderValue = 0
     timesDrawn = 0
     playedCard = true
+    bonusEvent = .none
   }
 
   func nextPlayer() {
     guard let game = game else { return }
     // update the current player with the score from the currentTurnScore
     updateScore(of: currentPlayerOnTurn, with: calculatedScore)
-    
-    // append the actual turn to the turns-array to keep track of the turns, but also in the childViewContext, so that if the game is set back all models are untouched
+
+    // append the actual turn to the turns-array to keep track of the turns,
+    // but also in the childViewContext, so that if the game is set back all models are untouched
     let newTurn = Turn(game)
     game.addToTurns(newTurn)
 
@@ -105,45 +128,47 @@ class GameViewModel: ObservableObject {
     }
     return nil
   }
-  
+
   // MARK: - GameState Ending
-  /// Game will end
-  /// 1) setting up some needed properties
-  /// 2) get the last player, who was on turn when the game ended, because he gets bonus points and all the points left of the other players
-  /// 3) filter out all other players into their own array
-  /// 4) loop over this array to ask for their points left on their hand
-  /// 5) after getting points from the last player, call endGame(), to calculate all the points, saving them and then step over to display the GameResultsView
-  
+  // Game will end
+  // 1) setting up some needed properties
+  // 2) get the last player, who was on turn when the game ended, because he gets bonus points
+  //    and all the points left of the other players
+  // 3) filter out all other players into their own array
+  // 4) loop over this array to ask for their points left on their hand
+  // 5) after getting points from the last player, call endGame(), to calculate all the points,
+  //    saving them and then step over to display the GameResultsView
+
   // Alert for ending and exiting the game
   @Published var showEndGameAlert: Bool = false
   @Published var showExitGameAlert: Bool = false
-  
+
   var lastPlayer: Player?
   @Published var playersWithoutLastPlayer: [Player] = []
   @Published var playerToAskForPointsIndex: Int = 0
   @Published var playerToAskForPoints: Player?
   @Published var scoreOfPlayersWithoutLastPlayer: Int64 = 0
-  
+
   func endingGame() {
     guard let game = game else { return }
 
     lastPlayer = currentPlayerOnTurn
     if game.players?.count == 1 { endGame() }
-    
+
     playersWithoutLastPlayer = game.playersArray.filter({ $0 != currentPlayerOnTurn })
     if let player = playersWithoutLastPlayer.first {
       playerToAskForPoints = player
       gameState = .isEnding
     }
   }
-  
+
   func addPoints(with points: Int64) {
     scoreOfPlayersWithoutLastPlayer += points
-    
+
     playerToAskForPointsIndex += 1
     getNextPlayerToAskForPoints()
   }
-  
+
   func getNextPlayerToAskForPoints() {
     if playerToAskForPointsIndex < playersWithoutLastPlayer.count {
       playerToAskForPoints = playersWithoutLastPlayer[playerToAskForPointsIndex]
@@ -151,9 +176,9 @@ class GameViewModel: ObservableObject {
       endGame()
     }
   }
-  
+
   // MARK: - GameState Ended
-  
+
   func endGame() {
     guard let game = game else { return }
     // Currently: For every player, save the current score to the highscore, if it's higher.
@@ -161,34 +186,37 @@ class GameViewModel: ObservableObject {
     if let lastPlayer = lastPlayer {
       // 25 EXTRA POINTS FOR PLAYING OUT THE LAST STONE
       lastPlayer.currentScore += 25
-      
+
       // ADD POINTS FROM ALL OTHER PLAYERS
       lastPlayer.currentScore += scoreOfPlayersWithoutLastPlayer
-      
+
       // GET WINNER WITH HIGHEST SCORE
       let winner = game.playersArray.sorted(by: { $0.currentScore > $1.currentScore }).first!
       winner.increaseGamesWon()
-      game.winnerID = winner.id
-      
+      game.wrappedWinnerID = winner.objectID.description
+
       for player in game.playersArray {
         if player.currentScore > player.highscore {
           player.highscore = player.currentScore
         }
-        _ = GameScoreDict.init(gameKey: game.id, player: player)
+        _ = GameScoreDict.init(gameKey: game.objectID.description, player: player)
         store.saveContext(context: context)
       }
-      
+
+      Game.incrementalID += 1
+      game.id = Game.incrementalID
+
       game.hasEnded = true
       gameState = .ended
-      store.persist(game)
+      store.saveContext(context: context)
     }
   }
-  
+
   func saveGameState() {
     if let game = game {
-      store.persist(game)
+      if game.hasChanges {
+        store.saveContext(context: context)
+      }
     }
   }
-
-
 }

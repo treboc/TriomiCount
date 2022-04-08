@@ -14,8 +14,6 @@ extension ButtonStyle where Self == CircularOffsetStyle {
 }
 
 struct CircularOffsetStyle: ButtonStyle {
-  @Environment(\.isEnabled) var isEnabled
-
   let primaryColor: Color
   let secondaryColor: Color
 
@@ -27,7 +25,7 @@ struct CircularOffsetStyle: ButtonStyle {
   func makeBody(configuration: Configuration) -> some View {
     configuration.label
       .frame(width: 40, height: 40)
-      .background(Color.primaryAccentColor)
+      .background(primaryColor)
       .clipShape(Circle())
       .foregroundColor(.label)
       .font(.headline.bold())
@@ -37,7 +35,7 @@ struct CircularOffsetStyle: ButtonStyle {
       )
       .offset(y: configuration.isPressed ? 0 : -4)
       .background(
-        Color.secondaryAccentColor
+        secondaryColor
           .frame(height: 40)
           .clipShape(Circle())
       )

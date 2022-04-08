@@ -9,38 +9,36 @@
 import Foundation
 import CoreData
 
-
 extension GameScoreDict {
+  @nonobjc public class func fetchRequest() -> NSFetchRequest<GameScoreDict> {
+    let fetchRequest = NSFetchRequest<GameScoreDict>(entityName: "GameScoreDict")
+    fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \GameScoreDict.scoreValue, ascending: true)]
+    return fetchRequest
+  }
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<GameScoreDict> {
-      let fetchRequest = NSFetchRequest<GameScoreDict>(entityName: "GameScoreDict")
-      fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \GameScoreDict.scoreValue, ascending: true)]
-      return fetchRequest
-    }
+  @NSManaged public var id: UUID
+  @NSManaged public var gameKey: String
+  @NSManaged public var scoreValue: Int64
+  @NSManaged public var playerID: String
 
-    @NSManaged public var id: UUID
-    @NSManaged public var gameKey: UUID
-    @NSManaged public var scoreValue: Int64
-    @NSManaged public var playerID: UUID
-  
-  convenience init(gameKey: UUID, player: Player, context: NSManagedObjectContext = PersistentStore.shared.context) {
+  convenience init(gameKey: String, player: Player, context: NSManagedObjectContext = PersistentStore.shared.context) {
     self.init(context: context)
     self.id = UUID()
     self.gameKey = gameKey
     self.scoreValue = player.currentScore
-    self.playerID = player.id
+    self.playerID = player.objectID.description
   }
-
 }
 
-extension GameScoreDict: Identifiable {
-
-}
+extension GameScoreDict: Identifiable {}
 
 extension GameScoreDict {
   // finds an NSManagedObject with the given UUID (there should only be one, really)
-  class func getGameScoreDictWith(gameKey: UUID, context: NSManagedObjectContext = PersistentStore.shared.context) -> GameScoreDict? {
-    let fetchRequest: NSFetchRequest<GameScoreDict> = NSFetchRequest<GameScoreDict>(entityName: GameScoreDict.description())
+  class func getGameScoreDictWith(gameKey: UUID,
+                                  context: NSManagedObjectContext = PersistentStore.shared.context)
+                                  -> GameScoreDict? {
+    let fetchRequest: NSFetchRequest<GameScoreDict> =
+                                    NSFetchRequest<GameScoreDict>(entityName: GameScoreDict.description())
     fetchRequest.predicate = NSPredicate(format: "gameKey == %@", gameKey as CVarArg)
     do {
       let results = try context.fetch(fetchRequest)
@@ -50,9 +48,12 @@ extension GameScoreDict {
     }
     return nil
   }
-  
-  class func getGameScoreDictsWith(gameKey: UUID, context: NSManagedObjectContext = PersistentStore.shared.context) -> [GameScoreDict]? {
-    let fetchRequest: NSFetchRequest<GameScoreDict> = NSFetchRequest<GameScoreDict>(entityName: GameScoreDict.description())
+
+  class func getGameScoreDictsWith(gameKey: NSManagedObjectID,
+                                   context: NSManagedObjectContext = PersistentStore.shared.context)
+                                   -> [GameScoreDict]? {
+    let fetchRequest: NSFetchRequest<GameScoreDict> =
+                                     NSFetchRequest<GameScoreDict>(entityName: GameScoreDict.description())
     fetchRequest.predicate = NSPredicate(format: "gameKey == %@", gameKey as CVarArg)
     do {
       let results = try context.fetch(fetchRequest)

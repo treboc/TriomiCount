@@ -19,7 +19,7 @@ struct TimesDrawnPicker: View {
       }
     }
     .animation(.default, value: selection)
-    .onChange(of: selection) { newValue in
+    .onChange(of: selection) { _ in
       HapticManager.shared.impact(style: .light)
     }
   }
@@ -27,6 +27,7 @@ struct TimesDrawnPicker: View {
   struct ButtonToPick: View {
     let number: Int
     @Binding var selection: Int
+    let height: CGFloat = UIScreen.main.bounds.height / 18
 
     var isToggled: Bool {
       number == selection
@@ -40,7 +41,7 @@ struct TimesDrawnPicker: View {
     var body: some View {
       Text("\(number)")
         .font(.headline)
-        .frame(height: 55)
+        .frame(height: height)
         .frame(maxWidth: .infinity)
         .background(isToggled ? Color.primaryAccentColor : Color.secondaryBackground)
         .cornerRadius(15)
@@ -53,7 +54,7 @@ struct TimesDrawnPicker: View {
         .offset(y: isToggled ? 0 : -4)
         .background(
           backgroundColor
-            .frame(height: 55)
+            .frame(height: height)
             .cornerRadius(15)
         )
         .onTapGesture {
@@ -62,7 +63,3 @@ struct TimesDrawnPicker: View {
     }
   }
 }
-
-
-
-

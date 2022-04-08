@@ -5,59 +5,70 @@
 //  Created by Marvin Lee Kobert on 19.03.22.
 //
 
+import Inject
 import SwiftUI
 
 struct GameView: View {
-  @StateObject var vm: GameViewModel
+  @StateObject var viewModel: GameViewModel
   @EnvironmentObject var appState: AppState
-  @Environment(\.dismiss) private var dismiss
   @State private var isAnimated: Bool = false
 
   var body: some View {
-    VStack {
-      header
-
-      Spacer(minLength: 10)
-
-      center
-
-      Spacer(minLength: 10)
-
+    ZStack {
       VStack {
-        nextPlayerButton
-        HStack {
-          exitGameButton
-          endGameButton
+        header
+        Spacer(minLength: 10)
+        center
+        Spacer(minLength: 10)
+        VStack {
+          nextPlayerButton
+          HStack {
+            exitGameButton
+            endGameButton
+          }
         }
       }
-    }
-    .scaleEffect(isAnimated ? 1.05 : 1.0)
-    .animation(.default, value: isAnimated)
-    .onAppear(perform: vm.resetTurnState)
-    .tint(.primaryAccentColor)
-    .padding()
-    .alert(AlertContext.exitGame.title, isPresented: $vm.showExitGameAlert) {
-      Button("Cancel", role: .cancel) {}
-      Button(AlertContext.exitGame.buttonTitle) {
-        exitGame()
+      .scaleEffect(isAnimated ? 1.05 : 1.0)
+      .animation(.default, value: isAnimated)
+      .onAppear(perform: viewModel.resetTurnState)
+      .tint(.primaryAccentColor)
+      .padding()
+      .alert(AlertContext.exitGame.title, isPresented: $viewModel.showExitGameAlert) {
+        Button("Cancel", role: .cancel) {}
+        Button(action: { exitGame() },
+               label: { Text("exitGameAlert.buttonTitle") }
+        )
+      } message: {
+        Text(AlertContext.exitGame.message)
       }
-    } message: {
-      Text(AlertContext.exitGame.message)
+      .alert(AlertContext.endGame.title, isPresented: $viewModel.showEndGameAlert) {
+        Button("Cancel", role: .cancel, action: {})
+        Button(action: { viewModel.endingGame() },
+               label: { Text(AlertContext.endGame.buttonTitle) }
+        )
+      } message: {
+        Text(AlertContext.endGame.message)
+      }
+      .blur(radius: viewModel.bonusEventPickerOverlayIsShown ? 5 : 0)
+      .allowsHitTesting(viewModel.bonusEventPickerOverlayIsShown ? false : true)
+
+      if viewModel.bonusEventPickerOverlayIsShown {
+        BonusEventPicker.SelectionOverlay(viewModel: viewModel)
+      }
     }
-    .alert(AlertContext.endGame.title, isPresented: $vm.showEndGameAlert) {
-      Button("Cancel", role: .cancel, action: {})
-      Button(AlertContext.endGame.buttonTitle, action: { vm.endingGame() })
-    } message: {
-      Text(AlertContext.endGame.message)
-    }
+    .enableInjection()
   }
+
+  #if DEBUG
+  @ObservedObject private var iO = Inject.observer
+  #endif
 }
 
-//MARK: UI Components
+// MARK: UI Components
 extension GameView {
   private var header: some View {
     VStack(alignment: .center, spacing: 10) {
-      Text(vm.currentPlayerOnTurn?.name ?? "Unknown Player")
+      Text(viewModel.currentPlayerOnTurn?.name ?? "Unknown Player")
         .font(.title)
         .bold()
 
@@ -66,25 +77,25 @@ extension GameView {
           Text("gameView.headerLabel.total_score")
             .font(.headline)
             .fontWeight(.semibold)
-          Text("\(vm.currentPlayerOnTurn?.currentScore ?? 0)")
+          Text("\(viewModel.currentPlayerOnTurn?.currentScore ?? 0)")
             .font(.subheadline)
         }
         .lineLimit(1)
+
         Spacer()
 
         VStack(alignment: .trailing, spacing: 5) {
           Text("gameView.headerLabel.this_turn_score")
             .font(.headline)
             .fontWeight(.semibold)
-          Text("\(vm.calculatedScore)")
+          Text("\(viewModel.calculatedScore)")
             .font(.subheadline)
-            .animation(.none, value: vm.calculatedScore)
+            .animation(.none, value: viewModel.calculatedScore)
         }
         .lineLimit(1)
       }
-
     }
-    .animation(.none, value: vm.currentPlayerOnTurn)
+    .animation(.none, value: viewModel.currentPlayerOnTurn)
     .padding()
     .frame(maxWidth: .infinity)
     .background(Color.secondaryBackground)
@@ -96,12 +107,14 @@ extension GameView {
   }
 
   private var center: some View {
-    VStack(spacing: 20) {
+    VStack(spacing: 10) {
       scoreSliderStack
       divider
       timesDrawnStack
       divider
       playedCardStack
+      divider
+      bonusEventStack
     }
     .padding()
     .frame(maxWidth: .infinity)
@@ -110,7 +123,7 @@ extension GameView {
       RoundedRectangle(cornerRadius: 10)
         .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
     )
-    .overlay( circularResetButton.offset(x: 10, y: -15), alignment: .topTrailing )
+    .overlay( circularResetButton.offset(x: 10, y: -15).scaleEffect(0.8), alignment: .topTrailing )
   }
 
   private var scoreSliderStack: some View {
@@ -119,14 +132,16 @@ extension GameView {
         .font(.headline)
 
       HStack(spacing: 20) {
-        Text(String(format: "%02d", Int(vm.scoreSliderValue)))
+        Text(String(format: "%02d", Int(viewModel.scoreSliderValue)))
           .monospacedDigit()
           .frame(minWidth: 20)
-        Slider(value: $vm.scoreSliderValue, in: 0...15, step: 1)
-          .onChange(of: vm.scoreSliderValue) { _ in
+        Slider(value: $viewModel.scoreSliderValue, in: 0...15, step: 1)
+          .onChange(of: viewModel.scoreSliderValue) { _ in
             HapticManager.shared.impact(style: .light)
           }
+          .tint(.primaryAccentColor)
       }
+      .padding(.horizontal)
     }
   }
 
@@ -134,7 +149,8 @@ extension GameView {
     VStack(alignment: .leading) {
       Text("gameView.timesDrawnPicker.label_text")
         .font(.headline)
-      TimesDrawnPicker(selection: $vm.timesDrawn)
+      TimesDrawnPicker(selection: $viewModel.timesDrawn)
+        .padding(.horizontal)
     }
   }
 
@@ -142,7 +158,17 @@ extension GameView {
     VStack(alignment: .leading) {
       Text("gameView.playedCardPicker.label_text")
         .font(.headline)
-      PlayedCardPicker(selection: $vm.playedCard, timesDrawn: $vm.timesDrawn)
+      PlayedCardPicker(selection: $viewModel.playedCard, timesDrawn: $viewModel.timesDrawn)
+        .padding(.horizontal)
+    }
+  }
+
+  private var bonusEventStack: some View {
+    VStack(alignment: .leading) {
+      Text("gameView.bonusEventPicker.label_text")
+        .font(.headline)
+      BonusEventPicker(viewModel: viewModel)
+        .padding(.horizontal)
     }
   }
 
@@ -151,12 +177,12 @@ extension GameView {
       .fill(Color.tertiaryBackground)
       .frame(height: 2)
       .frame(maxWidth: .infinity)
-      .padding(.horizontal, 20)
+      .padding(.horizontal, 0)
   }
 
   private var nextPlayerButton: some View {
     Button("gameView.nextPlayerButton.label_text") {
-      vm.nextPlayer()
+      viewModel.nextPlayer()
       toggleScaleAnimation()
       HapticManager.shared.notification(type: .success)
     }
@@ -165,8 +191,8 @@ extension GameView {
 
   private var exitGameButton: some View {
     Button("gameView.exitGameButton.label_text") {
-      if vm.game?.turns?.count != nil {
-        vm.showExitGameAlert.toggle()
+      if viewModel.game?.turns?.count != nil {
+        viewModel.showExitGameAlert.toggle()
       } else {
         exitGame()
       }
@@ -176,16 +202,16 @@ extension GameView {
 
   private var endGameButton: some View {
     Button("gameView.endGameButton.label_text") {
-      vm.showEndGameAlert.toggle()
+      viewModel.showEndGameAlert.toggle()
       HapticManager.shared.notification(type: .success)
     }
     .buttonStyle(.offsetStyle)
-    .disabled(vm.game?.turns?.count == 0)
+    .disabled(viewModel.game?.turns?.count == 0)
   }
 
   private var circularResetButton: some View {
     Button("\(Image(systemSymbol: .arrowUturnBackwardCircle))") {
-      vm.resetTurnState()
+      viewModel.resetTurnState()
     }
     .buttonStyle(.circularOffsetStyle)
     .offset(x: -10, y: -10)
@@ -202,7 +228,7 @@ extension GameView {
   }
 
   func exitGame() {
-   appState.homeViewID = UUID()
-   HapticManager.shared.notification(type: .success)
- }
+    appState.homeViewID = UUID()
+    HapticManager.shared.notification(type: .success)
+  }
 }

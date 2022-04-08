@@ -9,30 +9,27 @@
 import Foundation
 import CoreData
 
-
 extension Game {
-  
   @nonobjc public class func fetchRequest() -> NSFetchRequest<Game> {
     return NSFetchRequest<Game>(entityName: "Game")
   }
-  
-  @NSManaged public var startedOn_: Date?
-  @NSManaged public var endedOn_: Date?
-  @NSManaged public var hasEnded_: Bool
-  @NSManaged public var id_: UUID?
-  @NSManaged public var winnerID_: UUID?
+
+  @NSManaged public var id: Int16
+  @NSManaged public var startedOn: Date?
+  @NSManaged public var endedOn: Date?
+  @NSManaged public var hasEnded: Bool
+  @NSManaged public var winnerID: String?
   @NSManaged public var turns: NSSet?
   @NSManaged public var players: NSSet?
-  
+
   public var turnsArray: [Turn] {
     let turnsSet = turns as? Set<Turn> ?? []
 
     return turnsSet.sorted {
-      $0.createdOn_ < $1.createdOn_
+      $0.wrappedCreatedOn < $1.wrappedCreatedOn
     }
   }
-  
-  // TODO: refactor to use this with UUIDs instead of the NSSet above
+
   public var playersArray: [Player] {
     let playersSet = players as? Set<Player> ?? []
 
@@ -40,49 +37,42 @@ extension Game {
       $0.position < $1.position
     }
   }
-  
+
   convenience init(players: [Player], context: NSManagedObjectContext) {
     self.init(context: context)
-    
+
     for player in players {
       player.currentScore = 0
       player.increaseGamesPlayed()
       player.isChosen = false
     }
-    
+
     self.addToPlayers(NSSet(array: players))
-    
     self.turns = NSSet()
-    self.startedOn_ = Date()
-    self.id = UUID()
+    self.startedOn = Date()
   }
 }
 
 // MARK: - Fronting Properties
 extension Game {
-  public var id: UUID {
-    get { id_ ?? UUID() }
-    set { id_ = newValue}
+  public var wrappedStartedOn: Date {
+    get { startedOn ?? Date() }
+    set { startedOn = newValue }
   }
-  
-  public var startedOn: Date {
-    get { startedOn_ ?? Date() }
-    set { startedOn_ = newValue }
+
+  public var wrappedEndedOn: Date {
+    get { endedOn ?? Date() }
+    set { endedOn = newValue }
   }
-  
-  public var endedOn: Date {
-    get { endedOn_ ?? Date() }
-    set { endedOn_ = newValue }
+
+  public var wrappedHasEnded: Bool {
+    get { hasEnded }
+    set { hasEnded = newValue }
   }
-  
-  public var hasEnded: Bool {
-    get { hasEnded_ }
-    set { hasEnded_ = newValue }
-  }
-  
-  public var winnerID: UUID? {
-    get { winnerID_ }
-    set { winnerID_ = newValue }
+
+  public var wrappedWinnerID: String? {
+    get { winnerID }
+    set { winnerID = newValue }
   }
 }
 
@@ -93,7 +83,7 @@ extension Game {
   /// 3) loop over all, delete all but not the latest
 
   class func getLastNotFinishedSession(context: NSManagedObjectContext) -> Game? {
-    let predicate = NSPredicate(format: "hasEnded_ = false")
+    let predicate = NSPredicate(format: "hasEnded = false")
     let fetchRequest: NSFetchRequest<Game> = NSFetchRequest<Game>(entityName: Game.description())
     fetchRequest.predicate = predicate
     do {
@@ -113,47 +103,40 @@ extension Game {
     }
     return nil
   }
-  
+
   class func allGames() -> [Game] {
-    return allObjects(context: PersistentStore.shared.context) as! [Game]
+    return allObjects(context: PersistentStore.shared.context) as? [Game] ?? []
   }
 }
 
-
-// MARK: Generated accessors for turns_
+// MARK: Generated accessors for turns
 extension Game {
-  
   @objc(addTurnsObject:)
   @NSManaged public func addToTurns(_ value: Turn)
-  
+
   @objc(removeTurnsObject:)
   @NSManaged public func removeFromTurns(_ value: Turn)
-  
+
   @objc(addTurns:)
   @NSManaged public func addToTurns(_ values: NSSet)
-  
+
   @objc(removeTurns:)
   @NSManaged public func removeFromTurns(_ values: NSSet)
-  
 }
 
-// MARK: Generated accessors for players_
+// MARK: Generated accessors for players
 extension Game {
-  
   @objc(addPlayersObject:)
   @NSManaged public func addToPlayers(_ value: Player)
-  
+
   @objc(removePlayersObject:)
   @NSManaged public func removeFromPlayers(_ value: Player)
-  
+
   @objc(addPlayers:)
   @NSManaged public func addToPlayers(_ values: NSSet)
-  
+
   @objc(removePlayers:)
   @NSManaged public func removeFromPlayers(_ values: NSSet)
-  
 }
 
-extension Game: Identifiable {
-  
-}
+extension Game: Identifiable {}

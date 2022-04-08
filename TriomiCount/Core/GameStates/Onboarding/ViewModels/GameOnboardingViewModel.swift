@@ -10,7 +10,7 @@ import SwiftUI
 
 class GameOnboardingViewModel: ObservableObject {
     @Published var chosenPlayers: [Player] = []
-    
+
     func toggleIsChosenState(_ player: Player) {
         player.toggleIsChosenStatus()
         if player.isChosen {
@@ -21,14 +21,14 @@ class GameOnboardingViewModel: ObservableObject {
             player.position = 0
         }
     }
-    
+
     func getPosition(ofChosenPlayer player: Player) -> Int? {
         if let index = chosenPlayers.firstIndex(where: { $0.id == player.id }) {
             return index + 1
         }
         return nil
     }
-    
+
     func resetState(of fetchedPlayers: FetchedResults<Player>) {
         for player in fetchedPlayers {
             player.isChosen = false

@@ -9,13 +9,13 @@ import SwiftUI
 
 struct PlayerListRowView: View {
   let player: Player
-  
+
   var body: some View {
     ZStack {
       Color("SecondaryAccentColor").opacity(0.5).cornerRadius(10)
-      
+
       HStack {
-        Text("\(player.name)")
+        Text("\(player.wrappedName)")
         Spacer()
         VStack(alignment: .center) {
           Text(player.highscore.roundedWithAbbreviations)

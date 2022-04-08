@@ -25,7 +25,7 @@ extension NSManagedObject {
 		}
 		return 0
 	}
-	
+
 	// simple way to get all objects
 	class func allObjects(context: NSManagedObjectContext) -> [NSManagedObject] {
 		let fetchRequest: NSFetchRequest<Self> = NSFetchRequest<Self>(entityName: Self.description())
@@ -50,5 +50,5 @@ extension NSManagedObject {
 		}
 		return nil
 	}
-	
+
 }

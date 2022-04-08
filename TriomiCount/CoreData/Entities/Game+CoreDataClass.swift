@@ -11,5 +11,9 @@ import CoreData
 
 @objc(Game)
 public class Game: NSManagedObject {
-
+  static var incrementalID: Int16 = 0 {
+    didSet {
+      print(incrementalID)
+    }
+  }
 }

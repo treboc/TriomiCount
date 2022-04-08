@@ -69,12 +69,6 @@ struct RGBColor {
   }
 }
 
-extension Color {
-  func rgbColor() -> RGBColor {
-    return RGBColor(r: rgbo.red, g: rgbo.green, b: rgbo.blue, alpha: rgbo.opacity)
-  }
-}
-
 // MARK: - XYZ
 
 struct XYZColor {
