@@ -9,6 +9,9 @@
 import Foundation
 import CoreData
 
+@objc(Turn)
+public class Turn: NSManagedObject {}
+
 extension Turn {
   @NSManaged public var createdOn: Date?
   @NSManaged public var game: Game?

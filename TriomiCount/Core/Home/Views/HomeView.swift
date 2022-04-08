@@ -37,7 +37,7 @@ struct HomeView: View {
                 }
               }
               PushStyledNavigationLink(title: "navigation_link.new_game") { GameOnboardingView()
-                                                                          .id(appState.onboardingScreen) }
+                .id(appState.onboardingScreen) }
               PushStyledNavigationLink(title: "navigation_link.players") { PlayerListView() }
               PushStyledNavigationLink(title: "navigation_link.games") { GamesListView() }
             }
@@ -62,9 +62,9 @@ struct HomeView: View {
     .enableInjection()
   }
 
-  #if DEBUG
+#if DEBUG
   @ObservedObject private var iO = Inject.observer
-  #endif
+#endif
 }
 
 struct MainMenuView_Previews: PreviewProvider {

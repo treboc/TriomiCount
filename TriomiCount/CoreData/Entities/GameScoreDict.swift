@@ -9,6 +9,9 @@
 import Foundation
 import CoreData
 
+@objc(GameScoreDict)
+public class GameScoreDict: NSManagedObject {}
+
 extension GameScoreDict {
   @nonobjc public class func fetchRequest() -> NSFetchRequest<GameScoreDict> {
     let fetchRequest = NSFetchRequest<GameScoreDict>(entityName: "GameScoreDict")
@@ -30,15 +33,11 @@ extension GameScoreDict {
   }
 
   var playerName: String {
-    if let objectIDURL = URL(string: playerID) {
-      let coordinator: NSPersistentStoreCoordinator = PersistentStore.shared.persistentContainer.persistentStoreCoordinator
-      if let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectIDURL) {
-        let player = PersistentStore.shared.context.object(with: managedObjectID) as? Player
-        return player?.wrappedName ?? "No Player with this ID found."
-      }
+    if let player = Player.objectBy(objectID: playerID) {
+      return player.wrappedName
+    } else {
+      return "Unknown Player"
     }
-    return "No Player found"
-
   }
 }
 
@@ -52,7 +51,6 @@ extension GameScoreDict {
     fetchRequest.predicate = NSPredicate(format: "gameKey == %@", gameKey as CVarArg)
     do {
       let results = try context.fetch(fetchRequest)
-      print(results.count)
       return results
     } catch let error as NSError {
       NSLog("Error fetching NSManagedObjects \(Self.description()): \(error.localizedDescription), \(error.userInfo)")

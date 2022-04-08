@@ -51,4 +51,14 @@ extension NSManagedObject {
 		return nil
 	}
 
+  // finds an NSManagedObject with given ObjectID as string
+  class func objectBy(objectID: String) -> Self? {
+    if let objectIDURL = URL(string: objectID) {
+      let coordinator = PersistentStore.shared.persistentContainer.persistentStoreCoordinator
+      if let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectIDURL) {
+        return PersistentStore.shared.context.object(with: managedObjectID) as? Self
+      }
+    }
+    return nil
+  }
 }

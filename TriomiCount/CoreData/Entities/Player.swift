@@ -9,6 +9,11 @@
 import Foundation
 import CoreData
 
+@objc(Player)
+public class Player: NSManagedObject {
+  var isChosen: Bool = false
+}
+
 extension Player {
   @NSManaged public var createdOn: Date?
   @NSManaged public var currentScore: Int64
