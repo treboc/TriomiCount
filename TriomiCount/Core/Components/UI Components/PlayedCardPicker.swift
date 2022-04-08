@@ -5,8 +5,6 @@
 //  Created by Marvin Lee Kobert on 13.03.22.
 //
 
-#warning("Think about refactor this to act like a generic segmented view.")
-
 import SwiftUI
 
 struct PlayedCardPicker: View {
@@ -35,6 +33,8 @@ struct PlayedCardPicker: View {
     @Binding var timesDrawn: Int
     let action: () -> Void
 
+    let height: CGFloat = UIScreen.main.bounds.height / 18
+
     var isSelected: Bool {
       if title == "Yes" && selection {
         return true
@@ -44,10 +44,14 @@ struct PlayedCardPicker: View {
       return false
     }
 
+    var backgroundColor: Color {
+      isSelected ? .secondaryAccentColor : .tertiaryBackground
+    }
+
     var body: some View {
       Text(title)
         .font(.headline)
-        .frame(height: 55)
+        .frame(height: height)
         .frame(maxWidth: .infinity)
         .background(isSelected ? Color.primaryAccentColor : Color.secondaryBackground)
         .cornerRadius(20)
@@ -59,14 +63,9 @@ struct PlayedCardPicker: View {
         )
         .offset(y: (isSelected ? 0 : -4))
         .background(
-          isSelected ?
-          Color.secondaryAccentColor
-            .frame(height: 55)
+          backgroundColor
+            .frame(height: height)
             .cornerRadius(15)
-          :
-          Color.tertiaryBackground
-          .frame(height: 55)
-          .cornerRadius(15)
         )
         .onTapGesture {
           if timesDrawn == 3 {
@@ -79,7 +78,3 @@ struct PlayedCardPicker: View {
     }
   }
 }
-
-
-
-

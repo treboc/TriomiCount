@@ -10,6 +10,7 @@ import SwiftUI
 struct GameOnboardingRowView: View {
   let player: Player
   let position: Int?
+  let height: CGFloat = UIScreen.main.bounds.height / 16
 
   var body: some View {
     ZStack {
@@ -20,9 +21,9 @@ struct GameOnboardingRowView: View {
             .font(.title)
           position != nil ? Text("\(position ?? 0)") : Text("")
         }
-        .frame(width: 30, height: 30)
+        .frame(width: 25, height: 25)
 
-        Text("\(player.name)")
+        Text("\(player.wrappedName)")
         Spacer()
         VStack(alignment: .center) {
           Text("\(player.highscore)")
@@ -35,29 +36,20 @@ struct GameOnboardingRowView: View {
 
     }
     .overlay(
-      RoundedRectangle(cornerRadius: 15, style: .continuous)
+      RoundedRectangle(cornerRadius: 20, style: .continuous)
         .strokeBorder(Color.secondaryAccentColor, lineWidth: 2)
     )
     .cornerRadius(20)
-    .frame(height: 65)
+    .frame(height: height)
     .frame(maxWidth: .infinity)
     .listRowSeparator(.hidden)
     .offset(y: player.isChosen ? 0 : -4)
     .background(
       Color.secondaryAccentColor
-        .frame(height: 65)
-        .cornerRadius(15)
+        .frame(height: height)
+        .cornerRadius(20)
     )
     .padding(.top, 5)
-    .accessibilityLabel("Player \(player.name), \(player.isChosen ? "is chosen" : "is not chosen")")
+    .accessibilityLabel("Player \(player.wrappedName), \(player.isChosen ? "is chosen" : "is not chosen")")
   }
 }
-
-//struct NewGameChoosePlayerListRowView_Previews: PreviewProvider {
-//  static let players: [Player] = Player.allPlayers()
-//
-//  static var previews: some View {
-//    GameOnboardingRowView(player: players.first!, position: 1)
-//      .padding()
-//  }
-//}

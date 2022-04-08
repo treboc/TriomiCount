@@ -15,7 +15,7 @@ struct AddNewPlayerView: View {
   @State private var alertTitle: LocalizedStringKey = ""
   @State private var alertMessage: LocalizedStringKey = ""
 
-  @State private var nameTooShort: Bool = false
+  @State private var nameIsValid: Bool = false
   @State private var nameTextFieldText: String = ""
 
   var body: some View {
@@ -36,16 +36,18 @@ struct AddNewPlayerView: View {
         Spacer()
 
         Text("addNewPlayerView.nameLabel.label_text")
+          .underline()
           .font(.title3)
           .fontWeight(.semibold)
           .padding(.leading, 20)
 
-        TextField("Name's coming..", text: $nameTextFieldText)
+        TextField("addNewPlayerView.nameLabel.textfield_text", text: $nameTextFieldText)
+          .foregroundColor(.label)
           .padding(.leading, 10)
           .frame(height: 55)
           .frame(maxWidth: .infinity)
           .background(Color.secondaryBackground)
-          .cornerRadius(10)
+          .cornerRadius(20)
           .padding(.horizontal, 20)
           .textInputAutocapitalization(.words)
           .textContentType(.givenName)
@@ -59,22 +61,18 @@ struct AddNewPlayerView: View {
           .onSubmit {
             createPlayer()
           }
-          .onChange(of: nameTextFieldText, perform: { newValue in
-            if (newValue.isEmpty) {
-              nameTooShort = true
+          .onChange(of: nameTextFieldText, perform: { _ in
+            if nameTextFieldText.isEmpty {
+              alertMessage = "addNewPlayerView.alertTextFieldEmpty.message"
+              nameIsValid = false
+            } else if nameTextFieldText.count > 20 {
+              alertMessage = "addNewPlayerView.alertNameToLong.message"
+              nameIsValid = false
             } else {
-              nameTooShort = false
+              nameIsValid = true
             }
           })
-          .overlay(
-            Text("textfield is empty!".uppercased())
-              .font(.subheadline)
-              .foregroundColor(.red)
-              .offset(x: nameTooShort ? 25 : -300, y: 20)
-              .animation(.default, value: nameTooShort)
-            , alignment: .bottomLeading
-          )
-
+          .overlayedAlert(with: alertMessage, bool: nameIsValid)
 
         Button {
           createPlayer()
@@ -84,6 +82,7 @@ struct AddNewPlayerView: View {
         }
         .buttonStyle(.offsetStyle)
         .padding(.horizontal, 20)
+        .disabled(!nameIsValid)
 
         Spacer()
         Spacer()
@@ -103,41 +102,20 @@ struct AddNewPlayerView: View {
     }
   }
 
-  func showAlert() {
-    if nameTextFieldText.isEmpty {
-      alertTitle = "addNewPlayerView.alertTextFieldEmpty.title"
-      alertMessage = "addNewPlayerView.alertTextFieldEmpty.message"
-    }
-
-    if nameTextFieldText.count > 15 {
-      alertTitle = "addNewPlayerView.alertNameToLong.title"
-      alertMessage = "addNewPlayerView.alertNameToLong.message"
-    }
-
-    alertIsShown.toggle()
-    HapticManager.shared.notification(type: .error)
-  }
-
-  func nameIsValid() -> Bool {
-    if nameTextFieldText.count > 0 && nameTextFieldText.count < 16 {
-      return true
-    }
-    return false
-  }
-  
   func createPlayer() {
     nameTextFieldText = nameTextFieldText.trimmingCharacters(in: .whitespacesAndNewlines)
 
-    if nameTextFieldText.isValidName() {
+    if nameTextFieldText.isValidName {
       Player.addNewPlayer(name: nameTextFieldText)
       dismiss()
     } else {
-      nameTooShort = true
+      HapticManager.shared.notification(type: .error)
+      nameIsValid = false
     }
   }
 }
 
-struct AddNewPlayerView_Preview: PreviewProvider {
+struct AddNewPlayerView_Previews: PreviewProvider {
   static var previews: some View {
     AddNewPlayerView()
   }

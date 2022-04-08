@@ -5,6 +5,7 @@
 //  Created by Marvin Lee Kobert on 22.01.22.
 //
 
+import Inject
 import SwiftUI
 import PageSheet
 import SFSafeSymbols
@@ -13,8 +14,6 @@ struct HomeView: View {
   @State private var showSettings: Bool = false
   @AppStorage("selectedAppearance") private var selectedAppearance = 0
   @EnvironmentObject var appState: AppState
-
-  @State private var logoIsAnimated: Bool = true
   @State private var lastSession: Game?
 
   var body: some View {
@@ -23,22 +22,24 @@ struct HomeView: View {
         // Background Layer
         Color.primaryBackground
           .ignoresSafeArea()
-        
+
         // Foreground Layer
         VStack {
           settingsButton
           VStack(spacing: 20) {
             Spacer()
             Logo()
-              .offset(y: -40)
             Spacer(minLength: 20)
             VStack(spacing: 15) {
               if lastSession != nil {
-                PrimaryNavigationLink(destinationView: GameMainView(vm: GameViewModel(lastGame: lastSession!)), labelTextStringKey: "navigation_link.resume")
+                PushStyledNavigationLink(title: "navigation_link.resume") {
+                  GameMainView(viewModel: GameViewModel(lastGame: lastSession!))
+                }
               }
-              PrimaryNavigationLink(destinationView: GameOnboardingView().id(appState.onboardingScreen), labelTextStringKey: "navigation_link.new_game")
-              PrimaryNavigationLink(destinationView: PlayerListView(), labelTextStringKey: "navigation_link.players")
-              PrimaryNavigationLink(destinationView: GamesListView(), labelTextStringKey: "navigation_link.games")
+              PushStyledNavigationLink(title: "navigation_link.new_game") { GameOnboardingView()
+                                                                          .id(appState.onboardingScreen) }
+              PushStyledNavigationLink(title: "navigation_link.players") { PlayerListView() }
+              PushStyledNavigationLink(title: "navigation_link.games") { GamesListView() }
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 50)
@@ -58,7 +59,12 @@ struct HomeView: View {
         .sheetPreference(.grabberVisible(true))
         .preferredColorScheme(selectedAppearance == 1 ? .light : selectedAppearance == 2 ? .dark : nil)
     }
+    .enableInjection()
   }
+
+  #if DEBUG
+  @ObservedObject private var iO = Inject.observer
+  #endif
 }
 
 struct MainMenuView_Previews: PreviewProvider {
@@ -71,7 +77,6 @@ struct MainMenuView_Previews: PreviewProvider {
     }
   }
 }
-
 
 // MARK: - Components
 extension HomeView {

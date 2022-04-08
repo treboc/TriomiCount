@@ -9,36 +9,36 @@ import SwiftUI
 import PageSheetCore
 
 struct GameOnboardingView: View {
-  @StateObject var vm: GameOnboardingViewModel = GameOnboardingViewModel()
+  @StateObject var viewModel: GameOnboardingViewModel = GameOnboardingViewModel()
   @Environment(\.dismiss) private var dismiss
   @State private var showAddPlayerPage: Bool = false
-  
+
   @FetchRequest(fetchRequest: Player.allPlayersFR(), animation: .default)
   var players: FetchedResults<Player>
-  
+
   var body: some View {
     ZStack {
       Color.primaryBackground
         .ignoresSafeArea()
-      
+
       VStack {
         Text(LocalizedStringKey("gameOnboardingView.participationHeaderText"))
           .multilineTextAlignment(.center)
           .padding()
           .frame(maxWidth: .infinity)
           .background(Color.secondaryBackground)
-          .cornerRadius(10)
+          .cornerRadius(20)
           .overlay(
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: 20)
               .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
           )
           .padding(.horizontal)
-        
+
         ScrollView {
           ForEach(players) { player in
-            GameOnboardingRowView(player: player, position: vm.getPosition(ofChosenPlayer: player))
+            GameOnboardingRowView(player: player, position: viewModel.getPosition(ofChosenPlayer: player))
               .contentShape(Rectangle())
-              .onTapGesture { vm.toggleIsChosenState(player) }
+              .onTapGesture { viewModel.toggleIsChosenState(player) }
               .padding(.horizontal)
           }
         }
@@ -48,8 +48,10 @@ struct GameOnboardingView: View {
             showAddPlayerPage.toggle()
           }
 
-          CustomNavLink(title: "gameOnboardingView.button.start_game", destination: GameMainView(vm: GameViewModel(vm.chosenPlayers)))
-            .disabled(vm.chosenPlayers.isEmpty)
+          PushStyledNavigationLink(title: "gameOnboardingView.button.start_game") {
+            GameMainView(viewModel: GameViewModel(viewModel.chosenPlayers))
+          }
+          .disabled(viewModel.chosenPlayers.isEmpty)
 
           Button("gameOnboardingView.button.back_to_main_menu") {
             dismiss()
@@ -60,7 +62,7 @@ struct GameOnboardingView: View {
       }
       .padding(.vertical)
       .onDisappear {
-        vm.resetState(of: players)
+        viewModel.resetState(of: players)
       }
       .pageSheet(isPresented: $showAddPlayerPage) {
         AddNewPlayerView()
@@ -74,13 +76,13 @@ struct GameOnboardingView: View {
 
 struct GameOnboardingView_Previews: PreviewProvider {
   static var previews: some View {
-    Group() {
+    Group {
       NavigationView {
         GameOnboardingView()
           .navigationBarHidden(true)
           .preferredColorScheme(.dark)
       }
-      
+
       NavigationView {
         GameOnboardingView()
           .navigationBarHidden(true)

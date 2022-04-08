@@ -14,11 +14,9 @@ extension Int64 {
         let million = number / 1000000
         if million >= 1.0 {
             return "\(round(million*10)/10)M"
-        }
-        else if thousand >= 1.0 {
+        } else if thousand >= 1.0 {
             return "\(round(thousand*10)/10)K"
-        }
-        else {
+        } else {
             return "\(self)"
         }
     }

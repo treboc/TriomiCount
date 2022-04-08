@@ -9,88 +9,54 @@ import SwiftUI
 import CoreData
 
 struct GamesListView: View {
-  @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Game.hasEnded_, ascending: true)], animation: .default) private var games: FetchedResults<Game>
-  
-  var body: some View {
-    List {
-      ForEach(games) { game in
-        VStack {
-          CustomNavLink(title: LocalizedStringKey("Game, startet on \(game.startedOn)"), destination: GameDetailView(game: game))
-        }
-      }
-    }
-  }
-}
-
-struct GameDetailView: View {
   @Environment(\.dismiss) var dismiss
-  let game: Game
-  
-  var body: some View {
-    VStack {
-      HStack {
-        Text("Game-ID")
-        Spacer()
-        Text(game.id.debugDescription)
-      }
-      
-      Divider()
-      
-      HStack {
-        Text("Startet on:")
-        Spacer()
-        Text(game.startedOn.formatted(date: .abbreviated, time: .shortened))
-      }
-      
-      Divider()
-      
-      HStack {
-        Text("The last player on turn is:")
-        Spacer()
-        Text(game.playersArray.first?.name ?? "Unknown")
-      }
-      
-      Divider()
-      
-      VStack {
-        HStack {
-          Text("Name")
-          Spacer()
-          Text("Score")
-        }
-        
-        ForEach(game.playersArray) { player in
-          HStack {
-            Text(player.name)
-            Spacer()
-            Text("\(player.getPlayersGameScore(ofGame: game.id) ?? 0)")
-          }
-          
-        }
-      }
+  @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Game.hasEnded, ascending: true)],
+                animation: .default) private var games: FetchedResults<Game>
 
-      Button("Delete") {
-        PersistentStore.shared.context.delete(game)
-        dismiss()
+  var body: some View {
+    ZStack {
+      Color.primaryBackground
+        .ignoresSafeArea()
+
+      VStack {
+        Text(LocalizedStringKey("Spiele"))
+          .multilineTextAlignment(.center)
+          .padding()
+          .frame(maxWidth: .infinity)
+          .background(Color.secondaryBackground)
+          .cornerRadius(10)
+          .overlay(
+            RoundedRectangle(cornerRadius: 10)
+              .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
+          )
+          .padding(.horizontal)
+
+        ScrollView {
+          ForEach(games) { game in
+            NavigationLink {
+              GameDetailView(game: game)
+            } label: {
+              GameListRowView(game: game)
+            }
+            .padding(.horizontal)
+          }
+        }
+
+        VStack(spacing: 10) {
+          Button("gameOnboardingView.button.back_to_main_menu") {
+            dismiss()
+          }
+        }
+        .buttonStyle(.offsetStyle)
+        .padding(.horizontal)
       }
-    }
-    
-    Divider()
-    
-    HStack {
-      if game.hasEnded {
-        Text("Game finished.")
-      }
+      .navigationBarHidden(true)
     }
   }
-  
-}
 
-
-
-
-struct GamesListView_Previews: PreviewProvider {
-  static var previews: some View {
-    GamesListView()
+  struct GamesListView_Previews: PreviewProvider {
+    static var previews: some View {
+      GamesListView()
+    }
   }
 }

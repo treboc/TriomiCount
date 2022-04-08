@@ -5,6 +5,8 @@
 //  Created by Marvin Lee Kobert on 22.01.22.
 //
 
+// @ObservedObject private var iO = Inject.observer
+
 import SwiftUI
 
 @main
@@ -22,17 +24,19 @@ struct TriomiCountApp: App {
         .onAppear {
           UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification), perform: handleResignActive)
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification), perform: handleBecomeActive)
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification),
+                   perform: handleResignActive)
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification),
+                   perform: handleBecomeActive)
     }
   }
 
   func handleResignActive(_ note: Notification) {
     // when going into background, save Core Data and shutdown timer
     PersistentStore.shared.saveContext(context: PersistentStore.shared.context)
-    if PersistentStore.shared.childViewContext().hasChanges {
+    if PersistentStore.shared.context.hasChanges {
       do {
-        try PersistentStore.shared.childViewContext().save()
+        try PersistentStore.shared.context.save()
         print("saved!")
       } catch let error as NSError {
         print("Error saving state on going to background \(error.localizedDescription)")

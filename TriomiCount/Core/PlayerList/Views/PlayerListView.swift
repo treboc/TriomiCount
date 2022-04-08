@@ -5,11 +5,13 @@
 //  Created by Marvin Lee Kobert on 24.01.22.
 //
 
+import CoreData
 import SwiftUI
 import PageSheet
 
 struct PlayerListView: View {
   @State private var showAddPlayerPage: Bool = false
+  @State private var searchTerm: String = ""
   @Environment(\.dismiss) private var dismiss
 
   @FetchRequest(sortDescriptors: PlayerListSort.default.descriptors, animation: .default)
@@ -81,8 +83,6 @@ struct PlayerListView_Previews: PreviewProvider {
     }
   }
 }
-
-
 
 // MARK: - Sorting & Adding New Player
 //        .toolbar {

@@ -11,28 +11,40 @@ struct PlayerDetailView: View {
   //  @Environment(\.presentationMode) var presentationMode
   @Environment(\.dismiss) private var dismiss
   @State private var showDeletePlayerAlert: Bool = false
-  
+
   var body: some View {
     ZStack {
       Color.primaryBackground
         .ignoresSafeArea()
-      
+
       VStack(spacing: 20) {
         PlayerInitialsCircle(player: player)
-        
+
         ScrollView(.vertical, showsIndicators: false) {
-          PlayerDetailSection(sectionTitle: "playerDetailView.name", sectionContent: Text(player.name))
-          PlayerDetailSection(sectionTitle: "playerDetailView.highscore", sectionContent: Text("\(player.highscore)"))
-          PlayerDetailSection(sectionTitle: "playerDetailView.lastScore", sectionContent: Text("\(player.currentScore)"))
-          PlayerDetailSection(sectionTitle: "playerDetailView.createdOn", sectionContent: Text("\(player.createdOn.formatted(date: .abbreviated, time: .omitted))"))
-          PlayerDetailSection(sectionTitle: "playerDetailView.numberOfGamesWon", sectionContent: Text("\(player.gamesWon)"))
-          PlayerDetailSection(sectionTitle: "playerDetailView.numberOfGamesPlayed", sectionContent: Text("\(player.gamesPlayed)"))
+          PlayerDetailSection("playerDetailView.name") {
+            player.wrappedName
+          }
+          PlayerDetailSection("playerDetailView.highscore") {
+            "\(player.wrappedHighscore)"
+          }
+          PlayerDetailSection("playerDetailView.lastScore") {
+            "\(player.wrappedCurrentScore)"
+          }
+          PlayerDetailSection("playerDetailView.createdOn") {
+            "\(player.wrappedCreatedOn.formatted(date: .abbreviated, time: .omitted))"
+          }
+          PlayerDetailSection("playerDetailView.numberOfGamesWon") {
+            "\(player.gamesWon)"
+          }
+          PlayerDetailSection("playerDetailView.numberOfGamesPlayed") {
+            "\(player.gamesPlayed)"
+          }
         }
-        
+
         Spacer()
 
         HStack {
-          Button("Zurück") {
+          Button("Back") {
             dismiss()
           }
           .buttonStyle(.offsetStyle)
@@ -50,7 +62,7 @@ struct PlayerDetailView: View {
       .alert("Warning!", isPresented: $showDeletePlayerAlert, actions: {
         Button("Yes, I'm sure.", role: .destructive) { deletePlayerAndDismissView() }
       }, message: {
-        Text("Are you sure that you want to delete \(player.name)? The data can't be restored.")
+        Text("Are you sure that you want to delete \(player.wrappedName)? The data can't be restored.")
       })
       .navigationBarHidden(true)
     }
@@ -72,15 +84,20 @@ struct PlayerDetailView_Previews: PreviewProvider {
 extension PlayerDetailView {
   struct PlayerDetailSection: View {
     let sectionTitle: String
-    let sectionContent: Text
-    
+    let sectionContent: String
+
+    init(_ sectionTitle: String, content: () -> String) {
+      self.sectionTitle = sectionTitle
+      self.sectionContent = content()
+    }
+
     var body: some View {
       HStack {
         VStack(alignment: .leading) {
           Text(NSLocalizedString(sectionTitle, comment: "").uppercased())
             .font(.caption)
           Spacer()
-          sectionContent
+          Text(sectionContent)
         }
         Spacer()
       }
@@ -95,16 +112,16 @@ extension PlayerDetailView {
       )
     }
   }
-  
+
   struct PlayerInitialsCircle: View {
     let player: Player
-    
+
     var body: some View {
       VStack {
         Circle()
           .foregroundColor(.green)
           .overlay(
-            Text(player.name.getInitials())
+            Text(player.wrappedName.initials)
               .font(.largeTitle)
           )
           .frame(width: 100, height: 100)
@@ -112,7 +129,7 @@ extension PlayerDetailView {
             Circle()
               .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
           )
-        Text(player.name)
+        Text(player.wrappedName)
       }
     }
   }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-// built to "navigate" back to the given view. When you want to get back, just create a new ID on the view.
+// built to "navigate" back to the given view. When you want to get back, just overwrite the ID of the view.
 final class AppState: ObservableObject {
   @Published var homeViewID: UUID = UUID()
   @Published var onboardingScreen: UUID = UUID()

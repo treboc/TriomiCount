@@ -10,26 +10,20 @@ import Foundation
 import CoreData
 
 extension Player {
-  @NSManaged public var createdOn_: Date?
-  @NSManaged public var currentScore_: Int64
-  @NSManaged public var highscore_: Int64
-  @NSManaged public var id_: UUID?
-  @NSManaged public var name_: String?
-  @NSManaged public var position_: Int16
+  @NSManaged public var createdOn: Date?
+  @NSManaged public var currentScore: Int64
+  @NSManaged public var highscore: Int64
+  @NSManaged public var name: String?
+  @NSManaged public var position: Int16
   @NSManaged public var games: NSSet?
-  @NSManaged public var gamesPlayed: Int
-  @NSManaged public var gamesWon: Int
+  @NSManaged public var gamesPlayed: Int16
+  @NSManaged public var gamesWon: Int16
   @NSManaged public var playerInTurn: Turn?
-  @NSManaged public var gameScores_: [String]?
-    
-  public override func awakeFromInsert() {
-    setPrimitiveValue(UUID(), forKey: "id")
-  }
-  
+  @NSManaged public var gameScores: [String]?
+
   convenience init(name: String, position: Int16, context: NSManagedObjectContext) {
     self.init(context: context)
     self.position = position
-    self.id = UUID()
     self.createdOn = Date()
     self.name = name
   }
@@ -37,126 +31,110 @@ extension Player {
 
 // MARK: - Fronting Properties
 extension Player {
-  public var id: UUID {
-    get { id_ ?? UUID() }
-    set { id_ = newValue}
+  var wrappedName: String {
+    get { name ?? "" }
+    set { name = newValue }
   }
-  
-  var name: String {
-    get { name_ ?? "" }
-    set { name_ = newValue }
+
+  var wrappedPosition: Int16 {
+    get { position }
+    set { position = newValue }
   }
-  
-  var position: Int16 {
-    get { position_ }
-    set { position_ = newValue }
+
+  var wrappedCurrentScore: Int64 {
+    get { currentScore }
+    set { currentScore = newValue }
   }
-  
-  var currentScore: Int64 {
-    get { currentScore_ }
-    set { currentScore_ = newValue }
+
+  var wrappedHighscore: Int64 {
+    get { highscore }
+    set { highscore = newValue }
   }
-  
-  var highscore: Int64 {
-    get { highscore_ }
-    set { highscore_ = newValue }
+
+  var wrappedCreatedOn: Date {
+    get { createdOn ?? Date() }
+    set { createdOn = newValue }
   }
-  
-  var createdOn: Date {
-    get { createdOn_ ?? Date() }
-    set { createdOn_ = newValue }
+
+  public var wrappedGameScores: [String] {
+    get { gameScores ?? [] }
+    set { gameScores = newValue }
   }
-  
-  public var gameScores: [String] {
-    get { gameScores_ ?? [] }
-    set { gameScores_ = newValue }
-  }
-  
+
   // MARK: - Computed Properties
-  
   var canBeSaved: Bool {
-    guard let name = name_ else { return false }
+    guard let name = name else { return false }
     return name.count > 0
   }
-  
-//  var gamesWon: Int {
-//    return Game.allGames().filter({ $0.winnerID == self.id }).count
-//  }
-//
-//  var gamesPlayed: Int {
-//    return Game.allGames().filter({ $0.playersArray.contains(where: { $0.id == self.id }) }).count
-//  }
-  
+
   // MARK: - Useful Fetch Requests
-  
   class func allPlayersFR() -> NSFetchRequest<Player> {
     let request: NSFetchRequest<Player> = NSFetchRequest<Player>(entityName: "Player")
-    request.sortDescriptors = [NSSortDescriptor(key: "createdOn_", ascending: true)]
+    request.sortDescriptors = [NSSortDescriptor(key: "createdOn", ascending: true)]
     return request
   }
-  
+
   class func allPlayersByHighscoreFR() -> NSFetchRequest<Player> {
     let request: NSFetchRequest<Player> = NSFetchRequest<Player>(entityName: "Player")
-    request.sortDescriptors = [NSSortDescriptor(key: "highscore_", ascending: false)]
+    request.sortDescriptors = [NSSortDescriptor(key: "highscore", ascending: false)]
     return request
   }
-  
+
   class func fetchPlayersBy(_ sortDescriptorKey: String, ascending: Bool) -> NSFetchRequest<Player> {
     let request: NSFetchRequest<Player> = NSFetchRequest<Player>(entityName: "Player")
     request.sortDescriptors = [NSSortDescriptor(key: sortDescriptorKey, ascending: ascending)]
     return request
   }
-  
-  func getPlayersGameScore(ofGame game: UUID) -> Int64? {
-    if let gameScores = GameScoreDict.getGameScoreDictsWith(gameKey: game) {
-      return gameScores.first{ $0.playerID == self.id }?.scoreValue
+
+  func getPlayersGameScore(ofGame gameID: NSManagedObjectID) -> Int64? {
+    if let gameScores = GameScoreDict.getGameScoreDictsWith(gameKey: gameID) {
+      return gameScores.first { $0.playerID == self.objectID.description }?.scoreValue
     }
     return nil
   }
-  
+
   // MARK: - Class functions for CRUD operations
-  
+
   class func count() -> Int {
     return count(context: PersistentStore.shared.context)
   }
-  
+
   class func allPlayers() -> [Player] {
-    return allObjects(context: PersistentStore.shared.context) as! [Player]
+    return allObjects(context: PersistentStore.shared.context) as? [Player] ?? []
   }
-  
+
   class func object(withID id: UUID) -> Player? {
     return object(id: id, context: PersistentStore.shared.context) as Player?
   }
-  
+
   private func isValid(name string: String) -> Bool {
     guard !string.isEmpty else { return false }
     guard string.count < 15  else { return false }
-    
+
     return true
   }
-  
+
   class func addNewPlayer(name: String) {
     let context = PersistentStore.shared.context
     let newPlayer = Player(context: context)
-    newPlayer.name = name
-    newPlayer.id = UUID()
-    newPlayer.createdOn = Date()
+    newPlayer.wrappedName = name
+    newPlayer.wrappedCreatedOn = Date()
     newPlayer.gamesPlayed = 0
     newPlayer.gamesWon = 0
     PersistentStore.shared.saveContext(context: context)
   }
-  
+
   class func deletePlayer(_ playerEntity: Player) {
     let context = PersistentStore.shared.context
     context.delete(playerEntity)
     PersistentStore.shared.saveContext(context: context)
   }
-  
+
   // MARK: - Object Methods
-  
+
   // toggles the isChosen flag for a player
   func toggleIsChosenStatus() { self.isChosen.toggle() }
-  
+
   func updateScore(score: Int64) {
     self.currentScore += score
   }
@@ -170,7 +148,4 @@ extension Player {
   }
 }
 
-extension Player: Identifiable {
-  
-}
-
+extension Player: Identifiable {}

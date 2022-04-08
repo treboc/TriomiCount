@@ -9,25 +9,29 @@ import SwiftUI
 import SFSafeSymbols
 
 struct GameMainView: View {
-  @StateObject var vm: GameViewModel
-  @Environment(\.dismiss) private var dismiss
+  @StateObject var viewModel: GameViewModel
   @EnvironmentObject var appState: AppState
 
-  //MARK: Body
+  // MARK: Body
   var body: some View {
     ZStack {
       Color.primaryBackground
         .ignoresSafeArea()
-      
-      switch vm.gameState {
+
+      switch viewModel.gameState {
       case .playing:
-        GameView(vm: vm)
+        GameView(viewModel: viewModel)
       case .isEnding:
-        SubmitPointsAfterGameView()
-          .environmentObject(vm)
+        ZStack {
+          GameView(viewModel: viewModel)
+            .blur(radius: 10)
+            .allowsHitTesting(false)
+          SubmitPointsView()
+            .environmentObject(viewModel)
+        }
       case .ended:
         GameResultsView()
-          .environmentObject(vm)
+          .environmentObject(viewModel)
       case .exited:
         Text("Game was exited.")
       }
@@ -40,14 +44,7 @@ struct GameMainView: View {
 
 struct PlayerView_Previews: PreviewProvider {
   static var previews: some View {
-    GameMainView(vm: GameViewModel(Player.allPlayers()))
+    GameMainView(viewModel: GameViewModel(Player.allPlayers()))
       .environment(\.managedObjectContext, PersistentStore.preview.context)
-  }
-}
-
-extension GameMainView {
-  func exitGame() {
-   appState.homeViewID = UUID()
-   HapticManager.shared.notification(type: .success)
   }
 }
