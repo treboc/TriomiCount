@@ -7,46 +7,46 @@
  */
 
 // HomeView
-"navigation_link.new_game" = "New Game";
-"navigation_link.resume" = "Resume";
-"navigation_link.players" = "Players";
-"navigation_link.games" = "Games";
+"homeView.newGame" = "New Game";
+"homeView.resume" = "Resume";
+"homeView.players" = "Players";
+"homeView.games" = "Games";
 
 // GameOnboardingView
 "gameOnboardingView.participationHeaderText" = "Please chose the players who are participating in the game.";
-"gameOnboardingView.button.add_new_player" = "Add New Player";
-"gameOnboardingView.button.start_game" = "Start Game";
-"gameOnboardingView.button.back_to_main_menu" = "Back to Main Menu";
+"gameOnboardingView.addNewPlayer" = "Add New Player";
+"gameOnboardingView.startGame" = "Start Game";
+"gameOnboardingView.backToMainMenu" = "Back to Main Menu";
 
 // GameView
-"gameView.headerLabel.total_score" = "Total score";
-"gameView.headerLabel.this_turn_score" = "This turn";
-"gameView.scoreSlider.label_text" = "How many points is your card worth?";
-"gameView.drawnToggle.label_text" = "Did you have to draw a card?";
-"gameView.timesDrawnPicker.label_text" = "How many times did you have to draw?";
-"gameView.playedCardPicker.label_text" = "Were you able to play the card?";
+"gameView.headerLabel.totalScore" = "Total score";
+"gameView.headerLabel.thisTurnScore" = "This turn";
+"gameView.scoreSlider.labelText" = "How many points is your card worth?";
+"gameView.drawnToggle.labelText" = "Did you have to draw a card?";
+"gameView.timesDrawnPicker.labelText" = "How many times did you have to draw?";
+"gameView.playedCardPicker.labelText" = "Were you able to play the card?";
 "gameView.playedCardPicker.yes" = "Yes";
 "gameView.playedCardPicker.no" = "No";
-"gameView.bonusEventPicker.label_text" = "Do you get some bonus points?";
+"gameView.bonusEventPicker.labelText" = "Do you get some bonus points?";
 "gameView.bonusEventPicker.none" = "None";
 "gameView.bonusEventPicker.bridge" = "Bridge";
 "gameView.bonusEventPicker.hexagon" = "Hexagon";
 "gameView.bonusEventPicker.twoHexagons" = "Two Hexagons";
 "gameView.bonusEventPicker.threeHexagons" = "Three Hexagons";
-"gameView.nextPlayerButton.label_text" = "Next Player";
-"gameView.exitGameButton.label_text" = "Exit Game";
-"gameView.endGameButton.label_text" = "End Game";
+"gameView.nextPlayerButton.labelText" = "Next Player";
+"gameView.exitGameButton.labelText" = "Exit Game";
+"gameView.endGameButton.labelText" = "End Game";
 
 // GameResultsView
-"gameResultsView.game_results" = "Game Results";
+"gameResultsView.gameResults" = "Game Results";
 "gameResultsView.name" = "Name";
-"gameResultsView.name" = "Points";
-"gameResultsView.mainMenuButton.label_text" = "Main menu";
+"gameResultsView.points" = "Points";
+"gameResultsView.mainMenuButton.labelText" = "Main menu";
 
 // AddNewPlayerView
-"addNewPlayerView.nameLabel.label_text" = "Tell me your name, please!";
-"addNewPlayerView.nameLabel.textfield_text" = "Name's coming..";
-"addNewPlayerView.createButton.label_text" = "Create";
+"addNewPlayerView.nameLabel.labelText" = "Tell me your name, please!";
+"addNewPlayerView.nameLabel.textfieldText" = "Name's coming..";
+"addNewPlayerView.createButton.labelText" = "Create";
 "addNewPlayerView.alertTextFieldEmpty.message" = "Textfield is empty!";
 "addNewPlayerView.alertNameToLong.message" = "I'm sorry, your name is too long!";
 
@@ -61,7 +61,7 @@
 "playerDetailView.backButton.title" = "Back";
 
 // GamesListView
-"gameListView.button.back_to_main_menu" = "Back to Main Menu";
+"gameListView.button.backToMainMenu" = "Back to Main Menu";
 "gameListView.sessions" = "Sessions";
 
 // GameListRowView

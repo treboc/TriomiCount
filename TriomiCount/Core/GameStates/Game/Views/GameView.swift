@@ -41,13 +41,13 @@ struct GameView: View {
       } message: {
         Text(AlertContext.exitGame.message)
       }
-      .alert(AlertContext.endGame.title, isPresented: $viewModel.showEndGameAlert) {
-        Button("Cancel", role: .cancel, action: {})
+      .confirmationDialog(AlertContext.endGame.title, isPresented: $viewModel.showEndGameAlert, titleVisibility: .visible) {
         Button(action: { viewModel.endingGame() },
-               label: { Text(AlertContext.endGame.buttonTitle) }
+               label: { Text("endGameAlert.messageWithWinner \(viewModel.currentPlayerOnTurn!.wrappedName)") }
         )
-      } message: {
-        Text(AlertContext.endGame.message)
+        Button("endGameAlert.messageTie") {
+          viewModel.endingGame()
+        }
       }
       .blur(radius: viewModel.bonusEventPickerOverlayIsShown ? 5 : 0)
       .allowsHitTesting(viewModel.bonusEventPickerOverlayIsShown ? false : true)

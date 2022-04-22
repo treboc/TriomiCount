@@ -7,46 +7,46 @@
 */
 
 // HomeView
-"navigation_link.new_game" = "Neues Spiel";
-"navigation_link.resume" = "Weiterspielen";
-"navigation_link.players" = "Spieler";
-"navigation_link.games" = "Spiele";
+"homeView.newGame" = "Neues Spiel";
+"homeView.resume" = "Weiterspielen";
+"homeView.players" = "Spieler";
+"homeView.games" = "Spiele";
 
 // GameOnboardingView
 "gameOnboardingView.participationHeaderText" = "Bitte wähle die Spieler aus, die mitspielen sollen.";
-"gameOnboardingView.button.add_new_player" = "Neuen Spieler erstellen";
-"gameOnboardingView.button.start_game" = "Spiel starten";
-"gameOnboardingView.button.back_to_main_menu" = "Zurück zum Hauptmenü";
+"gameOnboardingView.addNewPlayer" = "Neuen Spieler erstellen";
+"gameOnboardingView.startGame" = "Spiel starten";
+"gameOnboardingView.backToMainMenu" = "Zurück zum Hauptmenü";
 
 // GameView
-"gameView.headerLabel.total_score" = "Punkte";
-"gameView.headerLabel.this_turn_score" = "Diese Runde";
-"gameView.scoreSlider.label_text" = "Wie viele Punkte ist deine Karte wert?";
-"gameView.drawnToggle.label_text" = "Musstest du nachziehen?";
-"gameView.timesDrawnPicker.label_text" = "Wie oft musstest du nachziehen?";
-"gameView.playedCardPicker.label_text" = "Konntest du deine Karte ausspielen?";
+"gameView.headerLabel.totalScore" = "Punkte";
+"gameView.headerLabel.thisTurnScore" = "Diese Runde";
+"gameView.scoreSlider.labelText" = "Wie viele Punkte ist deine Karte wert?";
+"gameView.drawnToggle.labelText" = "Musstest du nachziehen?";
+"gameView.timesDrawnPicker.labelText" = "Wie oft musstest du nachziehen?";
+"gameView.playedCardPicker.labelText" = "Konntest du deine Karte ausspielen?";
 "gameView.playedCardPicker.yes" = "Yes";
 "gameView.playedCardPicker.no" = "No";
-"gameView.bonusEventPicker.label_text" = "Bekommst du Bonuspunkte?";
+"gameView.bonusEventPicker.labelText" = "Bekommst du Bonuspunkte?";
 "gameView.bonusEventPicker.none" = "Keine";
 "gameView.bonusEventPicker.bridge" = "Brücke";
 "gameView.bonusEventPicker.hexagon" = "Sechseck";
 "gameView.bonusEventPicker.twoHexagons" = "Zwei Sechsecke";
 "gameView.bonusEventPicker.threeHexagons" = "Drei Sechsecke";
-"gameView.nextPlayerButton.label_text" = "Zug beenden";
-"gameView.exitGameButton.label_text" = "Zum Hauptmenü";
-"gameView.endGameButton.label_text" = "Runde beenden";
+"gameView.nextPlayerButton.labelText" = "Zug beenden";
+"gameView.exitGameButton.labelText" = "Zum Hauptmenü";
+"gameView.endGameButton.labelText" = "Runde beenden";
 
 // GameResultsView
-"gameResultsView.game_results" = "Spielergebnis";
+"gameResultsView.gameResults" = "Spielergebnis";
 "gameResultsView.name" = "Name";
-"gameResultsView.name" = "Punkte";
-"gameResultsView.mainMenuButton.label_text" = "Zum Hauptmenü";
+"gameResultsView.points" = "Punkte";
+"gameResultsView.mainMenuButton.labelText" = "Zum Hauptmenü";
 
 // AddNewPlayerView
-"addNewPlayerView.nameLabel.label_text" = "Wie heisst du?";
-"addNewPlayerView.nameLabel.textfield_text" = "Den Namen hierhin..";
-"addNewPlayerView.createButton.label_text" = "Erstellen";
+"addNewPlayerView.nameLabel.labelText" = "Wie heisst du?";
+"addNewPlayerView.nameLabel.textfieldText" = "Den Namen hierhin..";
+"addNewPlayerView.createButton.labelText" = "Erstellen";
 "addNewPlayerView.alertTextFieldEmpty.message" = "Textfeld ist leer!";
 "addNewPlayerView.alertNameToLong.message" = "Sorry, dein Name ist zu lang!";
 
@@ -61,7 +61,7 @@
 "playerDetailView.backButton.title" = "Zurück";
 
 // GamesListView
-"gameListView.button.back_to_main_menu" = "Zurück zum Hauptmenü";
+"gameListView.button.backToMainMenu" = "Zurück zum Hauptmenü";
 "gameListView.sessions" = "Spiele";
 
 // GameListRowView
@@ -78,8 +78,9 @@
 "exitGameAlert.title" = "Bist du sicher?";
 "exitGameAlert.message" = "Du bist dabei, dass Spiel zu verlassen. Es könnte möglicherweise nicht gespeichert sein.";
 "exitGameAlert.buttonTitle" = "Ja, ich bin sicher.";
-"endGameAlert.title" = "Spiel wird beendet";
-"endGameAlert.message" = "Herzlichen Glückwunsch! Achtet darauf, dass der Spieler an der Reihe ist, der den letzten Stein gelegt hat.";
+"endGameAlert.title" = "Achtung! Das Spiel wird beendet.";
+"endGameAlert.messageWithWinner %@" = "Herzlichen Glückwunsch %@!";
+"endGameAlert.messageTie" = "Niemand kann mehr anlegen.";
 "endGameAlert.buttonTitle" = "Ja, ich bin sicher.";
 
 // Rules

@@ -1,1 +1,5 @@
 line_length: 175
+identifier_name:
+  excluded:
+    - iO
+    - id

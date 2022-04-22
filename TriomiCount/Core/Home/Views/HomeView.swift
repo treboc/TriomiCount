@@ -19,11 +19,9 @@ struct HomeView: View {
   var body: some View {
     NavigationView {
       ZStack {
-        // Background Layer
         Color.primaryBackground
           .ignoresSafeArea()
 
-        // Foreground Layer
         VStack {
           settingsButton
           VStack(spacing: 20) {
@@ -32,14 +30,14 @@ struct HomeView: View {
             Spacer(minLength: 20)
             VStack(spacing: 15) {
               if lastSession != nil {
-                PushStyledNavigationLink(title: "navigation_link.resume") {
+                PushStyledNavigationLink(title: Localization.HomeView.resume) {
                   GameMainView(viewModel: GameViewModel(lastGame: lastSession!))
                 }
               }
-              PushStyledNavigationLink(title: "navigation_link.new_game") { GameOnboardingView()
+              PushStyledNavigationLink(title: Localization.HomeView.newGame) { GameOnboardingView()
                 .id(appState.onboardingScreen) }
-              PushStyledNavigationLink(title: "navigation_link.players") { PlayerListView() }
-              PushStyledNavigationLink(title: "navigation_link.games") { GamesListView() }
+              PushStyledNavigationLink(title: Localization.HomeView.players) { PlayerListView() }
+              PushStyledNavigationLink(title: Localization.HomeView.games) { GamesListView() }
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 50)
