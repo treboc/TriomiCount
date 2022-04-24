@@ -48,10 +48,12 @@ extension Game {
       playerNames.append(player.wrappedName)
     }
 
+    let seperator = L10n.joinStringAnd
+
     if playerNames.count == 2 {
-      return playerNames.joined(separator: " and ")
+      return playerNames.joined(separator: seperator)
     } else if playerNames.count > 2 {
-      return playerNames.dropLast().joined(separator: ", ") + ", and " + playerNames.last!
+      return playerNames.dropLast().joined(separator: ", ") + ",\(seperator)" + playerNames.last!
     } else {
       return ""
     }
@@ -63,7 +65,7 @@ extension Game {
     return formatter.string(from: self.wrappedStartedOn)
   }
 
-  var winner: String {
+  var winner: String? {
     if let objectIDURL = URL(string: wrappedWinnerID) {
       let coordinator: NSPersistentStoreCoordinator = PersistentStore.shared.persistentContainer.persistentStoreCoordinator
       if let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectIDURL) {
@@ -71,7 +73,7 @@ extension Game {
         return winner?.wrappedName ?? "No Player with this ID found."
       }
     }
-    return "There is no winner."
+    return nil
   }
 
   convenience init(players: [Player], context: NSManagedObjectContext) {
