@@ -109,8 +109,6 @@ class GameViewModel: ObservableObject {
     let newTurn = Turn(game)
     game.addToTurns(newTurn)
 
-//    currentPlayerOnTurn = getCurrentPlayerOnTurn()
-
     saveGameState()
     resetTurnState()
   }
@@ -140,6 +138,7 @@ class GameViewModel: ObservableObject {
   @Published var playerToAskForPointsIndex: Int = 0
   @Published var playerToAskForPoints: Player?
   @Published var scoreOfPlayersWithoutLastPlayer: Int64 = 0
+  @Published var isTie: Bool = false
 
   func endingGame() {
     guard let game = game else { return }
@@ -148,9 +147,14 @@ class GameViewModel: ObservableObject {
     if game.players?.count == 1 { endGame() }
 
     playersWithoutLastPlayer = game.playersArray.filter({ $0 != currentPlayerOnTurn })
-    if let player = playersWithoutLastPlayer.first {
-      playerToAskForPoints = player
-      gameState = .isEnding
+
+    if isTie {
+      endGame()
+    } else {
+      if let player = playersWithoutLastPlayer.first {
+        playerToAskForPoints = player
+        gameState = .isEnding
+      }
     }
   }
 
@@ -176,13 +180,15 @@ class GameViewModel: ObservableObject {
     // Currently: For every player, save the current score to the highscore, if it's higher.
     // Want to: End the game, get all points correctly and only save the players highscore, if it's a new record.
     if let lastPlayer = lastPlayer {
-      // 25 EXTRA POINTS FOR PLAYING OUT THE LAST STONE
-      lastPlayer.currentScore += 25
+      if !isTie {
+        // 25 extra points for placing the last tile
+        lastPlayer.currentScore += 25
 
-      // ADD POINTS FROM ALL OTHER PLAYERS
-      lastPlayer.currentScore += scoreOfPlayersWithoutLastPlayer
+        // add points from all the other players
+        lastPlayer.currentScore += scoreOfPlayersWithoutLastPlayer
+      }
 
-      // GET WINNER WITH HIGHEST SCORE
+      // get winner with highest score
       let winner = game.playersArray.sorted(by: { $0.currentScore > $1.currentScore }).first!
       winner.increaseGamesWon()
       game.wrappedWinnerID = winner.objectID.uriRepresentation().absoluteString

@@ -23,7 +23,7 @@
 "gameView.headerLabel.thisTurnScore" = "This turn";
 "gameView.scoreSlider.labelText" = "How many points is your card worth?";
 "gameView.drawnToggle.labelText" = "Did you have to draw a card?";
-"gameView.timesDrawnPicker.labelText" = "How many times did you have to draw?";
+"gameView.timesDrawnPicker.labelText" = "How often did you have to draw?";
 "gameView.playedCardPicker.labelText" = "Were you able to play the card?";
 "gameView.playedCardPicker.yes" = "Yes";
 "gameView.playedCardPicker.no" = "No";

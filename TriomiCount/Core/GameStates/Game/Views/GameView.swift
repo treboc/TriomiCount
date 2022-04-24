@@ -47,6 +47,7 @@ struct GameView: View {
                label: { Text(L10n.EndGameConfirmationDialogue.messageWinner(viewModel.currentPlayerOnTurn?.wrappedName ?? "Unknown")) }
         )
         Button(L10n.EndGameConfirmationDialogue.messageTie) {
+          viewModel.isTie = true
           viewModel.endingGame()
         }
       }
