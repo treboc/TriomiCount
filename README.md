@@ -16,9 +16,9 @@ It basically is a kind of dominoes but with triangle shaped tiles.
 
 ## Screenshots
 <p float="left">
-  <img src="./screenshots/main_menu.png" width="200" />
-  <img src="./screenshots/game.png" width="200" />
-  <img src="./screenshots/player_details.png" width="200" />
+  <img src="./screenshots/homeView.png" width="200" />
+  <img src="./screenshots/gameView.png" width="200" />
+  <img src="./screenshots/playerDetailView.png" width="200" />
 </p>
 
 ## 
