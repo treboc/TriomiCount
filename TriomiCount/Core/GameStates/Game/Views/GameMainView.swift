@@ -38,7 +38,6 @@ struct GameMainView: View {
     }
     .navigationBarHidden(true)
     .navigationBarBackButtonHidden(true)
-
   }
 }
 

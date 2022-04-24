@@ -56,6 +56,7 @@
 		08F6F36127E681A200FFBCFB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F36027E681A200FFBCFB /* GameView.swift */; };
 		8A5E01102813491E00703CE5 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E010F2813491E00703CE5 /* L10n.swift */; };
 		8A5E011228154B3200703CE5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E011128154B3200703CE5 /* Settings.swift */; };
+		8A5E01142815A34800703CE5 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E01132815A34800703CE5 /* AppearanceManager.swift */; };
 		8A858C8627FF6E34002385E1 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = 8A858C8527FF6E34002385E1 /* Inject */; };
 		8AB0179D27FBABE900FFEF46 /* GameListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0179C27FBABE900FFEF46 /* GameListRowView.swift */; };
 		8AB0179F27FC1F5B00FFEF46 /* BonusEventPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0179E27FC1F5B00FFEF46 /* BonusEventPicker.swift */; };
@@ -114,6 +115,7 @@
 		08F6F36027E681A200FFBCFB /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		8A5E010F2813491E00703CE5 /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = L10n.swift; path = TriomiCount/Resources/L10n.swift; sourceTree = SOURCE_ROOT; };
 		8A5E011128154B3200703CE5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		8A5E01132815A34800703CE5 /* AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
 		8AB0179C27FBABE900FFEF46 /* GameListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListRowView.swift; sourceTree = "<group>"; };
 		8AB0179E27FC1F5B00FFEF46 /* BonusEventPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusEventPicker.swift; sourceTree = "<group>"; };
 		8AB017A027FC3A3F00FFEF46 /* OverlayAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayAlert.swift; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 				08288174279EF8D10064C9E8 /* AddNewPlayerView.swift */,
 				8ACA06E927F5A550000F6D4C /* Rules.swift */,
 				08AD236027AA912600BBDB16 /* HapticsManager.swift */,
+				8A5E01132815A34800703CE5 /* AppearanceManager.swift */,
 				8AB017A027FC3A3F00FFEF46 /* OverlayAlert.swift */,
 				08A0103227DFB68C000D0AEB /* AppState.swift */,
 			);
@@ -538,6 +541,7 @@
 				08D562A427B30BA7009C72B1 /* View+Extension.swift in Sources */,
 				08BE48EA279CA14900EA431F /* HomeView.swift in Sources */,
 				0827298227DDE74C00E48F4D /* TimesDrawnPicker.swift in Sources */,
+				8A5E01142815A34800703CE5 /* AppearanceManager.swift in Sources */,
 				089CA6F9279EA4B9007E34E8 /* PlayerListView.swift in Sources */,
 				0835129D27DC123700065228 /* GameScoreDict.swift in Sources */,
 				08A0103327DFB68C000D0AEB /* AppState.swift in Sources */,

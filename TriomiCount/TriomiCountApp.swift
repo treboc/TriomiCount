@@ -11,6 +11,8 @@ import SwiftUI
 
 @main
 struct TriomiCountApp: App {
+  @StateObject private var appearanceManager = AppearanceManager()
+
   @AppStorage("selectedAppearance") private var selectedAppearance: Int = 2
   @StateObject private var appState = AppState()
 
@@ -18,11 +20,12 @@ struct TriomiCountApp: App {
     WindowGroup {
       HomeView()
         .id(appState.homeViewID)
-        .preferredColorScheme(selectedAppearance == 1 ? .light : selectedAppearance == 2 ? .dark : nil)
         .environment(\.managedObjectContext, PersistentStore.shared.context)
         .environmentObject(appState)
+        .environmentObject(appearanceManager)
         .onAppear {
           UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+          appearanceManager.setAppearance()
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification),
                    perform: handleResignActive)

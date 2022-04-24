@@ -59,7 +59,7 @@ internal enum L10n {
   internal enum EndGameConfirmationDialogue {
     /// No one can place a tile.
     internal static let messageTie = L10n.tr("Localizable", "endGameConfirmationDialogue.messageTie")
-    /// Congratulations %@!
+    /// Did %@ played out the last tile?
     internal static func messageWinner(_ p1: Any) -> String {
       return L10n.tr("Localizable", "endGameConfirmationDialogue.messageWinner %@", String(describing: p1))
     }

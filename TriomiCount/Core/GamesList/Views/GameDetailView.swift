@@ -20,10 +20,9 @@ struct GameDetailView: View {
 
       VStack(alignment: .center) {
         HStack {
-          Text(L10n.GameListRowView.session) +
-          Text(" #\(game.id)")
+          Text("\(L10n.GameListRowView.session) #\(game.id)")
         }
-        .font(.largeTitle)
+        .font(.title.bold())
         .padding()
         .frame(maxWidth: .infinity)
 
@@ -101,6 +100,7 @@ extension GameDetailView {
       .padding()
       .frame(maxWidth: .infinity)
       .background(Color.secondaryBackground)
+      .foregroundColor(.white)
       .cornerRadius(20)
       .overlay(
         RoundedRectangle(cornerRadius: 20)

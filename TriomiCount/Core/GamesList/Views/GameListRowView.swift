@@ -17,13 +17,10 @@ struct GameListRowView: View {
         .opacity(1)
         .cornerRadius(20)
 
-      HStack(alignment: .firstTextBaseline) {
+      HStack(alignment: .top) {
         VStack(alignment: .leading, spacing: 3) {
-          Text(L10n.GameListRowView.session)
-            .font(.title2.bold())
-          +
-          Text(" #\(game.id)")
-            .font(.title2.bold())
+          Text("\(L10n.GameListRowView.session) #\(game.id)")
+            .font(.headline.bold())
 
           HStack(alignment: .firstTextBaseline) {
             Text(L10n.GameListRowView.playedBy)
@@ -37,6 +34,7 @@ struct GameListRowView: View {
         Spacer()
 
         Text(game.startedOnAsString)
+          .font(.caption)
       }
       .foregroundColor(.white)
       .padding(.horizontal)

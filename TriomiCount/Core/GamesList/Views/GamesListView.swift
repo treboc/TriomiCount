@@ -20,6 +20,7 @@ struct GamesListView: View {
 
       VStack {
         Text(L10n.games)
+          .foregroundColor(.white)
           .multilineTextAlignment(.center)
           .padding()
           .frame(maxWidth: .infinity)

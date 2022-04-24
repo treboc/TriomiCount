@@ -12,7 +12,6 @@ import SFSafeSymbols
 
 struct HomeView: View {
   @State private var showSettings: Bool = false
-  @AppStorage("selectedAppearance") private var selectedAppearance = 0
   @EnvironmentObject var appState: AppState
   @State private var lastSession: Game?
 
@@ -35,7 +34,8 @@ struct HomeView: View {
                 }
               }
               PushStyledNavigationLink(title: L10n.HomeView.newGame) { GameOnboardingView()
-                .id(appState.onboardingScreen) }
+                .id(appState.onboardingScreen)
+              }
               PushStyledNavigationLink(title: L10n.HomeView.players) { PlayerListView() }
               PushStyledNavigationLink(title: L10n.HomeView.games) { GamesListView() }
             }
@@ -53,9 +53,8 @@ struct HomeView: View {
       }
     }
     .pageSheet(isPresented: $showSettings) {
-      SettingsView(selectedAppearance: $selectedAppearance)
+      SettingsView()
         .sheetPreference(.grabberVisible(true))
-        .preferredColorScheme(selectedAppearance == 1 ? .light : selectedAppearance == 2 ? .dark : nil)
     }
     .enableInjection()
   }

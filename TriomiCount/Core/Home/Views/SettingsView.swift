@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SettingsView: View {
-  @Binding var selectedAppearance: Int
   @Environment(\.dismiss) var dismiss
   @AppStorage(Settings.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
 
@@ -16,7 +15,7 @@ struct SettingsView: View {
     NavigationView {
       Form {
         Section(L10n.SettingsView.ColorScheme.title) {
-          ColorSchemePicker(selectedAppearance: $selectedAppearance)
+          ColorSchemePicker()
         }
 
         Section {
@@ -51,55 +50,52 @@ extension SettingsView {
 
 extension SettingsView {
   struct ColorSchemePicker: View {
-    @Binding var selectedAppearance: Int
+    @EnvironmentObject var appearanceManager: AppearanceManager
     var pickerTitle: String {
-      switch selectedAppearance {
-      case 0:
-        return L10n.SettingsView.ColorScheme.system
-      case 1:
-        return L10n.SettingsView.ColorScheme.light
-      case 2:
+      switch appearanceManager.appearance {
+      case .dark:
         return L10n.SettingsView.ColorScheme.dark
-      default:
-        return "Unknown"
+      case .light:
+        return L10n.SettingsView.ColorScheme.light
+      case .system:
+        return L10n.SettingsView.ColorScheme.system
       }
     }
 
     var body: some View {
-      Picker(pickerTitle, selection: $selectedAppearance) {
+      Picker(pickerTitle, selection: $appearanceManager.appearance) {
         HStack {
           Text(L10n.SettingsView.ColorScheme.system)
           Spacer()
-          if selectedAppearance == 0 {
+          if appearanceManager.appearance == .system {
             Image(systemName: "checkmark")
           }
         }
         .contentShape(Rectangle())
-        .onTapGesture { selectedAppearance = 0 }
+        .onTapGesture { appearanceManager.appearance = .system }
 
         HStack {
           Text(L10n.SettingsView.ColorScheme.light)
           Spacer()
-          if selectedAppearance == 1 {
+          if appearanceManager.appearance == .light {
             Image(systemName: "checkmark")
           }
         }
         .contentShape(Rectangle())
-        .onTapGesture { selectedAppearance = 1 }
+        .onTapGesture { appearanceManager.appearance = .light }
 
         HStack {
           Text(L10n.SettingsView.ColorScheme.dark)
           Spacer()
-          if selectedAppearance == 2 {
+          if appearanceManager.appearance == .dark {
             Image(systemName: "checkmark")
           }
         }
         .contentShape(Rectangle())
-        .onTapGesture { selectedAppearance = 2 }
+        .onTapGesture { appearanceManager.appearance = .dark }
       }
       .pickerStyle(.automatic)
     }
-
   }
 }
 
