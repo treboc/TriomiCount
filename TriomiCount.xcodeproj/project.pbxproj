@@ -55,6 +55,7 @@
 		08D562A427B30BA7009C72B1 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D562A327B30BA7009C72B1 /* View+Extension.swift */; };
 		08F6F36127E681A200FFBCFB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F36027E681A200FFBCFB /* GameView.swift */; };
 		8A5E01102813491E00703CE5 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E010F2813491E00703CE5 /* L10n.swift */; };
+		8A5E011228154B3200703CE5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E011128154B3200703CE5 /* Settings.swift */; };
 		8A858C8627FF6E34002385E1 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = 8A858C8527FF6E34002385E1 /* Inject */; };
 		8AB0179D27FBABE900FFEF46 /* GameListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0179C27FBABE900FFEF46 /* GameListRowView.swift */; };
 		8AB0179F27FC1F5B00FFEF46 /* BonusEventPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0179E27FC1F5B00FFEF46 /* BonusEventPicker.swift */; };
@@ -112,6 +113,7 @@
 		08D562A327B30BA7009C72B1 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		08F6F36027E681A200FFBCFB /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		8A5E010F2813491E00703CE5 /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = L10n.swift; path = TriomiCount/Resources/L10n.swift; sourceTree = SOURCE_ROOT; };
+		8A5E011128154B3200703CE5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		8AB0179C27FBABE900FFEF46 /* GameListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListRowView.swift; sourceTree = "<group>"; };
 		8AB0179E27FC1F5B00FFEF46 /* BonusEventPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusEventPicker.swift; sourceTree = "<group>"; };
 		8AB017A027FC3A3F00FFEF46 /* OverlayAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayAlert.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 			children = (
 				08BE48E9279CA14900EA431F /* HomeView.swift */,
 				08A2C64227A34BBB0076C196 /* SettingsView.swift */,
+				8A5E011128154B3200703CE5 /* Settings.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				8AB017A127FC3A3F00FFEF46 /* OverlayAlert.swift in Sources */,
 				8AB0179D27FBABE900FFEF46 /* GameListRowView.swift in Sources */,
 				8ACA06EA27F5A550000F6D4C /* Rules.swift in Sources */,
+				8A5E011228154B3200703CE5 /* Settings.swift in Sources */,
 				083BFD5027CABB7200B5BE50 /* PointsSubmitView.swift in Sources */,
 				8A5E01102813491E00703CE5 /* L10n.swift in Sources */,
 				0896440E27A527F30091C6F8 /* Color+Extenstion.swift in Sources */,
@@ -731,10 +735,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = (
-					"-Xlinker",
-					"-interposable",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.marvinlee.TriomiCount;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -768,10 +769,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = (
-					"-Xlinker",
-					"-interposable",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.marvinlee.TriomiCount;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

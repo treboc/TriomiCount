@@ -301,6 +301,14 @@ internal enum L10n {
       /// System
       internal static let system = L10n.tr("Localizable", "settingsView.colorScheme.system")
     }
+    internal enum IdleDimmingDisabled {
+      /// IMPORTANT: This will reduce your battery life.
+      internal static let importantMessage = L10n.tr("Localizable", "settingsView.idleDimmingDisabled.importantMessage")
+      /// Options
+      internal static let options = L10n.tr("Localizable", "settingsView.idleDimmingDisabled.options")
+      /// Disable screen dimming in sessions
+      internal static let pickerLabelText = L10n.tr("Localizable", "settingsView.idleDimmingDisabled.pickerLabelText")
+    }
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

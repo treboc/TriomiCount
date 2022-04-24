@@ -11,12 +11,22 @@ struct SettingsView: View {
   @Binding var selectedAppearance: Int
   @Environment(\.colorScheme) var colorScheme
   @Environment(\.dismiss) var dismiss
+  @AppStorage(Settings.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
 
   var body: some View {
     NavigationView {
       Form {
         Section("Color Theme") {
           ColorSchemePicker(selectedAppearance: $selectedAppearance)
+        }
+
+        Section {
+          Toggle(L10n.SettingsView.IdleDimmingDisabled.pickerLabelText, isOn: $idleDimmingDisabled)
+        } header: {
+          Text(L10n.SettingsView.IdleDimmingDisabled.options)
+        } footer: {
+          Text(L10n.SettingsView.IdleDimmingDisabled.importantMessage)
+            .font(.caption)
         }
 
         Section(L10n.Rules.title) {

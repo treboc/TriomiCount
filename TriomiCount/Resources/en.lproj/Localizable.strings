@@ -85,6 +85,9 @@
 "settingsView.colorScheme.light" = "Light";
 "settingsView.colorScheme.dark" = "Dark";
 "settingsView.colorScheme.system" = "System";
+"settingsView.idleDimmingDisabled.options" = "Options";
+"settingsView.idleDimmingDisabled.pickerLabelText" = "Disable screen dimming in sessions";
+"settingsView.idleDimmingDisabled.importantMessage" = "IMPORTANT: This will reduce your battery life.";
 
 // ExitGameAlert
 "exitGameAlert.title" = "Are you sure?";

@@ -85,6 +85,9 @@
 "settingsView.colorScheme.light" = "Hell";
 "settingsView.colorScheme.dark" = "Dunkel";
 "settingsView.colorScheme.system" = "System";
+"settingsView.idleDimmingDisabled.options" = "Optionen";
+"settingsView.idleDimmingDisabled.pickerLabelText" = "Automatische Sperre in Spielen deaktivieren";
+"settingsView.idleDimmingDisabled.importantMessage" = "ACHTUNG: Dies wirkt sich negativ auf die Akkulaufzeit aus.";
 
 // Alerts
 "exitGameAlert.title" = "Bist du sicher?";

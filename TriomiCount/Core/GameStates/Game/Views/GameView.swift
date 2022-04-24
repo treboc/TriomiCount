@@ -11,6 +11,7 @@ import SwiftUI
 struct GameView: View {
   @StateObject var viewModel: GameViewModel
   @EnvironmentObject var appState: AppState
+  @AppStorage(Settings.idleDimmingDisabled) var idleDimmingDisabled = true
   @State private var isAnimated: Bool = false
 
   var body: some View {
@@ -51,6 +52,14 @@ struct GameView: View {
       }
       .blur(radius: viewModel.bonusEventPickerOverlayIsShown ? 5 : 0)
       .allowsHitTesting(viewModel.bonusEventPickerOverlayIsShown ? false : true)
+      .onAppear {
+        if idleDimmingDisabled {
+          UIApplication.shared.isIdleTimerDisabled = true
+        }
+      }
+      .onDisappear {
+        UIApplication.shared.isIdleTimerDisabled = false
+      }
 
       if viewModel.bonusEventPickerOverlayIsShown {
         BonusEventPicker.SelectionOverlay(viewModel: viewModel)
