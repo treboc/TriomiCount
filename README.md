@@ -22,6 +22,9 @@ I learn a lot better when building something, than rebuild the next to-do app or
 - [x] prevent display from dimming / turning off
     - [x] make it a setting
 - [ ] get some kind of chart into player and session statistics
+- [ ] give players the possibility to add a profile picture or atleast an emoji for the beginning
+    - [ ] work this into the gameView
+- [ ] some kind of quicklook feature in session (*maybe with tap on the header?*)
 
 ## Screenshots
 <p float="left">
