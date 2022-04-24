@@ -298,8 +298,10 @@ internal enum L10n {
       internal static let dark = L10n.tr("Localizable", "settingsView.colorScheme.dark")
       /// Light
       internal static let light = L10n.tr("Localizable", "settingsView.colorScheme.light")
-      /// System
+      /// Automatic
       internal static let system = L10n.tr("Localizable", "settingsView.colorScheme.system")
+      /// Appearance
+      internal static let title = L10n.tr("Localizable", "settingsView.colorScheme.title")
     }
     internal enum IdleDimmingDisabled {
       /// IMPORTANT: This will reduce your battery life.

@@ -82,9 +82,10 @@
 
 // SettingsView
 "settingsView.settings" = "Settings";
+"settingsView.colorScheme.title" = "Appearance";
 "settingsView.colorScheme.light" = "Light";
 "settingsView.colorScheme.dark" = "Dark";
-"settingsView.colorScheme.system" = "System";
+"settingsView.colorScheme.system" = "Automatic";
 "settingsView.idleDimmingDisabled.options" = "Options";
 "settingsView.idleDimmingDisabled.pickerLabelText" = "Disable screen dimming in sessions";
 "settingsView.idleDimmingDisabled.importantMessage" = "IMPORTANT: This will reduce your battery life.";

@@ -82,9 +82,10 @@
 
 // SettingsView
 "settingsView.settings" = "Einstellungen";
+"settingsView.colorScheme.title" = "Erscheinungsbild";
 "settingsView.colorScheme.light" = "Hell";
 "settingsView.colorScheme.dark" = "Dunkel";
-"settingsView.colorScheme.system" = "System";
+"settingsView.colorScheme.system" = "Automatisch";
 "settingsView.idleDimmingDisabled.options" = "Optionen";
 "settingsView.idleDimmingDisabled.pickerLabelText" = "Automatische Sperre in Spielen deaktivieren";
 "settingsView.idleDimmingDisabled.importantMessage" = "ACHTUNG: Dies wirkt sich negativ auf die Akkulaufzeit aus.";
