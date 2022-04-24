@@ -94,13 +94,14 @@ extension PlayerDetailView {
     var body: some View {
       HStack {
         VStack(alignment: .leading) {
-          Text(NSLocalizedString(sectionTitle, comment: "").uppercased())
+          Text(sectionTitle.uppercased())
             .font(.caption)
           Spacer()
           Text(sectionContent)
         }
         Spacer()
       }
+      .foregroundColor(.white)
       .multilineTextAlignment(.center)
       .padding()
       .frame(maxWidth: .infinity, maxHeight: 60)
