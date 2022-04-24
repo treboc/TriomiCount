@@ -46,7 +46,7 @@ extension Player {
     set { position = newValue }
   }
 
-  var wrappedCurrentScore: Int64 {
+  var wrappedLastScore: Int64 {
     get { currentScore }
     set { currentScore = newValue }
   }
