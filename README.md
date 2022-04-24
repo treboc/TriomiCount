@@ -8,11 +8,20 @@ TriomiCount is used to track the state of the games while playing the boardgame 
 
 It basically is a kind of dominoes but with triangle shaped tiles.
 
+Me and my wife like playing the game, but I was annoyed that I'd to write down our scores by hand and the next time we'd played, the last scores were gone. Also I was looking for a simple app for learning purpose.
+I learn a lot better when building something, than rebuild the next to-do app or just follow tutorials.
+
 ## Key features
 * add and list players
 * show statistics about single players *(e.g. highscores, last score, games played, games won, etc.)*
 * track a game of *n* players *(singleplayer games are also possible)*
 * look into previous games and its statistics *(work in progress)*
+
+## To-do
+- [ ] 'undo' last turn in a session
+- [x] prevent display from dimming / turning off
+    - [x] make it a setting
+- [ ] get some kind of chart into player and session statistics
 
 ## Screenshots
 <p float="left">
@@ -20,10 +29,6 @@ It basically is a kind of dominoes but with triangle shaped tiles.
   <img src="./screenshots/gameView.png" width="200" />
   <img src="./screenshots/playerDetailView.png" width="200" />
 </p>
-
-## 
-Me and my wife like playing the game, but I was annoyed that I'd to write down our scores by hand and the next time we'd played, the last scores were gone. Also I was looking for a simple app for learning purpose.
-I'm far more interested in building something – atleast for us – useful, than the next to-do app or just follow tutorials. 🙃
 
 ## Requirements
 * Xcode 13.0+ & Swift 5.5+
