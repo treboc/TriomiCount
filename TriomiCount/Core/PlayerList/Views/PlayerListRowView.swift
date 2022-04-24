@@ -12,7 +12,8 @@ struct PlayerListRowView: View {
 
   var body: some View {
     ZStack {
-      Color("SecondaryAccentColor").opacity(0.5).cornerRadius(10)
+      Color.secondaryAccentColor
+        .cornerRadius(20)
 
       HStack {
         Text("\(player.wrappedName)")
