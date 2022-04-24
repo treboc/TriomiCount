@@ -30,14 +30,14 @@ struct HomeView: View {
             Spacer(minLength: 20)
             VStack(spacing: 15) {
               if lastSession != nil {
-                PushStyledNavigationLink(title: Localization.HomeView.resume) {
+                PushStyledNavigationLink(title: L10n.HomeView.resume) {
                   GameMainView(viewModel: GameViewModel(lastGame: lastSession!))
                 }
               }
-              PushStyledNavigationLink(title: Localization.HomeView.newGame) { GameOnboardingView()
+              PushStyledNavigationLink(title: L10n.HomeView.newGame) { GameOnboardingView()
                 .id(appState.onboardingScreen) }
-              PushStyledNavigationLink(title: Localization.HomeView.players) { PlayerListView() }
-              PushStyledNavigationLink(title: Localization.HomeView.games) { GamesListView() }
+              PushStyledNavigationLink(title: L10n.HomeView.players) { PlayerListView() }
+              PushStyledNavigationLink(title: L10n.HomeView.games) { GamesListView() }
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 50)

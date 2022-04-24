@@ -19,7 +19,7 @@ struct GamesListView: View {
         .ignoresSafeArea()
 
       VStack {
-        Text(LocalizedStringKey("Spiele"))
+        Text(L10n.games)
           .multilineTextAlignment(.center)
           .padding()
           .frame(maxWidth: .infinity)
@@ -43,7 +43,7 @@ struct GamesListView: View {
         }
 
         VStack(spacing: 10) {
-          Button("gameOnboardingView.button.back_to_main_menu") {
+          Button(L10n.backToMainMenu) {
             dismiss()
           }
         }

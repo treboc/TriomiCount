@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OverlayedAlert: ViewModifier {
-  let message: LocalizedStringKey
+  let message: String
   let bool: Bool
 
   func body(content: Content) -> some View {
@@ -27,7 +27,7 @@ struct OverlayedAlert: ViewModifier {
 }
 
 extension View {
-  func overlayedAlert(with message: LocalizedStringKey, bool: Bool) -> some View {
+  func overlayedAlert(with message: String, bool: Bool) -> some View {
     modifier(OverlayedAlert(message: message, bool: bool))
   }
 }

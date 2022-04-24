@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 // MARK: - Components / Properties / Views for GameEndingState
-struct SubmitPointsView: View {
+struct PointsSubmitView: View {
   @EnvironmentObject var viewModel: GameViewModel
   @FocusState private var textFieldIsFocused: Bool
   @State var endPoints: String = ""
@@ -21,8 +21,7 @@ struct SubmitPointsView: View {
 
       VStack(alignment: .leading, spacing: 30) {
         VStack(alignment: .leading, spacing: 0) {
-          Text("How much points do you have left,")
-          Text("\(viewModel.playerToAskForPoints?.name ?? "")?")
+          Text(L10n.PointsSubmitView.labelText(viewModel.playerToAskForPoints!.wrappedName))
         }
         .font(.headline)
         TextField("e.g. 42", text: $endPoints)
@@ -34,7 +33,7 @@ struct SubmitPointsView: View {
           .keyboardType(.numberPad)
           .submitLabel(.go)
           .focused($textFieldIsFocused)
-          .overlayedAlert(with: "Please enter a valid number!", bool: endPointsIsInt)
+          .overlayedAlert(with: L10n.PointsSubmitView.overlayAlertMessage, bool: endPointsIsInt)
           .onSubmit {
             addPoints()
           }
@@ -56,14 +55,14 @@ struct SubmitPointsView: View {
 
         HStack {
           if viewModel.playerToAskForPointsIndex != 0 {
-            Button("Back") {
+            Button(L10n.back) {
               viewModel.playerToAskForPointsIndex -= 1
             }
             .buttonStyle(.offsetStyle)
           }
 
           Button(viewModel.playerToAskForPointsIndex ==
-                 viewModel.playersWithoutLastPlayer.count - 1 ? "Submit" : "Next") {
+                 viewModel.playersWithoutLastPlayer.count - 1 ? L10n.submit : L10n.next) {
             if endPoints.isInt {
               addPoints()
             } else {
@@ -99,7 +98,6 @@ struct SubmitPointsView: View {
 
 struct SubmitPointsAfterGameView_Previews: PreviewProvider {
   static var previews: some View {
-    //    SubmitPointsPageView(playerToAskForPoints: Player.allPlayers().first!)
-    SubmitPointsView()
+    PointsSubmitView()
   }
 }

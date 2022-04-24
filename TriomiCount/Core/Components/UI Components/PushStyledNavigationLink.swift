@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct PushStyledNavigationLink<Destination: View>: View {
-  let title: LocalizedStringKey
+  let title: String
   let destination: Destination
 
-  init(title: LocalizedStringKey, @ViewBuilder destination: () -> Destination) {
+  init(title: String, @ViewBuilder destination: () -> Destination) {
     self.destination = destination()
     self.title = title
   }

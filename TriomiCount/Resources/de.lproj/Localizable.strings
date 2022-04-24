@@ -37,6 +37,10 @@
 "gameView.exitGameButton.labelText" = "Zum Hauptmenü";
 "gameView.endGameButton.labelText" = "Runde beenden";
 
+// PointsSubmitView
+"pointsSubmitView.labelText %@" = "%@,\nwie viele Punkte hast du noch auf dem Brett?";
+"pointsSubmitView.overlayAlertMessage" = "Bitte gib eine Zahl ein!";
+
 // GameResultsView
 "gameResultsView.gameResults" = "Spielergebnis";
 "gameResultsView.name" = "Name";
@@ -59,6 +63,9 @@
 "playerDetailView.numberOfGamesPlayed" = "Gespielte Spiele";
 "playerDetailView.deleteButton.title" = "Spieler löschen";
 "playerDetailView.backButton.title" = "Zurück";
+"playerDetailView.deletePlayer.alertTitle" = "Warnung!";
+"playerDetailView.deletePlayer.alertMessage %@" = "Bist du sicher, dass du %@ löschen möchtest? Die Daten können nicht widerhergestellt werden.";
+"playerDetailView.deletePlayer.confirmationButtonTitle" = "Ja, ich bin mir sicher.";
 
 // GamesListView
 "gameListView.button.backToMainMenu" = "Zurück zum Hauptmenü";
@@ -67,6 +74,11 @@
 // GameListRowView
 "gameListRowView.session" = "Spiel";
 "gameListRowView.playedBy" = "Gespielt von:";
+
+// GameDetailView
+"gameDetailView.playedWith" = "Mitgespielt haben";
+"gameDetailView.won" = "Gewonnen hat";
+"gameDetailView.points" = "Punkteverteilung";
 
 // SettingsView
 "settingsView.settings" = "Einstellungen";
@@ -78,10 +90,11 @@
 "exitGameAlert.title" = "Bist du sicher?";
 "exitGameAlert.message" = "Du bist dabei, dass Spiel zu verlassen. Es könnte möglicherweise nicht gespeichert sein.";
 "exitGameAlert.buttonTitle" = "Ja, ich bin sicher.";
-"endGameAlert.title" = "Achtung! Das Spiel wird beendet.";
-"endGameAlert.messageWithWinner %@" = "Herzlichen Glückwunsch %@!";
-"endGameAlert.messageTie" = "Niemand kann mehr anlegen.";
-"endGameAlert.buttonTitle" = "Ja, ich bin sicher.";
+
+// ConfirmationDialogue
+"endGameConfirmationDialogue.title" = "Achtung! Das Spiel wird beendet.";
+"endGameConfirmationDialogue.messageWinner %@" = "Herzlichen Glückwunsch %@!";
+"endGameConfirmationDialogue.messageTie" = "Niemand kann mehr anlegen.";
 
 // Rules
 // Beginning
@@ -125,8 +138,18 @@ Wenn du den Stein ablegen konntest, ist der Wert auf dem Stein mit den Strafpunk
 4. Drei Sechsecke beenden - 70 Punkte.";
 
 // Simple constants
-"Yes" = "Ja";
-"No" = "Nein";
-"Reset" = "Zurücksetzen";
-"Cancel" = "Abbrechen";
-"Back" = "Zurück";
+"yes" = "Ja";
+"no" = "Nein";
+"reset" = "Zurücksetzen";
+"cancel" = "Abbrechen";
+"back" = "Zurück";
+"next" = "Weiter";
+"submit" = "Beenden";
+"players" = "Spieler";
+"games" = "Spiele";
+
+"joinStringAnd" = " und ";
+
+// Buttons
+"backToMainMenu" = "Zurück zum Hauptmenü";
+"addNewPlayer" = "Spieler hinzufügen";

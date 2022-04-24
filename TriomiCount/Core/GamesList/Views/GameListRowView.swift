@@ -19,14 +19,15 @@ struct GameListRowView: View {
 
       HStack(alignment: .firstTextBaseline) {
         VStack(alignment: .leading, spacing: 3) {
-          Text("gameListRowView.session")
+          Text(L10n.GameListRowView.session)
             .font(.title2.bold())
           +
           Text(" #\(game.id)")
             .font(.title2.bold())
 
           HStack(alignment: .firstTextBaseline) {
-            Text(LocalizedStringKey("gameListRowView.playedBy")).bold()
+            Text(L10n.GameListRowView.playedBy)
+              .bold()
             Text(game.playedBy)
               .multilineTextAlignment(.leading)
           }

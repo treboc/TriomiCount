@@ -22,7 +22,8 @@ struct GameOnboardingView: View {
         .ignoresSafeArea()
 
       VStack {
-        Text(Localization.GameOnboardingView.participationHeader)
+        Text(L10n.GameOnboardingView.participationHeaderText)
+          .foregroundColor(.white)
           .multilineTextAlignment(.center)
           .padding()
           .frame(maxWidth: .infinity)
@@ -44,16 +45,16 @@ struct GameOnboardingView: View {
         }
 
         VStack(spacing: 10) {
-          Button(Localization.GameOnboardingView.addNewPlayer) {
+          Button(L10n.GameOnboardingView.addNewPlayer) {
             showAddPlayerPage.toggle()
           }
 
-          PushStyledNavigationLink(title: Localization.GameOnboardingView.startGame) {
+          PushStyledNavigationLink(title: L10n.GameOnboardingView.startGame) {
             GameMainView(viewModel: GameViewModel(viewModel.chosenPlayers))
           }
           .disabled(viewModel.chosenPlayers.isEmpty)
 
-          Button(Localization.GameOnboardingView.backToMainMenu) {
+          Button(L10n.GameOnboardingView.backToMainMenu) {
             dismiss()
           }
         }

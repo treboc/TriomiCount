@@ -37,6 +37,10 @@
 "gameView.exitGameButton.labelText" = "Exit Game";
 "gameView.endGameButton.labelText" = "End Game";
 
+// PointsSubmitView
+"pointsSubmitView.labelText %@" = "How much points do you have left,\n%@?";
+"pointsSubmitView.overlayAlertMessage" = "Please enter a valid number!";
+
 // GameResultsView
 "gameResultsView.gameResults" = "Game Results";
 "gameResultsView.name" = "Name";
@@ -59,6 +63,9 @@
 "playerDetailView.numberOfGamesPlayed" = "Number Of Games Played";
 "playerDetailView.deleteButton.title" = "Delete Player";
 "playerDetailView.backButton.title" = "Back";
+"playerDetailView.deletePlayer.alertTitle" = "Warning!";
+"playerDetailView.deletePlayer.alertMessage %@" = "Are you sure that you want to delete %@? The data can't be restored.";
+"playerDetailView.deletePlayer.confirmationButtonTitle" = "Yes, I'm sure.";
 
 // GamesListView
 "gameListView.button.backToMainMenu" = "Back to Main Menu";
@@ -68,19 +75,26 @@
 "gameListRowView.session" = "Session";
 "gameListRowView.playedBy" = "Played with:";
 
+// GameDetailView
+"gameDetailView.playedWith" = "Played with";
+"gameDetailView.won" = "Winner";
+"gameDetailView.points" = "Points";
+
 // SettingsView
 "settingsView.settings" = "Settings";
 "settingsView.colorScheme.light" = "Light";
 "settingsView.colorScheme.dark" = "Dark";
 "settingsView.colorScheme.system" = "System";
 
-// Alerts
+// ExitGameAlert
 "exitGameAlert.title" = "Are you sure?";
 "exitGameAlert.message" = "You're about to leave the game. It's possible that it is not saved..";
 "exitGameAlert.buttonTitle" = "Yes, I'm sure.";
-"endGameAlert.title" = "Session end";
-"endGameAlert.message" = "Congratulations, but make sure that the player on turn is the player who placed the last tile.";
-"endGameAlert.buttonTitle" = "Yes, I'm sure.";
+
+// ConfirmationDialogue
+"endGameConfirmationDialogue.title" = "The game will end";
+"endGameConfirmationDialogue.messageWinner %@" = "Congratulations %@!";
+"endGameConfirmationDialogue.messageTie" = "No one can place a tile.";
 
 // Rules
 // Beginning
@@ -123,3 +137,20 @@ If you can place a tile after buying, the value of this tile is added to the pen
 2. Completing a hexagon - 50 points.
 3. Two hexagons at the same time - 60 points.
 4. Three hexagons at the same time - 70 points.";
+
+// Simple constants
+"yes" = "Yes";
+"no" = "No";
+"reset" = "Reset";
+"cancel" = "Cancel";
+"back" = "Back";
+"next" = "Next";
+"submit" = "Submit";
+"players" = "Players";
+"games" = "Games";
+
+"joinStringAnd" = " and ";
+
+// Buttons
+"backToMainMenu" = "Back to Main Menu";
+"addNewPlayer" = "Add new player";

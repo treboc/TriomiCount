@@ -20,22 +20,24 @@ struct GameDetailView: View {
 
       VStack(alignment: .center) {
         HStack {
-          Text(LocalizedStringKey("gameListRowView.session")) +
+          Text(L10n.GameListRowView.session) +
           Text(" #\(game.id)")
         }
         .font(.largeTitle)
         .padding()
         .frame(maxWidth: .infinity)
 
-        GameDetailSection("Mitgespielt haben:") {
+        GameDetailSection(L10n.GameDetailView.playedWith) {
           Text(game.playedBy)
         }
 
-        GameDetailSection("Gewonnen hat:") {
-          Text(game.winner)
+        if game.winner != nil {
+          GameDetailSection(L10n.GameDetailView.won) {
+            Text(game.winner ?? "Unknown")
+          }
         }
 
-        GameDetailSection("Punkte wie folgt:") {
+        GameDetailSection(L10n.GameDetailView.points) {
           VStack(alignment: .leading) {
             ForEach(GameScoreDict.getGameScoreDictWith(gameKey: game.objectID.uriRepresentation().absoluteString)!) { dict in
               HStack {
@@ -51,7 +53,7 @@ struct GameDetailView: View {
 
         Spacer()
 
-        Button("gameOnboardingView.button.back_to_main_menu") {
+        Button(L10n.backToMainMenu) {
           dismiss()
         }
         .buttonStyle(.offsetStyle)
@@ -87,7 +89,7 @@ extension GameDetailView {
     var body: some View {
       HStack {
         VStack(alignment: .leading) {
-          Text(NSLocalizedString(sectionTitle, comment: "").uppercased())
+          Text(sectionTitle.uppercased())
             .font(.caption)
             .padding(.bottom, 2)
           content

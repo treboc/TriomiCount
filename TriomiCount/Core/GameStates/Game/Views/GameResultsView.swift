@@ -14,16 +14,16 @@ struct GameResultsView: View {
   var body: some View {
     ZStack {
       VStack {
-        Text("Game Results")
+        Text(L10n.GameResultsView.gameResults)
           .font(.largeTitle)
           .fontWeight(.semibold)
           .padding(.bottom, 20)
 
         HStack {
-          Text("Name")
+          Text(L10n.GameResultsView.name)
             .font(.title2)
           Spacer()
-          Text("Points")
+          Text(L10n.GameResultsView.points)
         }
 
         Divider()
@@ -42,8 +42,8 @@ struct GameResultsView: View {
 
         Spacer()
 
-        Button("Main menu") {
-          appState.onboardingScreen = UUID()
+        Button(L10n.backToMainMenu) {
+          appState.homeViewID = UUID()
         }
         .buttonStyle(.offsetStyle)
         .padding(.bottom, 50)

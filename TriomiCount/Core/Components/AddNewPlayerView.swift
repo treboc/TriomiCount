@@ -12,8 +12,8 @@ struct AddNewPlayerView: View {
   @FocusState private var textFieldIsFocused: Bool
 
   @State private var alertIsShown: Bool = false
-  @State private var alertTitle: LocalizedStringKey = ""
-  @State private var alertMessage: LocalizedStringKey = ""
+  @State private var alertTitle: String = ""
+  @State private var alertMessage: String = ""
 
   @State private var nameIsValid: Bool = false
   @State private var nameTextFieldText: String = ""
@@ -26,7 +26,7 @@ struct AddNewPlayerView: View {
       VStack(alignment: .leading, spacing: 30) {
         HStack {
           Spacer()
-          Button("Cancel") {
+          Button(L10n.cancel) {
             dismiss()
           }
           .foregroundColor(.primaryAccentColor)
@@ -35,13 +35,13 @@ struct AddNewPlayerView: View {
 
         Spacer()
 
-        Text("addNewPlayerView.nameLabel.label_text")
+        Text(L10n.AddNewPlayerView.NameLabel.labelText)
           .underline()
           .font(.title3)
           .fontWeight(.semibold)
           .padding(.leading, 20)
 
-        TextField("addNewPlayerView.nameLabel.textfield_text", text: $nameTextFieldText)
+        TextField(L10n.AddNewPlayerView.NameLabel.textfieldText, text: $nameTextFieldText)
           .foregroundColor(.label)
           .padding(.leading, 10)
           .frame(height: 55)
@@ -63,10 +63,10 @@ struct AddNewPlayerView: View {
           }
           .onChange(of: nameTextFieldText, perform: { _ in
             if nameTextFieldText.isEmpty {
-              alertMessage = "addNewPlayerView.alertTextFieldEmpty.message"
+              alertMessage = L10n.AddNewPlayerView.AlertTextFieldEmpty.message
               nameIsValid = false
             } else if nameTextFieldText.count > 20 {
-              alertMessage = "addNewPlayerView.alertNameToLong.message"
+              alertMessage = L10n.AddNewPlayerView.AlertNameToLong.message
               nameIsValid = false
             } else {
               nameIsValid = true
@@ -77,7 +77,7 @@ struct AddNewPlayerView: View {
         Button {
           createPlayer()
         } label: {
-          Text("addNewPlayerView.createButton.label_text")
+          Text(L10n.AddNewPlayerView.CreateButton.labelText)
             .frame(maxWidth: .infinity)
         }
         .buttonStyle(.offsetStyle)

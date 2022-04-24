@@ -33,19 +33,19 @@ struct GameView: View {
       .onAppear(perform: viewModel.resetTurnState)
       .tint(.primaryAccentColor)
       .padding()
-      .alert(AlertContext.exitGame.title, isPresented: $viewModel.showExitGameAlert) {
-        Button("Cancel", role: .cancel) {}
+      .alert(L10n.ExitGameAlert.title, isPresented: $viewModel.showExitGameAlert) {
+        Button(L10n.cancel, role: .cancel) {}
         Button(action: { exitGame() },
-               label: { Text("exitGameAlert.buttonTitle") }
+               label: { Text(L10n.ExitGameAlert.buttonTitle) }
         )
       } message: {
-        Text(AlertContext.exitGame.message)
+        Text(L10n.ExitGameAlert.message)
       }
-      .confirmationDialog(AlertContext.endGame.title, isPresented: $viewModel.showEndGameAlert, titleVisibility: .visible) {
+      .confirmationDialog(L10n.EndGameConfirmationDialogue.title, isPresented: $viewModel.showEndGameAlert, titleVisibility: .visible) {
         Button(action: { viewModel.endingGame() },
-               label: { Text("endGameAlert.messageWithWinner \(viewModel.currentPlayerOnTurn!.wrappedName)") }
+               label: { Text(L10n.EndGameConfirmationDialogue.messageWinner(viewModel.currentPlayerOnTurn?.wrappedName ?? "Unknown")) }
         )
-        Button("endGameAlert.messageTie") {
+        Button(L10n.EndGameConfirmationDialogue.messageTie) {
           viewModel.endingGame()
         }
       }
@@ -68,13 +68,13 @@ struct GameView: View {
 extension GameView {
   private var header: some View {
     VStack(alignment: .center, spacing: 10) {
-      Text(viewModel.currentPlayerOnTurn?.name ?? "Unknown Player")
+      Text(viewModel.currentPlayerOnTurn?.wrappedName ?? "Unknown")
         .font(.title)
         .bold()
 
       HStack {
         VStack(alignment: .leading, spacing: 5) {
-          Text("gameView.headerLabel.total_score")
+          Text(L10n.GameView.HeaderLabel.totalScore)
             .font(.headline)
             .fontWeight(.semibold)
           Text("\(viewModel.currentPlayerOnTurn?.currentScore ?? 0)")
@@ -85,7 +85,7 @@ extension GameView {
         Spacer()
 
         VStack(alignment: .trailing, spacing: 5) {
-          Text("gameView.headerLabel.this_turn_score")
+          Text(L10n.GameView.HeaderLabel.thisTurnScore)
             .font(.headline)
             .fontWeight(.semibold)
           Text("\(viewModel.calculatedScore)")
@@ -95,13 +95,14 @@ extension GameView {
         .lineLimit(1)
       }
     }
+    .foregroundColor(.white)
     .animation(.none, value: viewModel.currentPlayerOnTurn)
     .padding()
     .frame(maxWidth: .infinity)
     .background(Color.secondaryBackground)
-    .cornerRadius(10)
+    .cornerRadius(20)
     .overlay(
-      RoundedRectangle(cornerRadius: 10)
+      RoundedRectangle(cornerRadius: 20)
         .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
     )
   }
@@ -118,9 +119,9 @@ extension GameView {
     }
     .padding()
     .frame(maxWidth: .infinity)
-    .cornerRadius(10)
+    .cornerRadius(20)
     .overlay(
-      RoundedRectangle(cornerRadius: 10)
+      RoundedRectangle(cornerRadius: 20)
         .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
     )
     .overlay( circularResetButton.offset(x: 10, y: -15).scaleEffect(0.8), alignment: .topTrailing )
@@ -128,7 +129,7 @@ extension GameView {
 
   private var scoreSliderStack: some View {
     VStack(alignment: .leading) {
-      Text("gameView.scoreSlider.label_text")
+      Text(L10n.GameView.ScoreSlider.labelText)
         .font(.headline)
 
       HStack(spacing: 20) {
@@ -147,7 +148,7 @@ extension GameView {
 
   private var timesDrawnStack: some View {
     VStack(alignment: .leading) {
-      Text("gameView.timesDrawnPicker.label_text")
+      Text(L10n.GameView.TimesDrawnPicker.labelText)
         .font(.headline)
       TimesDrawnPicker(selection: $viewModel.timesDrawn)
         .padding(.horizontal)
@@ -156,7 +157,7 @@ extension GameView {
 
   private var playedCardStack: some View {
     VStack(alignment: .leading) {
-      Text("gameView.playedCardPicker.label_text")
+      Text(L10n.GameView.PlayedCardPicker.labelText)
         .font(.headline)
       PlayedCardPicker(selection: $viewModel.playedCard, timesDrawn: $viewModel.timesDrawn)
         .padding(.horizontal)
@@ -165,7 +166,7 @@ extension GameView {
 
   private var bonusEventStack: some View {
     VStack(alignment: .leading) {
-      Text("gameView.bonusEventPicker.label_text")
+      Text(L10n.GameView.BonusEventPicker.labelText)
         .font(.headline)
       BonusEventPicker(viewModel: viewModel)
         .padding(.horizontal)
@@ -181,7 +182,7 @@ extension GameView {
   }
 
   private var nextPlayerButton: some View {
-    Button("gameView.nextPlayerButton.label_text") {
+    Button(L10n.GameView.NextPlayerButton.labelText) {
       viewModel.nextPlayer()
       toggleScaleAnimation()
       HapticManager.shared.notification(type: .success)
@@ -190,7 +191,7 @@ extension GameView {
   }
 
   private var exitGameButton: some View {
-    Button("gameView.exitGameButton.label_text") {
+    Button(L10n.GameView.ExitGameButton.labelText) {
       if viewModel.game?.turns?.count != nil {
         viewModel.showExitGameAlert.toggle()
       } else {
@@ -201,7 +202,7 @@ extension GameView {
   }
 
   private var endGameButton: some View {
-    Button("gameView.endGameButton.label_text") {
+    Button(L10n.GameView.EndGameButton.labelText) {
       viewModel.showEndGameAlert.toggle()
       HapticManager.shared.notification(type: .success)
     }

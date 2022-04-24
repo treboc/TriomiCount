@@ -26,7 +26,7 @@ struct GameMainView: View {
           GameView(viewModel: viewModel)
             .blur(radius: 10)
             .allowsHitTesting(false)
-          SubmitPointsView()
+          PointsSubmitView()
             .environmentObject(viewModel)
         }
       case .ended:

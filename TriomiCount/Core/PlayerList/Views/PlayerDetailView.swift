@@ -21,22 +21,22 @@ struct PlayerDetailView: View {
         PlayerInitialsCircle(player: player)
 
         ScrollView(.vertical, showsIndicators: false) {
-          PlayerDetailSection("playerDetailView.name") {
+          PlayerDetailSection(L10n.PlayerDetailView.name) {
             player.wrappedName
           }
-          PlayerDetailSection("playerDetailView.highscore") {
+          PlayerDetailSection(L10n.PlayerDetailView.highscore) {
             "\(player.wrappedHighscore)"
           }
-          PlayerDetailSection("playerDetailView.lastScore") {
-            "\(player.wrappedCurrentScore)"
+          PlayerDetailSection(L10n.PlayerDetailView.lastScore) {
+            "\(player.wrappedLastScore)"
           }
-          PlayerDetailSection("playerDetailView.createdOn") {
+          PlayerDetailSection(L10n.PlayerDetailView.createdOn) {
             "\(player.wrappedCreatedOn.formatted(date: .abbreviated, time: .omitted))"
           }
-          PlayerDetailSection("playerDetailView.numberOfGamesWon") {
+          PlayerDetailSection(L10n.PlayerDetailView.numberOfGamesWon) {
             "\(player.gamesWon)"
           }
-          PlayerDetailSection("playerDetailView.numberOfGamesPlayed") {
+          PlayerDetailSection(L10n.PlayerDetailView.numberOfGamesPlayed) {
             "\(player.gamesPlayed)"
           }
         }
@@ -44,12 +44,12 @@ struct PlayerDetailView: View {
         Spacer()
 
         HStack {
-          Button("Back") {
+          Button(L10n.back) {
             dismiss()
           }
           .buttonStyle(.offsetStyle)
 
-          Button("Delete Player", role: .destructive) {
+          Button(L10n.PlayerDetailView.DeleteButton.title, role: .destructive) {
             showDeletePlayerAlert.toggle()
           }
           .buttonStyle(OffsetOnTapStyle(role: .destructive))
@@ -59,10 +59,10 @@ struct PlayerDetailView: View {
       .frame(maxWidth: .infinity, maxHeight: .infinity)
       .navigationTitle("")
       .navigationBarTitleDisplayMode(.inline)
-      .alert("Warning!", isPresented: $showDeletePlayerAlert, actions: {
-        Button("Yes, I'm sure.", role: .destructive) { deletePlayerAndDismissView() }
+      .alert(L10n.PlayerDetailView.DeletePlayer.alertTitle, isPresented: $showDeletePlayerAlert, actions: {
+        Button(L10n.PlayerDetailView.DeletePlayer.confirmationButtonTitle, role: .destructive) { deletePlayerAndDismissView() }
       }, message: {
-        Text("Are you sure that you want to delete \(player.wrappedName)? The data can't be restored.")
+        Text(L10n.PlayerDetailView.DeletePlayer.alertMessage(player.wrappedName))
       })
       .navigationBarHidden(true)
     }
