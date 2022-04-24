@@ -33,6 +33,8 @@ struct SettingsView: View {
       }
       .navigationTitle(L10n.Rules.title)
     }
+    // accentColor will be deprecated, but .tint() will not work here!
+    .accentColor(.primaryAccentColor)
   }
 }
 
