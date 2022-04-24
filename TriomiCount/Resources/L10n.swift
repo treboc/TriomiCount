@@ -26,10 +26,16 @@ internal enum L10n {
   internal static let next = L10n.tr("Localizable", "next")
   /// No
   internal static let no = L10n.tr("Localizable", "no")
+  /// Player
+  internal static let player = L10n.tr("Localizable", "player")
   /// Players
   internal static let players = L10n.tr("Localizable", "players")
   /// Reset
   internal static let reset = L10n.tr("Localizable", "reset")
+  /// Score
+  internal static let score = L10n.tr("Localizable", "score")
+  /// Session Overview
+  internal static let sessionOverview = L10n.tr("Localizable", "sessionOverview")
   /// Submit
   internal static let submit = L10n.tr("Localizable", "submit")
   /// Yes
@@ -175,7 +181,7 @@ internal enum L10n {
       internal static let labelText = L10n.tr("Localizable", "gameView.scoreSlider.labelText")
     }
     internal enum TimesDrawnPicker {
-      /// How many times did you have to draw?
+      /// How often did you have to draw?
       internal static let labelText = L10n.tr("Localizable", "gameView.timesDrawnPicker.labelText")
     }
   }

@@ -149,6 +149,9 @@ Wenn du den Stein ablegen konntest, ist der Wert auf dem Stein mit den Strafpunk
 "back" = "Zurück";
 "next" = "Weiter";
 "submit" = "Beenden";
+"player" = "Spieler";
+"score" = "Punktestand";
+"sessionOverview" = "Aktueller Punktestand";
 "players" = "Spieler";
 "games" = "Spiele";
 

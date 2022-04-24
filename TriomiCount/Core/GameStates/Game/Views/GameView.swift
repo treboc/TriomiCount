@@ -11,8 +11,12 @@ import SwiftUI
 struct GameView: View {
   @StateObject var viewModel: GameViewModel
   @EnvironmentObject var appState: AppState
-  @AppStorage(Settings.idleDimmingDisabled) var idleDimmingDisabled = true
+  @AppStorage(Settings.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
   @State private var isAnimated: Bool = false
+  private var overlayIsShown: Bool {
+    return viewModel.bonusEventPickerOverlayIsShown || sessionOverviewIsShown
+  }
+  @State private var sessionOverviewIsShown: Bool = false
 
   var body: some View {
     ZStack {
@@ -51,8 +55,8 @@ struct GameView: View {
           viewModel.endingGame()
         }
       }
-      .blur(radius: viewModel.bonusEventPickerOverlayIsShown ? 5 : 0)
-      .allowsHitTesting(viewModel.bonusEventPickerOverlayIsShown ? false : true)
+      .blur(radius: overlayIsShown ? 5 : 0)
+      .allowsHitTesting(overlayIsShown ? false : true)
       .onAppear {
         if idleDimmingDisabled {
           UIApplication.shared.isIdleTimerDisabled = true
@@ -61,9 +65,12 @@ struct GameView: View {
       .onDisappear {
         UIApplication.shared.isIdleTimerDisabled = false
       }
-
       if viewModel.bonusEventPickerOverlayIsShown {
         BonusEventPicker.SelectionOverlay(viewModel: viewModel)
+      }
+      if sessionOverviewIsShown {
+        SessionOverview(players: viewModel.game!.playersArray, sessionOverviewIsShown: $sessionOverviewIsShown)
+          .transition(.move(edge: .top))
       }
     }
     .enableInjection()
@@ -115,6 +122,11 @@ extension GameView {
       RoundedRectangle(cornerRadius: 20)
         .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
     )
+    .onTapGesture {
+      withAnimation {
+        sessionOverviewIsShown.toggle()
+      }
+    }
   }
 
   private var center: some View {
@@ -226,6 +238,53 @@ extension GameView {
     }
     .buttonStyle(.circularOffsetStyle)
     .offset(x: -10, y: -10)
+  }
+
+  struct SessionOverview: View {
+    let players: [Player]
+    @Binding var sessionOverviewIsShown: Bool
+
+    var body: some View {
+      ZStack(alignment: .top) {
+        Color.black.opacity(0.01).ignoresSafeArea()
+
+        VStack {
+          Text(L10n.sessionOverview)
+            .font(.title3.bold())
+            .padding(.bottom)
+
+          HStack {
+            Text(L10n.player)
+            Spacer()
+            Text(L10n.score)
+          }
+          .font(.headline.bold())
+          .padding(.bottom, 15)
+
+          ForEach(players) { player in
+            HStack {
+              Text(player.wrappedName)
+              Spacer()
+              Text("\(player.currentScore)")
+            }
+          }
+        }
+        .padding(50)
+        .frame(maxWidth: .infinity)
+        .background(Color.primaryBackground)
+        .cornerRadius(20)
+        .overlay(
+          RoundedRectangle(cornerRadius: 20)
+            .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
+        )
+      }
+      .padding(.horizontal)
+      .onTapGesture {
+        withAnimation {
+          sessionOverviewIsShown = false
+        }
+      }
+    }
   }
 }
 

@@ -150,6 +150,9 @@ If you can place a tile after buying, the value of this tile is added to the pen
 "back" = "Back";
 "next" = "Next";
 "submit" = "Submit";
+"player" = "Player";
+"score" = "Score";
+"sessionOverview" = "Session Overview";
 "players" = "Players";
 "games" = "Games";
 
