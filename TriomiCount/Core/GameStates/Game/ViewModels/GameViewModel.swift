@@ -22,21 +22,28 @@ class GameViewModel: ObservableObject {
 
   @Published var game: Game?
   @Published var gameState: GameState = .playing
-  @Published var currentPlayerOnTurn: Player?
+  var currentPlayerOnTurn: Player? {
+    guard let game = game else { return nil }
+    let playerCount = game.playersArray.count
+    let turnsCount = game.turnsArray.count
+
+    if turnsCount == 0 {
+      return game.playersArray.first!
+    }
+    return game.playersArray[turnsCount % playerCount]
+  }
 
   @AppStorage("gameID") var gameID: Int = 0
 
   init(lastGame: Game) {
     if lastGame.players?.count != 0 {
       self.game = lastGame
-      self.currentPlayerOnTurn = getCurrentPlayerOnTurn()
     }
   }
 
   init(_ players: [Player] = []) {
     guard !players.isEmpty else { return }
     self.game = Game(players: players, context: context)
-    self.currentPlayerOnTurn = getCurrentPlayerOnTurn()
   }
 
   // 2) calculate the current points the player gets for laying the card
@@ -102,7 +109,7 @@ class GameViewModel: ObservableObject {
     let newTurn = Turn(game)
     game.addToTurns(newTurn)
 
-    currentPlayerOnTurn = getCurrentPlayerOnTurn()
+//    currentPlayerOnTurn = getCurrentPlayerOnTurn()
 
     saveGameState()
     resetTurnState()
@@ -112,23 +119,6 @@ class GameViewModel: ObservableObject {
     if let player = player {
       player.currentScore += score
     }
-  }
-
-  func getCurrentPlayerOnTurn() -> Player? {
-    guard let game = self.game else { return nil }
-
-    let playersCount = game.playersArray.count
-    let turnsCount = game.turnsArray.count
-
-    if turnsCount != 0 {
-      return game.playersArray[turnsCount % playersCount]
-
-    } else {
-      if let firstPlayer = game.playersArray.first {
-        return firstPlayer
-      }
-    }
-    return nil
   }
 
   // MARK: - GameState Ending
