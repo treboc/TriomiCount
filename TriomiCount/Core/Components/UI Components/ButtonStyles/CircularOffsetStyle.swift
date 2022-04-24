@@ -27,7 +27,7 @@ struct CircularOffsetStyle: ButtonStyle {
       .frame(width: 40, height: 40)
       .background(primaryColor)
       .clipShape(Circle())
-      .foregroundColor(.label)
+      .foregroundColor(.white)
       .font(.headline.bold())
       .overlay(
         Circle()

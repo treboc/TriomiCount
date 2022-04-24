@@ -43,9 +43,9 @@ struct TimesDrawnPicker: View {
         .font(.headline)
         .frame(height: height)
         .frame(maxWidth: .infinity)
-        .background(isToggled ? Color.primaryAccentColor : Color.secondaryBackground)
+        .background(isToggled ? Color.primaryAccentColor : Color.tertiaryBackground)
         .cornerRadius(15)
-        .foregroundColor(.label)
+        .foregroundColor(.white)
         .font(.headline.bold())
         .overlay(
           RoundedRectangle(cornerRadius: 15, style: .continuous)

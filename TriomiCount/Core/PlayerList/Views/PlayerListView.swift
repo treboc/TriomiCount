@@ -23,14 +23,15 @@ struct PlayerListView: View {
         .ignoresSafeArea()
 
       VStack {
-        Text(LocalizedStringKey("Spieler"))
+        Text(L10n.players)
+          .foregroundColor(.white)
           .multilineTextAlignment(.center)
           .padding()
           .frame(maxWidth: .infinity)
           .background(Color.secondaryBackground)
-          .cornerRadius(10)
+          .cornerRadius(20)
           .overlay(
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: 20)
               .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
           )
           .padding(.horizontal)
@@ -47,11 +48,11 @@ struct PlayerListView: View {
         }
 
         VStack(spacing: 10) {
-          Button("gameOnboardingView.button.add_new_player") {
+          Button(L10n.addNewPlayer) {
             showAddPlayerPage.toggle()
           }
 
-          Button("gameOnboardingView.button.back_to_main_menu") {
+          Button(L10n.backToMainMenu) {
             dismiss()
           }
         }

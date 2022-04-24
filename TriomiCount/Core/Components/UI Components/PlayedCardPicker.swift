@@ -55,17 +55,17 @@ struct PlayedCardPicker: View {
         .frame(maxWidth: .infinity)
         .background(isSelected ? Color.primaryAccentColor : Color.secondaryBackground)
         .cornerRadius(20)
-        .foregroundColor(.label)
+        .foregroundColor(.white)
         .font(.headline.bold())
         .overlay(
-          RoundedRectangle(cornerRadius: 15, style: .continuous)
+          RoundedRectangle(cornerRadius: 20, style: .continuous)
             .strokeBorder(Color.secondaryBackground, lineWidth: 2)
         )
         .offset(y: (isSelected ? 0 : -4))
         .background(
           backgroundColor
             .frame(height: height)
-            .cornerRadius(15)
+            .cornerRadius(20)
         )
         .onTapGesture {
           if timesDrawn == 3 {
