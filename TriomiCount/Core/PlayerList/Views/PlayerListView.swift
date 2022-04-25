@@ -59,6 +59,7 @@ struct PlayerListView: View {
         .buttonStyle(.offsetStyle)
         .padding(.horizontal)
       }
+      .padding(.vertical)
       .pageSheet(isPresented: $showAddPlayerPage) {
         AddNewPlayerView()
           .sheetPreference(.detents([PageSheet.Detent.medium()]))

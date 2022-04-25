@@ -57,6 +57,8 @@
 		8A5E01102813491E00703CE5 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E010F2813491E00703CE5 /* L10n.swift */; };
 		8A5E011228154B3200703CE5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E011128154B3200703CE5 /* Settings.swift */; };
 		8A5E01142815A34800703CE5 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E01132815A34800703CE5 /* AppearanceManager.swift */; };
+		8A5E01162816929D00703CE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E01152816929D00703CE5 /* Images.xcassets */; };
+		8A5E011B2816943500703CE5 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E011A2816943500703CE5 /* AboutView.swift */; };
 		8A858C8627FF6E34002385E1 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = 8A858C8527FF6E34002385E1 /* Inject */; };
 		8AB0179D27FBABE900FFEF46 /* GameListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0179C27FBABE900FFEF46 /* GameListRowView.swift */; };
 		8AB0179F27FC1F5B00FFEF46 /* BonusEventPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0179E27FC1F5B00FFEF46 /* BonusEventPicker.swift */; };
@@ -116,6 +118,8 @@
 		8A5E010F2813491E00703CE5 /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = L10n.swift; path = TriomiCount/Resources/L10n.swift; sourceTree = SOURCE_ROOT; };
 		8A5E011128154B3200703CE5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		8A5E01132815A34800703CE5 /* AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
+		8A5E01152816929D00703CE5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8A5E011A2816943500703CE5 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		8AB0179C27FBABE900FFEF46 /* GameListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListRowView.swift; sourceTree = "<group>"; };
 		8AB0179E27FC1F5B00FFEF46 /* BonusEventPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusEventPicker.swift; sourceTree = "<group>"; };
 		8AB017A027FC3A3F00FFEF46 /* OverlayAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayAlert.swift; sourceTree = "<group>"; };
@@ -215,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				08BE48DB279CA0FB00EA431F /* Icon.xcassets */,
+				8A5E01152816929D00703CE5 /* Images.xcassets */,
 			);
 			path = Icon;
 			sourceTree = "<group>";
@@ -327,8 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				08BE48E9279CA14900EA431F /* HomeView.swift */,
-				08A2C64227A34BBB0076C196 /* SettingsView.swift */,
-				8A5E011128154B3200703CE5 /* Settings.swift */,
+				8A5E0117281692C900703CE5 /* Settings */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -405,6 +409,16 @@
 				08A0103227DFB68C000D0AEB /* AppState.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		8A5E0117281692C900703CE5 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				08A2C64227A34BBB0076C196 /* SettingsView.swift */,
+				8A5E011128154B3200703CE5 /* Settings.swift */,
+				8A5E011A2816943500703CE5 /* AboutView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		8A858C8327FF5C20002385E1 /* ButtonStyles */ = {
@@ -489,6 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8ACA06E627F593B6000F6D4C /* Launch Screen.storyboard in Resources */,
+				8A5E01162816929D00703CE5 /* Images.xcassets in Resources */,
 				0828817A279F42AB0064C9E8 /* PhotographSignature.ttf in Resources */,
 				0888914A27D573E900061754 /* Localizable.strings in Resources */,
 				0896440C27A526CE0091C6F8 /* Colors.xcassets in Resources */,
@@ -552,6 +567,7 @@
 				8A5E011228154B3200703CE5 /* Settings.swift in Sources */,
 				083BFD5027CABB7200B5BE50 /* PointsSubmitView.swift in Sources */,
 				8A5E01102813491E00703CE5 /* L10n.swift in Sources */,
+				8A5E011B2816943500703CE5 /* AboutView.swift in Sources */,
 				0896440E27A527F30091C6F8 /* Color+Extenstion.swift in Sources */,
 				0827298427DE488900E48F4D /* PlayedCardPicker.swift in Sources */,
 				082C540127ABE88F00AB5CD7 /* PersistentStore.swift in Sources */,

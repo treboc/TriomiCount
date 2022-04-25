@@ -13,10 +13,10 @@ struct GameView: View {
   @EnvironmentObject var appState: AppState
   @AppStorage(Settings.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
   @State private var isAnimated: Bool = false
+  @State private var sessionOverviewIsShown: Bool = false
   private var overlayIsShown: Bool {
     return viewModel.bonusEventPickerOverlayIsShown || sessionOverviewIsShown
   }
-  @State private var sessionOverviewIsShown: Bool = false
 
   var body: some View {
     ZStack {
@@ -33,6 +33,8 @@ struct GameView: View {
           }
         }
       }
+      .blur(radius: overlayIsShown ? 5 : 0)
+      .allowsHitTesting(overlayIsShown ? false : true)
       .scaleEffect(isAnimated ? 1.05 : 1.0)
       .animation(.default, value: isAnimated)
       .onAppear(perform: viewModel.resetTurnState)
@@ -55,8 +57,6 @@ struct GameView: View {
           viewModel.endingGame()
         }
       }
-      .blur(radius: overlayIsShown ? 5 : 0)
-      .allowsHitTesting(overlayIsShown ? false : true)
       .onAppear {
         if idleDimmingDisabled {
           UIApplication.shared.isIdleTimerDisabled = true

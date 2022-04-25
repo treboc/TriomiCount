@@ -56,6 +56,7 @@ struct PlayerDetailView: View {
         }
       }
       .padding([.horizontal, .top], 20)
+      .padding(.bottom)
       .frame(maxWidth: .infinity, maxHeight: .infinity)
       .navigationTitle("")
       .navigationBarTitleDisplayMode(.inline)

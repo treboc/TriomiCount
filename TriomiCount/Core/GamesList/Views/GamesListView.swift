@@ -51,6 +51,7 @@ struct GamesListView: View {
         .buttonStyle(.offsetStyle)
         .padding(.horizontal)
       }
+      .padding(.vertical)
       .navigationBarHidden(true)
     }
   }

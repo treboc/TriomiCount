@@ -57,7 +57,7 @@ struct GameDetailView: View {
         }
         .buttonStyle(.offsetStyle)
       }
-      .padding(.horizontal)
+      .padding()
     }
     .enableInjection()
     .navigationBarHidden(true)
