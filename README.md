@@ -34,6 +34,14 @@ I learn a lot better when building something, than rebuild the next to-do app or
   <img src="./screenshots/playerDetailView.png" width="200" />
 </p>
 
+## Credits
+* Font used in logo is 'Photograph Signature' by [typeline](https://creativemarket.com/typeline)
+* Used Packages and helper tools:
+    * [PageSheet](https://github.com/ericlewis/PageSheet)
+    * [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)
+    * [Swiftgen](https://github.com/SwiftGen/SwiftGen)
+    * [Inject](https://github.com/krzysztofzablocki/Inject)
+
 ## Requirements
 * Xcode 13.0+ & Swift 5.5+
 * iOS 15.0+
