@@ -19,12 +19,12 @@ I learn a lot better when building something, than rebuild the next to-do app or
 
 ## To-do
 - [ ] 'undo' last turn in a session
-- [x] prevent display from dimming / turning off
-    - [x] make it a setting
+- [x] ~~prevent display from dimming / turning off~~
+    - [x] ~~make it a setting~~
 - [ ] get some kind of chart into player and session statistics
 - [ ] give players the possibility to add a profile picture or atleast an emoji for the beginning
     - [ ] work this into the gameView
-- [x] some kind of quicklook feature in session (*maybe with tap on the header?*)
+- [x] ~~some kind of quicklook feature in session (*maybe with tap on the header?*)~~
     - [ ] add some onboarding for this feature
 
 ## Screenshots
