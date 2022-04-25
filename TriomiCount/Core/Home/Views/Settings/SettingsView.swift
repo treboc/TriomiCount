@@ -30,7 +30,18 @@ struct SettingsView: View {
         Section(L10n.Rules.title) {
           rulesSection
         }
+
+        NavigationLink("About") {
+          AboutView()
+        }
       }
+      .toolbar(content: {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button(L10n.cancel) {
+            dismiss()
+          }
+        }
+      })
       .navigationTitle(L10n.Rules.title)
     }
     // accentColor will be deprecated, but .tint() will not work here!
