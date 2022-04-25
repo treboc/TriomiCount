@@ -20,7 +20,7 @@ internal enum L10n {
   internal static let cancel = L10n.tr("Localizable", "cancel")
   /// Games
   internal static let games = L10n.tr("Localizable", "games")
-  ///  and 
+  /// , and 
   internal static let joinStringAnd = L10n.tr("Localizable", "joinStringAnd")
   /// Next
   internal static let next = L10n.tr("Localizable", "next")

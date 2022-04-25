@@ -53,7 +53,7 @@ extension Game {
     if playerNames.count == 2 {
       return playerNames.joined(separator: seperator)
     } else if playerNames.count > 2 {
-      return playerNames.dropLast().joined(separator: ", ") + ",\(seperator)" + playerNames.last!
+      return playerNames.dropLast().joined(separator: ", ") + "\(seperator)" + playerNames.last!
     } else {
       return ""
     }

@@ -17,12 +17,11 @@ extension Color {
     Color("SecondaryAccentColor")
   }
 
-  public static var TertiaryAccentColor: Color {
+  public static var tertiaryAccentColor: Color {
     Color("TertiaryAccentColor")
   }
 
   // --- Destructive Button Colors
-
   public static var destructiveButtonPrimaryColor: Color {
     Color("DestructiveButtonPrimaryColor")
   }

@@ -16,31 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Marvin Lee Kobert" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55e-iD-2CZ">
-                                <rect key="frame" x="126" y="781.5" width="162" height="20.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="162" id="LqE-CY-Col"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchScreenImage" translatesAutoresizingMaskIntoConstraints="NO" id="l6X-82-0Kk">
-                                <rect key="frame" x="20" y="144" width="374" height="324"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="374" id="Q5y-7e-E2h"/>
-                                    <constraint firstAttribute="width" secondItem="l6X-82-0Kk" secondAttribute="height" multiplier="187:162" id="mMT-xt-ImO"/>
-                                    <constraint firstAttribute="height" constant="324" id="mtg-tN-NHq"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="l6X-82-0Kk">
+                                <rect key="frame" x="-44" y="216" width="477" height="465"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" name="PrimaryBackground"/>
                         <constraints>
-                            <constraint firstItem="l6X-82-0Kk" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Cok-6y-lAZ"/>
-                            <constraint firstItem="l6X-82-0Kk" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="100" id="H2E-qc-zEh"/>
-                            <constraint firstItem="55e-iD-2CZ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="KIj-gC-kaX"/>
-                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="55e-iD-2CZ" secondAttribute="bottom" constant="60" id="mV7-bd-JJM"/>
+                            <constraint firstAttribute="trailing" secondItem="l6X-82-0Kk" secondAttribute="trailing" constant="-19" id="4gR-mz-M7q"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="l6X-82-0Kk" secondAttribute="bottom" constant="181" id="TiM-O5-EJ9"/>
+                            <constraint firstItem="l6X-82-0Kk" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="-44" id="nYG-xe-AAt"/>
+                            <constraint firstItem="l6X-82-0Kk" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="172" id="ogO-oR-6Lf"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -50,9 +36,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launchScreenImage" width="744" height="670"/>
+        <image name="logo" width="477" height="465"/>
         <namedColor name="PrimaryBackground">
-            <color red="0.47100001573562622" green="0.47100001573562622" blue="0.50199997425079346" alpha="0.20000000298023224" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>
