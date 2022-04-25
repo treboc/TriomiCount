@@ -41,8 +41,12 @@ struct AddNewPlayerView: View {
           .fontWeight(.semibold)
           .padding(.leading, 20)
 
-        TextField(L10n.AddNewPlayerView.NameLabel.textfieldText, text: $nameTextFieldText)
-          .foregroundColor(.label)
+        TextField("", text: $nameTextFieldText)
+          .placeholder(when: nameTextFieldText.isEmpty, placeholder: {
+            Text(L10n.AddNewPlayerView.NameLabel.textfieldText)
+              .foregroundColor(.gray)
+          })
+          .foregroundColor(.white)
           .padding(.leading, 10)
           .frame(height: 55)
           .frame(maxWidth: .infinity)

@@ -15,7 +15,6 @@ struct OverlayedAlert: ViewModifier {
     content
       .overlay(
         Text(message)
-          .textCase(.uppercase)
           .font(.subheadline)
           .foregroundColor(.red)
           .offset(x: 25, y: 20)
