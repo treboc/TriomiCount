@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct AboutView: View {
-  let twitterUrl = URL(string: "https://twitter.com/v0gelfrey")!
-  let githubUrl = URL(string: "https://github.com/vogelfrey")!
+  let twitterUrl = URL(string: "https://twitter.com/treb0c")!
+  let githubUrl = URL(string: "https://github.com/treboc")!
 
   var body: some View {
     ZStack {

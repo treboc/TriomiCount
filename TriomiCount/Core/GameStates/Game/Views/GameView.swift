@@ -18,8 +18,10 @@ struct GameView: View {
     return viewModel.bonusEventPickerOverlayIsShown || sessionOverviewIsShown
   }
 
+  @State private var overlayIsShown2 = false
+
   var body: some View {
-    ZStack {
+    ZStack(alignment: .top) {
       VStack {
         header
         Spacer(minLength: 10)
@@ -33,7 +35,7 @@ struct GameView: View {
           }
         }
       }
-      .blur(radius: overlayIsShown ? 5 : 0)
+      .blur(radius: overlayIsShown ? 2 : 0)
       .allowsHitTesting(overlayIsShown ? false : true)
       .scaleEffect(isAnimated ? 1.05 : 1.0)
       .animation(.default, value: isAnimated)
@@ -68,10 +70,9 @@ struct GameView: View {
       if viewModel.bonusEventPickerOverlayIsShown {
         BonusEventPicker.SelectionOverlay(viewModel: viewModel)
       }
-      if sessionOverviewIsShown {
-        SessionOverview(players: viewModel.game!.playersArray, sessionOverviewIsShown: $sessionOverviewIsShown)
-          .transition(.move(edge: .top))
-      }
+
+      SessionOverview(players: viewModel.game!.playersArray, sessionOverviewIsShown: $sessionOverviewIsShown)
+        .offset(x: 0, y: sessionOverviewIsShown ? 0 : -800)
     }
     .enableInjection()
   }
