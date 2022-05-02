@@ -36,9 +36,10 @@ struct GameView: View {
         }
       }
       .blur(radius: overlayIsShown ? 2 : 0)
+      .animation(.none, value: overlayIsShown)
+
       .allowsHitTesting(overlayIsShown ? false : true)
       .scaleEffect(isAnimated ? 1.05 : 1.0)
-      .animation(.default, value: isAnimated)
       .onAppear(perform: viewModel.resetTurnState)
       .tint(.primaryAccentColor)
       .padding()
@@ -74,6 +75,7 @@ struct GameView: View {
       SessionOverview(players: viewModel.game.playersArray, sessionOverviewIsShown: $sessionOverviewIsShown)
         .offset(x: 0, y: sessionOverviewIsShown ? 0 : -800)
     }
+    .animation(.default, value: isAnimated)
     .enableInjection()
   }
 
@@ -215,7 +217,7 @@ extension GameView {
 
   private var exitGameButton: some View {
     Button(L10n.GameView.ExitGameButton.labelText) {
-      if viewModel.game.turns?.count != nil {
+      if viewModel.game.turnsArray.count > 0 {
         viewModel.showExitGameAlert.toggle()
       } else {
         exitGame()
@@ -300,6 +302,6 @@ extension GameView {
 
   func exitGame() {
     appState.homeViewID = UUID()
-    HapticManager.shared.notification(type: .success)
+    HapticManager.shared.impact(style: .medium)
   }
 }
