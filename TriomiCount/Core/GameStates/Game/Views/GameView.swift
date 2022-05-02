@@ -68,9 +68,8 @@ struct GameView: View {
       .onDisappear {
         UIApplication.shared.isIdleTimerDisabled = false
       }
-      if viewModel.bonusEventPickerOverlayIsShown {
-        BonusEventPicker.SelectionOverlay(viewModel: viewModel)
-      }
+
+      BonusEventPicker.SelectionOverlay(viewModel: viewModel)
 
       SessionOverview(players: viewModel.game.playersArray, sessionOverviewIsShown: $sessionOverviewIsShown)
         .offset(x: 0, y: sessionOverviewIsShown ? 0 : -800)
@@ -149,7 +148,7 @@ extension GameView {
       RoundedRectangle(cornerRadius: 20)
         .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
     )
-    .overlay( circularResetButton.offset(x: 10, y: -15).scaleEffect(0.8), alignment: .topTrailing )
+    .overlay( circularResetButton.scaleEffect(0.8), alignment: .topTrailing )
   }
 
   private var scoreSliderStack: some View {
@@ -240,7 +239,7 @@ extension GameView {
       viewModel.resetTurnState()
     }
     .buttonStyle(.circularOffsetStyle)
-    .offset(x: -10, y: -10)
+    .padding(5)
   }
 
   struct SessionOverview: View {
