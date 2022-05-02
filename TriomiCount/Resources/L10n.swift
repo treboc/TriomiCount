@@ -12,6 +12,8 @@ import Foundation
 internal enum L10n {
   /// Add new player
   internal static let addNewPlayer = L10n.tr("Localizable", "addNewPlayer")
+  ///  and 
+  internal static let and = L10n.tr("Localizable", "and")
   /// Back
   internal static let back = L10n.tr("Localizable", "back")
   /// Back to Main Menu
