@@ -235,8 +235,11 @@ extension GameView {
   }
 
   private var circularResetButton: some View {
-    Button("\(Image(systemSymbol: .arrowUturnBackwardCircle))") {
+    Button {
       viewModel.resetTurnState()
+    } label: {
+      Image(systemSymbol: .arrowCounterclockwise)
+        .font(.title2.bold())
     }
     .buttonStyle(.circularOffsetStyle)
     .padding(5)
@@ -252,7 +255,7 @@ extension GameView {
 
         VStack {
           Text(L10n.sessionOverview)
-            .font(.title3.bold())
+            .font(.title2.bold())
             .padding(.bottom)
 
           HStack {
@@ -260,15 +263,17 @@ extension GameView {
             Spacer()
             Text(L10n.score)
           }
-          .font(.headline.bold())
-          .padding(.bottom, 15)
+          .font(.title3.bold())
 
-          ForEach(players) { player in
+          divider
+
+          ForEach(players.sorted(by: { $0.currentScore > $1.currentScore })) { player in
             HStack {
               Text(player.wrappedName)
               Spacer()
               Text("\(player.currentScore)")
             }
+            .font(.title3)
           }
         }
         .padding(50)
@@ -286,6 +291,14 @@ extension GameView {
           sessionOverviewIsShown = false
         }
       }
+    }
+
+    private var divider: some View {
+      RoundedRectangle(cornerRadius: 1)
+        .fill(Color.tertiaryBackground)
+        .frame(height: 2)
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 0)
     }
   }
 }

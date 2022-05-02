@@ -97,7 +97,7 @@
 
 // ConfirmationDialogue
 "endGameConfirmationDialogue.title" = "The game will end";
-"endGameConfirmationDialogue.messageWinner %@" = "Did %@ played out the last tile?";
+"endGameConfirmationDialogue.messageWinner %@" = "%@ played out the last tile.";
 "endGameConfirmationDialogue.messageTie" = "No one can place a tile.";
 
 // Rules

@@ -37,25 +37,25 @@ struct HomeView: View {
             Logo()
             Spacer(minLength: 20)
             VStack(spacing: 15) {
-              if lastSession != nil {
+              if let lastSession = lastSession {
                 PushStyledNavigationLink(title: L10n.HomeView.resume) {
-                  GameMainView(viewModel: GameViewModel(lastGame: lastSession!))
+                  GameMainView(viewModel: GameViewModel(lastGame: lastSession))
                 }
-                .offset(y: isAnimating ? 0 : 300)
-                .animation(.easeInOut(duration: 0.3), value: isAnimating)
+                .offset(y: isAnimating ? 0 : 800)
+                .animation(.easeInOut(duration: 0.4), value: isAnimating)
               }
 
               PushStyledNavigationLink(title: L10n.HomeView.newGame) { GameOnboardingView()
                 .id(appState.onboardingScreen)
               }
-              .offset(y: isAnimating ? 0 : 300)
-              .animation(.easeInOut(duration: 0.3).delay(lastSession != nil ? animationDelay : 0), value: isAnimating)
+              .offset(y: isAnimating ? 0 : 800)
+              .animation(.easeInOut(duration: 0.4).delay(lastSession != nil ? animationDelay : 0), value: isAnimating)
               PushStyledNavigationLink(title: L10n.HomeView.players) { PlayerListView() }
-                .offset(y: isAnimating ? 0 : 300)
-                .animation(.easeInOut(duration: 0.3).delay(lastSession != nil ? animationDelay * 2 : animationDelay), value: isAnimating)
+                .offset(y: isAnimating ? 0 : 800)
+                .animation(.easeInOut(duration: 0.4).delay(lastSession != nil ? animationDelay * 2 : animationDelay), value: isAnimating)
               PushStyledNavigationLink(title: L10n.HomeView.games) { GamesListView() }
-                .offset(y: isAnimating ? 0 : 300)
-                .animation(.easeInOut(duration: 0.3).delay(lastSession != nil ? animationDelay * 3 : animationDelay * 2), value: isAnimating)
+                .offset(y: isAnimating ? 0 : 800)
+                .animation(.easeInOut(duration: 0.4).delay(lastSession != nil ? animationDelay * 3 : animationDelay * 2), value: isAnimating)
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 50)

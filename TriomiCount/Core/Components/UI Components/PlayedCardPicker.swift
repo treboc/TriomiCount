@@ -13,11 +13,11 @@ struct PlayedCardPicker: View {
 
   var body: some View {
     HStack {
-      ButtonToPick(title: "Yes", selection: $selection, timesDrawn: $timesDrawn) {
+      ButtonToPick(title: L10n.yes, selection: $selection, timesDrawn: $timesDrawn) {
         self.selection = true
       }
 
-      ButtonToPick(title: "No", selection: $selection, timesDrawn: $timesDrawn) {
+      ButtonToPick(title: L10n.no, selection: $selection, timesDrawn: $timesDrawn) {
         self.selection = false
       }
     }
@@ -28,7 +28,7 @@ struct PlayedCardPicker: View {
   }
 
   struct ButtonToPick: View {
-    let title: LocalizedStringKey
+    let title: String
     @Binding var selection: Bool
     @Binding var timesDrawn: Int
     let action: () -> Void
@@ -36,9 +36,9 @@ struct PlayedCardPicker: View {
     let height: CGFloat = UIScreen.main.bounds.height / 18
 
     var isSelected: Bool {
-      if title == "Yes" && selection {
+      if title == L10n.yes && selection {
         return true
-      } else if title == "No" && !selection {
+      } else if title == L10n.no && !selection {
         return true
       }
       return false

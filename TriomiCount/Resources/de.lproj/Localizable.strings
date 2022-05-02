@@ -97,7 +97,7 @@
 
 // ConfirmationDialogue
 "endGameConfirmationDialogue.title" = "Achtung! Das Spiel wird beendet.";
-"endGameConfirmationDialogue.messageWinner %@" = "Hat %@ den letzten Stein angelegt?";
+"endGameConfirmationDialogue.messageWinner %@" = "%@ hat den letzten Stein angelegt.";
 "endGameConfirmationDialogue.messageTie" = "Niemand kann mehr anlegen.";
 
 // Rules
