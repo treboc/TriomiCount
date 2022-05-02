@@ -156,6 +156,7 @@ If you can place a tile after buying, the value of this tile is added to the pen
 "players" = "Players";
 "games" = "Games";
 
+"and" = " and ";
 "joinStringAnd" = ", and ";
 
 // Buttons

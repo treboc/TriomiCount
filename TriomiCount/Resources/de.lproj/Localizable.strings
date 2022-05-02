@@ -155,6 +155,7 @@ Wenn du den Stein ablegen konntest, ist der Wert auf dem Stein mit den Strafpunk
 "players" = "Spieler";
 "games" = "Spiele";
 
+"and" = " und ";
 "joinStringAnd" = " und ";
 
 // Buttons
