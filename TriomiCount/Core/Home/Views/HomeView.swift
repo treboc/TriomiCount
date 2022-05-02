@@ -13,7 +13,16 @@ import SFSafeSymbols
 struct HomeView: View {
   @State private var showSettings: Bool = false
   @EnvironmentObject var appState: AppState
-  @State private var lastSession: Game?
+  private var lastSession: Game? {
+    if let lastSession = Game.getLastNotFinishedSession(context: PersistentStore.shared.context) {
+      return lastSession
+    } else {
+      return nil
+    }
+  }
+  @State private var isAnimating: Bool = false
+
+  let animationDelay = 0.25
 
   var body: some View {
     NavigationView {
@@ -32,12 +41,21 @@ struct HomeView: View {
                 PushStyledNavigationLink(title: L10n.HomeView.resume) {
                   GameMainView(viewModel: GameViewModel(lastGame: lastSession!))
                 }
+                .offset(y: isAnimating ? 0 : 300)
+                .animation(.easeInOut(duration: 0.3), value: isAnimating)
               }
+
               PushStyledNavigationLink(title: L10n.HomeView.newGame) { GameOnboardingView()
                 .id(appState.onboardingScreen)
               }
+              .offset(y: isAnimating ? 0 : 300)
+              .animation(.easeInOut(duration: 0.3).delay(lastSession != nil ? animationDelay : 0), value: isAnimating)
               PushStyledNavigationLink(title: L10n.HomeView.players) { PlayerListView() }
+                .offset(y: isAnimating ? 0 : 300)
+                .animation(.easeInOut(duration: 0.3).delay(lastSession != nil ? animationDelay * 2 : animationDelay), value: isAnimating)
               PushStyledNavigationLink(title: L10n.HomeView.games) { GamesListView() }
+                .offset(y: isAnimating ? 0 : 300)
+                .animation(.easeInOut(duration: 0.3).delay(lastSession != nil ? animationDelay * 3 : animationDelay * 2), value: isAnimating)
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 50)
@@ -47,11 +65,13 @@ struct HomeView: View {
           .navigationBarHidden(true)
           .tint(Color.primaryAccentColor)
         }
+
         .onAppear {
-          lastSession = Game.getLastNotFinishedSession(context: PersistentStore.shared.context)
+          isAnimating = true
         }
       }
     }
+
     .pageSheet(isPresented: $showSettings) {
       SettingsView()
         .sheetPreference(.grabberVisible(true))
