@@ -20,29 +20,29 @@ class GameViewModel: ObservableObject {
   let store = PersistentStore.shared
   let context = PersistentStore.shared.context
 
-  @Published var game: Game?
+  @Published var game: Game
   @Published var gameState: GameState = .playing
   var currentPlayerOnTurn: Player? {
-    guard let game = game else { return nil }
     let playerCount = game.playersArray.count
     let turnsCount = game.turnsArray.count
 
     if turnsCount == 0 {
-      return game.playersArray.first!
+      if let firstPlayer = game.playersArray.first {
+        return firstPlayer
+      }
+    } else {
+      return game.playersArray[turnsCount % playerCount]
     }
-    return game.playersArray[turnsCount % playerCount]
+    return nil
   }
 
   @AppStorage("gameID") var gameID: Int = 0
 
   init(lastGame: Game) {
-    if lastGame.players?.count != 0 {
-      self.game = lastGame
-    }
+    self.game = lastGame
   }
 
-  init(_ players: [Player] = []) {
-    guard !players.isEmpty else { return }
+  init(_ players: [Player]) {
     self.game = Game(players: players, context: context)
   }
 
@@ -100,7 +100,6 @@ class GameViewModel: ObservableObject {
   }
 
   func nextPlayer() {
-    guard let game = game else { return }
     // update the current player with the score from the currentTurnScore
     updateScore(of: currentPlayerOnTurn, with: calculatedScore)
 
@@ -141,8 +140,6 @@ class GameViewModel: ObservableObject {
   @Published var isTie: Bool = false
 
   func endingGame() {
-    guard let game = game else { return }
-
     lastPlayer = currentPlayerOnTurn
     if game.players?.count == 1 { endGame() }
 
@@ -176,7 +173,6 @@ class GameViewModel: ObservableObject {
   // MARK: - GameState Ended
 
   func endGame() {
-    guard let game = game else { return }
     // Currently: For every player, save the current score to the highscore, if it's higher.
     // Want to: End the game, get all points correctly and only save the players highscore, if it's a new record.
     if let lastPlayer = lastPlayer {
@@ -210,10 +206,8 @@ class GameViewModel: ObservableObject {
   }
 
   func saveGameState() {
-    if let game = game {
-      if game.hasChanges {
-        store.saveContext(context: context)
-      }
+    if game.hasChanges {
+      store.saveContext(context: context)
     }
   }
 }

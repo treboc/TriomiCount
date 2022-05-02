@@ -71,7 +71,7 @@ struct GameView: View {
         BonusEventPicker.SelectionOverlay(viewModel: viewModel)
       }
 
-      SessionOverview(players: viewModel.game!.playersArray, sessionOverviewIsShown: $sessionOverviewIsShown)
+      SessionOverview(players: viewModel.game.playersArray, sessionOverviewIsShown: $sessionOverviewIsShown)
         .offset(x: 0, y: sessionOverviewIsShown ? 0 : -800)
     }
     .enableInjection()
@@ -215,7 +215,7 @@ extension GameView {
 
   private var exitGameButton: some View {
     Button(L10n.GameView.ExitGameButton.labelText) {
-      if viewModel.game?.turns?.count != nil {
+      if viewModel.game.turns?.count != nil {
         viewModel.showExitGameAlert.toggle()
       } else {
         exitGame()
@@ -230,7 +230,7 @@ extension GameView {
       HapticManager.shared.notification(type: .success)
     }
     .buttonStyle(.offsetStyle)
-    .disabled(viewModel.game?.turns?.count == 0)
+    .disabled(viewModel.game.turns?.count == 0)
   }
 
   private var circularResetButton: some View {

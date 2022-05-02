@@ -28,7 +28,7 @@ struct GameResultsView: View {
 
         Divider()
 
-        ForEach(viewModel.game?.playersArray.sorted(by: { $0.currentScore > $1.currentScore }) ?? []) { player in
+        ForEach(viewModel.game.playersArray.sorted(by: { $0.currentScore > $1.currentScore })) { player in
           HStack {
             Text(player.wrappedName)
               .font(.title2)
