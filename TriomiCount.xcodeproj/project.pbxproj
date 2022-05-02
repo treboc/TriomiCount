@@ -206,7 +206,7 @@
 		083974DE27D2BECE002B90E4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0855A21E27DCD58000E882AC /* Icon */,
+				0855A21E27DCD58000E882AC /* Images */,
 				0855A21F27DCD59100E882AC /* Color */,
 				08288179279F42570064C9E8 /* Fonts */,
 				8A5E010F2813491E00703CE5 /* L10n.swift */,
@@ -215,13 +215,13 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		0855A21E27DCD58000E882AC /* Icon */ = {
+		0855A21E27DCD58000E882AC /* Images */ = {
 			isa = PBXGroup;
 			children = (
 				08BE48DB279CA0FB00EA431F /* Icon.xcassets */,
 				8A5E01152816929D00703CE5 /* Images.xcassets */,
 			);
-			path = Icon;
+			path = Images;
 			sourceTree = "<group>";
 		};
 		0855A21F27DCD59100E882AC /* Color */ = {

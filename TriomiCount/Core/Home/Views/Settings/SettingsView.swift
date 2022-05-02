@@ -31,8 +31,8 @@ struct SettingsView: View {
           rulesSection
         }
 
-        NavigationLink("About") {
-          AboutView()
+        Section("Contact me") {
+          AboutSection()
         }
       }
       .toolbar(content: {
@@ -42,7 +42,7 @@ struct SettingsView: View {
           }
         }
       })
-      .navigationTitle(L10n.Rules.title)
+      .navigationTitle(L10n.SettingsView.settings)
     }
     // accentColor will be deprecated, but .tint() will not work here!
     .accentColor(.primaryAccentColor)
@@ -57,7 +57,6 @@ extension SettingsView {
       RulesSection(sectionHeader: L10n.Rules.EndOfGame.header, sectionBody: L10n.Rules.EndOfGame.body)
       RulesSection(sectionHeader: L10n.Rules.BonusPoints.header, sectionBody: L10n.Rules.BonusPoints.body)
     }
-    .navigationTitle(Rules.rulesTitle)
   }
 }
 
@@ -134,12 +133,15 @@ struct RulesSection: View {
         if detailIsShown {
           Text(sectionBody)
             .animation(.default, value: detailIsShown)
+            .padding(.bottom, 10)
         }
       }
     }
     .contentShape(Rectangle())
     .onTapGesture {
-      detailIsShown.toggle()
+      withAnimation {
+        detailIsShown.toggle()
+      }
     }
   }
 }

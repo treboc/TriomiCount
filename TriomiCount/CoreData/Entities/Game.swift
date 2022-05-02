@@ -51,7 +51,7 @@ extension Game {
     let seperator = L10n.joinStringAnd
 
     if playerNames.count == 2 {
-      return playerNames.joined(separator: seperator)
+      return playerNames.joined(separator: L10n.and)
     } else if playerNames.count > 2 {
       return playerNames.dropLast().joined(separator: ", ") + "\(seperator)" + playerNames.last!
     } else {
