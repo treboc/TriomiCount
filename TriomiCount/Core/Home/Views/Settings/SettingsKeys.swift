@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Settings {
+struct SettingsKeys {
   static let selectedAppearance = "selectedAppearance"
   static let idleDimmingDisabled = "idleDimmingDisabled"
 }

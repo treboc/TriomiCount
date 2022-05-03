@@ -1,5 +1,5 @@
 //
-//  Game+CoreDataProperties.swift
+//  Session+CoreDataProperties.swift
 //  TriomiCount
 //
 //  Created by Marvin Lee Kobert on 04.03.22.
@@ -9,13 +9,13 @@
 import Foundation
 import CoreData
 
-@objc(Game)
-public class Game: NSManagedObject {
+@objc(Session)
+public class Session: NSManagedObject {
 }
 
-extension Game {
-  @nonobjc public class func fetchRequest() -> NSFetchRequest<Game> {
-    return NSFetchRequest<Game>(entityName: "Game")
+extension Session {
+  @nonobjc public class func fetchRequest() -> NSFetchRequest<Session> {
+    return NSFetchRequest<Session>(entityName: "Session")
   }
 
   @NSManaged public var id: Int16
@@ -81,7 +81,7 @@ extension Game {
 
     for player in players {
       player.currentScore = 0
-      player.increaseGamesPlayed()
+      player.increaseSessionsPlayed()
       player.isChosen = false
     }
 
@@ -92,7 +92,7 @@ extension Game {
 }
 
 // MARK: - Fronting Properties
-extension Game {
+extension Session {
   public var wrappedStartedOn: Date {
     get { startedOn ?? Date() }
     set { startedOn = newValue }
@@ -115,14 +115,14 @@ extension Game {
 }
 
 // MARK: - Class Functions
-extension Game {
-  /// 1) get all not yet finished games
+extension Session {
+  /// 1) get all not yet finished sessions
   /// 2) make sure, there's atleast one not finished game
   /// 3) loop over all, delete all but not the latest
 
-  class func getLastNotFinishedSession(context: NSManagedObjectContext) -> Game? {
+  class func getLastNotFinishedSession(context: NSManagedObjectContext) -> Session? {
     let predicate = NSPredicate(format: "hasEnded = false")
-    let fetchRequest: NSFetchRequest<Game> = NSFetchRequest<Game>(entityName: Game.description())
+    let fetchRequest: NSFetchRequest<Session> = NSFetchRequest<Session>(entityName: Session.description())
     fetchRequest.predicate = predicate
     do {
       let result = try context.fetch(fetchRequest)
@@ -142,13 +142,13 @@ extension Game {
     return nil
   }
 
-  class func allGames() -> [Game] {
-    return allObjects(context: PersistentStore.shared.context) as? [Game] ?? []
+  class func allGames() -> [Session] {
+    return allObjects(context: PersistentStore.shared.context) as? [Session] ?? []
   }
 }
 
 // MARK: Generated accessors for turns
-extension Game {
+extension Session {
   @objc(addTurnsObject:)
   @NSManaged public func addToTurns(_ value: Turn)
 
@@ -163,7 +163,7 @@ extension Game {
 }
 
 // MARK: Generated accessors for players
-extension Game {
+extension Session {
   @objc(addPlayersObject:)
   @NSManaged public func addToPlayers(_ value: Player)
 
@@ -177,4 +177,4 @@ extension Game {
   @NSManaged public func removeFromPlayers(_ values: NSSet)
 }
 
-extension Game: Identifiable {}
+extension Session: Identifiable {}

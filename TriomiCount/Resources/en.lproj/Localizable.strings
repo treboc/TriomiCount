@@ -7,45 +7,45 @@
  */
 
 // HomeView
-"homeView.newGame" = "New Game";
+"homeView.newSession" = "New Session";
 "homeView.resume" = "Resume";
 "homeView.players" = "Players";
-"homeView.games" = "Games";
+"homeView.sessions" = "Sessions";
 
-// GameOnboardingView
-"gameOnboardingView.participationHeaderText" = "Please chose the players who are participating in the game.";
-"gameOnboardingView.addNewPlayer" = "Add New Player";
-"gameOnboardingView.startGame" = "Start Game";
-"gameOnboardingView.backToMainMenu" = "Back to Main Menu";
+// SessionOnboardingView
+"sessionOnboardingView.participationHeaderText" = "Please chose the players who are participating in the session.";
+"sessionOnboardingView.addNewPlayer" = "Add New Player";
+"sessionOnboardingView.startSession" = "Start Session";
+"sessionOnboardingView.backToMainMenu" = "Back to Main Menu";
 
-// GameView
-"gameView.headerLabel.totalScore" = "Total score";
-"gameView.headerLabel.thisTurnScore" = "This turn";
-"gameView.scoreSlider.labelText" = "How many points is your card worth?";
-"gameView.drawnToggle.labelText" = "Did you have to draw a card?";
-"gameView.timesDrawnPicker.labelText" = "How often did you have to draw?";
-"gameView.playedCardPicker.labelText" = "Were you able to play the card?";
-"gameView.playedCardPicker.yes" = "Yes";
-"gameView.playedCardPicker.no" = "No";
-"gameView.bonusEventPicker.labelText" = "Do you get some bonus points?";
-"gameView.bonusEventPicker.none" = "None";
-"gameView.bonusEventPicker.bridge" = "Bridge";
-"gameView.bonusEventPicker.hexagon" = "Hexagon";
-"gameView.bonusEventPicker.twoHexagons" = "Two Hexagons";
-"gameView.bonusEventPicker.threeHexagons" = "Three Hexagons";
-"gameView.nextPlayerButton.labelText" = "Next Player";
-"gameView.exitGameButton.labelText" = "Exit Game";
-"gameView.endGameButton.labelText" = "End Game";
+// SessionView
+"sessionView.headerLabel.totalScore" = "Total score";
+"sessionView.headerLabel.thisTurnScore" = "This turn";
+"sessionView.scoreSlider.labelText" = "How many points is your card worth?";
+"sessionView.drawnToggle.labelText" = "Did you have to draw a card?";
+"sessionView.timesDrawnPicker.labelText" = "How often did you have to draw?";
+"sessionView.playedCardPicker.labelText" = "Were you able to play the card?";
+"sessionView.playedCardPicker.yes" = "Yes";
+"sessionView.playedCardPicker.no" = "No";
+"sessionView.bonusEventPicker.labelText" = "Do you get some bonus points?";
+"sessionView.bonusEventPicker.none" = "None";
+"sessionView.bonusEventPicker.bridge" = "Bridge";
+"sessionView.bonusEventPicker.hexagon" = "Hexagon";
+"sessionView.bonusEventPicker.twoHexagons" = "Two Hexagons";
+"sessionView.bonusEventPicker.threeHexagons" = "Three Hexagons";
+"sessionView.nextPlayerButton.labelText" = "Next Player";
+"sessionView.exitSessionButton.labelText" = "Exit Session";
+"sessionView.endSessionButton.labelText" = "End Session";
 
 // PointsSubmitView
 "pointsSubmitView.labelText %@" = "How much points do you have left,\n%@?";
 "pointsSubmitView.overlayAlertMessage" = "Please enter a valid number!";
 
-// GameResultsView
-"gameResultsView.gameResults" = "Game Results";
-"gameResultsView.name" = "Name";
-"gameResultsView.points" = "Points";
-"gameResultsView.mainMenuButton.labelText" = "Main menu";
+// SessionResultsView
+"sessionResultsView.sessionResults" = "Session Results";
+"sessionResultsView.name" = "Name";
+"sessionResultsView.points" = "Points";
+"sessionResultsView.mainMenuButton.labelText" = "Main menu";
 
 // AddNewPlayerView
 "addNewPlayerView.nameLabel.labelText" = "Tell me your name, please!";
@@ -59,26 +59,26 @@
 "playerDetailView.highscore" = "Highscore";
 "playerDetailView.lastScore" = "Last Score";
 "playerDetailView.createdOn" = "Created On";
-"playerDetailView.numberOfGamesWon" = "Number Of Games Won";
-"playerDetailView.numberOfGamesPlayed" = "Number Of Games Played";
+"playerDetailView.numberOfSessionsWon" = "Number Of Sessions Won";
+"playerDetailView.numberOfSessionsPlayed" = "Number Of Sessions Played";
 "playerDetailView.deleteButton.title" = "Delete Player";
 "playerDetailView.backButton.title" = "Back";
 "playerDetailView.deletePlayer.alertTitle" = "Warning!";
 "playerDetailView.deletePlayer.alertMessage %@" = "Are you sure that you want to delete %@? The data can't be restored.";
 "playerDetailView.deletePlayer.confirmationButtonTitle" = "Yes, I'm sure.";
 
-// GamesListView
-"gameListView.button.backToMainMenu" = "Back to Main Menu";
-"gameListView.sessions" = "Sessions";
+// SessionsListView
+"sessionListView.button.backToMainMenu" = "Back to Main Menu";
+"sessionListView.sessions" = "Sessions";
 
-// GameListRowView
-"gameListRowView.session" = "Session";
-"gameListRowView.playedBy" = "Played with:";
+// SessionsListRowView
+"sessionListRowView.session" = "Session";
+"sessionListRowView.playedBy" = "Played with:";
 
-// GameDetailView
-"gameDetailView.playedWith" = "Played with";
-"gameDetailView.won" = "Winner";
-"gameDetailView.points" = "Points";
+// SessionDetailView
+"sessionDetailView.playedWith" = "Played with";
+"sessionDetailView.won" = "Winner";
+"sessionDetailView.points" = "Points";
 
 // SettingsView
 "settingsView.settings" = "Settings";
@@ -90,15 +90,15 @@
 "settingsView.idleDimmingDisabled.pickerLabelText" = "Disable screen dimming in sessions";
 "settingsView.idleDimmingDisabled.importantMessage" = "IMPORTANT: This will reduce your battery life.";
 
-// ExitGameAlert
-"exitGameAlert.title" = "Are you sure?";
-"exitGameAlert.message" = "You're about to leave the game. It's possible that it is not saved..";
-"exitGameAlert.buttonTitle" = "Yes, I'm sure.";
+// ExitSessionAlert
+"exitSessionAlert.title" = "Are you sure?";
+"exitSessionAlert.message" = "You're about to leave the session. It's possible that it is not saved..";
+"exitSessionAlert.buttonTitle" = "Yes, I'm sure.";
 
 // ConfirmationDialogue
-"endGameConfirmationDialogue.title" = "The game will end";
-"endGameConfirmationDialogue.messageWinner %@" = "%@ played out the last tile.";
-"endGameConfirmationDialogue.messageTie" = "No one can place a tile.";
+"endSessionConfirmationDialogue.title" = "The session will end";
+"endSessionConfirmationDialogue.messageWinner %@" = "%@ played out the last tile.";
+"endSessionConfirmationDialogue.messageTie" = "No one can place a tile.";
 
 // Rules
 // Beginning
@@ -154,7 +154,7 @@ If you can place a tile after buying, the value of this tile is added to the pen
 "score" = "Score";
 "sessionOverview" = "Session Overview";
 "players" = "Players";
-"games" = "Games";
+"sessions" = "Sessions";
 
 "and" = " and ";
 "joinStringAnd" = ", and ";

@@ -11,7 +11,7 @@ import SwiftUI
 
 struct GameDetailView: View {
   @Environment(\.dismiss) var dismiss
-  let game: Game
+  let game: Session
 
   var body: some View {
     ZStack(alignment: .topLeading) {
@@ -20,25 +20,25 @@ struct GameDetailView: View {
 
       VStack(alignment: .center) {
         HStack {
-          Text("\(L10n.GameListRowView.session) #\(game.id)")
+          Text("\(L10n.SessionListRowView.session) #\(game.id)")
         }
         .font(.title.bold())
         .padding()
         .frame(maxWidth: .infinity)
 
-        GameDetailSection(L10n.GameDetailView.playedWith) {
+        GameDetailSection(L10n.SessionDetailView.playedWith) {
           Text(game.playedBy)
         }
 
         if game.winner != nil {
-          GameDetailSection(L10n.GameDetailView.won) {
+          GameDetailSection(L10n.SessionDetailView.won) {
             Text(game.winner ?? "Unknown")
           }
         }
 
-        GameDetailSection(L10n.GameDetailView.points) {
+        GameDetailSection(L10n.SessionDetailView.points) {
           VStack(alignment: .leading) {
-            ForEach(GameScoreDict.getGameScoreDictWith(gameKey: game.objectID.uriRepresentation().absoluteString)!) { dict in
+            ForEach(SessionScore.getGameScoreDictWith(gameKey: game.objectID.uriRepresentation().absoluteString)!) { dict in
               HStack {
                 Text(dict.playerName)
                   .frame(minWidth: 50, alignment: .leading)
@@ -71,7 +71,7 @@ struct GameDetailView: View {
 
 struct GameDetailView_Previews: PreviewProvider {
     static var previews: some View {
-      GameDetailView(game: Game.allGames().first!)
+      GameDetailView(game: Session.allGames().first!)
     }
 }
 

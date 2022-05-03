@@ -20,11 +20,11 @@ extension Player {
   @NSManaged public var highscore: Int64
   @NSManaged public var name: String?
   @NSManaged public var position: Int16
-  @NSManaged public var games: NSSet?
-  @NSManaged public var gamesPlayed: Int16
-  @NSManaged public var gamesWon: Int16
+  @NSManaged public var sessions: NSSet?
+  @NSManaged public var sessionsPlayed: Int16
+  @NSManaged public var sessionsWon: Int16
   @NSManaged public var playerInTurn: Turn?
-  @NSManaged public var gameScores: [String]?
+  @NSManaged public var sessionScores: [String]?
 
   convenience init(name: String, position: Int16, context: NSManagedObjectContext) {
     self.init(context: context)
@@ -61,9 +61,9 @@ extension Player {
     set { createdOn = newValue }
   }
 
-  public var wrappedGameScores: [String] {
-    get { gameScores ?? [] }
-    set { gameScores = newValue }
+  public var wrappedSessionScores: [String] {
+    get { sessionScores ?? [] }
+    set { sessionScores = newValue }
   }
 
   // MARK: - Computed Properties
@@ -91,8 +91,8 @@ extension Player {
     return request
   }
 
-  func getPlayersGameScore(ofGame gameID: NSManagedObjectID) -> Int64? {
-    if let gameScores = GameScoreDict.getGameScoreDictsWith(gameKey: gameID) {
+  func getPlayerScore(ofGame gameID: NSManagedObjectID) -> Int64? {
+    if let gameScores = SessionScore.getSessionScoresWith(gameKey: gameID) {
       return gameScores.first { $0.playerID == self.objectID.description }?.scoreValue
     }
     return nil
@@ -124,8 +124,8 @@ extension Player {
     let newPlayer = Player(context: context)
     newPlayer.wrappedName = name
     newPlayer.wrappedCreatedOn = Date()
-    newPlayer.gamesPlayed = 0
-    newPlayer.gamesWon = 0
+    newPlayer.sessionsPlayed = 0
+    newPlayer.sessionsWon = 0
     PersistentStore.shared.saveContext(context: context)
   }
 
@@ -144,12 +144,12 @@ extension Player {
     self.currentScore += score
   }
 
-  func increaseGamesWon() {
-    gamesWon += 1
+  func increaseSessionsWon() {
+    sessionsWon += 1
   }
 
-  func increaseGamesPlayed() {
-    gamesPlayed += 1
+  func increaseSessionsPlayed() {
+    sessionsPlayed += 1
   }
 }
 

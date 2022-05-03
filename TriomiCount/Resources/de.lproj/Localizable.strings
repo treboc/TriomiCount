@@ -7,45 +7,45 @@
 */
 
 // HomeView
-"homeView.newGame" = "Neues Spiel";
+"homeView.newSession" = "Neues Spiel";
 "homeView.resume" = "Weiterspielen";
 "homeView.players" = "Spieler";
-"homeView.games" = "Spiele";
+"homeView.sessions" = "Spiele";
 
-// GameOnboardingView
-"gameOnboardingView.participationHeaderText" = "Bitte wähle die Spieler aus, die mitspielen sollen.";
-"gameOnboardingView.addNewPlayer" = "Neuen Spieler erstellen";
-"gameOnboardingView.startGame" = "Spiel starten";
-"gameOnboardingView.backToMainMenu" = "Zurück zum Hauptmenü";
+// SessionOnboardingView
+"sessionOnboardingView.participationHeaderText" = "Bitte wähle die Spieler aus, die mitspielen sollen.";
+"sessionOnboardingView.addNewPlayer" = "Neuen Spieler erstellen";
+"sessionOnboardingView.startSession" = "Spiel starten";
+"sessionOnboardingView.backToMainMenu" = "Zurück zum Hauptmenü";
 
-// GameView
-"gameView.headerLabel.totalScore" = "Punkte";
-"gameView.headerLabel.thisTurnScore" = "Diese Runde";
-"gameView.scoreSlider.labelText" = "Wie viele Punkte ist deine Karte wert?";
-"gameView.drawnToggle.labelText" = "Musstest du nachziehen?";
-"gameView.timesDrawnPicker.labelText" = "Wie oft musstest du nachziehen?";
-"gameView.playedCardPicker.labelText" = "Konntest du deine Karte ausspielen?";
-"gameView.playedCardPicker.yes" = "Yes";
-"gameView.playedCardPicker.no" = "No";
-"gameView.bonusEventPicker.labelText" = "Bekommst du Bonuspunkte?";
-"gameView.bonusEventPicker.none" = "Keine";
-"gameView.bonusEventPicker.bridge" = "Brücke";
-"gameView.bonusEventPicker.hexagon" = "Sechseck";
-"gameView.bonusEventPicker.twoHexagons" = "Zwei Sechsecke";
-"gameView.bonusEventPicker.threeHexagons" = "Drei Sechsecke";
-"gameView.nextPlayerButton.labelText" = "Zug beenden";
-"gameView.exitGameButton.labelText" = "Zum Hauptmenü";
-"gameView.endGameButton.labelText" = "Runde beenden";
+// SessionView
+"sessionView.headerLabel.totalScore" = "Punkte";
+"sessionView.headerLabel.thisTurnScore" = "Diese Runde";
+"sessionView.scoreSlider.labelText" = "Wie viele Punkte ist deine Karte wert?";
+"sessionView.drawnToggle.labelText" = "Musstest du nachziehen?";
+"sessionView.timesDrawnPicker.labelText" = "Wie oft musstest du nachziehen?";
+"sessionView.playedCardPicker.labelText" = "Konntest du deine Karte ausspielen?";
+"sessionView.playedCardPicker.yes" = "Yes";
+"sessionView.playedCardPicker.no" = "No";
+"sessionView.bonusEventPicker.labelText" = "Bekommst du Bonuspunkte?";
+"sessionView.bonusEventPicker.none" = "Keine";
+"sessionView.bonusEventPicker.bridge" = "Brücke";
+"sessionView.bonusEventPicker.hexagon" = "Sechseck";
+"sessionView.bonusEventPicker.twoHexagons" = "Zwei Sechsecke";
+"sessionView.bonusEventPicker.threeHexagons" = "Drei Sechsecke";
+"sessionView.nextPlayerButton.labelText" = "Zug beenden";
+"sessionView.exitSessionButton.labelText" = "Zum Hauptmenü";
+"sessionView.endSessionButton.labelText" = "Runde beenden";
 
 // PointsSubmitView
 "pointsSubmitView.labelText %@" = "%@,\nwie viele Punkte hast du noch auf dem Brett?";
 "pointsSubmitView.overlayAlertMessage" = "Bitte gib eine Zahl ein!";
 
-// GameResultsView
-"gameResultsView.gameResults" = "Spielergebnis";
-"gameResultsView.name" = "Name";
-"gameResultsView.points" = "Punkte";
-"gameResultsView.mainMenuButton.labelText" = "Zum Hauptmenü";
+// SessionResultsView
+"sessionResultsView.sessionResults" = "Spielergebnis";
+"sessionResultsView.name" = "Name";
+"sessionResultsView.points" = "Punkte";
+"sessionResultsView.mainMenuButton.labelText" = "Zum Hauptmenü";
 
 // AddNewPlayerView
 "addNewPlayerView.nameLabel.labelText" = "Wie heisst du?";
@@ -59,26 +59,26 @@
 "playerDetailView.highscore" = "Highscore";
 "playerDetailView.lastScore" = "Punkte im letzten Spiel";
 "playerDetailView.createdOn" = "Erstellt am";
-"playerDetailView.numberOfGamesWon" = "Gewonnene Spiele";
-"playerDetailView.numberOfGamesPlayed" = "Gespielte Spiele";
+"playerDetailView.numberOfSessionsWon" = "Gewonnene Spiele";
+"playerDetailView.numberOfSessionsPlayed" = "Gespielte Spiele";
 "playerDetailView.deleteButton.title" = "Spieler löschen";
 "playerDetailView.backButton.title" = "Zurück";
 "playerDetailView.deletePlayer.alertTitle" = "Warnung!";
 "playerDetailView.deletePlayer.alertMessage %@" = "Bist du sicher, dass du %@ löschen möchtest? Die Daten können nicht widerhergestellt werden.";
 "playerDetailView.deletePlayer.confirmationButtonTitle" = "Ja, ich bin mir sicher.";
 
-// GamesListView
-"gameListView.button.backToMainMenu" = "Zurück zum Hauptmenü";
-"gameListView.sessions" = "Spiele";
+// SessionListView
+"sessionListView.button.backToMainMenu" = "Zurück zum Hauptmenü";
+"sessionListView.sessions" = "Spiele";
 
-// GameListRowView
-"gameListRowView.session" = "Spiel";
-"gameListRowView.playedBy" = "Gespielt von:";
+// SessionListRowView
+"sessionListRowView.session" = "Spiel";
+"sessionListRowView.playedBy" = "Gespielt von:";
 
-// GameDetailView
-"gameDetailView.playedWith" = "Mitgespielt haben";
-"gameDetailView.won" = "Gewonnen hat";
-"gameDetailView.points" = "Punkteverteilung";
+// SessionDetailView
+"sessionDetailView.playedWith" = "Mitgespielt haben";
+"sessionDetailView.won" = "Gewonnen hat";
+"sessionDetailView.points" = "Punkteverteilung";
 
 // SettingsView
 "settingsView.settings" = "Einstellungen";
@@ -91,14 +91,14 @@
 "settingsView.idleDimmingDisabled.importantMessage" = "ACHTUNG: Dies wirkt sich negativ auf die Akkulaufzeit aus.";
 
 // Alerts
-"exitGameAlert.title" = "Bist du sicher?";
-"exitGameAlert.message" = "Du bist dabei, dass Spiel zu verlassen. Es könnte möglicherweise nicht gespeichert sein.";
-"exitGameAlert.buttonTitle" = "Ja, ich bin sicher.";
+"exitSessionAlert.title" = "Bist du sicher?";
+"exitSessionAlert.message" = "Du bist dabei, dass Spiel zu verlassen. Es könnte möglicherweise nicht gespeichert sein.";
+"exitSessionAlert.buttonTitle" = "Ja, ich bin sicher.";
 
 // ConfirmationDialogue
-"endGameConfirmationDialogue.title" = "Achtung! Das Spiel wird beendet.";
-"endGameConfirmationDialogue.messageWinner %@" = "%@ hat den letzten Stein angelegt.";
-"endGameConfirmationDialogue.messageTie" = "Niemand kann mehr anlegen.";
+"endSessionConfirmationDialogue.title" = "Achtung! Das Spiel wird beendet.";
+"endSessionConfirmationDialogue.messageWinner %@" = "%@ hat den letzten Stein angelegt.";
+"endSessionConfirmationDialogue.messageTie" = "Niemand kann mehr anlegen.";
 
 // Rules
 // Beginning
@@ -153,7 +153,7 @@ Wenn du den Stein ablegen konntest, ist der Wert auf dem Stein mit den Strafpunk
 "score" = "Punktestand";
 "sessionOverview" = "Aktueller Punktestand";
 "players" = "Spieler";
-"games" = "Spiele";
+"sessions" = "Spiele";
 
 "and" = " und ";
 "joinStringAnd" = " und ";

@@ -20,30 +20,30 @@ class GameViewModel: ObservableObject {
   let store = PersistentStore.shared
   let context = PersistentStore.shared.context
 
-  @Published var game: Game
+  @Published var session: Session
   @Published var gameState: GameState = .playing
   var currentPlayerOnTurn: Player? {
-    let playerCount = game.playersArray.count
-    let turnsCount = game.turnsArray.count
+    let playerCount = session.playersArray.count
+    let turnsCount = session.turnsArray.count
 
     if turnsCount == 0 {
-      if let firstPlayer = game.playersArray.first {
+      if let firstPlayer = session.playersArray.first {
         return firstPlayer
       }
     } else {
-      return game.playersArray[turnsCount % playerCount]
+      return session.playersArray[turnsCount % playerCount]
     }
     return nil
   }
 
   @AppStorage("gameID") var gameID: Int = 0
 
-  init(lastGame: Game) {
-    self.game = lastGame
+  init(lastGame: Session) {
+    self.session = lastGame
   }
 
   init(_ players: [Player]) {
-    self.game = Game(players: players, context: context)
+    self.session = Session(players: players, context: context)
   }
 
   // 2) calculate the current points the player gets for laying the card
@@ -54,11 +54,11 @@ class GameViewModel: ObservableObject {
   @Published var bonusEventPickerOverlayIsShown = false
 
   enum BonusEvent: LocalizedStringKey, CaseIterable {
-    case none = "gameView.bonusEventPicker.none"
-    case bridge = "gameView.bonusEventPicker.bridge"
-    case hexagon = "gameView.bonusEventPicker.hexagon"
-    case twoHexagons = "gameView.bonusEventPicker.twoHexagons"
-    case threeHexagons = "gameView.bonusEventPicker.threeHexagons"
+    case none = "sessionView.bonusEventPicker.none"
+    case bridge = "sessionView.bonusEventPicker.bridge"
+    case hexagon = "sessionView.bonusEventPicker.hexagon"
+    case twoHexagons = "sessionView.bonusEventPicker.twoHexagons"
+    case threeHexagons = "sessionView.bonusEventPicker.threeHexagons"
   }
 
   var calculatedScore: Int64 {
@@ -105,8 +105,8 @@ class GameViewModel: ObservableObject {
 
     // append the actual turn to the turns-array to keep track of the turns,
     // but also in the childViewContext, so that if the game is set back all models are untouched
-    let newTurn = Turn(game)
-    game.addToTurns(newTurn)
+    let newTurn = Turn(session)
+    session.addToTurns(newTurn)
 
     saveGameState()
     resetTurnState()
@@ -141,9 +141,9 @@ class GameViewModel: ObservableObject {
 
   func endingGame() {
     lastPlayer = currentPlayerOnTurn
-    if game.players?.count == 1 { endGame() }
+    if session.players?.count == 1 { endGame() }
 
-    playersWithoutLastPlayer = game.playersArray.filter({ $0 != currentPlayerOnTurn })
+    playersWithoutLastPlayer = session.playersArray.filter({ $0 != currentPlayerOnTurn })
 
     if isTie {
       endGame()
@@ -185,28 +185,28 @@ class GameViewModel: ObservableObject {
       }
 
       // get winner with highest score
-      let winner = game.playersArray.sorted(by: { $0.currentScore > $1.currentScore }).first!
-      winner.increaseGamesWon()
-      game.wrappedWinnerID = winner.objectID.uriRepresentation().absoluteString
+      let winner = session.playersArray.sorted(by: { $0.currentScore > $1.currentScore }).first!
+      winner.increaseSessionsWon()
+      session.wrappedWinnerID = winner.objectID.uriRepresentation().absoluteString
 
-      for player in game.playersArray {
+      for player in session.playersArray {
         if player.currentScore > player.highscore {
           player.highscore = player.currentScore
         }
-        _ = GameScoreDict.init(gameKey: game.objectID.uriRepresentation().absoluteString, player: player)
+        _ = SessionScore.init(sessionKey: session.objectID.uriRepresentation().absoluteString, player: player)
       }
 
       gameID += 1
-      game.id = Int16(gameID)
+      session.id = Int16(gameID)
 
-      game.hasEnded = true
+      session.hasEnded = true
       gameState = .ended
       store.saveContext(context: context)
     }
   }
 
   func saveGameState() {
-    if game.hasChanges {
+    if session.hasChanges {
       store.saveContext(context: context)
     }
   }

@@ -33,11 +33,11 @@ struct PlayerDetailView: View {
           PlayerDetailSection(L10n.PlayerDetailView.createdOn) {
             "\(player.wrappedCreatedOn.formatted(date: .abbreviated, time: .omitted))"
           }
-          PlayerDetailSection(L10n.PlayerDetailView.numberOfGamesWon) {
-            "\(player.gamesWon)"
+          PlayerDetailSection(L10n.PlayerDetailView.numberOfSessionsWon) {
+            "\(player.sessionsWon)"
           }
-          PlayerDetailSection(L10n.PlayerDetailView.numberOfGamesPlayed) {
-            "\(player.gamesPlayed)"
+          PlayerDetailSection(L10n.PlayerDetailView.numberOfSessionsPlayed) {
+            "\(player.sessionsPlayed)"
           }
         }
 

@@ -13,8 +13,8 @@ import SFSafeSymbols
 struct HomeView: View {
   @State private var showSettings: Bool = false
   @EnvironmentObject var appState: AppState
-  private var lastSession: Game? {
-    if let lastSession = Game.getLastNotFinishedSession(context: PersistentStore.shared.context) {
+  private var lastSession: Session? {
+    if let lastSession = Session.getLastNotFinishedSession(context: PersistentStore.shared.context) {
       return lastSession
     } else {
       return nil
@@ -45,7 +45,7 @@ struct HomeView: View {
                 .animation(.easeInOut(duration: 0.4), value: isAnimating)
               }
 
-              PushStyledNavigationLink(title: L10n.HomeView.newGame) { GameOnboardingView()
+              PushStyledNavigationLink(title: L10n.HomeView.newSession) { GameOnboardingView()
                 .id(appState.onboardingScreen)
               }
               .offset(y: isAnimating ? 0 : 800)
@@ -53,7 +53,7 @@ struct HomeView: View {
               PushStyledNavigationLink(title: L10n.HomeView.players) { PlayerListView() }
                 .offset(y: isAnimating ? 0 : 800)
                 .animation(.easeInOut(duration: 0.4).delay(lastSession != nil ? animationDelay * 2 : animationDelay), value: isAnimating)
-              PushStyledNavigationLink(title: L10n.HomeView.games) { GamesListView() }
+              PushStyledNavigationLink(title: L10n.HomeView.sessions) { SessionListView() }
                 .offset(y: isAnimating ? 0 : 800)
                 .animation(.easeInOut(duration: 0.4).delay(lastSession != nil ? animationDelay * 3 : animationDelay * 2), value: isAnimating)
             }

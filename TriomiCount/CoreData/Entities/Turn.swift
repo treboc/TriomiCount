@@ -14,9 +14,9 @@ public class Turn: NSManagedObject {}
 
 extension Turn {
   @NSManaged public var createdOn: Date?
-  @NSManaged public var game: Game?
+  @NSManaged public var game: Session?
 
-  convenience init(_ game: Game) {
+  convenience init(_ game: Session) {
     self.init(context: PersistentStore.shared.context)
     self.game = game
     self.wrappedCreatedOn = Date()

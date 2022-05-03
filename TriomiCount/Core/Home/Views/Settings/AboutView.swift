@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct AboutSection: View {
+struct AboutView: View {
   let twitterUrl = URL(string: "https://twitter.com/treb0c")!
   let githubUrl = URL(string: "https://github.com/treboc")!
 
   var body: some View {
-    List {
+    VStack {
       HStack(spacing: 20) {
         Image("github-logo")
           .resizable()
@@ -20,6 +20,7 @@ struct AboutSection: View {
           .frame(width: 32, height: 32)
 
         Link("treboc @ GitHub", destination: githubUrl)
+          .font(.headline)
       }
 
       HStack(spacing: 20) {
@@ -29,6 +30,7 @@ struct AboutSection: View {
           .frame(width: 32, height: 32)
 
         Link("treb0c @ Twitter", destination: twitterUrl)
+          .font(.headline)
       }
     }
   }
@@ -36,6 +38,6 @@ struct AboutSection: View {
 
 struct AboutView_Previews: PreviewProvider {
   static var previews: some View {
-    AboutSection()
+    AboutView()
   }
 }

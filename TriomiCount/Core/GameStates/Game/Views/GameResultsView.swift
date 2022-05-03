@@ -14,21 +14,21 @@ struct GameResultsView: View {
   var body: some View {
     ZStack {
       VStack {
-        Text(L10n.GameResultsView.gameResults)
+        Text(L10n.SessionResultsView.sessionResults)
           .font(.largeTitle)
           .fontWeight(.semibold)
           .padding(.bottom, 20)
 
         HStack {
-          Text(L10n.GameResultsView.name)
+          Text(L10n.SessionResultsView.name)
             .font(.title2)
           Spacer()
-          Text(L10n.GameResultsView.points)
+          Text(L10n.SessionResultsView.points)
         }
 
         Divider()
 
-        ForEach(viewModel.game.playersArray.sorted(by: { $0.currentScore > $1.currentScore })) { player in
+        ForEach(viewModel.session.playersArray.sorted(by: { $0.currentScore > $1.currentScore })) { player in
           HStack {
             Text(player.wrappedName)
               .font(.title2)

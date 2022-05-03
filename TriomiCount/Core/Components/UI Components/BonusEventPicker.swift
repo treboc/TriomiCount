@@ -16,7 +16,7 @@ struct BonusEventPicker: View {
         viewModel.bonusEventPickerOverlayIsShown = true
       }
     }
-//    .animation(.none, value: viewModel.bonusEvent.rawValue)
+    .animation(.none, value: viewModel.bonusEvent.rawValue)
     .buttonStyle(.offsetStyle)
     .onChange(of: viewModel.bonusEvent) { _ in
       HapticManager.shared.impact(style: .light)

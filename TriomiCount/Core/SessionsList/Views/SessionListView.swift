@@ -8,10 +8,10 @@
 import SwiftUI
 import CoreData
 
-struct GamesListView: View {
+struct SessionListView: View {
   @Environment(\.dismiss) var dismiss
-  @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Game.hasEnded, ascending: true)],
-                animation: .default) private var games: FetchedResults<Game>
+  @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Session.hasEnded, ascending: true)],
+                animation: .default) private var sessions: FetchedResults<Session>
 
   var body: some View {
     ZStack {
@@ -19,7 +19,7 @@ struct GamesListView: View {
         .ignoresSafeArea()
 
       VStack {
-        Text(L10n.games)
+        Text(L10n.sessions)
           .foregroundColor(.white)
           .multilineTextAlignment(.center)
           .padding()
@@ -33,7 +33,7 @@ struct GamesListView: View {
           .padding(.horizontal)
 
         ScrollView {
-          ForEach(games) { game in
+          ForEach(sessions) { game in
             NavigationLink {
               GameDetailView(game: game)
             } label: {
@@ -58,7 +58,7 @@ struct GamesListView: View {
 
   struct GamesListView_Previews: PreviewProvider {
     static var previews: some View {
-      GamesListView()
+      SessionListView()
     }
   }
 }

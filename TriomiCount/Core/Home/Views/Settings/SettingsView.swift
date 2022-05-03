@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
   @Environment(\.dismiss) var dismiss
-  @AppStorage(Settings.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
+  @AppStorage(SettingsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
 
   var body: some View {
     NavigationView {
@@ -31,9 +31,7 @@ struct SettingsView: View {
           rulesSection
         }
 
-        Section("Contact me") {
-          AboutSection()
-        }
+        Section(footer: footer, content: { EmptyView() })
       }
       .toolbar(content: {
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -57,6 +55,20 @@ extension SettingsView {
       RulesSection(sectionHeader: L10n.Rules.EndOfGame.header, sectionBody: L10n.Rules.EndOfGame.body)
       RulesSection(sectionHeader: L10n.Rules.BonusPoints.header, sectionBody: L10n.Rules.BonusPoints.body)
     }
+  }
+
+  private var footer: some View {
+    VStack(spacing: 10) {
+      Text("Made with ☕️ and 💚 by")
+        .font(.headline)
+      Text("Marvin Lee")
+        .font(.subheadline.bold())
+      Text("Version 1.0.0")
+
+      AboutView()
+
+    }
+    .frame(maxWidth: .infinity, alignment: .center)
   }
 }
 

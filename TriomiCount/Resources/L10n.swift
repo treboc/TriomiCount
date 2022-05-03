@@ -20,8 +20,6 @@ internal enum L10n {
   internal static let backToMainMenu = L10n.tr("Localizable", "backToMainMenu")
   /// Cancel
   internal static let cancel = L10n.tr("Localizable", "cancel")
-  /// Games
-  internal static let games = L10n.tr("Localizable", "games")
   /// , and 
   internal static let joinStringAnd = L10n.tr("Localizable", "joinStringAnd")
   /// Next
@@ -38,6 +36,8 @@ internal enum L10n {
   internal static let score = L10n.tr("Localizable", "score")
   /// Session Overview
   internal static let sessionOverview = L10n.tr("Localizable", "sessionOverview")
+  /// Sessions
+  internal static let sessions = L10n.tr("Localizable", "sessions")
   /// Submit
   internal static let submit = L10n.tr("Localizable", "submit")
   /// Yes
@@ -64,139 +64,35 @@ internal enum L10n {
     }
   }
 
-  internal enum EndGameConfirmationDialogue {
+  internal enum EndSessionConfirmationDialogue {
     /// No one can place a tile.
-    internal static let messageTie = L10n.tr("Localizable", "endGameConfirmationDialogue.messageTie")
+    internal static let messageTie = L10n.tr("Localizable", "endSessionConfirmationDialogue.messageTie")
     /// %@ played out the last tile.
     internal static func messageWinner(_ p1: Any) -> String {
-      return L10n.tr("Localizable", "endGameConfirmationDialogue.messageWinner %@", String(describing: p1))
+      return L10n.tr("Localizable", "endSessionConfirmationDialogue.messageWinner %@", String(describing: p1))
     }
-    /// The game will end
-    internal static let title = L10n.tr("Localizable", "endGameConfirmationDialogue.title")
+    /// The session will end
+    internal static let title = L10n.tr("Localizable", "endSessionConfirmationDialogue.title")
   }
 
-  internal enum ExitGameAlert {
+  internal enum ExitSessionAlert {
     /// Yes, I'm sure.
-    internal static let buttonTitle = L10n.tr("Localizable", "exitGameAlert.buttonTitle")
-    /// You're about to leave the game. It's possible that it is not saved..
-    internal static let message = L10n.tr("Localizable", "exitGameAlert.message")
+    internal static let buttonTitle = L10n.tr("Localizable", "exitSessionAlert.buttonTitle")
+    /// You're about to leave the session. It's possible that it is not saved..
+    internal static let message = L10n.tr("Localizable", "exitSessionAlert.message")
     /// Are you sure?
-    internal static let title = L10n.tr("Localizable", "exitGameAlert.title")
-  }
-
-  internal enum GameDetailView {
-    /// Played with
-    internal static let playedWith = L10n.tr("Localizable", "gameDetailView.playedWith")
-    /// Points
-    internal static let points = L10n.tr("Localizable", "gameDetailView.points")
-    /// Winner
-    internal static let won = L10n.tr("Localizable", "gameDetailView.won")
-  }
-
-  internal enum GameListRowView {
-    /// Played with:
-    internal static let playedBy = L10n.tr("Localizable", "gameListRowView.playedBy")
-    /// Session
-    internal static let session = L10n.tr("Localizable", "gameListRowView.session")
-  }
-
-  internal enum GameListView {
-    /// Sessions
-    internal static let sessions = L10n.tr("Localizable", "gameListView.sessions")
-    internal enum Button {
-      /// Back to Main Menu
-      internal static let backToMainMenu = L10n.tr("Localizable", "gameListView.button.backToMainMenu")
-    }
-  }
-
-  internal enum GameOnboardingView {
-    /// Add New Player
-    internal static let addNewPlayer = L10n.tr("Localizable", "gameOnboardingView.addNewPlayer")
-    /// Back to Main Menu
-    internal static let backToMainMenu = L10n.tr("Localizable", "gameOnboardingView.backToMainMenu")
-    /// Please chose the players who are participating in the game.
-    internal static let participationHeaderText = L10n.tr("Localizable", "gameOnboardingView.participationHeaderText")
-    /// Start Game
-    internal static let startGame = L10n.tr("Localizable", "gameOnboardingView.startGame")
-  }
-
-  internal enum GameResultsView {
-    /// Game Results
-    internal static let gameResults = L10n.tr("Localizable", "gameResultsView.gameResults")
-    /// Name
-    internal static let name = L10n.tr("Localizable", "gameResultsView.name")
-    /// Points
-    internal static let points = L10n.tr("Localizable", "gameResultsView.points")
-    internal enum MainMenuButton {
-      /// Main menu
-      internal static let labelText = L10n.tr("Localizable", "gameResultsView.mainMenuButton.labelText")
-    }
-  }
-
-  internal enum GameView {
-    internal enum BonusEventPicker {
-      /// Bridge
-      internal static let bridge = L10n.tr("Localizable", "gameView.bonusEventPicker.bridge")
-      /// Hexagon
-      internal static let hexagon = L10n.tr("Localizable", "gameView.bonusEventPicker.hexagon")
-      /// Do you get some bonus points?
-      internal static let labelText = L10n.tr("Localizable", "gameView.bonusEventPicker.labelText")
-      /// None
-      internal static let `none` = L10n.tr("Localizable", "gameView.bonusEventPicker.none")
-      /// Three Hexagons
-      internal static let threeHexagons = L10n.tr("Localizable", "gameView.bonusEventPicker.threeHexagons")
-      /// Two Hexagons
-      internal static let twoHexagons = L10n.tr("Localizable", "gameView.bonusEventPicker.twoHexagons")
-    }
-    internal enum DrawnToggle {
-      /// Did you have to draw a card?
-      internal static let labelText = L10n.tr("Localizable", "gameView.drawnToggle.labelText")
-    }
-    internal enum EndGameButton {
-      /// End Game
-      internal static let labelText = L10n.tr("Localizable", "gameView.endGameButton.labelText")
-    }
-    internal enum ExitGameButton {
-      /// Exit Game
-      internal static let labelText = L10n.tr("Localizable", "gameView.exitGameButton.labelText")
-    }
-    internal enum HeaderLabel {
-      /// This turn
-      internal static let thisTurnScore = L10n.tr("Localizable", "gameView.headerLabel.thisTurnScore")
-      /// Total score
-      internal static let totalScore = L10n.tr("Localizable", "gameView.headerLabel.totalScore")
-    }
-    internal enum NextPlayerButton {
-      /// Next Player
-      internal static let labelText = L10n.tr("Localizable", "gameView.nextPlayerButton.labelText")
-    }
-    internal enum PlayedCardPicker {
-      /// Were you able to play the card?
-      internal static let labelText = L10n.tr("Localizable", "gameView.playedCardPicker.labelText")
-      /// No
-      internal static let no = L10n.tr("Localizable", "gameView.playedCardPicker.no")
-      /// Yes
-      internal static let yes = L10n.tr("Localizable", "gameView.playedCardPicker.yes")
-    }
-    internal enum ScoreSlider {
-      /// How many points is your card worth?
-      internal static let labelText = L10n.tr("Localizable", "gameView.scoreSlider.labelText")
-    }
-    internal enum TimesDrawnPicker {
-      /// How often did you have to draw?
-      internal static let labelText = L10n.tr("Localizable", "gameView.timesDrawnPicker.labelText")
-    }
+    internal static let title = L10n.tr("Localizable", "exitSessionAlert.title")
   }
 
   internal enum HomeView {
-    /// Games
-    internal static let games = L10n.tr("Localizable", "homeView.games")
-    /// New Game
-    internal static let newGame = L10n.tr("Localizable", "homeView.newGame")
+    /// New Session
+    internal static let newSession = L10n.tr("Localizable", "homeView.newSession")
     /// Players
     internal static let players = L10n.tr("Localizable", "homeView.players")
     /// Resume
     internal static let resume = L10n.tr("Localizable", "homeView.resume")
+    /// Sessions
+    internal static let sessions = L10n.tr("Localizable", "homeView.sessions")
   }
 
   internal enum PlayerDetailView {
@@ -208,10 +104,10 @@ internal enum L10n {
     internal static let lastScore = L10n.tr("Localizable", "playerDetailView.lastScore")
     /// Name
     internal static let name = L10n.tr("Localizable", "playerDetailView.name")
-    /// Number Of Games Played
-    internal static let numberOfGamesPlayed = L10n.tr("Localizable", "playerDetailView.numberOfGamesPlayed")
-    /// Number Of Games Won
-    internal static let numberOfGamesWon = L10n.tr("Localizable", "playerDetailView.numberOfGamesWon")
+    /// Number Of Sessions Played
+    internal static let numberOfSessionsPlayed = L10n.tr("Localizable", "playerDetailView.numberOfSessionsPlayed")
+    /// Number Of Sessions Won
+    internal static let numberOfSessionsWon = L10n.tr("Localizable", "playerDetailView.numberOfSessionsWon")
     internal enum BackButton {
       /// Back
       internal static let title = L10n.tr("Localizable", "playerDetailView.backButton.title")
@@ -295,6 +191,110 @@ internal enum L10n {
       internal static let body = L10n.tr("Localizable", "rules.setup.body")
       /// Setup
       internal static let header = L10n.tr("Localizable", "rules.setup.header")
+    }
+  }
+
+  internal enum SessionDetailView {
+    /// Played with
+    internal static let playedWith = L10n.tr("Localizable", "sessionDetailView.playedWith")
+    /// Points
+    internal static let points = L10n.tr("Localizable", "sessionDetailView.points")
+    /// Winner
+    internal static let won = L10n.tr("Localizable", "sessionDetailView.won")
+  }
+
+  internal enum SessionListRowView {
+    /// Played with:
+    internal static let playedBy = L10n.tr("Localizable", "sessionListRowView.playedBy")
+    /// Session
+    internal static let session = L10n.tr("Localizable", "sessionListRowView.session")
+  }
+
+  internal enum SessionListView {
+    /// Sessions
+    internal static let sessions = L10n.tr("Localizable", "sessionListView.sessions")
+    internal enum Button {
+      /// Back to Main Menu
+      internal static let backToMainMenu = L10n.tr("Localizable", "sessionListView.button.backToMainMenu")
+    }
+  }
+
+  internal enum SessionOnboardingView {
+    /// Add New Player
+    internal static let addNewPlayer = L10n.tr("Localizable", "sessionOnboardingView.addNewPlayer")
+    /// Back to Main Menu
+    internal static let backToMainMenu = L10n.tr("Localizable", "sessionOnboardingView.backToMainMenu")
+    /// Please chose the players who are participating in the session.
+    internal static let participationHeaderText = L10n.tr("Localizable", "sessionOnboardingView.participationHeaderText")
+    /// Start Session
+    internal static let startSession = L10n.tr("Localizable", "sessionOnboardingView.startSession")
+  }
+
+  internal enum SessionResultsView {
+    /// Name
+    internal static let name = L10n.tr("Localizable", "sessionResultsView.name")
+    /// Points
+    internal static let points = L10n.tr("Localizable", "sessionResultsView.points")
+    /// Session Results
+    internal static let sessionResults = L10n.tr("Localizable", "sessionResultsView.sessionResults")
+    internal enum MainMenuButton {
+      /// Main menu
+      internal static let labelText = L10n.tr("Localizable", "sessionResultsView.mainMenuButton.labelText")
+    }
+  }
+
+  internal enum SessionView {
+    internal enum BonusEventPicker {
+      /// Bridge
+      internal static let bridge = L10n.tr("Localizable", "sessionView.bonusEventPicker.bridge")
+      /// Hexagon
+      internal static let hexagon = L10n.tr("Localizable", "sessionView.bonusEventPicker.hexagon")
+      /// Do you get some bonus points?
+      internal static let labelText = L10n.tr("Localizable", "sessionView.bonusEventPicker.labelText")
+      /// None
+      internal static let `none` = L10n.tr("Localizable", "sessionView.bonusEventPicker.none")
+      /// Three Hexagons
+      internal static let threeHexagons = L10n.tr("Localizable", "sessionView.bonusEventPicker.threeHexagons")
+      /// Two Hexagons
+      internal static let twoHexagons = L10n.tr("Localizable", "sessionView.bonusEventPicker.twoHexagons")
+    }
+    internal enum DrawnToggle {
+      /// Did you have to draw a card?
+      internal static let labelText = L10n.tr("Localizable", "sessionView.drawnToggle.labelText")
+    }
+    internal enum EndSessionButton {
+      /// End Session
+      internal static let labelText = L10n.tr("Localizable", "sessionView.endSessionButton.labelText")
+    }
+    internal enum ExitSessionButton {
+      /// Exit Session
+      internal static let labelText = L10n.tr("Localizable", "sessionView.exitSessionButton.labelText")
+    }
+    internal enum HeaderLabel {
+      /// This turn
+      internal static let thisTurnScore = L10n.tr("Localizable", "sessionView.headerLabel.thisTurnScore")
+      /// Total score
+      internal static let totalScore = L10n.tr("Localizable", "sessionView.headerLabel.totalScore")
+    }
+    internal enum NextPlayerButton {
+      /// Next Player
+      internal static let labelText = L10n.tr("Localizable", "sessionView.nextPlayerButton.labelText")
+    }
+    internal enum PlayedCardPicker {
+      /// Were you able to play the card?
+      internal static let labelText = L10n.tr("Localizable", "sessionView.playedCardPicker.labelText")
+      /// No
+      internal static let no = L10n.tr("Localizable", "sessionView.playedCardPicker.no")
+      /// Yes
+      internal static let yes = L10n.tr("Localizable", "sessionView.playedCardPicker.yes")
+    }
+    internal enum ScoreSlider {
+      /// How many points is your card worth?
+      internal static let labelText = L10n.tr("Localizable", "sessionView.scoreSlider.labelText")
+    }
+    internal enum TimesDrawnPicker {
+      /// How often did you have to draw?
+      internal static let labelText = L10n.tr("Localizable", "sessionView.timesDrawnPicker.labelText")
     }
   }
 

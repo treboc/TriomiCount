@@ -9,7 +9,7 @@ import Inject
 import SwiftUI
 
 struct GameListRowView: View {
-  let game: Game
+  let game: Session
 
   var body: some View {
     ZStack(alignment: .topLeading) {
@@ -19,11 +19,11 @@ struct GameListRowView: View {
 
       HStack(alignment: .top) {
         VStack(alignment: .leading, spacing: 3) {
-          Text("\(L10n.GameListRowView.session) #\(game.id)")
+          Text("\(L10n.SessionListRowView.session) #\(game.id)")
             .font(.headline.bold())
 
           HStack(alignment: .firstTextBaseline) {
-            Text(L10n.GameListRowView.playedBy)
+            Text(L10n.SessionListRowView.playedBy)
               .bold()
             Text(game.playedBy)
               .multilineTextAlignment(.leading)
@@ -52,6 +52,6 @@ struct GameListRowView: View {
 
 struct GameListRowView_Previews: PreviewProvider {
     static var previews: some View {
-      GameListRowView(game: Game.allGames().first!)
+      GameListRowView(game: Session.allGames().first!)
     }
 }
