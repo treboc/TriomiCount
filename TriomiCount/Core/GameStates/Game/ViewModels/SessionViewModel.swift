@@ -48,7 +48,13 @@ class SessionViewModel: ObservableObject {
 
   // 2) calculate the current points the player gets for laying the card
   @Published var scoreSliderValue: Float = 0
-  @Published var timesDrawn: Int = 0
+  @Published var timesDrawn: Int = 0 {
+    didSet {
+      if timesDrawn != 3 {
+        playedCard = true
+      }
+    }
+  }
   @Published var playedCard: Bool = true
   @Published var bonusEvent: BonusEvent = .none
   @Published var bonusEventPickerOverlayIsShown = false
