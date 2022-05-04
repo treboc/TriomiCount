@@ -1,5 +1,5 @@
 //
-//  GameResultsView.swift
+//  SessionResultsView.swift
 //  TriomiCount
 //
 //  Created by Marvin Lee Kobert on 28.02.22.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct GameResultsView: View {
-  @EnvironmentObject var viewModel: GameViewModel
+struct SessionResultsView: View {
+  @EnvironmentObject var viewModel: SessionViewModel
   @EnvironmentObject var appState: AppState
 
   var body: some View {

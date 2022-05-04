@@ -14,14 +14,14 @@ public class Turn: NSManagedObject {}
 
 extension Turn {
   @NSManaged public var createdOn: Date?
-  @NSManaged public var game: Session?
+  @NSManaged public var session: Session?
 
-  convenience init(_ game: Session) {
+  convenience init(_ session: Session) {
     self.init(context: PersistentStore.shared.context)
-    self.game = game
+    self.session = session
     self.wrappedCreatedOn = Date()
 
-    if let players = game.players {
+    if let players = session.players {
       self.addToPlayersInTurn(players)
     }
   }

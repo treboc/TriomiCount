@@ -1,5 +1,5 @@
 //
-//  GameDetailView.swift
+//  SessionDetailView.swift
 //  TriomiCount
 //
 //  Created by Marvin Lee Kobert on 31.03.22.
@@ -9,9 +9,9 @@ import CoreData
 import Inject
 import SwiftUI
 
-struct GameDetailView: View {
+struct SessionDetailView: View {
   @Environment(\.dismiss) var dismiss
-  let game: Session
+  let session: Session
 
   var body: some View {
     ZStack(alignment: .topLeading) {
@@ -20,25 +20,25 @@ struct GameDetailView: View {
 
       VStack(alignment: .center) {
         HStack {
-          Text("\(L10n.SessionListRowView.session) #\(game.id)")
+          Text("\(L10n.SessionListRowView.session) #\(session.id)")
         }
         .font(.title.bold())
         .padding()
         .frame(maxWidth: .infinity)
 
-        GameDetailSection(L10n.SessionDetailView.playedWith) {
-          Text(game.playedBy)
+        SessionDetailSection(L10n.SessionDetailView.playedWith) {
+          Text(session.playedBy)
         }
 
-        if game.winner != nil {
-          GameDetailSection(L10n.SessionDetailView.won) {
-            Text(game.winner ?? "Unknown")
+        if session.winner != nil {
+          SessionDetailSection(L10n.SessionDetailView.won) {
+            Text(session.winner ?? "Unknown")
           }
         }
 
-        GameDetailSection(L10n.SessionDetailView.points) {
+        SessionDetailSection(L10n.SessionDetailView.points) {
           VStack(alignment: .leading) {
-            ForEach(SessionScore.getGameScoreDictWith(gameKey: game.objectID.uriRepresentation().absoluteString)!) { dict in
+            ForEach(SessionScore.getSessionScoreDictWith(sessionKey: session.objectID.uriRepresentation().absoluteString)!) { dict in
               HStack {
                 Text(dict.playerName)
                   .frame(minWidth: 50, alignment: .leading)
@@ -71,12 +71,12 @@ struct GameDetailView: View {
 
 struct GameDetailView_Previews: PreviewProvider {
     static var previews: some View {
-      GameDetailView(game: Session.allGames().first!)
+      SessionDetailView(session: Session.getAllSessions().first!)
     }
 }
 
-extension GameDetailView {
-  struct GameDetailSection<Content: View>: View {
+extension SessionDetailView {
+  struct SessionDetailSection<Content: View>: View {
     let sectionTitle: String
     let content: Content
 

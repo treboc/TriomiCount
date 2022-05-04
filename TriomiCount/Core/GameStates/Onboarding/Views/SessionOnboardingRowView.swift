@@ -1,5 +1,5 @@
 //
-//  NewGameChoosePlayerListRowView.swift
+//  SessionOnboardingRowView.swift
 //  TriomiCount
 //
 //  Created by Marvin Lee Kobert on 25.01.22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GameOnboardingRowView: View {
+struct SessionOnboardingRowView: View {
   let player: Player
   let position: Int?
   let height: CGFloat = UIScreen.main.bounds.height / 16

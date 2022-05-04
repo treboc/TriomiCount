@@ -53,6 +53,7 @@ struct OffsetOnTapStyle: ButtonStyle {
         secondaryColor
           .frame(height: height)
           .cornerRadius(20)
+          .shadow(color: secondaryColor.opacity(0.5), radius: 10, x: 0, y: 0)
       )
       .animation(.none, value: configuration.isPressed)
       .onChange(of: configuration.isPressed) { newValue in

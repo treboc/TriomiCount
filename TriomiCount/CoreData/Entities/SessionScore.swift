@@ -44,11 +44,10 @@ extension SessionScore {
 extension SessionScore: Identifiable {}
 
 extension SessionScore {
-  // finds an NSManagedObject with the given GameID (there should only be one, really)
-  class func getGameScoreDictWith(gameKey: String, context: NSManagedObjectContext = PersistentStore.shared.context) -> [SessionScore]? {
+  class func getSessionScoreDictWith(sessionKey: String, context: NSManagedObjectContext = PersistentStore.shared.context) -> [SessionScore]? {
     let fetchRequest: NSFetchRequest<SessionScore> =
     NSFetchRequest<SessionScore>(entityName: SessionScore.description())
-    fetchRequest.predicate = NSPredicate(format: "gameKey == %@", gameKey as CVarArg)
+    fetchRequest.predicate = NSPredicate(format: "sessionKey == %@", sessionKey as CVarArg)
     do {
       let results = try context.fetch(fetchRequest)
       return results
@@ -58,10 +57,10 @@ extension SessionScore {
     return nil
   }
 
-  class func getSessionScoresWith(gameKey: NSManagedObjectID, context: NSManagedObjectContext = PersistentStore.shared.context) -> [SessionScore]? {
+  class func getSessionScoresWith(sessionKey: NSManagedObjectID, context: NSManagedObjectContext = PersistentStore.shared.context) -> [SessionScore]? {
     let fetchRequest: NSFetchRequest<SessionScore> =
     NSFetchRequest<SessionScore>(entityName: SessionScore.description())
-    fetchRequest.predicate = NSPredicate(format: "gameKey == %@", gameKey as CVarArg)
+    fetchRequest.predicate = NSPredicate(format: "sessionKey == %@", sessionKey as CVarArg)
     do {
       let results = try context.fetch(fetchRequest)
       return results

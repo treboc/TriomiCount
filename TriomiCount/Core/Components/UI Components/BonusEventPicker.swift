@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BonusEventPicker: View {
-  @ObservedObject var viewModel: GameViewModel
+  @ObservedObject var viewModel: SessionViewModel
 
   var body: some View {
     Button(viewModel.bonusEvent.rawValue) {
@@ -24,7 +24,7 @@ struct BonusEventPicker: View {
   }
 
   struct SelectionOverlay: View {
-    @ObservedObject var viewModel: GameViewModel
+    @ObservedObject var viewModel: SessionViewModel
 
     var body: some View {
       ZStack {
@@ -36,7 +36,7 @@ struct BonusEventPicker: View {
           }
 
         VStack(spacing: 15) {
-          ForEach(GameViewModel.BonusEvent.allCases, id: \.self) { bonusEvent in
+          ForEach(SessionViewModel.BonusEvent.allCases, id: \.self) { bonusEvent in
             Button(bonusEvent.rawValue) {
               viewModel.bonusEvent = bonusEvent
               viewModel.bonusEventPickerOverlayIsShown = false

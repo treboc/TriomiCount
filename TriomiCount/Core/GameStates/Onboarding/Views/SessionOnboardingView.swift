@@ -1,5 +1,5 @@
 //
-//  NewGameChoosePlayerView.swift
+//  SessionOnboardingView.swift
 //  TriomiCount
 //
 //  Created by Marvin Lee Kobert on 25.01.22.
@@ -8,8 +8,8 @@
 import SwiftUI
 import PageSheetCore
 
-struct GameOnboardingView: View {
-  @StateObject var viewModel: GameOnboardingViewModel = GameOnboardingViewModel()
+struct SessionOnboardingView: View {
+  @StateObject var viewModel: SessionOnboardingViewModel = SessionOnboardingViewModel()
   @Environment(\.dismiss) private var dismiss
   @State private var showAddPlayerPage: Bool = false
 
@@ -37,7 +37,7 @@ struct GameOnboardingView: View {
 
         ScrollView {
           ForEach(players) { player in
-            GameOnboardingRowView(player: player, position: viewModel.getPosition(ofChosenPlayer: player))
+            SessionOnboardingRowView(player: player, position: viewModel.getPosition(ofChosenPlayer: player))
               .contentShape(Rectangle())
               .onTapGesture { viewModel.toggleIsChosenState(player) }
               .padding(.horizontal)
@@ -50,7 +50,7 @@ struct GameOnboardingView: View {
           }
 
           PushStyledNavigationLink(title: L10n.SessionOnboardingView.startSession) {
-            GameMainView(viewModel: GameViewModel(viewModel.chosenPlayers))
+            SessionMainView(viewModel: SessionViewModel(viewModel.chosenPlayers))
           }
           .disabled(viewModel.chosenPlayers.isEmpty)
 
@@ -75,17 +75,17 @@ struct GameOnboardingView: View {
   }
 }
 
-struct GameOnboardingView_Previews: PreviewProvider {
+struct SessionOnboardingView_Previews: PreviewProvider {
   static var previews: some View {
     Group {
       NavigationView {
-        GameOnboardingView()
+        SessionOnboardingView()
           .navigationBarHidden(true)
           .preferredColorScheme(.dark)
       }
 
       NavigationView {
-        GameOnboardingView()
+        SessionOnboardingView()
           .navigationBarHidden(true)
           .preferredColorScheme(.light)
       }

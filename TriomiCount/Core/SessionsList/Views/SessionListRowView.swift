@@ -1,5 +1,5 @@
 //
-//  GameListRowView.swift
+//  SessionListRowView.swift
 //  TriomiCount
 //
 //  Created by Marvin Lee Kobert on 05.04.22.
@@ -8,8 +8,8 @@
 import Inject
 import SwiftUI
 
-struct GameListRowView: View {
-  let game: Session
+struct SessionListRowView: View {
+  let session: Session
 
   var body: some View {
     ZStack(alignment: .topLeading) {
@@ -19,13 +19,13 @@ struct GameListRowView: View {
 
       HStack(alignment: .top) {
         VStack(alignment: .leading, spacing: 3) {
-          Text("\(L10n.SessionListRowView.session) #\(game.id)")
+          Text("\(L10n.SessionListRowView.session) #\(session.id)")
             .font(.headline.bold())
 
           HStack(alignment: .firstTextBaseline) {
             Text(L10n.SessionListRowView.playedBy)
               .bold()
-            Text(game.playedBy)
+            Text(session.playedBy)
               .multilineTextAlignment(.leading)
           }
           .font(.subheadline)
@@ -33,7 +33,7 @@ struct GameListRowView: View {
 
         Spacer()
 
-        Text(game.startedOnAsString)
+        Text(session.startedOnAsString)
           .font(.caption)
       }
       .foregroundColor(.white)
@@ -50,8 +50,8 @@ struct GameListRowView: View {
 #endif
 }
 
-struct GameListRowView_Previews: PreviewProvider {
+struct SessionListRowView_Previews: PreviewProvider {
     static var previews: some View {
-      GameListRowView(game: Session.allGames().first!)
+      SessionListRowView(session: Session.getAllSessions().first!)
     }
 }

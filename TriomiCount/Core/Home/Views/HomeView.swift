@@ -39,13 +39,13 @@ struct HomeView: View {
             VStack(spacing: 15) {
               if let lastSession = lastSession {
                 PushStyledNavigationLink(title: L10n.HomeView.resume) {
-                  GameMainView(viewModel: GameViewModel(lastGame: lastSession))
+                  SessionMainView(viewModel: SessionViewModel(lastSession: lastSession))
                 }
                 .offset(y: isAnimating ? 0 : 800)
                 .animation(.easeInOut(duration: 0.4), value: isAnimating)
               }
 
-              PushStyledNavigationLink(title: L10n.HomeView.newSession) { GameOnboardingView()
+              PushStyledNavigationLink(title: L10n.HomeView.newSession) { SessionOnboardingView()
                 .id(appState.onboardingScreen)
               }
               .offset(y: isAnimating ? 0 : 800)
@@ -53,7 +53,7 @@ struct HomeView: View {
               PushStyledNavigationLink(title: L10n.HomeView.players) { PlayerListView() }
                 .offset(y: isAnimating ? 0 : 800)
                 .animation(.easeInOut(duration: 0.4).delay(lastSession != nil ? animationDelay * 2 : animationDelay), value: isAnimating)
-              PushStyledNavigationLink(title: L10n.HomeView.sessions) { SessionListView() }
+              PushStyledNavigationLink(title: L10n.HomeView.sessions) { SessionsListView() }
                 .offset(y: isAnimating ? 0 : 800)
                 .animation(.easeInOut(duration: 0.4).delay(lastSession != nil ? animationDelay * 3 : animationDelay * 2), value: isAnimating)
             }

@@ -1,5 +1,5 @@
 //
-//  GamesListView.swift
+//  SessionsListView.swift
 //  TriomiCount
 //
 //  Created by Marvin Lee Kobert on 04.03.22.
@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-struct SessionListView: View {
+struct SessionsListView: View {
   @Environment(\.dismiss) var dismiss
   @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Session.hasEnded, ascending: true)],
                 animation: .default) private var sessions: FetchedResults<Session>
@@ -33,11 +33,11 @@ struct SessionListView: View {
           .padding(.horizontal)
 
         ScrollView {
-          ForEach(sessions) { game in
+          ForEach(sessions) { session in
             NavigationLink {
-              GameDetailView(game: game)
+              SessionDetailView(session: session)
             } label: {
-              GameListRowView(game: game)
+              SessionListRowView(session: session)
             }
             .padding(.horizontal)
           }
@@ -56,9 +56,9 @@ struct SessionListView: View {
     }
   }
 
-  struct GamesListView_Previews: PreviewProvider {
+  struct SessionsListView_Previews: PreviewProvider {
     static var previews: some View {
-      SessionListView()
+      SessionsListView()
     }
   }
 }

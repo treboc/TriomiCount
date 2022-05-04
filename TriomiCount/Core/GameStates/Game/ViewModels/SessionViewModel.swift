@@ -1,5 +1,5 @@
 //
-//  GameViewModel.swift
+//  SessionViewModel.swift
 //  TriomiCount
 //
 //  Created by Marvin Lee Kobert on 22.01.22.
@@ -8,20 +8,20 @@
 import Foundation
 import SwiftUI
 
-class GameViewModel: ObservableObject {
-  enum GameState: Equatable {
+class SessionViewModel: ObservableObject {
+  enum SessionState: Equatable {
     case exited
     case playing
-    case isEnding
-    case ended
+    case willEnd
+    case didEnd
   }
 
-  // MARK: - GameState Playing
+  // MARK: - SessionState Playing
   let store = PersistentStore.shared
   let context = PersistentStore.shared.context
 
   @Published var session: Session
-  @Published var gameState: GameState = .playing
+  @Published var sessionState: SessionState = .playing
   var currentPlayerOnTurn: Player? {
     let playerCount = session.playersArray.count
     let turnsCount = session.turnsArray.count
@@ -36,10 +36,10 @@ class GameViewModel: ObservableObject {
     return nil
   }
 
-  @AppStorage("gameID") var gameID: Int = 0
+  @AppStorage("sessionID") var sessionID: Int = 0
 
-  init(lastGame: Session) {
-    self.session = lastGame
+  init(lastSession: Session) {
+    self.session = lastSession
   }
 
   init(_ players: [Player]) {
@@ -104,11 +104,10 @@ class GameViewModel: ObservableObject {
     updateScore(of: currentPlayerOnTurn, with: calculatedScore)
 
     // append the actual turn to the turns-array to keep track of the turns,
-    // but also in the childViewContext, so that if the game is set back all models are untouched
     let newTurn = Turn(session)
     session.addToTurns(newTurn)
 
-    saveGameState()
+    saveSessionState()
     resetTurnState()
   }
 
@@ -118,19 +117,10 @@ class GameViewModel: ObservableObject {
     }
   }
 
-  // MARK: - GameState Ending
-  // Game will end
-  // 1) setting up some needed properties
-  // 2) get the last player, who was on turn when the game ended, because he gets bonus points
-  //    and all the points left of the other players
-  // 3) filter out all other players into their own array
-  // 4) loop over this array to ask for their points left on their hand
-  // 5) after getting points from the last player, call endGame(), to calculate all the points,
-  //    saving them and then step over to display the GameResultsView
-
-  // Alert for ending and exiting the game
-  @Published var showEndGameAlert: Bool = false
-  @Published var showExitGameAlert: Bool = false
+  // MARK: - SessionState Ending
+  // Alert for ending and exiting the session
+  @Published var showEndSessionAlert: Bool = false
+  @Published var showExitSessionAlert: Bool = false
 
   var lastPlayer: Player?
   @Published var playersWithoutLastPlayer: [Player] = []
@@ -139,18 +129,18 @@ class GameViewModel: ObservableObject {
   @Published var scoreOfPlayersWithoutLastPlayer: Int64 = 0
   @Published var isTie: Bool = false
 
-  func endingGame() {
+  func sessionWillEnd() {
     lastPlayer = currentPlayerOnTurn
-    if session.players?.count == 1 { endGame() }
+    if session.players?.count == 1 { endSession() }
 
     playersWithoutLastPlayer = session.playersArray.filter({ $0 != currentPlayerOnTurn })
 
     if isTie {
-      endGame()
+      endSession()
     } else {
       if let player = playersWithoutLastPlayer.first {
         playerToAskForPoints = player
-        gameState = .isEnding
+        sessionState = .willEnd
       }
     }
   }
@@ -166,15 +156,13 @@ class GameViewModel: ObservableObject {
     if playerToAskForPointsIndex < playersWithoutLastPlayer.count {
       playerToAskForPoints = playersWithoutLastPlayer[playerToAskForPointsIndex]
     } else {
-      endGame()
+      endSession()
     }
   }
 
-  // MARK: - GameState Ended
+  // MARK: - SessionState Ended
 
-  func endGame() {
-    // Currently: For every player, save the current score to the highscore, if it's higher.
-    // Want to: End the game, get all points correctly and only save the players highscore, if it's a new record.
+  func endSession() {
     if let lastPlayer = lastPlayer {
       if !isTie {
         // 25 extra points for placing the last tile
@@ -196,16 +184,16 @@ class GameViewModel: ObservableObject {
         _ = SessionScore.init(sessionKey: session.objectID.uriRepresentation().absoluteString, player: player)
       }
 
-      gameID += 1
-      session.id = Int16(gameID)
+      sessionID += 1
+      session.id = Int16(sessionID)
 
       session.hasEnded = true
-      gameState = .ended
+      sessionState = .didEnd
       store.saveContext(context: context)
     }
   }
 
-  func saveGameState() {
+  func saveSessionState() {
     if session.hasChanges {
       store.saveContext(context: context)
     }

@@ -117,7 +117,7 @@ extension Session {
 // MARK: - Class Functions
 extension Session {
   /// 1) get all not yet finished sessions
-  /// 2) make sure, there's atleast one not finished game
+  /// 2) make sure, there's atleast one not finished session
   /// 3) loop over all, delete all but not the latest
 
   class func getLastNotFinishedSession(context: NSManagedObjectContext) -> Session? {
@@ -142,7 +142,7 @@ extension Session {
     return nil
   }
 
-  class func allGames() -> [Session] {
+  class func getAllSessions() -> [Session] {
     return allObjects(context: PersistentStore.shared.context) as? [Session] ?? []
   }
 }

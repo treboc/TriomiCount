@@ -1,5 +1,5 @@
 //
-//  GameView.swift
+//  SessionView.swift
 //  TriomiCount
 //
 //  Created by Marvin Lee Kobert on 19.03.22.
@@ -8,8 +8,8 @@
 import Inject
 import SwiftUI
 
-struct GameView: View {
-  @StateObject var viewModel: GameViewModel
+struct SessionView: View {
+  @StateObject var viewModel: SessionViewModel
   @EnvironmentObject var appState: AppState
   @AppStorage(SettingsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
   @State private var isAnimated: Bool = false
@@ -30,8 +30,8 @@ struct GameView: View {
         VStack {
           nextPlayerButton
           HStack {
-            exitGameButton
-            endGameButton
+            exitSessionButton
+            endSessionButton
           }
         }
       }
@@ -43,21 +43,21 @@ struct GameView: View {
       .onAppear(perform: viewModel.resetTurnState)
       .tint(.primaryAccentColor)
       .padding()
-      .alert(L10n.ExitSessionAlert.title, isPresented: $viewModel.showExitGameAlert) {
+      .alert(L10n.ExitSessionAlert.title, isPresented: $viewModel.showExitSessionAlert) {
         Button(L10n.cancel, role: .cancel) {}
-        Button(action: { exitGame() },
+        Button(action: { exitSession() },
                label: { Text(L10n.ExitSessionAlert.buttonTitle) }
         )
       } message: {
         Text(L10n.ExitSessionAlert.message)
       }
-      .confirmationDialog(L10n.EndSessionConfirmationDialogue.title, isPresented: $viewModel.showEndGameAlert, titleVisibility: .visible) {
-        Button(action: { viewModel.endingGame() },
+      .confirmationDialog(L10n.EndSessionConfirmationDialogue.title, isPresented: $viewModel.showEndSessionAlert, titleVisibility: .visible) {
+        Button(action: { viewModel.sessionWillEnd() },
                label: { Text(L10n.EndSessionConfirmationDialogue.messageWinner(viewModel.currentPlayerOnTurn?.wrappedName ?? "Unknown")) }
         )
         Button(L10n.EndSessionConfirmationDialogue.messageTie) {
           viewModel.isTie = true
-          viewModel.endingGame()
+          viewModel.sessionWillEnd()
         }
       }
       .onAppear {
@@ -84,7 +84,7 @@ struct GameView: View {
 }
 
 // MARK: UI Components
-extension GameView {
+extension SessionView {
   private var header: some View {
     VStack(alignment: .center, spacing: 10) {
       Text(viewModel.currentPlayerOnTurn?.wrappedName ?? "Unknown")
@@ -214,20 +214,20 @@ extension GameView {
     .buttonStyle(.offsetStyle)
   }
 
-  private var exitGameButton: some View {
+  private var exitSessionButton: some View {
     Button(L10n.SessionView.ExitSessionButton.labelText) {
       if viewModel.session.turnsArray.count > 0 {
-        viewModel.showExitGameAlert.toggle()
+        viewModel.showExitSessionAlert.toggle()
       } else {
-        exitGame()
+        exitSession()
       }
     }
     .buttonStyle(.offsetStyle)
   }
 
-  private var endGameButton: some View {
+  private var endSessionButton: some View {
     Button(L10n.SessionView.EndSessionButton.labelText) {
-      viewModel.showEndGameAlert.toggle()
+      viewModel.showEndSessionAlert.toggle()
       HapticManager.shared.notification(type: .success)
     }
     .buttonStyle(.offsetStyle)
@@ -304,7 +304,7 @@ extension GameView {
 }
 
 // MARK: - UI Methods
-extension GameView {
+extension SessionView {
   private func toggleScaleAnimation() {
     isAnimated = true
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -312,7 +312,7 @@ extension GameView {
     }
   }
 
-  func exitGame() {
+  func exitSession() {
     appState.homeViewID = UUID()
     HapticManager.shared.impact(style: .medium)
   }

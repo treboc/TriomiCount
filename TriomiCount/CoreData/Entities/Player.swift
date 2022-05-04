@@ -91,9 +91,9 @@ extension Player {
     return request
   }
 
-  func getPlayerScore(ofGame gameID: NSManagedObjectID) -> Int64? {
-    if let gameScores = SessionScore.getSessionScoresWith(gameKey: gameID) {
-      return gameScores.first { $0.playerID == self.objectID.description }?.scoreValue
+  func getPlayerScore(ofSession sessionID: NSManagedObjectID) -> Int64? {
+    if let sessionScores = SessionScore.getSessionScoresWith(sessionKey: sessionID) {
+      return sessionScores.first { $0.playerID == self.objectID.description }?.scoreValue
     }
     return nil
   }

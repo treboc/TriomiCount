@@ -1,5 +1,5 @@
 //
-//  GameMainView.swift
+//  SessionMainView.swift
 //  TriomiCount
 //
 //  Created by Marvin Lee Kobert on 22.01.22.
@@ -8,8 +8,8 @@
 import SwiftUI
 import SFSafeSymbols
 
-struct GameMainView: View {
-  @StateObject var viewModel: GameViewModel
+struct SessionMainView: View {
+  @StateObject var viewModel: SessionViewModel
   @EnvironmentObject var appState: AppState
 
   // MARK: Body
@@ -18,19 +18,19 @@ struct GameMainView: View {
       Color.primaryBackground
         .ignoresSafeArea()
 
-      switch viewModel.gameState {
+      switch viewModel.sessionState {
       case .playing:
-        GameView(viewModel: viewModel)
-      case .isEnding:
+        SessionView(viewModel: viewModel)
+      case .willEnd:
         ZStack {
-          GameView(viewModel: viewModel)
+          SessionView(viewModel: viewModel)
             .blur(radius: 10)
             .allowsHitTesting(false)
           PointsSubmitView()
             .environmentObject(viewModel)
         }
-      case .ended:
-        GameResultsView()
+      case .didEnd:
+        SessionResultsView()
           .environmentObject(viewModel)
       case .exited:
         Text("Game was exited.")
@@ -43,7 +43,7 @@ struct GameMainView: View {
 
 struct PlayerView_Previews: PreviewProvider {
   static var previews: some View {
-    GameMainView(viewModel: GameViewModel(Player.allPlayers()))
+    SessionMainView(viewModel: SessionViewModel(Player.allPlayers()))
       .environment(\.managedObjectContext, PersistentStore.preview.context)
   }
 }

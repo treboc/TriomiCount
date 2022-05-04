@@ -1,5 +1,5 @@
 //
-//  GameOnboardingViewModel.swift
+//  SessionOnboardingViewModel.swift
 //  TriomiCount
 //
 //  Created by Marvin Lee Kobert on 26.01.22.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class GameOnboardingViewModel: ObservableObject {
+class SessionOnboardingViewModel: ObservableObject {
     @Published var chosenPlayers: [Player] = []
 
     func toggleIsChosenState(_ player: Player) {

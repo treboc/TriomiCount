@@ -1,5 +1,5 @@
 //
-//  SubmitPointsAfterGameView.swift
+//  PointsSubmitView.swift
 //  TriomiCount
 //
 //  Created by Marvin Lee Kobert on 26.02.22.
@@ -8,9 +8,8 @@
 import SwiftUI
 import Combine
 
-// MARK: - Components / Properties / Views for GameEndingState
 struct PointsSubmitView: View {
-  @EnvironmentObject var viewModel: GameViewModel
+  @EnvironmentObject var viewModel: SessionViewModel
   @FocusState private var textFieldIsFocused: Bool
   @State var endPoints: String = ""
   @State var endPointsIsInt: Bool = true
@@ -96,7 +95,7 @@ struct PointsSubmitView: View {
   }
 }
 
-struct SubmitPointsAfterGameView_Previews: PreviewProvider {
+struct PointsSubmitView_Previews: PreviewProvider {
   static var previews: some View {
     PointsSubmitView()
   }
