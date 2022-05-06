@@ -23,21 +23,20 @@ struct CircularOffsetStyle: ButtonStyle {
   }
 
   func makeBody(configuration: Configuration) -> some View {
-    configuration.label
-      .frame(width: 40, height: 40)
-      .background(primaryColor)
-      .clipShape(Circle())
-      .foregroundColor(.white)
-      .font(.headline.bold())
-      .overlay(
-        Circle()
-          .strokeBorder(Color.secondaryBackground, lineWidth: 2)
-      )
-      .offset(y: configuration.isPressed ? 0 : -4)
-      .background(
-        secondaryColor
-          .frame(height: 40)
-          .clipShape(Circle())
-      )
+    ZStack {
+      Circle()
+        .fill(primaryColor.opacity(0.25))
+        .frame(width: 40, height: 40)
+        .shadow(color: .black.opacity(0.8), radius: configuration.isPressed ? 0 : 3, x: 0, y: 0)
+        .animation(.easeIn(duration: 0.1), value: configuration.isPressed)
+
+      configuration.label
+        .frame(width: 40, height: 40)
+        .background(primaryColor)
+        .clipShape(Circle())
+        .foregroundColor(.white)
+        .font(.headline.bold())
+        .offset(y: configuration.isPressed ? 0 : -4)
+    }
   }
 }

@@ -63,6 +63,7 @@ struct PlayerListView: View {
       .pageSheet(isPresented: $showAddPlayerPage) {
         AddNewPlayerView()
           .sheetPreference(.detents([PageSheet.Detent.medium()]))
+          .sheetPreference(.cornerRadius(20))
           .sheetPreference(.grabberVisible(true))
       }
       .navigationBarHidden(true)

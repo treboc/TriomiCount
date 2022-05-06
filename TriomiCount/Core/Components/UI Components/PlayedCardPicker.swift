@@ -33,7 +33,7 @@ struct PlayedCardPicker: View {
     @Binding var timesDrawn: Int
     let action: () -> Void
 
-    let height: CGFloat = UIScreen.main.bounds.height / 18
+    let height: CGFloat = 55
 
     var isSelected: Bool {
       if title == L10n.yes && selection {
@@ -44,8 +44,11 @@ struct PlayedCardPicker: View {
       return false
     }
 
-    var backgroundColor: Color {
-      isSelected ? .secondaryAccentColor : .tertiaryBackground
+    var firstBackgroundColor: Color {
+      isSelected ? Color.secondaryAccentColor : Color.primaryAccentColor
+    }
+    var secondBackgroundColor: Color {
+      isSelected ? .secondaryAccentColor : .tertiaryAccentColor
     }
 
     var body: some View {
@@ -53,19 +56,17 @@ struct PlayedCardPicker: View {
         .font(.headline)
         .frame(height: height)
         .frame(maxWidth: .infinity)
-        .background(isSelected ? Color.primaryAccentColor : Color.secondaryBackground)
+        .background(firstBackgroundColor)
         .cornerRadius(20)
         .foregroundColor(.white)
         .font(.headline.bold())
-        .overlay(
-          RoundedRectangle(cornerRadius: 20, style: .continuous)
-            .strokeBorder(Color.secondaryBackground, lineWidth: 2)
-        )
         .offset(y: (isSelected ? 0 : -4))
         .background(
-          backgroundColor
+          secondBackgroundColor
+            .opacity(0.25)
             .frame(height: height)
             .cornerRadius(20)
+            .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 0)
         )
         .onTapGesture {
           if timesDrawn == 3 {

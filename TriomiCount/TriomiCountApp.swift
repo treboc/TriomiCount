@@ -40,7 +40,6 @@ struct TriomiCountApp: App {
     if PersistentStore.shared.context.hasChanges {
       do {
         try PersistentStore.shared.context.save()
-        print("saved!")
       } catch let error as NSError {
         print("Error saving state on going to background \(error.localizedDescription)")
       }

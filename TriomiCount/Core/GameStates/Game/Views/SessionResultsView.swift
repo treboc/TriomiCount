@@ -21,20 +21,17 @@ struct SessionResultsView: View {
 
         HStack {
           Text(L10n.SessionResultsView.name)
-            .font(.title2)
           Spacer()
           Text(L10n.SessionResultsView.points)
         }
+        .font(.title2)
 
         Divider()
 
         ForEach(viewModel.session.playersArray.sorted(by: { $0.currentScore > $1.currentScore })) { player in
           HStack {
             Text(player.wrappedName)
-              .font(.title2)
-
             Spacer()
-
             Text("\(player.currentScore) Pts.")
           }
         }

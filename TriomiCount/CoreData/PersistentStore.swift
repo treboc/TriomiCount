@@ -15,6 +15,7 @@ final class PersistentStore: ObservableObject {
   let persistentContainer: NSPersistentContainer
 
   init(inMemory: Bool = false) {
+    ColorValueTransformer.register()
     persistentContainer = NSPersistentContainer(name: "TriomiCount")
     if inMemory {
       persistentContainer.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
@@ -67,44 +68,10 @@ final class PersistentStore: ObservableObject {
     if context.hasChanges {
       do {
         try context.save()
+        print("saved")
       } catch let error as NSError {
         NSLog("Unresolved error saving context: \(error), \(error.userInfo)")
       }
     }
   }
-
-//  func childViewContext() -> NSManagedObjectContext {
-//    let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-//    context.parent = self.context
-//    return context
-//  }
-//
-//  func newTemporaryInstance<T: NSManagedObject>(in context: NSManagedObjectContext) -> T {
-//    return T(context: context)
-//  }
-//
-//  func copyForEditing<T: NSManagedObject>(of object: T,
-//                                          in context: NSManagedObjectContext) -> T {
-//    guard let object = (try? context.existingObject(with: object.objectID)) as? T else {
-//      fatalError("Requested copy of a managed object that doesn't exist.")
-//    }
-//    return object
-//  }
-
-//  func persist(_ object: NSManagedObject) {
-//    guard let objectContext = object.managedObjectContext else { return }
-//    do {
-//      try objectContext.save()
-//    } catch let error {
-//      print(error)
-//    }
-//
-//    if let parent = objectContext.parent {
-//      do {
-//        try parent.save()
-//      } catch let error as NSError {
-//        print(error)
-//      }
-//    }
-//  }
 }

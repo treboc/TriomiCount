@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreData
+import UIKit
+import SwiftUI
 
 @objc(Player)
 public class Player: NSManagedObject {
@@ -25,6 +27,7 @@ extension Player {
   @NSManaged public var sessionsWon: Int16
   @NSManaged public var playerInTurn: Turn?
   @NSManaged public var sessionScores: [String]?
+  @NSManaged public var favoriteColor: UIColor?
 
   convenience init(name: String, position: Int16, context: NSManagedObjectContext) {
     self.init(context: context)
@@ -64,6 +67,11 @@ extension Player {
   public var wrappedSessionScores: [String] {
     get { sessionScores ?? [] }
     set { sessionScores = newValue }
+  }
+
+  public var wrappedFavoriteColor: UIColor {
+    get { favoriteColor ?? Color.tertiaryBackgroundUIColor }
+    set { favoriteColor = newValue }
   }
 
   // MARK: - Computed Properties
@@ -119,11 +127,12 @@ extension Player {
     return true
   }
 
-  class func addNewPlayer(name: String) {
+  class func addNewPlayer(name: String, favoriteColor: UIColor) {
     let context = PersistentStore.shared.context
     let newPlayer = Player(context: context)
     newPlayer.wrappedName = name
     newPlayer.wrappedCreatedOn = Date()
+    newPlayer.favoriteColor = favoriteColor
     newPlayer.sessionsPlayed = 0
     newPlayer.sessionsWon = 0
     PersistentStore.shared.saveContext(context: context)

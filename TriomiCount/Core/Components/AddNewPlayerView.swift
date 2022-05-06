@@ -17,6 +17,7 @@ struct AddNewPlayerView: View {
 
   @State private var nameIsValid: Bool = false
   @State private var nameTextFieldText: String = ""
+  @State private var favoriteColor: UIColor = UIColor.FavoriteColors.colors.first!
 
   var body: some View {
     ZStack {
@@ -24,15 +25,6 @@ struct AddNewPlayerView: View {
         .ignoresSafeArea()
 
       VStack(alignment: .leading, spacing: 30) {
-        HStack {
-          Spacer()
-          Button(L10n.cancel) {
-            dismiss()
-          }
-          .foregroundColor(.primaryAccentColor)
-          .padding(.top)
-        }
-
         Spacer()
 
         Text(L10n.AddNewPlayerView.NameLabel.labelText)
@@ -77,6 +69,9 @@ struct AddNewPlayerView: View {
             }
           })
           .overlayedAlert(with: alertMessage, bool: nameIsValid)
+          .overlay(nameTextFieldText.isEmpty ? nil : deleteButton, alignment: .trailing)
+
+        FavoriteColorPicker(favoriteColor: $favoriteColor)
 
         Button {
           createPlayer()
@@ -98,6 +93,11 @@ struct AddNewPlayerView: View {
         Text(alertMessage)
       }
     }
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button("Tesst") {}
+      }
+    }
   }
 
   func focusTextField() {
@@ -110,7 +110,7 @@ struct AddNewPlayerView: View {
     nameTextFieldText = nameTextFieldText.trimmingCharacters(in: .whitespacesAndNewlines)
 
     if nameTextFieldText.isValidName {
-      Player.addNewPlayer(name: nameTextFieldText)
+      Player.addNewPlayer(name: nameTextFieldText, favoriteColor: favoriteColor)
       dismiss()
     } else {
       HapticManager.shared.notification(type: .error)
@@ -122,5 +122,44 @@ struct AddNewPlayerView: View {
 struct AddNewPlayerView_Previews: PreviewProvider {
   static var previews: some View {
     AddNewPlayerView()
+  }
+}
+
+extension AddNewPlayerView {
+  private var deleteButton: some View {
+    Button(action: {
+      nameTextFieldText.removeAll()
+    }, label: {
+      Image(systemSymbol: .xCircle)
+        .font(.headline)
+        .foregroundColor(.white)
+    })
+    .padding(.trailing, 30)
+  }
+
+  struct FavoriteColorPicker: View {
+    @Binding var favoriteColor: UIColor
+
+    var body: some View {
+      ScrollView(.horizontal, showsIndicators: false) {
+        HStack {
+          ForEach(UIColor.FavoriteColors.colors, id: \.self) { color in
+            Circle()
+              .fill(
+                LinearGradient(colors: [Color(uiColor: color).opacity(0.5), Color(uiColor: color)], startPoint: .topLeading, endPoint: .bottomTrailing)
+              )
+              .frame(width: 32, height: 32)
+              .overlay(Circle().strokeBorder(favoriteColor == color ? .gray : .label, lineWidth: favoriteColor == color ? 2 : 0))
+              .onTapGesture { favoriteColor = color }
+          }
+        }
+        .padding()
+      }
+      .frame(height: 55)
+      .frame(maxWidth: .infinity)
+      .background(Color.secondaryBackground)
+      .clipShape(RoundedRectangle(cornerRadius: 20))
+      .padding(.horizontal, 20)
+    }
   }
 }

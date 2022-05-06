@@ -8,6 +8,7 @@
 import Foundation
 
 struct SettingsKeys {
+  // SettingsKeys for @AppStorage usage
   static let selectedAppearance = "selectedAppearance"
   static let idleDimmingDisabled = "idleDimmingDisabled"
 }

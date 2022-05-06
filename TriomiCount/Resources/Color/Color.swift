@@ -42,4 +42,8 @@ extension Color {
   public static var tertiaryBackground: Color {
     Color("TertiaryBackground")
   }
+
+  public static var tertiaryBackgroundUIColor: UIColor {
+    UIColor(named: "TertiaryBackground") ?? .clear
+  }
 }

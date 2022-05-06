@@ -18,31 +18,22 @@ struct SessionView: View {
     return viewModel.bonusEventPickerOverlayIsShown || sessionOverviewIsShown
   }
 
-  @State private var overlayIsShown2 = false
-
   var body: some View {
     ZStack(alignment: .top) {
-      VStack {
+      LinearGradient(colors: [Color(uiColor: viewModel.currentPlayerOnTurn?.wrappedFavoriteColor ?? .clear), .clear, .clear], startPoint: .top, endPoint: .bottom)
+        .ignoresSafeArea()
+
+      VStack(spacing: 0) {
         header
         Spacer(minLength: 10)
         center
         Spacer(minLength: 10)
-        VStack {
-          nextPlayerButton
-          HStack {
-            exitSessionButton
-            endSessionButton
-          }
-        }
+        buttonStack
       }
-      .blur(radius: overlayIsShown ? 2 : 0)
-      .animation(.none, value: overlayIsShown)
-
-      .allowsHitTesting(overlayIsShown ? false : true)
+      .blur(radius: sessionOverviewIsShown ? 2 : 0)
+      .scaleEffect(sessionOverviewIsShown ? 0.95 : 1)
       .scaleEffect(isAnimated ? 1.05 : 1.0)
       .onAppear(perform: viewModel.resetTurnState)
-      .tint(.primaryAccentColor)
-      .padding()
       .alert(L10n.ExitSessionAlert.title, isPresented: $viewModel.showExitSessionAlert) {
         Button(L10n.cancel, role: .cancel) {}
         Button(action: { exitSession() },
@@ -69,18 +60,25 @@ struct SessionView: View {
         UIApplication.shared.isIdleTimerDisabled = false
       }
 
-      BonusEventPicker.SelectionOverlay(viewModel: viewModel)
-
-      SessionOverview(players: viewModel.session.playersArray, sessionOverviewIsShown: $sessionOverviewIsShown)
-        .offset(x: 0, y: sessionOverviewIsShown ? 0 : -800)
+      if sessionOverviewIsShown {
+        SessionOverview(players: viewModel.session.playersArray)
+          .zIndex(1)
+          .transition(.move(edge: .top))
+          .onTapGesture {
+            withAnimation {
+              sessionOverviewIsShown.toggle()
+            }
+          }
+      }
     }
+    .ignoresSafeArea(.all, edges: .top)
     .animation(.default, value: isAnimated)
     .enableInjection()
-  }
+}
 
-  #if DEBUG
-  @ObservedObject private var iO = Inject.observer
-  #endif
+#if DEBUG
+@ObservedObject private var iO = Inject.observer
+#endif
 }
 
 // MARK: UI Components
@@ -114,16 +112,17 @@ extension SessionView {
         .lineLimit(1)
       }
     }
-    .foregroundColor(.white)
-    .animation(.none, value: viewModel.currentPlayerOnTurn)
     .padding()
-    .frame(maxWidth: .infinity)
-    .background(Color.secondaryBackground)
-    .cornerRadius(20)
-    .overlay(
-      RoundedRectangle(cornerRadius: 20)
-        .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
+    .padding(.top, 30)
+    .background(
+      Rectangle()
+        .fill(.ultraThinMaterial)
+        .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
+        .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 3)
     )
+    .foregroundColor(.label)
+    .animation(.none, value: viewModel.currentPlayerOnTurn)
+    .frame(maxWidth: .infinity)
     .onTapGesture {
       withAnimation {
         sessionOverviewIsShown.toggle()
@@ -132,23 +131,46 @@ extension SessionView {
   }
 
   private var center: some View {
-    VStack(spacing: 10) {
-      scoreSliderStack
-      divider
-      timesDrawnStack
-      divider
-      playedCardStack
-      divider
-      bonusEventStack
+    ZStack {
+      if !viewModel.bonusEventPickerOverlayIsShown {
+        VStack(spacing: 10) {
+          scoreSliderStack
+          divider
+          timesDrawnStack
+          divider
+          playedCardStack
+          divider
+          bonusEventStack
+        }
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(
+          RoundedRectangle(cornerRadius: 20)
+            .fill(.ultraThinMaterial)
+            .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 0)
+        )
+        .overlay( circularResetButton.scaleEffect(0.8), alignment: .topTrailing )
+        .padding(.horizontal)
+        .transition(.move(edge: .leading))
+      }
+
+      if viewModel.bonusEventPickerOverlayIsShown {
+        BonusEventPicker.SelectionOverlay(viewModel: viewModel)
+          .transition(.move(edge: .trailing))
+          .zIndex(1)
+      }
     }
-    .padding()
-    .frame(maxWidth: .infinity)
-    .cornerRadius(20)
-    .overlay(
-      RoundedRectangle(cornerRadius: 20)
-        .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
-    )
-    .overlay( circularResetButton.scaleEffect(0.8), alignment: .topTrailing )
+  }
+
+  private var buttonStack: some View {
+    VStack {
+      nextPlayerButton
+      HStack {
+        exitSessionButton
+        endSessionButton
+      }
+    }
+    .padding([.horizontal, .bottom])
   }
 
   private var scoreSliderStack: some View {
@@ -247,11 +269,10 @@ extension SessionView {
 
   struct SessionOverview: View {
     let players: [Player]
-    @Binding var sessionOverviewIsShown: Bool
 
     var body: some View {
       ZStack(alignment: .top) {
-        Color.black.opacity(0.01).ignoresSafeArea()
+        Color.black.opacity(0.001)
 
         VStack {
           Text(L10n.sessionOverview)
@@ -276,20 +297,15 @@ extension SessionView {
             .font(.title3)
           }
         }
-        .padding(50)
+        .padding(.top, 30)
         .frame(maxWidth: .infinity)
-        .background(Color.primaryBackground)
-        .cornerRadius(20)
-        .overlay(
-          RoundedRectangle(cornerRadius: 20)
-            .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
+        .padding()
+        .background(
+          Rectangle()
+            .fill(.ultraThinMaterial)
+            .cornerRadius(20, corners: [.bottomRight, .bottomLeft])
+            .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 3)
         )
-      }
-      .padding(.horizontal)
-      .onTapGesture {
-        withAnimation {
-          sessionOverviewIsShown = false
-        }
       }
     }
 

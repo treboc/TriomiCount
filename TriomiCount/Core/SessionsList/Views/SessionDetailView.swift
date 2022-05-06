@@ -28,6 +28,7 @@ struct SessionDetailView: View {
 
         SessionDetailSection(L10n.SessionDetailView.playedWith) {
           Text(session.playedBy)
+            .multilineTextAlignment(.leading)
         }
 
         if session.winner != nil {

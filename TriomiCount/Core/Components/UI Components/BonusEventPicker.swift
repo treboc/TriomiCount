@@ -27,44 +27,38 @@ struct BonusEventPicker: View {
     @ObservedObject var viewModel: SessionViewModel
 
     var body: some View {
-      ZStack {
-        Color.black.opacity(0.01).ignoresSafeArea()
-          .onTapGesture {
+      VStack(spacing: 15) {
+        ForEach(SessionViewModel.BonusEvent.allCases, id: \.self) { bonusEvent in
+          Button(bonusEvent.rawValue) {
             withAnimation {
-              viewModel.bonusEventPickerOverlayIsShown = false
-            }
-          }
-
-        VStack(spacing: 15) {
-          ForEach(SessionViewModel.BonusEvent.allCases, id: \.self) { bonusEvent in
-            Button(bonusEvent.rawValue) {
               viewModel.bonusEvent = bonusEvent
               viewModel.bonusEventPickerOverlayIsShown = false
             }
-            .buttonStyle(.offsetStyle)
           }
+          .buttonStyle(.offsetStyle)
+          .padding(.horizontal)
         }
-        .padding(50)
-        .frame(maxWidth: .infinity)
-        .background(Color.primaryBackground)
-        .overlay(
-          RoundedRectangle(cornerRadius: 20)
-            .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
-        )
-        .overlay(
-          Button(action: {
-            viewModel.bonusEventPickerOverlayIsShown = false
-          }, label: {
-            Label("Close BonusEventPicker", systemImage: "xmark")
-              .labelStyle(.iconOnly)
-          })
-            .buttonStyle(.circularOffsetStyle)
-            .padding(5)
-            .scaleEffect(0.8), alignment: .topTrailing
-        )
-        .padding(.horizontal, 50)
       }
-      .offset(y: viewModel.bonusEventPickerOverlayIsShown ? 0 : 900)
+      .padding()
+      .frame(maxWidth: .infinity)
+      .background(
+        RoundedRectangle(cornerRadius: 20)
+          .fill(.ultraThinMaterial)
+          .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 0)
+      )
+      .padding(.horizontal)
+    }
+
+    private var closeButton: some View {
+      Button(action: {
+        viewModel.bonusEventPickerOverlayIsShown = false
+      }, label: {
+        Label("Close BonusEventPicker", systemImage: "xmark")
+          .labelStyle(.iconOnly)
+      })
+      .buttonStyle(.circularOffsetStyle)
+      .padding(5)
+      .scaleEffect(0.8)
     }
   }
 }

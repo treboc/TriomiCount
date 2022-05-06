@@ -27,15 +27,18 @@ struct TimesDrawnPicker: View {
   struct ButtonToPick: View {
     let number: Int
     @Binding var selection: Int
-    let height: CGFloat = UIScreen.main.bounds.height / 18
+    let height: CGFloat = 55
 
     var isToggled: Bool {
       number == selection
     }
 
     let action: () -> Void
-    var backgroundColor: Color {
-      isToggled ? .secondaryAccentColor : .tertiaryBackground
+    var firstBackgroundColor: Color {
+      isToggled ? Color.secondaryAccentColor : Color.primaryAccentColor
+    }
+    var secondBackgroundColor: Color {
+      isToggled ? .secondaryAccentColor : .tertiaryAccentColor
     }
 
     var body: some View {
@@ -43,19 +46,17 @@ struct TimesDrawnPicker: View {
         .font(.headline)
         .frame(height: height)
         .frame(maxWidth: .infinity)
-        .background(isToggled ? Color.primaryAccentColor : Color.tertiaryBackground)
-        .cornerRadius(15)
+        .background(firstBackgroundColor)
+        .cornerRadius(20)
         .foregroundColor(.white)
         .font(.headline.bold())
-        .overlay(
-          RoundedRectangle(cornerRadius: 15, style: .continuous)
-            .stroke(Color.secondaryBackground, lineWidth: 2)
-        )
         .offset(y: isToggled ? 0 : -4)
         .background(
-          backgroundColor
+          secondBackgroundColor
+            .opacity(0.25)
             .frame(height: height)
-            .cornerRadius(15)
+            .cornerRadius(20)
+            .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 0)
         )
         .onTapGesture {
           action()

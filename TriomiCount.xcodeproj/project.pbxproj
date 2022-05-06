@@ -54,6 +54,9 @@
 		08BE48F7279CA82E00EA431F /* SessionMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE48F6279CA82E00EA431F /* SessionMainView.swift */; };
 		08D562A427B30BA7009C72B1 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D562A327B30BA7009C72B1 /* View+Extension.swift */; };
 		08F6F36127E681A200FFBCFB /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F36027E681A200FFBCFB /* SessionView.swift */; };
+		8A06D67F282265540049EA9A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D67E282265540049EA9A /* UIColor+Extension.swift */; };
+		8A06D681282273F00049EA9A /* UIColorValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */; };
+		8A06D6832824FA160049EA9A /* RoundedCornerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */; };
 		8A5E01102813491E00703CE5 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E010F2813491E00703CE5 /* L10n.swift */; };
 		8A5E011228154B3200703CE5 /* SettingsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E011128154B3200703CE5 /* SettingsKeys.swift */; };
 		8A5E01142815A34800703CE5 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E01132815A34800703CE5 /* AppearanceManager.swift */; };
@@ -115,6 +118,9 @@
 		08BE48F6279CA82E00EA431F /* SessionMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionMainView.swift; sourceTree = "<group>"; };
 		08D562A327B30BA7009C72B1 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		08F6F36027E681A200FFBCFB /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
+		8A06D67E282265540049EA9A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorValueTransformer.swift; sourceTree = "<group>"; };
+		8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerModifier.swift; sourceTree = "<group>"; };
 		8A5E010F2813491E00703CE5 /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = L10n.swift; path = TriomiCount/Resources/L10n.swift; sourceTree = SOURCE_ROOT; };
 		8A5E011128154B3200703CE5 /* SettingsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsKeys.swift; sourceTree = "<group>"; };
 		8A5E01132815A34800703CE5 /* AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
@@ -169,6 +175,7 @@
 				0835129227DC123700065228 /* Player.swift */,
 				0835129027DC123700065228 /* Turn.swift */,
 				0835129527DC123700065228 /* SessionScore.swift */,
+				8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -238,6 +245,7 @@
 			children = (
 				087179DF27ADDD9A0005C074 /* NSManagedObject+Extensions.swift */,
 				0896440D27A527F30091C6F8 /* Color+Extenstion.swift */,
+				8A06D67E282265540049EA9A /* UIColor+Extension.swift */,
 				085B664327B02D00000CCC99 /* String+Extension.swift */,
 				08735D4027CEC5AE001571F5 /* Int64+Extension.swift */,
 				08D562A327B30BA7009C72B1 /* View+Extension.swift */,
@@ -426,6 +434,7 @@
 			children = (
 				083512A827DC15DA00065228 /* OffsetOnTapStyle.swift */,
 				08093A6727DD4CA90061352D /* CircularOffsetStyle.swift */,
+				8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */,
 			);
 			path = ButtonStyles;
 			sourceTree = "<group>";
@@ -544,7 +553,9 @@
 				083974DD27D2A172002B90E4 /* PushStyledNavigationLink.swift in Sources */,
 				08F6F36127E681A200FFBCFB /* SessionView.swift in Sources */,
 				089D478B27A1A89B000E3BA8 /* SessionOnboardingViewModel.swift in Sources */,
+				8A06D681282273F00049EA9A /* UIColorValueTransformer.swift in Sources */,
 				08735D4127CEC5AE001571F5 /* Int64+Extension.swift in Sources */,
+				8A06D6832824FA160049EA9A /* RoundedCornerModifier.swift in Sources */,
 				08A2C64327A34BBB0076C196 /* SettingsView.swift in Sources */,
 				8ACA06E827F596A0000F6D4C /* SessionDetailView.swift in Sources */,
 				08BE48F7279CA82E00EA431F /* SessionMainView.swift in Sources */,
@@ -582,6 +593,7 @@
 				08093A6827DD4CA90061352D /* CircularOffsetStyle.swift in Sources */,
 				087179E027ADDD9A0005C074 /* NSManagedObject+Extensions.swift in Sources */,
 				083512A927DC15DA00065228 /* OffsetOnTapStyle.swift in Sources */,
+				8A06D67F282265540049EA9A /* UIColor+Extension.swift in Sources */,
 				083974DB27D294F7002B90E4 /* SessionsListView.swift in Sources */,
 				8AB0179F27FC1F5B00FFEF46 /* BonusEventPicker.swift in Sources */,
 				08BBB1F627A08F98001CD3DF /* SessionOnboardingView.swift in Sources */,

@@ -26,6 +26,8 @@ I learn a lot better when building something, than rebuild the next to-do app or
     - [ ] work this into the gameView
 - [x] ~~some kind of quicklook feature in session (*maybe with tap on the header?*)~~
     - [ ] add some onboarding for this feature
+- [ ] feature: favorite color of player, choose on creating, edit in PlayerDetailView
+- [ ] color the GameView into player's favorite color?
 
 ## Screenshots
 <p float="left">
