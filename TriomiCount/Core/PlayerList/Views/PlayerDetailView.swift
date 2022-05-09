@@ -21,24 +21,27 @@ struct PlayerDetailView: View {
         PlayerInitialsCircle(player: player)
 
         ScrollView(.vertical, showsIndicators: false) {
-          PlayerDetailSection(L10n.PlayerDetailView.name) {
-            player.wrappedName
+          VStack {
+            PlayerDetailSection(L10n.PlayerDetailView.name) {
+              player.wrappedName
+            }
+            PlayerDetailSection(L10n.PlayerDetailView.highscore) {
+              "\(player.wrappedHighscore)"
+            }
+            PlayerDetailSection(L10n.PlayerDetailView.lastScore) {
+              "\(player.wrappedLastScore)"
+            }
+            PlayerDetailSection(L10n.PlayerDetailView.createdOn) {
+              "\(player.wrappedCreatedOn.formatted(date: .abbreviated, time: .omitted))"
+            }
+            PlayerDetailSection(L10n.PlayerDetailView.numberOfSessionsWon) {
+              "\(player.sessionsWon)"
+            }
+            PlayerDetailSection(L10n.PlayerDetailView.numberOfSessionsPlayed) {
+              "\(player.sessionsPlayed)"
+            }
           }
-          PlayerDetailSection(L10n.PlayerDetailView.highscore) {
-            "\(player.wrappedHighscore)"
-          }
-          PlayerDetailSection(L10n.PlayerDetailView.lastScore) {
-            "\(player.wrappedLastScore)"
-          }
-          PlayerDetailSection(L10n.PlayerDetailView.createdOn) {
-            "\(player.wrappedCreatedOn.formatted(date: .abbreviated, time: .omitted))"
-          }
-          PlayerDetailSection(L10n.PlayerDetailView.numberOfSessionsWon) {
-            "\(player.sessionsWon)"
-          }
-          PlayerDetailSection(L10n.PlayerDetailView.numberOfSessionsPlayed) {
-            "\(player.sessionsPlayed)"
-          }
+          .padding([.horizontal, .top], 20)
         }
 
         Spacer()
@@ -54,8 +57,8 @@ struct PlayerDetailView: View {
           }
           .buttonStyle(OffsetOnTapStyle(role: .destructive))
         }
+        .padding(.horizontal, 20)
       }
-      .padding([.horizontal, .top], 20)
       .padding(.bottom)
       .frame(maxWidth: .infinity, maxHeight: .infinity)
       .navigationTitle("")
@@ -102,15 +105,14 @@ extension PlayerDetailView {
         }
         Spacer()
       }
-      .foregroundColor(.white)
+      .foregroundColor(.primary)
       .multilineTextAlignment(.center)
       .padding()
       .frame(maxWidth: .infinity, maxHeight: 60)
-      .background(Color.secondaryBackground)
-      .cornerRadius(10)
-      .overlay(
-        RoundedRectangle(cornerRadius: 10)
-          .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
+      .background(
+        RoundedRectangle(cornerRadius: 20)
+          .fill(.ultraThinMaterial)
+          .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 0)
       )
     }
   }
@@ -121,10 +123,16 @@ extension PlayerDetailView {
     var body: some View {
       VStack {
         Circle()
-          .foregroundColor(.green)
+          .fill(
+            LinearGradient(colors: [
+              Color(uiColor: player.wrappedFavoriteColor),
+              Color(uiColor: player.wrappedFavoriteColor)
+            ], startPoint: .topLeading, endPoint: .bottomTrailing)
+          )
           .overlay(
             Text(player.wrappedName.initials)
               .font(.largeTitle)
+              .foregroundColor(player.wrappedFavoriteColor.isDarkColor ? .white : .black)
           )
           .frame(width: 100, height: 100)
           .overlay(

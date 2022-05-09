@@ -23,12 +23,13 @@ struct PointsSubmitView: View {
           Text(L10n.PointsSubmitView.labelText(viewModel.playerToAskForPoints!.wrappedName))
         }
         .font(.headline)
+
         TextField("e.g. 42", text: $endPoints)
           .padding(.leading, 10)
-          .frame(height: 55)
+          .frame(height: Constants.buttonHeight)
           .frame(maxWidth: .infinity)
           .background(Color("SecondaryAccentColor").opacity(0.3))
-          .cornerRadius(10)
+          .cornerRadius(Constants.cornerRadius)
           .keyboardType(.numberPad)
           .submitLabel(.go)
           .focused($textFieldIsFocused)
@@ -74,9 +75,9 @@ struct PointsSubmitView: View {
       }
       .padding()
       .background(
-        RoundedRectangle(cornerRadius: 10)
-          .stroke(Color.tertiaryBackground, lineWidth: 2)
-          .background(Color.primaryBackground)
+        RoundedRectangle(cornerRadius: Constants.cornerRadius)
+          .fill(.thinMaterial)
+          .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 3)
       )
       .onAppear {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

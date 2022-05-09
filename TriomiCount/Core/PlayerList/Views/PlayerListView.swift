@@ -23,18 +23,7 @@ struct PlayerListView: View {
         .ignoresSafeArea()
 
       VStack {
-        Text(L10n.players)
-          .foregroundColor(.white)
-          .multilineTextAlignment(.center)
-          .padding()
-          .frame(maxWidth: .infinity)
-          .background(Color.secondaryBackground)
-          .cornerRadius(20)
-          .overlay(
-            RoundedRectangle(cornerRadius: 20)
-              .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
-          )
-          .padding(.horizontal)
+        header
 
         ScrollView {
           ForEach(players) { player in
@@ -43,31 +32,61 @@ struct PlayerListView: View {
             } label: {
               PlayerListRowView(player: player)
             }
+            .buttonStyle(.offsetStyle)
             .padding(.horizontal)
           }
         }
-
-        VStack(spacing: 10) {
-          Button(L10n.addNewPlayer) {
-            showAddPlayerPage.toggle()
-          }
-
-          Button(L10n.backToMainMenu) {
-            dismiss()
-          }
-        }
-        .buttonStyle(.offsetStyle)
-        .padding(.horizontal)
       }
-      .padding(.vertical)
       .pageSheet(isPresented: $showAddPlayerPage) {
         AddNewPlayerView()
           .sheetPreference(.detents([PageSheet.Detent.medium()]))
           .sheetPreference(.cornerRadius(20))
           .sheetPreference(.grabberVisible(true))
       }
+      .onAppear {  }
       .navigationBarHidden(true)
     }
+  }
+}
+
+extension PlayerListView {
+  private var header: some View {
+    Text(L10n.players)
+      .glassStyled()
+      .overlay(
+        Button(action: {
+          dismiss()
+        }, label: {
+          Image(systemSymbol: .arrowBackward)
+            .font(.headline)
+            .foregroundColor(.primary)
+            .padding(.leading)
+        }), alignment: .leading
+      )
+      .overlay(
+        Button(action: {
+          showAddPlayerPage = true
+        }, label: {
+          Image(systemSymbol: .plus)
+            .font(.headline)
+            .foregroundColor(.primary)
+            .padding(.trailing)
+        }), alignment: .trailing
+      )
+  }
+
+  private var buttonStack: some View {
+    VStack(spacing: 10) {
+      Button(L10n.addNewPlayer) {
+        showAddPlayerPage.toggle()
+      }
+
+      Button(L10n.backToMainMenu) {
+        dismiss()
+      }
+    }
+    .buttonStyle(.offsetStyle)
+    .padding([.horizontal, .bottom])
   }
 }
 

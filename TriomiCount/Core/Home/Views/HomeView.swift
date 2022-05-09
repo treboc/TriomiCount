@@ -31,44 +31,39 @@ struct HomeView: View {
           .ignoresSafeArea()
 
         VStack {
-          settingsButton
-          VStack(spacing: 20) {
-            Spacer()
-            Logo()
-            Spacer(minLength: 20)
-            VStack(spacing: 15) {
-              if let lastSession = lastSession {
-                PushStyledNavigationLink(title: L10n.HomeView.resume) {
-                  SessionMainView(viewModel: SessionViewModel(lastSession: lastSession))
-                }
-                .offset(y: isAnimating ? 0 : 800)
-                .animation(.easeInOut(duration: 0.4), value: isAnimating)
-              }
-
-              PushStyledNavigationLink(title: L10n.HomeView.newSession) { SessionOnboardingView()
-                .id(appState.onboardingScreen)
+          Logo()
+          Spacer(minLength: 20)
+          VStack(spacing: 15) {
+            if let lastSession = lastSession {
+              PushStyledNavigationLink(title: L10n.HomeView.resume) {
+                SessionMainView(viewModel: SessionViewModel(lastSession: lastSession))
               }
               .offset(y: isAnimating ? 0 : 800)
-              .animation(.easeInOut(duration: 0.4).delay(lastSession != nil ? animationDelay : 0), value: isAnimating)
-              PushStyledNavigationLink(title: L10n.HomeView.players) { PlayerListView() }
-                .offset(y: isAnimating ? 0 : 800)
-                .animation(.easeInOut(duration: 0.4).delay(lastSession != nil ? animationDelay * 2 : animationDelay), value: isAnimating)
-              PushStyledNavigationLink(title: L10n.HomeView.sessions) { SessionsListView() }
-                .offset(y: isAnimating ? 0 : 800)
-                .animation(.easeInOut(duration: 0.4).delay(lastSession != nil ? animationDelay * 3 : animationDelay * 2), value: isAnimating)
+              .animation(.easeInOut(duration: 0.4), value: isAnimating)
             }
-            .frame(maxWidth: .infinity)
-            .padding(.horizontal, 50)
-            .padding(.bottom, 20)
-            Spacer()
-          }
-          .navigationBarHidden(true)
-          .tint(Color.primaryAccentColor)
-        }
 
+            PushStyledNavigationLink(title: L10n.HomeView.newSession) { SessionOnboardingView()
+                .id(appState.onboardingScreen)
+            }
+            .offset(y: isAnimating ? 0 : 800)
+            .animation(.easeInOut(duration: 0.4).delay(lastSession != nil ? animationDelay : 0), value: isAnimating)
+            PushStyledNavigationLink(title: L10n.HomeView.players) { PlayerListView() }
+              .offset(y: isAnimating ? 0 : 800)
+              .animation(.easeInOut(duration: 0.4).delay(lastSession != nil ? animationDelay * 2 : animationDelay), value: isAnimating)
+            PushStyledNavigationLink(title: L10n.HomeView.sessions) { SessionsListView() }
+              .offset(y: isAnimating ? 0 : 800)
+              .animation(.easeInOut(duration: 0.4).delay(lastSession != nil ? animationDelay * 3 : animationDelay * 2), value: isAnimating)
+          }
+          .frame(maxWidth: .infinity)
+          .padding(.horizontal, 50)
+          .padding(.bottom, 20)
+        }
+        .navigationBarHidden(true)
+        .tint(Color.primaryAccentColor)
         .onAppear {
           isAnimating = true
         }
+        .overlay(settingsButton, alignment: .topTrailing)
       }
     }
 
@@ -98,14 +93,10 @@ struct MainMenuView_Previews: PreviewProvider {
 // MARK: - Components
 extension HomeView {
   var settingsButton: some View {
-    HStack {
-      Spacer()
-
       Button("\(Image(systemSymbol: .wrenchAndScrewdriverFill))") {
         showSettings.toggle()
       }
       .buttonStyle(.circularOffsetStyle)
-    }
-    .padding()
+      .padding([.top, .trailing])
   }
 }

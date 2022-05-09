@@ -17,7 +17,7 @@ struct AddNewPlayerView: View {
 
   @State private var nameIsValid: Bool = false
   @State private var nameTextFieldText: String = ""
-  @State private var favoriteColor: UIColor = UIColor.FavoriteColors.colors.first!
+  @State private var favoriteColor: UIColor = .blue
 
   var body: some View {
     ZStack {
@@ -25,51 +25,13 @@ struct AddNewPlayerView: View {
         .ignoresSafeArea()
 
       VStack(alignment: .leading, spacing: 30) {
-        Spacer()
-
         Text(L10n.AddNewPlayerView.NameLabel.labelText)
           .underline()
           .font(.title3)
           .fontWeight(.semibold)
           .padding(.leading, 20)
 
-        TextField("", text: $nameTextFieldText)
-          .placeholder(when: nameTextFieldText.isEmpty, placeholder: {
-            Text(L10n.AddNewPlayerView.NameLabel.textfieldText)
-              .foregroundColor(.gray)
-          })
-          .foregroundColor(.white)
-          .padding(.leading, 10)
-          .frame(height: 55)
-          .frame(maxWidth: .infinity)
-          .background(Color.secondaryBackground)
-          .cornerRadius(20)
-          .padding(.horizontal, 20)
-          .textInputAutocapitalization(.words)
-          .textContentType(.givenName)
-          .disableAutocorrection(true)
-          .focused($textFieldIsFocused)
-          .onAppear {
-            focusTextField()
-          }
-          .keyboardType(.alphabet)
-          .submitLabel(.go)
-          .onSubmit {
-            createPlayer()
-          }
-          .onChange(of: nameTextFieldText, perform: { _ in
-            if nameTextFieldText.isEmpty {
-              alertMessage = L10n.AddNewPlayerView.AlertTextFieldEmpty.message
-              nameIsValid = false
-            } else if nameTextFieldText.count > 20 {
-              alertMessage = L10n.AddNewPlayerView.AlertNameToLong.message
-              nameIsValid = false
-            } else {
-              nameIsValid = true
-            }
-          })
-          .overlayedAlert(with: alertMessage, bool: nameIsValid)
-          .overlay(nameTextFieldText.isEmpty ? nil : deleteButton, alignment: .trailing)
+        nameTextField
 
         FavoriteColorPicker(favoriteColor: $favoriteColor)
 
@@ -82,9 +44,6 @@ struct AddNewPlayerView: View {
         .buttonStyle(.offsetStyle)
         .padding(.horizontal, 20)
         .disabled(!nameIsValid)
-
-        Spacer()
-        Spacer()
       }
       .padding(.horizontal)
       .alert(alertTitle, isPresented: $alertIsShown) {
@@ -102,7 +61,7 @@ struct AddNewPlayerView: View {
 
   func focusTextField() {
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-      textFieldIsFocused.toggle()
+      textFieldIsFocused = true
     }
   }
 
@@ -126,6 +85,46 @@ struct AddNewPlayerView_Previews: PreviewProvider {
 }
 
 extension AddNewPlayerView {
+  private var nameTextField: some View {
+    TextField("", text: $nameTextFieldText)
+      .placeholder(when: nameTextFieldText.isEmpty, placeholder: {
+        Text(L10n.AddNewPlayerView.NameLabel.textfieldText)
+          .foregroundColor(.gray)
+      })
+      .foregroundColor(.white)
+      .padding(.leading, 10)
+      .frame(height: Constants.buttonHeight)
+      .frame(maxWidth: .infinity)
+      .background(Color.secondaryBackground)
+      .cornerRadius(Constants.cornerRadius)
+      .padding(.horizontal, 20)
+      .textInputAutocapitalization(.words)
+      .textContentType(.givenName)
+      .disableAutocorrection(true)
+      .focused($textFieldIsFocused, equals: true)
+      .keyboardType(.alphabet)
+      .submitLabel(.go)
+      .onAppear {
+        focusTextField()
+      }
+      .onSubmit {
+        createPlayer()
+      }
+      .onChange(of: nameTextFieldText, perform: { _ in
+        if nameTextFieldText.isEmpty {
+          alertMessage = L10n.AddNewPlayerView.AlertTextFieldEmpty.message
+          nameIsValid = false
+        } else if nameTextFieldText.count > 20 {
+          alertMessage = L10n.AddNewPlayerView.AlertNameToLong.message
+          nameIsValid = false
+        } else {
+          nameIsValid = true
+        }
+      })
+      .overlayedAlert(with: alertMessage, bool: nameIsValid)
+      .overlay(nameTextFieldText.isEmpty ? nil : deleteButton.transition(.move(edge: .trailing)), alignment: .trailing)
+  }
+
   private var deleteButton: some View {
     Button(action: {
       nameTextFieldText.removeAll()
@@ -139,27 +138,39 @@ extension AddNewPlayerView {
 
   struct FavoriteColorPicker: View {
     @Binding var favoriteColor: UIColor
+    @State var colorName: String = UIColor.FavoriteColors.colors[0].name
 
     var body: some View {
-      ScrollView(.horizontal, showsIndicators: false) {
-        HStack {
-          ForEach(UIColor.FavoriteColors.colors, id: \.self) { color in
-            Circle()
-              .fill(
-                LinearGradient(colors: [Color(uiColor: color).opacity(0.5), Color(uiColor: color)], startPoint: .topLeading, endPoint: .bottomTrailing)
-              )
-              .frame(width: 32, height: 32)
-              .overlay(Circle().strokeBorder(favoriteColor == color ? .gray : .label, lineWidth: favoriteColor == color ? 2 : 0))
-              .onTapGesture { favoriteColor = color }
+      VStack {
+        ScrollView(.horizontal, showsIndicators: false) {
+          HStack {
+            ForEach(UIColor.FavoriteColors.colors, id: \.name) { favColor in
+              Circle()
+                .fill(
+                  Color(uiColor: favColor.color)
+                )
+                .frame(width: 32, height: 32)
+                .onTapGesture {
+                  withAnimation {
+                    favoriteColor = favColor.color
+                    colorName = favColor.name
+                  }
+                }
+            }
           }
+          .padding()
         }
-        .padding()
+        .frame(height: Constants.buttonHeight)
+        .frame(maxWidth: .infinity)
+        .background(
+          RoundedRectangle(cornerRadius: Constants.cornerRadius)
+            .fill(Color.secondaryBackground)
+        )
+        .padding(.horizontal, 20)
+
+        Text(colorName)
+          .animation(.none, value: colorName)
       }
-      .frame(height: 55)
-      .frame(maxWidth: .infinity)
-      .background(Color.secondaryBackground)
-      .clipShape(RoundedRectangle(cornerRadius: 20))
-      .padding(.horizontal, 20)
     }
   }
 }

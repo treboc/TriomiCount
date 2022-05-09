@@ -42,7 +42,7 @@ struct BonusEventPicker: View {
       .padding()
       .frame(maxWidth: .infinity)
       .background(
-        RoundedRectangle(cornerRadius: 20)
+        RoundedRectangle(cornerRadius: Constants.cornerRadius)
           .fill(.ultraThinMaterial)
           .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 0)
       )

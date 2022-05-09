@@ -12,8 +12,9 @@ struct PlayerListRowView: View {
 
   var body: some View {
     ZStack {
-      Color.secondaryAccentColor
-        .cornerRadius(20)
+      RoundedRectangle(cornerRadius: Constants.cornerRadius)
+        .fill(Color.primaryBackground)
+        .shadow(color: .black, radius: 3, x: 0, y: 3)
 
       HStack {
         Text("\(player.wrappedName)")
@@ -24,10 +25,9 @@ struct PlayerListRowView: View {
             .font(.caption)
         }
       }
-      .foregroundColor(.white)
-      .padding(.horizontal)
+      .padding()
+      .foregroundColor(.primary)
     }
-    .frame(height: 65)
     .frame(maxWidth: .infinity)
     .listRowSeparator(.hidden)
   }
@@ -38,6 +38,6 @@ struct PlayerListRowView_Previews: PreviewProvider {
     PlayerListRowView(player: Player(context: PersistentStore.preview.context))
       .environment(\.managedObjectContext, PersistentStore.preview.context)
       .padding()
-      .previewLayout(.sizeThatFits)
+//      .previewLayout(.sizeThatFits)
   }
 }

@@ -70,7 +70,7 @@ extension Player {
   }
 
   public var wrappedFavoriteColor: UIColor {
-    get { favoriteColor ?? Color.tertiaryBackgroundUIColor }
+    get { favoriteColor ?? .blue }
     set { favoriteColor = newValue }
   }
 

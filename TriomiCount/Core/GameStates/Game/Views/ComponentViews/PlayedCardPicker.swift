@@ -33,7 +33,7 @@ struct PlayedCardPicker: View {
     @Binding var timesDrawn: Int
     let action: () -> Void
 
-    let height: CGFloat = 55
+    let height: CGFloat = Constants.buttonHeight
 
     var isSelected: Bool {
       if title == L10n.yes && selection {
@@ -57,7 +57,7 @@ struct PlayedCardPicker: View {
         .frame(height: height)
         .frame(maxWidth: .infinity)
         .background(firstBackgroundColor)
-        .cornerRadius(20)
+        .cornerRadius(Constants.cornerRadius)
         .foregroundColor(.white)
         .font(.headline.bold())
         .offset(y: (isSelected ? 0 : -4))

@@ -13,14 +13,12 @@ struct SessionView: View {
   @EnvironmentObject var appState: AppState
   @AppStorage(SettingsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
   @State private var isAnimated: Bool = false
+  @State private var bgIsAnimated: Bool = false
   @State private var sessionOverviewIsShown: Bool = false
-  private var overlayIsShown: Bool {
-    return viewModel.bonusEventPickerOverlayIsShown || sessionOverviewIsShown
-  }
 
   var body: some View {
-    ZStack(alignment: .top) {
-      LinearGradient(colors: [Color(uiColor: viewModel.currentPlayerOnTurn?.wrappedFavoriteColor ?? .clear), .clear, .clear], startPoint: .top, endPoint: .bottom)
+    ZStack {
+      background
         .ignoresSafeArea()
 
       VStack(spacing: 0) {
@@ -71,18 +69,17 @@ struct SessionView: View {
           }
       }
     }
-    .ignoresSafeArea(.all, edges: .top)
     .animation(.default, value: isAnimated)
     .enableInjection()
-}
+  }
 
 #if DEBUG
-@ObservedObject private var iO = Inject.observer
+  @ObservedObject private var iO = Inject.observer
 #endif
 }
 
-// MARK: UI Components
 extension SessionView {
+  // MARK: - Header
   private var header: some View {
     VStack(alignment: .center, spacing: 10) {
       Text(viewModel.currentPlayerOnTurn?.wrappedName ?? "Unknown")
@@ -111,25 +108,20 @@ extension SessionView {
         }
         .lineLimit(1)
       }
+      .overlay(
+        Image(systemSymbol: .infoCircle).font(.headline)
+          .onTapGesture {
+            withAnimation {
+              sessionOverviewIsShown.toggle()
+            }
+          }, alignment: .center
+      )
     }
-    .padding()
-    .padding(.top, 30)
-    .background(
-      Rectangle()
-        .fill(.ultraThinMaterial)
-        .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
-        .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 3)
-    )
-    .foregroundColor(.label)
+    .glassStyled()
     .animation(.none, value: viewModel.currentPlayerOnTurn)
-    .frame(maxWidth: .infinity)
-    .onTapGesture {
-      withAnimation {
-        sessionOverviewIsShown.toggle()
-      }
-    }
   }
 
+  // MARK: - Center
   private var center: some View {
     ZStack {
       if !viewModel.bonusEventPickerOverlayIsShown {
@@ -146,10 +138,10 @@ extension SessionView {
         .frame(maxWidth: .infinity)
         .background(
           RoundedRectangle(cornerRadius: 20)
-            .fill(.ultraThinMaterial)
+            .fill(.thinMaterial)
             .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 0)
         )
-        .overlay( circularResetButton.scaleEffect(0.8), alignment: .topTrailing )
+        .overlay( viewModel.turnHasChanges ? circularResetButton.scaleEffect(0.5) : nil, alignment: .topTrailing )
         .padding(.horizontal)
         .transition(.move(edge: .leading))
       }
@@ -297,14 +289,14 @@ extension SessionView {
             .font(.title3)
           }
         }
-        .padding(.top, 30)
         .frame(maxWidth: .infinity)
         .padding()
         .background(
           Rectangle()
             .fill(.ultraThinMaterial)
             .cornerRadius(20, corners: [.bottomRight, .bottomLeft])
-            .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 3)
+            .shadow(color: .black, radius: 5, x: 0, y: 2.5)
+            .ignoresSafeArea(.all, edges: .top)
         )
       }
     }
@@ -331,5 +323,28 @@ extension SessionView {
   func exitSession() {
     appState.homeViewID = UUID()
     HapticManager.shared.impact(style: .medium)
+  }
+}
+
+extension SessionView {
+  private var background: some View {
+    ZStack {
+      Color.primaryBackground
+        .ignoresSafeArea()
+        .overlay(
+          Circle()
+            .fill(.pink)
+            .frame(width: 150, height: 150)
+            .blur(radius: 50), alignment: bgIsAnimated ? .topLeading : .bottomLeading
+        )
+        .overlay(
+          Circle()
+          .fill(.purple)
+          .frame(width: 150, height: 150)
+          .blur(radius: 50), alignment: bgIsAnimated ? .bottomTrailing : .topTrailing
+        )
+        .animation(.easeIn(duration: 10).repeatForever(autoreverses: true), value: bgIsAnimated)
+    }
+    .onAppear { bgIsAnimated.toggle() }
   }
 }

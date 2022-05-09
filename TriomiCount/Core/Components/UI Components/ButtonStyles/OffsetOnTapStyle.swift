@@ -16,8 +16,6 @@ extension ButtonStyle where Self == OffsetOnTapStyle {
 struct OffsetOnTapStyle: ButtonStyle {
   @Environment(\.isEnabled) var isEnabled
 
-  let height: CGFloat = 55
-
   let primaryColor: Color
   let secondaryColor: Color
   var borderColor: Color = .secondaryBackground
@@ -37,21 +35,22 @@ struct OffsetOnTapStyle: ButtonStyle {
 
   func makeBody(configuration: Configuration) -> some View {
     ZStack {
-      RoundedRectangle(cornerRadius: 20)
-        .fill(primaryColor.opacity(0.25))
-        .frame(height: height)
-        .shadow(color: .gray.opacity(0.8), radius: configuration.isPressed ? 0 : 3, x: 0, y: 0)
+      RoundedRectangle(cornerRadius: Constants.cornerRadius)
+        .fill(.black.opacity(0.1))
+        .frame(height: Constants.buttonHeight)
+        .shadow(color: .black.opacity(1), radius: configuration.isPressed ? 0 : 3, x: 0, y: 0)
         .animation(.easeIn(duration: 0.1), value: configuration.isPressed)
+        .offset(y: 4)
 
       configuration.label
         .font(.headline)
-        .frame(height: height)
+        .foregroundColor(.white)
+        .frame(height: Constants.buttonHeight)
         .frame(maxWidth: .infinity)
         .background(primaryColor)
-        .cornerRadius(20)
-        .foregroundColor(.white)
+        .cornerRadius(Constants.cornerRadius)
         .font(.headline.bold())
-        .offset(y: configuration.isPressed ? 0 : -4)
+        .offset(y: configuration.isPressed ? 4 : 0)
     }
     .onChange(of: configuration.isPressed) { newValue in
       if newValue {

@@ -11,61 +11,39 @@ import PageSheetCore
 struct SessionOnboardingView: View {
   @StateObject var viewModel: SessionOnboardingViewModel = SessionOnboardingViewModel()
   @Environment(\.dismiss) private var dismiss
-  @State private var showAddPlayerPage: Bool = false
+  @State private var newPlayerSheedIsShown: Bool = false
 
   @FetchRequest(fetchRequest: Player.allPlayersFR(), animation: .default)
   var players: FetchedResults<Player>
 
   var body: some View {
     ZStack {
-      Color.primaryBackground
-        .ignoresSafeArea()
+      background
 
       VStack {
-        Text(L10n.SessionOnboardingView.participationHeaderText)
-          .foregroundColor(.white)
-          .multilineTextAlignment(.center)
-          .padding()
-          .frame(maxWidth: .infinity)
-          .background(Color.secondaryBackground)
-          .cornerRadius(20)
-          .overlay(
-            RoundedRectangle(cornerRadius: 20)
-              .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
-          )
-          .padding(.horizontal)
+        header
 
         ScrollView {
           ForEach(players) { player in
             SessionOnboardingRowView(player: player, position: viewModel.getPosition(ofChosenPlayer: player))
               .contentShape(Rectangle())
-              .onTapGesture { viewModel.toggleIsChosenState(player) }
+              .onTapGesture {
+                withAnimation {
+                  viewModel.toggleIsChosenState(player)
+                }
+              }
               .padding(.horizontal)
           }
         }
 
-        VStack(spacing: 10) {
-          Button(L10n.SessionOnboardingView.addNewPlayer) {
-            showAddPlayerPage.toggle()
-          }
-
-          PushStyledNavigationLink(title: L10n.SessionOnboardingView.startSession) {
-            SessionMainView(viewModel: SessionViewModel(viewModel.chosenPlayers))
-          }
-          .disabled(viewModel.chosenPlayers.isEmpty)
-
-          Button(L10n.SessionOnboardingView.backToMainMenu) {
-            dismiss()
-          }
+        if !viewModel.chosenPlayers.isEmpty {
+          startSessionButton
         }
-        .buttonStyle(.offsetStyle)
-        .padding(.horizontal)
       }
-      .padding(.vertical)
       .onDisappear {
         viewModel.resetState(of: players)
       }
-      .pageSheet(isPresented: $showAddPlayerPage) {
+      .pageSheet(isPresented: $newPlayerSheedIsShown) {
         AddNewPlayerView()
           .sheetPreference(.detents([PageSheet.Detent.medium()]))
           .sheetPreference(.grabberVisible(true))
@@ -90,5 +68,54 @@ struct SessionOnboardingView_Previews: PreviewProvider {
           .preferredColorScheme(.light)
       }
     }
+  }
+}
+
+extension SessionOnboardingView {
+  private var background: some View {
+    Color.primaryBackground
+      .ignoresSafeArea()
+  }
+
+  private var header: some View {
+    HStack {
+      Button(action: {
+        dismiss()
+      }, label: {
+        Image(systemSymbol: .arrowBackward)
+          .font(.headline)
+          .foregroundColor(.primary)
+      })
+
+      Text(L10n.SessionOnboardingView.participationHeaderText)
+        .padding(.horizontal)
+
+      Button(action: {
+        newPlayerSheedIsShown = true
+      }, label: {
+        Image(systemSymbol: .plus)
+          .font(.headline)
+          .foregroundColor(.primary)
+      })
+    }
+    .glassStyled()
+  }
+
+  private var startSessionButton: some View {
+    PushStyledNavigationLink(title: L10n.SessionOnboardingView.startSession) {
+      SessionMainView(viewModel: SessionViewModel(viewModel.chosenPlayers))
+    }
+    .buttonStyle(.offsetStyle)
+    .foregroundColor(.primary)
+    .padding()
+    .frame(maxWidth: .infinity)
+    .background(
+      Rectangle()
+        .fill(Color.secondaryBackground)
+        .cornerRadius(20, corners: [.topLeft, .topRight])
+        .shadow(color: Color(uiColor: .black).opacity(0.5), radius: 8, x: 0, y: -2.5)
+        .ignoresSafeArea(.all, edges: .bottom)
+    )
+    .transition(.move(edge: .bottom))
   }
 }

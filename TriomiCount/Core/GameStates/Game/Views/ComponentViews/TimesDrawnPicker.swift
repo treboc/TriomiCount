@@ -27,7 +27,6 @@ struct TimesDrawnPicker: View {
   struct ButtonToPick: View {
     let number: Int
     @Binding var selection: Int
-    let height: CGFloat = 55
 
     var isToggled: Bool {
       number == selection
@@ -44,18 +43,18 @@ struct TimesDrawnPicker: View {
     var body: some View {
       Text("\(number)")
         .font(.headline)
-        .frame(height: height)
+        .frame(height: Constants.buttonHeight)
         .frame(maxWidth: .infinity)
         .background(firstBackgroundColor)
-        .cornerRadius(20)
+        .cornerRadius(Constants.cornerRadius)
         .foregroundColor(.white)
         .font(.headline.bold())
         .offset(y: isToggled ? 0 : -4)
         .background(
           secondBackgroundColor
             .opacity(0.25)
-            .frame(height: height)
-            .cornerRadius(20)
+            .frame(height: Constants.buttonHeight)
+            .cornerRadius(Constants.cornerRadius)
             .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 0)
         )
         .onTapGesture {

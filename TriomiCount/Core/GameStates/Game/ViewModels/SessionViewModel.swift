@@ -98,6 +98,10 @@ class SessionViewModel: ObservableObject {
     return Int64(calculatedScore)
   }
 
+  var turnHasChanges: Bool {
+    return scoreSliderValue != 0 || timesDrawn != 0 || bonusEvent != .none
+  }
+
   func resetTurnState() {
     scoreSliderValue = 0
     timesDrawn = 0

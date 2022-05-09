@@ -67,7 +67,7 @@ struct Logo: View {
         .shadow(color: .primary.opacity(0.8), radius: 10, x: 0, y: 0)
         .offset(x: 15, y: 30)
     }
-    .offset(x: -20, y: -40)
+    .offset(x: -20, y: 20)
     .rotationEffect(Angle(degrees: -20))
     .accessibilityHidden(true)
   }

@@ -57,6 +57,8 @@
 		8A06D67F282265540049EA9A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D67E282265540049EA9A /* UIColor+Extension.swift */; };
 		8A06D681282273F00049EA9A /* UIColorValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */; };
 		8A06D6832824FA160049EA9A /* RoundedCornerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */; };
+		8A2C8CF42827A7DD005136AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C8CF32827A7DD005136AD /* Constants.swift */; };
+		8A5D847228286B8C00286F14 /* CustomModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5D847128286B8C00286F14 /* CustomModifiers.swift */; };
 		8A5E01102813491E00703CE5 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E010F2813491E00703CE5 /* L10n.swift */; };
 		8A5E011228154B3200703CE5 /* SettingsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E011128154B3200703CE5 /* SettingsKeys.swift */; };
 		8A5E01142815A34800703CE5 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E01132815A34800703CE5 /* AppearanceManager.swift */; };
@@ -121,6 +123,8 @@
 		8A06D67E282265540049EA9A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorValueTransformer.swift; sourceTree = "<group>"; };
 		8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerModifier.swift; sourceTree = "<group>"; };
+		8A2C8CF32827A7DD005136AD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8A5D847128286B8C00286F14 /* CustomModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifiers.swift; sourceTree = "<group>"; };
 		8A5E010F2813491E00703CE5 /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = L10n.swift; path = TriomiCount/Resources/L10n.swift; sourceTree = SOURCE_ROOT; };
 		8A5E011128154B3200703CE5 /* SettingsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsKeys.swift; sourceTree = "<group>"; };
 		8A5E01132815A34800703CE5 /* AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
@@ -183,9 +187,6 @@
 		083512A027DC13E500065228 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
-				0827298127DDE74C00E48F4D /* TimesDrawnPicker.swift */,
-				0827298327DE488900E48F4D /* PlayedCardPicker.swift */,
-				8AB0179E27FC1F5B00FFEF46 /* BonusEventPicker.swift */,
 				083974DC27D2A172002B90E4 /* PushStyledNavigationLink.swift */,
 				8A858C8327FF5C20002385E1 /* ButtonStyles */,
 			);
@@ -278,6 +279,7 @@
 				08F6F36027E681A200FFBCFB /* SessionView.swift */,
 				083BFD4F27CABB7200B5BE50 /* PointsSubmitView.swift */,
 				0859748227CD7CAB0030A4E5 /* SessionResultsView.swift */,
+				8A2C8CF228270A0C005136AD /* ComponentViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -406,6 +408,8 @@
 		08DEBD6827A19689005A0990 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8A2C8CF32827A7DD005136AD /* Constants.swift */,
+				8A5D847128286B8C00286F14 /* CustomModifiers.swift */,
 				087179DE27ADDD890005C074 /* Extensions */,
 				083512A027DC13E500065228 /* UI Components */,
 				08B3E2F227B9AA02009E4DD7 /* Logo.swift */,
@@ -417,6 +421,16 @@
 				08A0103227DFB68C000D0AEB /* AppState.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		8A2C8CF228270A0C005136AD /* ComponentViews */ = {
+			isa = PBXGroup;
+			children = (
+				0827298127DDE74C00E48F4D /* TimesDrawnPicker.swift */,
+				0827298327DE488900E48F4D /* PlayedCardPicker.swift */,
+				8AB0179E27FC1F5B00FFEF46 /* BonusEventPicker.swift */,
+			);
+			path = ComponentViews;
 			sourceTree = "<group>";
 		};
 		8A5E0117281692C900703CE5 /* Settings */ = {
@@ -583,6 +597,7 @@
 				0827298427DE488900E48F4D /* PlayedCardPicker.swift in Sources */,
 				082C540127ABE88F00AB5CD7 /* PersistentStore.swift in Sources */,
 				0835129827DC123700065228 /* Turn.swift in Sources */,
+				8A2C8CF42827A7DD005136AD /* Constants.swift in Sources */,
 				08BE48D8279CA0FA00EA431F /* TriomiCountApp.swift in Sources */,
 				08288175279EF8D10064C9E8 /* AddNewPlayerView.swift in Sources */,
 				0855A22127DCD5AE00E882AC /* Color.swift in Sources */,
@@ -590,6 +605,7 @@
 				0835129E27DC123700065228 /* Session.swift in Sources */,
 				08A2C64127A341E70076C196 /* PlayerDetailView.swift in Sources */,
 				0859748327CD7CAC0030A4E5 /* SessionResultsView.swift in Sources */,
+				8A5D847228286B8C00286F14 /* CustomModifiers.swift in Sources */,
 				08093A6827DD4CA90061352D /* CircularOffsetStyle.swift in Sources */,
 				087179E027ADDD9A0005C074 /* NSManagedObject+Extensions.swift in Sources */,
 				083512A927DC15DA00065228 /* OffsetOnTapStyle.swift in Sources */,

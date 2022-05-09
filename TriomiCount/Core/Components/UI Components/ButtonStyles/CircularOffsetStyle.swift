@@ -25,9 +25,9 @@ struct CircularOffsetStyle: ButtonStyle {
   func makeBody(configuration: Configuration) -> some View {
     ZStack {
       Circle()
-        .fill(primaryColor.opacity(0.25))
+        .fill(.black.opacity(0.5))
         .frame(width: 40, height: 40)
-        .shadow(color: .black.opacity(0.8), radius: configuration.isPressed ? 0 : 3, x: 0, y: 0)
+        .shadow(color: .black.opacity(1), radius: configuration.isPressed ? 0 : 3, x: 0, y: 0)
         .animation(.easeIn(duration: 0.1), value: configuration.isPressed)
 
       configuration.label

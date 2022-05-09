@@ -8,6 +8,16 @@
 import UIKit
 
 extension UIColor {
+  // credit: @beyowulf
+  // https://stackoverflow.com/questions/47365583/determining-text-color-from-the-background-color-in-swift/47366748
+  var isDarkColor: Bool {
+    var r, g, b, a: CGFloat
+    (r, g, b, a) = (0, 0, 0, 0)
+    self.getRed(&r, green: &g, blue: &b, alpha: &a)
+    let lum = 0.2126 * r + 0.7152 * g + 0.0722 * b
+    return  lum < 0.50
+  }
+
   class func color(withData data: Data) -> UIColor? {
     return try? NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data) // as UIColor?
   }
@@ -15,18 +25,48 @@ extension UIColor {
   func encode() -> Data? {
     return try? NSKeyedArchiver.archivedData(withRootObject: self, requiringSecureCoding: false)
   }
+}
+
+extension UIColor {
+  public convenience init?(hex: String) {
+    let r, g, b, a: CGFloat
+
+    if hex.hasPrefix("#") {
+      let start = hex.index(hex.startIndex, offsetBy: 1)
+      let hexColor = String(hex[start...])
+
+      if hexColor.count == 8 {
+        let scanner = Scanner(string: hexColor)
+        var hexNumber: UInt64 = 0
+
+        if scanner.scanHexInt64(&hexNumber) {
+          r = CGFloat((hexNumber & 0xff000000) >> 24) / 255
+          g = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
+          b = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255
+          a = CGFloat(hexNumber & 0x000000ff) / 255
+
+          self.init(red: r, green: g, blue: b, alpha: a)
+          return
+        }
+      }
+    }
+
+    return nil
+  }
+}
+
+extension UIColor {
+  struct FavoriteColor {
+    let name: String
+    let color: UIColor
+  }
 
   struct FavoriteColors {
-    static let colors: [UIColor] = [blue, red, pink, purple, white, black, green, yellow.shade(.darkest)]
-
-    static let blue     =   UIColor.blue
-    static let red      =   UIColor.red
-    static let pink     =   UIColor.systemPink
-    static let purple   =   UIColor.purple
-    static let white    =   UIColor.white
-    static let black    =   UIColor.black
-    static let green    =   UIColor.green
-    static let yellow   =   UIColor.yellow.shade(.darker)
+    static let colors: [FavoriteColor] = [
+      FavoriteColor(name: "Winter Sky", color: UIColor(red: 1.00, green: 0.13, blue: 0.43, alpha: 1.00)),
+      FavoriteColor(name: "Lemon Glacier", color: UIColor(red: 0.98, green: 1.00, blue: 0.07, alpha: 1.00)),
+      FavoriteColor(name: "Maximum Blue Purple", color: UIColor(red: 0.67, green: 0.60, blue: 1.00, alpha: 1.00))
+    ]
   }
 }
 
