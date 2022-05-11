@@ -15,6 +15,7 @@ struct SessionView: View {
   @State private var isAnimated: Bool = false
   @State private var bgIsAnimated: Bool = false
   @State private var sessionOverviewIsShown: Bool = false
+  @State private var resetButtonIsShown: Bool = false
 
   var body: some View {
     ZStack {
@@ -32,6 +33,11 @@ struct SessionView: View {
       .scaleEffect(sessionOverviewIsShown ? 0.95 : 1)
       .scaleEffect(isAnimated ? 1.05 : 1.0)
       .onAppear(perform: viewModel.resetTurnState)
+      .onChange(of: viewModel.turnHasChanges, perform: { newValue in
+        withAnimation {
+          resetButtonIsShown = newValue
+        }
+      })
       .alert(L10n.ExitSessionAlert.title, isPresented: $viewModel.showExitSessionAlert) {
         Button(L10n.cancel, role: .cancel) {}
         Button(action: { exitSession() },
@@ -108,15 +114,8 @@ extension SessionView {
         }
         .lineLimit(1)
       }
-      .overlay(
-        Image(systemSymbol: .infoCircle).font(.headline)
-          .onTapGesture {
-            withAnimation {
-              sessionOverviewIsShown.toggle()
-            }
-          }, alignment: .center
-      )
     }
+    .overlay(sessionInfoButton, alignment: .topTrailing)
     .glassStyled()
     .animation(.none, value: viewModel.currentPlayerOnTurn)
   }
@@ -136,14 +135,11 @@ extension SessionView {
         }
         .padding()
         .frame(maxWidth: .infinity)
-        .background(
-          RoundedRectangle(cornerRadius: 20)
-            .fill(.thinMaterial)
-            .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 0)
-        )
-        .overlay( viewModel.turnHasChanges ? circularResetButton.scaleEffect(0.5) : nil, alignment: .topTrailing )
-        .padding(.horizontal)
         .transition(.move(edge: .leading))
+        .overlay( resetButtonIsShown ? circularResetButton
+          .scaleEffect(0.8)
+          .transition(.opacity)
+          .offset(y: -30) : nil, alignment: .topTrailing )
       }
 
       if viewModel.bonusEventPickerOverlayIsShown {
@@ -152,6 +148,7 @@ extension SessionView {
           .zIndex(1)
       }
     }
+
   }
 
   private var buttonStack: some View {
@@ -253,10 +250,19 @@ extension SessionView {
       viewModel.resetTurnState()
     } label: {
       Image(systemSymbol: .arrowCounterclockwise)
-        .font(.title2.bold())
     }
     .buttonStyle(.circularOffsetStyle)
     .padding(5)
+  }
+
+  private var sessionInfoButton: some View {
+    Image(systemSymbol: .infoCircle)
+      .font(.title)
+      .onTapGesture {
+        withAnimation {
+          sessionOverviewIsShown.toggle()
+        }
+      }
   }
 
   struct SessionOverview: View {
@@ -329,21 +335,20 @@ extension SessionView {
 extension SessionView {
   private var background: some View {
     ZStack {
-      Color.primaryBackground
+      Rectangle()
+        .fill(.ultraThinMaterial)
         .ignoresSafeArea()
-        .overlay(
+        .background(
           Circle()
-            .fill(.pink)
-            .frame(width: 150, height: 150)
-            .blur(radius: 50), alignment: bgIsAnimated ? .topLeading : .bottomLeading
+            .fill(Color(uiColor: viewModel.currentPlayerOnTurn?.wrappedFavoriteColor ?? .purple))
+            .frame(width: 150, height: 150), alignment: bgIsAnimated ? .topLeading : .bottomLeading
         )
-        .overlay(
+        .background(
           Circle()
-          .fill(.purple)
-          .frame(width: 150, height: 150)
-          .blur(radius: 50), alignment: bgIsAnimated ? .bottomTrailing : .topTrailing
+            .fill(Color(uiColor: viewModel.currentPlayerOnTurn?.wrappedFavoriteColor ?? .purple))
+            .frame(width: 150, height: 150), alignment: bgIsAnimated ? .bottomTrailing : .topTrailing
         )
-        .animation(.easeIn(duration: 10).repeatForever(autoreverses: true), value: bgIsAnimated)
+        .animation(.easeInOut(duration: 10).repeatForever(autoreverses: true), value: bgIsAnimated)
     }
     .onAppear { bgIsAnimated.toggle() }
   }

@@ -16,8 +16,17 @@ struct PlayerDetailView: View {
     ZStack {
       Color.primaryBackground
         .ignoresSafeArea()
+        .overlay(
+          Button(action: {
+            dismiss()
+          }, label: {
+            Image(systemSymbol: .arrowBackward)
+              .font(.headline)
+              .foregroundColor(.primary)
+          }).padding(), alignment: .topLeading
+        )
 
-      VStack(spacing: 20) {
+      VStack {
         PlayerInitialsCircle(player: player)
 
         ScrollView(.vertical, showsIndicators: false) {
@@ -41,28 +50,18 @@ struct PlayerDetailView: View {
               "\(player.sessionsPlayed)"
             }
           }
-          .padding([.horizontal, .top], 20)
+          .padding(.horizontal, 20)
         }
 
         Spacer()
 
-        HStack {
-          Button(L10n.back) {
-            dismiss()
-          }
-          .buttonStyle(.offsetStyle)
-
-          Button(L10n.PlayerDetailView.DeleteButton.title, role: .destructive) {
-            showDeletePlayerAlert.toggle()
-          }
-          .buttonStyle(OffsetOnTapStyle(role: .destructive))
+        Button(L10n.PlayerDetailView.DeleteButton.title, role: .destructive) {
+          showDeletePlayerAlert.toggle()
         }
-        .padding(.horizontal, 20)
+        .buttonStyle(OffsetOnTapStyle(role: .destructive))
+        .padding(.horizontal, 50)
       }
-      .padding(.bottom)
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
-      .navigationTitle("")
-      .navigationBarTitleDisplayMode(.inline)
+      .padding(.vertical)
       .alert(L10n.PlayerDetailView.DeletePlayer.alertTitle, isPresented: $showDeletePlayerAlert, actions: {
         Button(L10n.PlayerDetailView.DeletePlayer.confirmationButtonTitle, role: .destructive) { deletePlayerAndDismissView() }
       }, message: {
@@ -114,6 +113,7 @@ extension PlayerDetailView {
           .fill(.ultraThinMaterial)
           .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 0)
       )
+      .padding(.top, 5)
     }
   }
 
@@ -126,7 +126,7 @@ extension PlayerDetailView {
           .fill(
             LinearGradient(colors: [
               Color(uiColor: player.wrappedFavoriteColor),
-              Color(uiColor: player.wrappedFavoriteColor)
+              Color(uiColor: player.wrappedFavoriteColor.shade(.dark))
             ], startPoint: .topLeading, endPoint: .bottomTrailing)
           )
           .overlay(
@@ -137,7 +137,7 @@ extension PlayerDetailView {
           .frame(width: 100, height: 100)
           .overlay(
             Circle()
-              .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
+              .strokeBorder(.primary, lineWidth: 2)
           )
         Text(player.wrappedName)
       }

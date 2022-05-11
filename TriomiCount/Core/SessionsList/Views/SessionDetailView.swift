@@ -6,7 +6,6 @@
 //
 
 import CoreData
-import Inject
 import SwiftUI
 
 struct SessionDetailView: View {
@@ -23,51 +22,50 @@ struct SessionDetailView: View {
           Text("\(L10n.SessionListRowView.session) #\(session.id)")
         }
         .font(.title.bold())
-        .padding()
-        .frame(maxWidth: .infinity)
+        .glassStyled()
+        .overlay(
+          Button(action: {
+            dismiss()
+          }, label: {
+            Image(systemSymbol: .arrowBackward)
+              .font(.headline)
+              .foregroundColor(.primary)
+              .padding(.leading)
+          }), alignment: .leading
+        )
 
-        SessionDetailSection(L10n.SessionDetailView.playedWith) {
-          Text(session.playedBy)
-            .multilineTextAlignment(.leading)
-        }
-
-        if session.winner != nil {
-          SessionDetailSection(L10n.SessionDetailView.won) {
-            Text(session.winner ?? "Unknown")
+        VStack {
+          SessionDetailSection(L10n.SessionDetailView.playedWith) {
+            Text(session.playedBy)
+              .multilineTextAlignment(.leading)
           }
-        }
 
-        SessionDetailSection(L10n.SessionDetailView.points) {
-          VStack(alignment: .leading) {
-            ForEach(SessionScore.getSessionScoreDictWith(sessionKey: session.objectID.uriRepresentation().absoluteString)!) { dict in
-              HStack {
-                Text(dict.playerName)
-                  .frame(minWidth: 50, alignment: .leading)
-                Spacer()
-                Text("\(dict.scoreValue)")
-                  .frame(minWidth: 50, alignment: .trailing)
+          if session.winner != nil {
+            SessionDetailSection(L10n.SessionDetailView.won) {
+              Text(session.winner ?? "Unknown")
+            }
+          }
+
+          SessionDetailSection(L10n.SessionDetailView.points) {
+            VStack(alignment: .leading) {
+              ForEach(SessionScore.getSessionScoreDictWith(sessionKey: session.objectID.uriRepresentation().absoluteString)!) { dict in
+                HStack {
+                  Text(dict.playerName)
+                    .frame(minWidth: 50, alignment: .leading)
+                  Spacer()
+                  Text("\(dict.scoreValue)")
+                    .frame(minWidth: 50, alignment: .trailing)
+                }
               }
             }
           }
         }
-
-        Spacer()
-
-        Button(L10n.backToMainMenu) {
-          dismiss()
-        }
-        .buttonStyle(.offsetStyle)
+        .padding(.horizontal)
       }
-      .padding()
     }
-    .enableInjection()
     .navigationBarHidden(true)
     .navigationBarBackButtonHidden(true)
   }
-
-#if DEBUG
-  @ObservedObject private var iO = Inject.observer
-#endif
 }
 
 struct GameDetailView_Previews: PreviewProvider {

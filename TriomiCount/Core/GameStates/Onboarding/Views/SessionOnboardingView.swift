@@ -79,39 +79,42 @@ extension SessionOnboardingView {
 
   private var header: some View {
     HStack {
+      Text(L10n.SessionOnboardingView.participationHeaderText)
+        .padding(.horizontal)
+    }
+    .frame(maxWidth: .infinity)
+    .overlay(
       Button(action: {
         dismiss()
       }, label: {
         Image(systemSymbol: .arrowBackward)
           .font(.headline)
           .foregroundColor(.primary)
-      })
-
-      Text(L10n.SessionOnboardingView.participationHeaderText)
-        .padding(.horizontal)
-
+      }), alignment: .topLeading
+    )
+    .overlay(
       Button(action: {
         newPlayerSheedIsShown = true
       }, label: {
         Image(systemSymbol: .plus)
           .font(.headline)
           .foregroundColor(.primary)
-      })
-    }
+      }), alignment: .topTrailing
+    )
     .glassStyled()
-  }
+}
 
-  private var startSessionButton: some View {
-    PushStyledNavigationLink(title: L10n.SessionOnboardingView.startSession) {
-      SessionMainView(viewModel: SessionViewModel(viewModel.chosenPlayers))
-    }
+private var startSessionButton: some View {
+  PushStyledNavigationLink(title: L10n.SessionOnboardingView.startSession) {
+    SessionMainView(viewModel: SessionViewModel(viewModel.chosenPlayers))
+  }
     .buttonStyle(.offsetStyle)
     .foregroundColor(.primary)
     .padding()
     .frame(maxWidth: .infinity)
     .background(
       Rectangle()
-        .fill(Color.secondaryBackground)
+        .fill(.regularMaterial)
         .cornerRadius(20, corners: [.topLeft, .topRight])
         .shadow(color: Color(uiColor: .black).opacity(0.5), radius: 8, x: 0, y: -2.5)
         .ignoresSafeArea(.all, edges: .bottom)

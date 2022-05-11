@@ -13,7 +13,7 @@ struct PlayerListRowView: View {
   var body: some View {
     ZStack {
       RoundedRectangle(cornerRadius: Constants.cornerRadius)
-        .fill(Color.primaryBackground)
+        .fill(Color.primaryAccentColor.opacity(0.8))
         .shadow(color: .black, radius: 3, x: 0, y: 3)
 
       HStack {
@@ -25,8 +25,8 @@ struct PlayerListRowView: View {
             .font(.caption)
         }
       }
+      .foregroundColor(.white)
       .padding()
-      .foregroundColor(.primary)
     }
     .frame(maxWidth: .infinity)
     .listRowSeparator(.hidden)

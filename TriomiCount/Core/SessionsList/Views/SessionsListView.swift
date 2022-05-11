@@ -19,18 +19,7 @@ struct SessionsListView: View {
         .ignoresSafeArea()
 
       VStack {
-        Text(L10n.sessions)
-          .foregroundColor(.white)
-          .multilineTextAlignment(.center)
-          .padding()
-          .frame(maxWidth: .infinity)
-          .background(Color.secondaryBackground)
-          .cornerRadius(20)
-          .overlay(
-            RoundedRectangle(cornerRadius: 20)
-              .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
-          )
-          .padding(.horizontal)
+        header
 
         ScrollView {
           ForEach(sessions) { session in
@@ -42,16 +31,7 @@ struct SessionsListView: View {
             .padding(.horizontal)
           }
         }
-
-        VStack(spacing: 10) {
-          Button(L10n.backToMainMenu) {
-            dismiss()
-          }
-        }
-        .buttonStyle(.offsetStyle)
-        .padding(.horizontal)
       }
-      .padding(.vertical)
       .navigationBarHidden(true)
     }
   }
@@ -60,5 +40,24 @@ struct SessionsListView: View {
     static var previews: some View {
       SessionsListView()
     }
+  }
+}
+
+extension SessionsListView {
+  private var header: some View {
+    Text(L10n.sessions)
+      .multilineTextAlignment(.center)
+      .glassStyled()
+      .overlay(
+        Button(action: {
+          dismiss()
+        }, label: {
+          Image(systemSymbol: .arrowBackward)
+            .font(.headline)
+            .foregroundColor(.primary)
+            .padding(.leading)
+        }), alignment: .leading
+      )
+
   }
 }

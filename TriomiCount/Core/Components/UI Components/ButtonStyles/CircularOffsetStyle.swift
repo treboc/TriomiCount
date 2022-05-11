@@ -35,7 +35,7 @@ struct CircularOffsetStyle: ButtonStyle {
         .background(primaryColor)
         .clipShape(Circle())
         .foregroundColor(.white)
-        .font(.headline.bold())
+        .font(.system(size: 20))
         .offset(y: configuration.isPressed ? 0 : -4)
     }
   }

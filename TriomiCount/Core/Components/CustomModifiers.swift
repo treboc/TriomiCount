@@ -23,7 +23,7 @@ struct GlassStyledHeader: ViewModifier {
       .frame(maxWidth: .infinity)
       .background(
         Rectangle()
-          .fill(Color.secondaryBackground)
+          .fill(.regularMaterial)
           .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
           .shadow(color: Color(uiColor: .black).opacity(0.5), radius: 8, x: 0, y: 2.5)
           .ignoresSafeArea(.all, edges: .top)

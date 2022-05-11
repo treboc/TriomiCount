@@ -18,34 +18,36 @@ struct PlayerListView: View {
   private var players: FetchedResults<Player>
 
   var body: some View {
-    ZStack {
-      Color.primaryBackground
-        .ignoresSafeArea()
+    NavigationView {
+      ZStack {
+        Color.primaryBackground
+          .ignoresSafeArea()
 
-      VStack {
-        header
+        VStack {
+          header
 
-        ScrollView {
-          ForEach(players) { player in
-            NavigationLink {
-              PlayerDetailView(player: player)
-            } label: {
-              PlayerListRowView(player: player)
+          ScrollView {
+            ForEach(players) { player in
+              NavigationLink {
+                PlayerDetailView(player: player)
+              } label: {
+                PlayerListRowView(player: player)
+              }
+              .buttonStyle(.offsetStyle)
+              .padding(.horizontal)
             }
-            .buttonStyle(.offsetStyle)
-            .padding(.horizontal)
           }
         }
+        .pageSheet(isPresented: $showAddPlayerPage) {
+          AddNewPlayerView()
+            .sheetPreference(.detents([PageSheet.Detent.medium()]))
+            .sheetPreference(.cornerRadius(20))
+            .sheetPreference(.grabberVisible(true))
+        }
+        .onAppear {  }
       }
-      .pageSheet(isPresented: $showAddPlayerPage) {
-        AddNewPlayerView()
-          .sheetPreference(.detents([PageSheet.Detent.medium()]))
-          .sheetPreference(.cornerRadius(20))
-          .sheetPreference(.grabberVisible(true))
-      }
-      .onAppear {  }
-      .navigationBarHidden(true)
     }
+    .navigationBarHidden(true)
   }
 }
 

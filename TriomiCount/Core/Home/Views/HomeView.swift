@@ -58,6 +58,7 @@ struct HomeView: View {
           .padding(.horizontal, 50)
           .padding(.bottom, 20)
         }
+        .padding(.vertical)
         .navigationBarHidden(true)
         .tint(Color.primaryAccentColor)
         .onAppear {
