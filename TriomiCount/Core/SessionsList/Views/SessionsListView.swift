@@ -29,6 +29,7 @@ struct SessionsListView: View {
               SessionListRowView(session: session)
             }
             .padding(.horizontal)
+            .buttonStyle(.offsetStyle)
           }
         }
       }

@@ -6,12 +6,16 @@
 //
 
 import Inject
+import Introspect
 import SwiftUI
 import PageSheet
 import SFSafeSymbols
 
 struct HomeView: View {
-  @State private var showSettings: Bool = false
+  @State private var isAnimating: Bool = false
+  let animationDelay = 0.25
+
+  @State private var settingsViewIsShown: Bool = false
   @EnvironmentObject var appState: AppState
   private var lastSession: Session? {
     if let lastSession = Session.getLastNotFinishedSession(context: PersistentStore.shared.context) {
@@ -20,9 +24,6 @@ struct HomeView: View {
       return nil
     }
   }
-  @State private var isAnimating: Bool = false
-
-  let animationDelay = 0.25
 
   var body: some View {
     NavigationView {
@@ -30,16 +31,11 @@ struct HomeView: View {
         Color.primaryBackground
           .ignoresSafeArea()
 
-        VStack {
+        VStack(spacing: 100) {
           Logo()
-          Spacer(minLength: 20)
           VStack(spacing: 15) {
-            if let lastSession = lastSession {
-              PushStyledNavigationLink(title: L10n.HomeView.resume) {
-                SessionMainView(viewModel: SessionViewModel(lastSession: lastSession))
-              }
-              .offset(y: isAnimating ? 0 : 800)
-              .animation(.easeInOut(duration: 0.4), value: isAnimating)
+            if lastSession != nil {
+              lastSessionButton
             }
 
             PushStyledNavigationLink(title: L10n.HomeView.newSession) { SessionOnboardingView()
@@ -64,20 +60,15 @@ struct HomeView: View {
         .onAppear {
           isAnimating = true
         }
-        .overlay(settingsButton, alignment: .topTrailing)
       }
+      .overlay(settingsButton, alignment: .topTrailing)
     }
 
-    .pageSheet(isPresented: $showSettings) {
+    .pageSheet(isPresented: $settingsViewIsShown) {
       SettingsView()
         .sheetPreference(.grabberVisible(true))
     }
-    .enableInjection()
   }
-
-#if DEBUG
-  @ObservedObject private var iO = Inject.observer
-#endif
 }
 
 struct MainMenuView_Previews: PreviewProvider {
@@ -95,9 +86,17 @@ struct MainMenuView_Previews: PreviewProvider {
 extension HomeView {
   var settingsButton: some View {
       Button("\(Image(systemSymbol: .wrenchAndScrewdriverFill))") {
-        showSettings.toggle()
+        settingsViewIsShown.toggle()
       }
       .buttonStyle(.circularOffsetStyle)
       .padding([.top, .trailing])
+  }
+
+  private var lastSessionButton: some View {
+    PushStyledNavigationLink(title: L10n.HomeView.resume) {
+      SessionMainView(viewModel: SessionViewModel(lastSession: lastSession!))
+    }
+    .offset(y: isAnimating ? 0 : 800)
+    .animation(.easeInOut(duration: 0.4), value: isAnimating)
   }
 }

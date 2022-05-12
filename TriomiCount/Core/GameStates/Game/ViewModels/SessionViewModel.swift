@@ -18,20 +18,21 @@ class SessionViewModel: ObservableObject {
 
   // MARK: - SessionState Playing
   let store = PersistentStore.shared
-  let context = PersistentStore.shared.context
 
   @Published var session: Session
-  @Published var sessionState: SessionState = .playing
+  @Published var state: SessionState = .playing
   var currentPlayerOnTurn: Player? {
-    let playerCount = session.playersArray.count
-    let turnsCount = session.turnsArray.count
+    let players = session.playersArray.count
+    let turns = session.turnsArray.count
 
-    if turnsCount == 0 {
+    if turns == 0 {
       if let firstPlayer = session.playersArray.first {
         return firstPlayer
       }
     } else {
-      return session.playersArray[turnsCount % playerCount]
+      if let player = session.playersArray[safe: turns % players] {
+        return player
+      }
     }
     return nil
   }
@@ -43,7 +44,7 @@ class SessionViewModel: ObservableObject {
   }
 
   init(_ players: [Player]) {
-    self.session = Session(players: players, context: context)
+    self.session = Session(players: players, context: store.context)
   }
 
   // 2) calculate the current points the player gets for laying the card
@@ -135,43 +136,40 @@ class SessionViewModel: ObservableObject {
   var lastPlayer: Player?
   @Published var playersWithoutLastPlayer: [Player] = []
   @Published var playerToAskForPointsIndex: Int = 0
-  @Published var playerToAskForPoints: Player?
+  var playerToAskForPoints: Player? {
+    return playersWithoutLastPlayer[safe: playerToAskForPointsIndex]
+  }
   @Published var scoreOfPlayersWithoutLastPlayer: Int64 = 0
   @Published var isTie: Bool = false
 
   func sessionWillEnd() {
     lastPlayer = currentPlayerOnTurn
-    if session.players?.count == 1 { endSession() }
+    if session.players?.count == 1 {
+      endSession()
+    }
 
-    playersWithoutLastPlayer = session.playersArray.filter({ $0 != currentPlayerOnTurn })
+    playersWithoutLastPlayer = session.playersArray.filter {
+      $0 != currentPlayerOnTurn
+    }
 
     if isTie {
       endSession()
     } else {
-      if let player = playersWithoutLastPlayer.first {
-        playerToAskForPoints = player
-        sessionState = .willEnd
-      }
+      state = .willEnd
     }
   }
 
   func addPoints(with points: Int64) {
     scoreOfPlayersWithoutLastPlayer += points
 
-    playerToAskForPointsIndex += 1
-    getNextPlayerToAskForPoints()
-  }
-
-  func getNextPlayerToAskForPoints() {
-    if playerToAskForPointsIndex < playersWithoutLastPlayer.count {
-      playerToAskForPoints = playersWithoutLastPlayer[playerToAskForPointsIndex]
+    if playerToAskForPointsIndex < playersWithoutLastPlayer.count - 1 {
+      playerToAskForPointsIndex += 1
     } else {
       endSession()
     }
   }
 
   // MARK: - SessionState Ended
-
   func endSession() {
     if let lastPlayer = lastPlayer {
       if !isTie {
@@ -198,14 +196,14 @@ class SessionViewModel: ObservableObject {
       session.id = Int16(sessionID)
 
       session.hasEnded = true
-      sessionState = .didEnd
-      store.saveContext(context: context)
+      state = .didEnd
+      store.saveContext(context: store.context)
     }
   }
 
   func saveSessionState() {
     if session.hasChanges {
-      store.saveContext(context: context)
+      store.saveContext(context: store.context)
     }
   }
 }

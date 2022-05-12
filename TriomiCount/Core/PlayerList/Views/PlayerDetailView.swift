@@ -8,7 +8,6 @@ import SwiftUI
 
 struct PlayerDetailView: View {
   let player: Player
-  //  @Environment(\.presentationMode) var presentationMode
   @Environment(\.dismiss) private var dismiss
   @State private var showDeletePlayerAlert: Bool = false
 
@@ -67,8 +66,8 @@ struct PlayerDetailView: View {
       }, message: {
         Text(L10n.PlayerDetailView.DeletePlayer.alertMessage(player.wrappedName))
       })
-      .navigationBarHidden(true)
     }
+    .navigationBarHidden(true)
   }
 
   func deletePlayerAndDismissView() {

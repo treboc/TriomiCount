@@ -16,42 +16,14 @@ struct PointsSubmitView: View {
 
   var body: some View {
     ZStack {
-      Color.clear.ignoresSafeArea()
+      Color.clear
+        .ignoresSafeArea()
 
       VStack(alignment: .leading, spacing: 30) {
-        VStack(alignment: .leading, spacing: 0) {
-          Text(L10n.PointsSubmitView.labelText(viewModel.playerToAskForPoints!.wrappedName))
-        }
-        .font(.headline)
+        Text(L10n.PointsSubmitView.labelText((viewModel.playerToAskForPoints != nil) ? viewModel.playerToAskForPoints!.wrappedName : "Unknown player"))
+          .font(.headline)
 
-        TextField("e.g. 42", text: $endPoints)
-          .padding(.leading, 10)
-          .frame(height: Constants.buttonHeight)
-          .frame(maxWidth: .infinity)
-          .background(Color("SecondaryAccentColor").opacity(0.3))
-          .cornerRadius(Constants.cornerRadius)
-          .keyboardType(.numberPad)
-          .submitLabel(.go)
-          .focused($textFieldIsFocused)
-          .overlayedAlert(with: L10n.PointsSubmitView.overlayAlertMessage, bool: endPointsIsInt)
-          .onSubmit {
-            addPoints()
-          }
-          .onChange(of: endPoints, perform: { newValue in
-            if newValue.isInt {
-              endPointsIsInt = true
-            } else {
-              endPointsIsInt = false
-            }
-          })
-          /* Make sure the maximum input is 999 (no more as 3 digits),
-             because more than this is not realistic and it avoids
-             errors in the system b/c of too high scores. */
-          .onReceive(Just(endPoints)) { value in
-            if value.count > 3 {
-              endPoints.removeLast()
-            }
-          }
+        textField
 
         HStack {
           if viewModel.playerToAskForPointsIndex != 0 {
@@ -77,7 +49,7 @@ struct PointsSubmitView: View {
       .background(
         RoundedRectangle(cornerRadius: Constants.cornerRadius)
           .fill(.thinMaterial)
-          .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 3)
+          .shadow(color: .black.opacity(0.5), radius: 8, x: 0, y: 2.5)
       )
       .onAppear {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -99,5 +71,38 @@ struct PointsSubmitView: View {
 struct PointsSubmitView_Previews: PreviewProvider {
   static var previews: some View {
     PointsSubmitView()
+  }
+}
+
+extension PointsSubmitView {
+  private var textField: some View {
+    TextField("e.g. 42", text: $endPoints)
+      .padding(.leading, 10)
+      .frame(height: Constants.buttonHeight)
+      .frame(maxWidth: .infinity)
+      .background(Color("SecondaryAccentColor").opacity(0.3))
+      .cornerRadius(Constants.cornerRadius)
+      .keyboardType(.numberPad)
+      .submitLabel(.go)
+      .focused($textFieldIsFocused)
+      .overlayedAlert(with: L10n.PointsSubmitView.overlayAlertMessage, bool: endPointsIsInt)
+      .onSubmit {
+        addPoints()
+      }
+      .onChange(of: endPoints, perform: { newValue in
+        if newValue.isInt {
+          endPointsIsInt = true
+        } else {
+          endPointsIsInt = false
+        }
+      })
+    /* Make sure the maximum input is 999 (no more as 3 digits),
+     because more than this is not realistic and it avoids
+     errors in the system b/c of too high scores. */
+      .onReceive(Just(endPoints)) { value in
+        if value.count > 3 {
+          endPoints.removeLast()
+        }
+      }
   }
 }

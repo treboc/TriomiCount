@@ -18,7 +18,7 @@ struct SessionMainView: View {
       Color.primaryBackground
         .ignoresSafeArea()
 
-      switch viewModel.sessionState {
+      switch viewModel.state {
       case .playing:
         SessionView(viewModel: viewModel)
       case .willEnd:
@@ -37,7 +37,6 @@ struct SessionMainView: View {
       }
     }
     .navigationBarHidden(true)
-    .navigationBarBackButtonHidden(true)
   }
 }
 

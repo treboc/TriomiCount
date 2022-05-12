@@ -18,21 +18,7 @@ struct SessionDetailView: View {
       .ignoresSafeArea()
 
       VStack(alignment: .center) {
-        HStack {
-          Text("\(L10n.SessionListRowView.session) #\(session.id)")
-        }
-        .font(.title.bold())
-        .glassStyled()
-        .overlay(
-          Button(action: {
-            dismiss()
-          }, label: {
-            Image(systemSymbol: .arrowBackward)
-              .font(.headline)
-              .foregroundColor(.primary)
-              .padding(.leading)
-          }), alignment: .leading
-        )
+        header
 
         VStack {
           SessionDetailSection(L10n.SessionDetailView.playedWith) {
@@ -95,17 +81,36 @@ extension SessionDetailView {
         }
         Spacer()
       }
+      .foregroundColor(.primary)
       .multilineTextAlignment(.center)
       .padding()
       .frame(maxWidth: .infinity)
-      .background(Color.secondaryBackground)
-      .foregroundColor(.white)
-      .cornerRadius(20)
-      .overlay(
+      .background(
         RoundedRectangle(cornerRadius: 20)
-          .strokeBorder(Color.tertiaryBackground, lineWidth: 2)
+          .fill(.ultraThinMaterial)
+          .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 0)
       )
+      .padding(.top, 5)
     }
   }
+}
 
+extension SessionDetailView {
+  fileprivate var header: some View {
+    HStack {
+      Text("\(L10n.SessionListRowView.session) #\(session.id)")
+    }
+    .font(.title.bold())
+    .glassStyled()
+    .overlay(
+      Button(action: {
+        dismiss()
+      }, label: {
+        Image(systemSymbol: .arrowBackward)
+          .font(.headline)
+          .foregroundColor(.primary)
+          .padding(.leading)
+      }), alignment: .leading
+    )
+  }
 }

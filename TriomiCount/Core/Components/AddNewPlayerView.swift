@@ -25,11 +25,7 @@ struct AddNewPlayerView: View {
         .ignoresSafeArea()
 
       VStack(alignment: .leading, spacing: 30) {
-        Text(L10n.AddNewPlayerView.NameLabel.labelText)
-          .underline()
-          .font(.title3)
-          .fontWeight(.semibold)
-          .padding(.leading, 20)
+        textLabel
 
         nameTextField
 
@@ -85,13 +81,21 @@ struct AddNewPlayerView_Previews: PreviewProvider {
 }
 
 extension AddNewPlayerView {
+  private var textLabel: some View {
+    Text(L10n.AddNewPlayerView.NameLabel.labelText)
+      .underline()
+      .font(.title3)
+      .fontWeight(.semibold)
+      .padding(.leading, 20)
+  }
+
   private var nameTextField: some View {
     TextField("", text: $nameTextFieldText)
       .placeholder(when: nameTextFieldText.isEmpty, placeholder: {
         Text(L10n.AddNewPlayerView.NameLabel.textfieldText)
           .foregroundColor(.gray)
       })
-      .foregroundColor(.white)
+      .foregroundColor(.primary)
       .padding(.leading, 10)
       .frame(height: Constants.buttonHeight)
       .frame(maxWidth: .infinity)
@@ -131,11 +135,13 @@ extension AddNewPlayerView {
     }, label: {
       Image(systemSymbol: .xCircle)
         .font(.headline)
-        .foregroundColor(.white)
+        .foregroundColor(.primary)
     })
     .padding(.trailing, 30)
   }
+}
 
+extension AddNewPlayerView {
   struct FavoriteColorPicker: View {
     @Binding var favoriteColor: UIColor
     @State var colorName: String = UIColor.FavoriteColors.colors[0].name
@@ -149,6 +155,7 @@ extension AddNewPlayerView {
                 .fill(
                   Color(uiColor: favColor.color)
                 )
+                .shadow(color: .black, radius: 3, x: 0, y: 2.5)
                 .frame(width: 32, height: 32)
                 .onTapGesture {
                   withAnimation {
@@ -160,12 +167,9 @@ extension AddNewPlayerView {
           }
           .padding()
         }
-        .frame(height: Constants.buttonHeight)
         .frame(maxWidth: .infinity)
-        .background(
-          RoundedRectangle(cornerRadius: Constants.cornerRadius)
-            .fill(Color.secondaryBackground)
-        )
+        .background(Color.secondaryBackground)
+        .cornerRadius(Constants.cornerRadius)
         .padding(.horizontal, 20)
 
         Text(colorName)

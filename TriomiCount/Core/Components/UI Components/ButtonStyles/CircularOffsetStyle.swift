@@ -26,16 +26,16 @@ struct CircularOffsetStyle: ButtonStyle {
     ZStack {
       Circle()
         .fill(.black.opacity(0.5))
-        .frame(width: 40, height: 40)
+        .frame(width: 34, height: 34)
         .shadow(color: .black.opacity(1), radius: configuration.isPressed ? 0 : 3, x: 0, y: 0)
         .animation(.easeIn(duration: 0.1), value: configuration.isPressed)
 
       configuration.label
-        .frame(width: 40, height: 40)
+        .frame(width: 34, height: 34)
         .background(primaryColor)
         .clipShape(Circle())
         .foregroundColor(.white)
-        .font(.system(size: 20))
+        .font(.system(size: 16))
         .offset(y: configuration.isPressed ? 0 : -4)
     }
   }

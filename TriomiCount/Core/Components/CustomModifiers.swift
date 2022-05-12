@@ -19,7 +19,6 @@ struct GlassStyledHeader: ViewModifier {
       .foregroundColor(.primary)
       .font(.headline)
       .padding()
-    //      .padding(.vertical)
       .frame(maxWidth: .infinity)
       .background(
         Rectangle()

@@ -57,6 +57,9 @@
 		8A06D67F282265540049EA9A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D67E282265540049EA9A /* UIColor+Extension.swift */; };
 		8A06D681282273F00049EA9A /* UIColorValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */; };
 		8A06D6832824FA160049EA9A /* RoundedCornerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */; };
+		8A07164B282B961100AC8C87 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A07164A282B961100AC8C87 /* UINavigationController+Extension.swift */; };
+		8A07164E282B9CAA00AC8C87 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 8A07164D282B9CAA00AC8C87 /* Introspect */; };
+		8A071650282CEE8B00AC8C87 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A07164F282CEE8B00AC8C87 /* Collection+Extension.swift */; };
 		8A2C8CF42827A7DD005136AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C8CF32827A7DD005136AD /* Constants.swift */; };
 		8A5D847228286B8C00286F14 /* CustomModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5D847128286B8C00286F14 /* CustomModifiers.swift */; };
 		8A5E01102813491E00703CE5 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E010F2813491E00703CE5 /* L10n.swift */; };
@@ -123,6 +126,8 @@
 		8A06D67E282265540049EA9A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorValueTransformer.swift; sourceTree = "<group>"; };
 		8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerModifier.swift; sourceTree = "<group>"; };
+		8A07164A282B961100AC8C87 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
+		8A07164F282CEE8B00AC8C87 /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		8A2C8CF32827A7DD005136AD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8A5D847128286B8C00286F14 /* CustomModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifiers.swift; sourceTree = "<group>"; };
 		8A5E010F2813491E00703CE5 /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = L10n.swift; path = TriomiCount/Resources/L10n.swift; sourceTree = SOURCE_ROOT; };
@@ -144,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A858C8627FF6E34002385E1 /* Inject in Frameworks */,
+				8A07164E282B9CAA00AC8C87 /* Introspect in Frameworks */,
 				083974E527D2C11D002B90E4 /* PageSheetCore in Frameworks */,
 				083974E327D2C11D002B90E4 /* PageSheet in Frameworks */,
 				0897300027DC197D0029C94B /* SFSafeSymbols in Frameworks */,
@@ -246,10 +252,12 @@
 			children = (
 				087179DF27ADDD9A0005C074 /* NSManagedObject+Extensions.swift */,
 				0896440D27A527F30091C6F8 /* Color+Extenstion.swift */,
+				8A07164F282CEE8B00AC8C87 /* Collection+Extension.swift */,
 				8A06D67E282265540049EA9A /* UIColor+Extension.swift */,
 				085B664327B02D00000CCC99 /* String+Extension.swift */,
 				08735D4027CEC5AE001571F5 /* Int64+Extension.swift */,
 				08D562A327B30BA7009C72B1 /* View+Extension.swift */,
+				8A07164A282B961100AC8C87 /* UINavigationController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -476,6 +484,7 @@
 				083974E627D2C11D002B90E4 /* PageSheetPlus */,
 				08972FFF27DC197D0029C94B /* SFSafeSymbols */,
 				8A858C8527FF6E34002385E1 /* Inject */,
+				8A07164D282B9CAA00AC8C87 /* Introspect */,
 			);
 			productName = TriomiCount;
 			productReference = 08BE48D4279CA0FA00EA431F /* TriomiCount.app */;
@@ -510,6 +519,7 @@
 				083974E127D2C11D002B90E4 /* XCRemoteSwiftPackageReference "PageSheet" */,
 				08972FFE27DC197D0029C94B /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				8A858C8427FF6E34002385E1 /* XCRemoteSwiftPackageReference "Inject" */,
+				8A07164C282B9CAA00AC8C87 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 08BE48D5279CA0FA00EA431F /* Products */;
 			projectDirPath = "";
@@ -573,6 +583,7 @@
 				08A2C64327A34BBB0076C196 /* SettingsView.swift in Sources */,
 				8ACA06E827F596A0000F6D4C /* SessionDetailView.swift in Sources */,
 				08BE48F7279CA82E00EA431F /* SessionMainView.swift in Sources */,
+				8A07164B282B961100AC8C87 /* UINavigationController+Extension.swift in Sources */,
 				089CA6FD279EA624007E34E8 /* PlayerListRowView.swift in Sources */,
 				08AD236127AA912600BBDB16 /* HapticsManager.swift in Sources */,
 				082C53F927ABE69D00AB5CD7 /* TriomiCount.xcdatamodeld in Sources */,
@@ -608,6 +619,7 @@
 				8A5D847228286B8C00286F14 /* CustomModifiers.swift in Sources */,
 				08093A6827DD4CA90061352D /* CircularOffsetStyle.swift in Sources */,
 				087179E027ADDD9A0005C074 /* NSManagedObject+Extensions.swift in Sources */,
+				8A071650282CEE8B00AC8C87 /* Collection+Extension.swift in Sources */,
 				083512A927DC15DA00065228 /* OffsetOnTapStyle.swift in Sources */,
 				8A06D67F282265540049EA9A /* UIColor+Extension.swift in Sources */,
 				083974DB27D294F7002B90E4 /* SessionsListView.swift in Sources */,
@@ -866,6 +878,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		8A07164C282B9CAA00AC8C87 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.4;
+			};
+		};
 		8A858C8427FF6E34002385E1 /* XCRemoteSwiftPackageReference "Inject" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/krzysztofzablocki/Inject.git";
@@ -896,6 +916,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 08972FFE27DC197D0029C94B /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
 			productName = SFSafeSymbols;
+		};
+		8A07164D282B9CAA00AC8C87 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8A07164C282B9CAA00AC8C87 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 		8A858C8527FF6E34002385E1 /* Inject */ = {
 			isa = XCSwiftPackageProductDependency;

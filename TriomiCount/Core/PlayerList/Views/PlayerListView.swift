@@ -18,7 +18,6 @@ struct PlayerListView: View {
   private var players: FetchedResults<Player>
 
   var body: some View {
-    NavigationView {
       ZStack {
         Color.primaryBackground
           .ignoresSafeArea()
@@ -46,7 +45,6 @@ struct PlayerListView: View {
         }
         .onAppear {  }
       }
-    }
     .navigationBarHidden(true)
   }
 }

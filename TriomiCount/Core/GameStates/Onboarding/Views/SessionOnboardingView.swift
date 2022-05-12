@@ -102,12 +102,12 @@ extension SessionOnboardingView {
       }), alignment: .topTrailing
     )
     .glassStyled()
-}
-
-private var startSessionButton: some View {
-  PushStyledNavigationLink(title: L10n.SessionOnboardingView.startSession) {
-    SessionMainView(viewModel: SessionViewModel(viewModel.chosenPlayers))
   }
+
+  private var startSessionButton: some View {
+    PushStyledNavigationLink(title: L10n.SessionOnboardingView.startSession) {
+      SessionMainView(viewModel: SessionViewModel(viewModel.chosenPlayers))
+    }
     .buttonStyle(.offsetStyle)
     .foregroundColor(.primary)
     .padding()
@@ -120,5 +120,6 @@ private var startSessionButton: some View {
         .ignoresSafeArea(.all, edges: .bottom)
     )
     .transition(.move(edge: .bottom))
+    .zIndex(1)
   }
 }

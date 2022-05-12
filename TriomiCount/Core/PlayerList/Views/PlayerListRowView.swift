@@ -18,6 +18,7 @@ struct PlayerListRowView: View {
 
       HStack {
         Text("\(player.wrappedName)")
+          .fontWeight(.medium)
         Spacer()
         VStack(alignment: .center) {
           Text(player.highscore.roundedWithAbbreviations)
