@@ -9,11 +9,21 @@ import Foundation
 import SwiftUI
 
 class SessionViewModel: ObservableObject {
+  @EnvironmentObject var appState: AppState
+
   enum SessionState: Equatable {
     case exited
     case playing
     case willEnd
     case didEnd
+  }
+
+  enum BonusEvent: LocalizedStringKey, CaseIterable {
+    case none = "sessionView.bonusEventPicker.none"
+    case bridge = "sessionView.bonusEventPicker.bridge"
+    case hexagon = "sessionView.bonusEventPicker.hexagon"
+    case twoHexagons = "sessionView.bonusEventPicker.twoHexagons"
+    case threeHexagons = "sessionView.bonusEventPicker.threeHexagons"
   }
 
   // MARK: - SessionState Playing
@@ -47,7 +57,7 @@ class SessionViewModel: ObservableObject {
     self.session = Session(players: players, context: store.context)
   }
 
-  // 2) calculate the current points the player gets for laying the card
+  // MARK: - Score Calculation
   @Published var scoreSliderValue: Float = 0
   @Published var timesDrawn: Int = 0 {
     didSet {
@@ -59,14 +69,6 @@ class SessionViewModel: ObservableObject {
   @Published var playedCard: Bool = true
   @Published var bonusEvent: BonusEvent = .none
   @Published var bonusEventPickerOverlayIsShown = false
-
-  enum BonusEvent: LocalizedStringKey, CaseIterable {
-    case none = "sessionView.bonusEventPicker.none"
-    case bridge = "sessionView.bonusEventPicker.bridge"
-    case hexagon = "sessionView.bonusEventPicker.hexagon"
-    case twoHexagons = "sessionView.bonusEventPicker.twoHexagons"
-    case threeHexagons = "sessionView.bonusEventPicker.threeHexagons"
-  }
 
   var calculatedScore: Int64 {
     var calculatedScore = self.scoreSliderValue
@@ -204,6 +206,16 @@ class SessionViewModel: ObservableObject {
   func saveSessionState() {
     if session.hasChanges {
       store.saveContext(context: store.context)
+    }
+  }
+}
+
+extension SessionViewModel {
+  func exitSessionButtonTapped(exitSession: () -> Void) {
+    if session.turnsArray.count > 0 {
+      showExitSessionAlert.toggle()
+    } else {
+      exitSession()
     }
   }
 }

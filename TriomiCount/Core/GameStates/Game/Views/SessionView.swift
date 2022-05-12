@@ -246,11 +246,7 @@ extension SessionView {
 
   private var exitSessionButton: some View {
     Button(L10n.SessionView.ExitSessionButton.labelText) {
-      if viewModel.session.turnsArray.count > 0 {
-        viewModel.showExitSessionAlert.toggle()
-      } else {
-        exitSession()
-      }
+      viewModel.exitSessionButtonTapped(exitSession: exitSession)
     }
     .buttonStyle(.offsetStyle)
   }
@@ -345,7 +341,7 @@ extension SessionView {
     }
   }
 
-  func exitSession() {
+  fileprivate func exitSession() {
     appState.homeViewID = UUID()
     HapticManager.shared.impact(style: .medium)
   }
