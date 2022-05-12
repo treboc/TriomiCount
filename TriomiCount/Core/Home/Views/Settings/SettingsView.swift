@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsView: View {
   @Environment(\.dismiss) var dismiss
   @AppStorage(SettingsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
+  @State private var showRules: [Bool] = Array(repeating: false, count: 4)
 
   var body: some View {
     NavigationView {
@@ -49,11 +50,19 @@ struct SettingsView: View {
 
 extension SettingsView {
   private var rulesSection: some View {
-    List {
-      RulesSection(sectionHeader: L10n.Rules.Setup.header, sectionBody: L10n.Rules.Setup.body)
-      RulesSection(sectionHeader: L10n.Rules.LetsGo.header, sectionBody: L10n.Rules.LetsGo.body)
-      RulesSection(sectionHeader: L10n.Rules.EndOfGame.header, sectionBody: L10n.Rules.EndOfGame.body)
-      RulesSection(sectionHeader: L10n.Rules.BonusPoints.header, sectionBody: L10n.Rules.BonusPoints.body)
+    Group {
+      DisclosureGroup(L10n.Rules.Setup.header, isExpanded: $showRules[0]) {
+        Text(L10n.Rules.Setup.body)
+      }
+      DisclosureGroup(L10n.Rules.LetsGo.header, isExpanded: $showRules[1]) {
+        Text(L10n.Rules.LetsGo.body)
+      }
+      DisclosureGroup(L10n.Rules.EndOfGame.header, isExpanded: $showRules[2]) {
+        Text(L10n.Rules.EndOfGame.body)
+      }
+      DisclosureGroup(L10n.Rules.BonusPoints.header, isExpanded: $showRules[3]) {
+        Text(L10n.Rules.BonusPoints.body)
+      }
     }
   }
 
@@ -75,6 +84,7 @@ extension SettingsView {
 extension SettingsView {
   struct ColorSchemePicker: View {
     @EnvironmentObject var appearanceManager: AppearanceManager
+
     var pickerTitle: String {
       switch appearanceManager.appearance {
       case .dark:
@@ -119,41 +129,6 @@ extension SettingsView {
         .onTapGesture { appearanceManager.appearance = .dark }
       }
       .pickerStyle(.automatic)
-    }
-  }
-}
-
-struct RulesSection: View {
-  @State private var detailIsShown: Bool = false
-  let sectionHeader: String
-  let sectionBody: String
-
-  var body: some View {
-    VStack {
-      VStack(alignment: .leading, spacing: 20) {
-        HStack(alignment: .center) {
-          Text(sectionHeader)
-            .font(detailIsShown ? .headline : nil)
-          Spacer()
-          Image(systemSymbol: .chevronRight)
-            .font(.caption)
-            .foregroundColor(.gray)
-            .rotationEffect(Angle(degrees: detailIsShown ? 90 : 0))
-        }
-        .padding(.vertical, 8)
-        .animation(.none, value: detailIsShown)
-        if detailIsShown {
-          Text(sectionBody)
-            .animation(.default, value: detailIsShown)
-            .padding(.bottom, 10)
-        }
-      }
-    }
-    .contentShape(Rectangle())
-    .onTapGesture {
-      withAnimation {
-        detailIsShown.toggle()
-      }
     }
   }
 }
