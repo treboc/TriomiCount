@@ -312,7 +312,6 @@ extension SessionView {
               Spacer()
               Text("\(player.currentScore)")
             }
-            .font(.title3)
           }
         }
         .frame(maxWidth: .infinity)
