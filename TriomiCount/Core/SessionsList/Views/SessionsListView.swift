@@ -46,19 +46,10 @@ struct SessionsListView: View {
 
 extension SessionsListView {
   private var header: some View {
-    Text(L10n.sessions)
-      .multilineTextAlignment(.center)
-      .glassStyled()
-      .overlay(
-        Button(action: {
-          dismiss()
-        }, label: {
-          Image(systemSymbol: .arrowBackward)
-            .font(.headline)
-            .foregroundColor(.primary)
-            .padding(.leading)
-        }), alignment: .leading
-      )
-
+    HeaderView(title: L10n.sessions) {
+      Button(iconName: .arrowLeft) {
+        dismiss()
+      }
+    }
   }
 }

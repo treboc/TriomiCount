@@ -51,28 +51,15 @@ struct PlayerListView: View {
 
 extension PlayerListView {
   private var header: some View {
-    Text(L10n.players)
-      .glassStyled()
-      .overlay(
-        Button(action: {
-          dismiss()
-        }, label: {
-          Image(systemSymbol: .arrowBackward)
-            .font(.headline)
-            .foregroundColor(.primary)
-            .padding(.leading)
-        }), alignment: .leading
-      )
-      .overlay(
-        Button(action: {
-          showAddPlayerPage = true
-        }, label: {
-          Image(systemSymbol: .plus)
-            .font(.headline)
-            .foregroundColor(.primary)
-            .padding(.trailing)
-        }), alignment: .trailing
-      )
+    HeaderView(title: L10n.players) {
+      Button(iconName: .arrowLeft) {
+        dismiss()
+      }
+    } trailingButton: {
+      Button(iconName: .plus) {
+        showAddPlayerPage = true
+      }
+    }
   }
 
   private var buttonStack: some View {

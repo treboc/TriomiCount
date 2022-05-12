@@ -23,18 +23,7 @@ struct SessionOnboardingView: View {
       VStack {
         header
 
-        ScrollView {
-          ForEach(players) { player in
-            SessionOnboardingRowView(player: player, position: viewModel.getPosition(ofChosenPlayer: player))
-              .contentShape(Rectangle())
-              .onTapGesture {
-                withAnimation {
-                  viewModel.toggleIsChosenState(player)
-                }
-              }
-              .padding(.horizontal)
-          }
-        }
+        playerList
 
         if !viewModel.chosenPlayers.isEmpty {
           startSessionButton
@@ -78,30 +67,30 @@ extension SessionOnboardingView {
   }
 
   private var header: some View {
-    HStack {
-      Text(L10n.SessionOnboardingView.participationHeaderText)
-        .padding(.horizontal)
-    }
-    .frame(maxWidth: .infinity)
-    .overlay(
-      Button(action: {
+    HeaderView(title: L10n.SessionOnboardingView.participationHeaderText) {
+      Button(iconName: .arrowLeft) {
         dismiss()
-      }, label: {
-        Image(systemSymbol: .arrowBackward)
-          .font(.headline)
-          .foregroundColor(.primary)
-      }), alignment: .topLeading
-    )
-    .overlay(
-      Button(action: {
+      }
+    } trailingButton: {
+      Button(iconName: .plus) {
         newPlayerSheedIsShown = true
-      }, label: {
-        Image(systemSymbol: .plus)
-          .font(.headline)
-          .foregroundColor(.primary)
-      }), alignment: .topTrailing
-    )
-    .glassStyled()
+      }
+    }
+  }
+
+  private var playerList: some View {
+    ScrollView {
+      ForEach(players) { player in
+        SessionOnboardingRowView(player: player, position: viewModel.getPosition(ofChosenPlayer: player))
+          .contentShape(Rectangle())
+          .onTapGesture {
+            withAnimation {
+              viewModel.toggleIsChosenState(player)
+            }
+          }
+          .padding(.horizontal)
+      }
+    }
   }
 
   private var startSessionButton: some View {

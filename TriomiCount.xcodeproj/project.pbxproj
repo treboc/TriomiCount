@@ -54,6 +54,7 @@
 		08BE48F7279CA82E00EA431F /* SessionMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE48F6279CA82E00EA431F /* SessionMainView.swift */; };
 		08D562A427B30BA7009C72B1 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D562A327B30BA7009C72B1 /* View+Extension.swift */; };
 		08F6F36127E681A200FFBCFB /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F36027E681A200FFBCFB /* SessionView.swift */; };
+		8A04CFCB282DAD5700DEDA67 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A04CFCA282DAD5700DEDA67 /* HeaderView.swift */; };
 		8A06D67F282265540049EA9A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D67E282265540049EA9A /* UIColor+Extension.swift */; };
 		8A06D681282273F00049EA9A /* UIColorValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */; };
 		8A06D6832824FA160049EA9A /* RoundedCornerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */; };
@@ -71,6 +72,7 @@
 		8AB0179D27FBABE900FFEF46 /* SessionListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0179C27FBABE900FFEF46 /* SessionListRowView.swift */; };
 		8AB0179F27FC1F5B00FFEF46 /* BonusEventPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0179E27FC1F5B00FFEF46 /* BonusEventPicker.swift */; };
 		8AB017A127FC3A3F00FFEF46 /* OverlayAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB017A027FC3A3F00FFEF46 /* OverlayAlert.swift */; };
+		8AC4D137282DB81900C227F6 /* Button+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4D136282DB81900C227F6 /* Button+Extension.swift */; };
 		8ACA06E627F593B6000F6D4C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ACA06E527F593B6000F6D4C /* Launch Screen.storyboard */; };
 		8ACA06E827F596A0000F6D4C /* SessionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACA06E727F596A0000F6D4C /* SessionDetailView.swift */; };
 		8ACA06EA27F5A550000F6D4C /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACA06E927F5A550000F6D4C /* Rules.swift */; };
@@ -123,6 +125,7 @@
 		08BE48F6279CA82E00EA431F /* SessionMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionMainView.swift; sourceTree = "<group>"; };
 		08D562A327B30BA7009C72B1 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		08F6F36027E681A200FFBCFB /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
+		8A04CFCA282DAD5700DEDA67 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		8A06D67E282265540049EA9A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorValueTransformer.swift; sourceTree = "<group>"; };
 		8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerModifier.swift; sourceTree = "<group>"; };
@@ -138,6 +141,7 @@
 		8AB0179C27FBABE900FFEF46 /* SessionListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListRowView.swift; sourceTree = "<group>"; };
 		8AB0179E27FC1F5B00FFEF46 /* BonusEventPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusEventPicker.swift; sourceTree = "<group>"; };
 		8AB017A027FC3A3F00FFEF46 /* OverlayAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayAlert.swift; sourceTree = "<group>"; };
+		8AC4D136282DB81900C227F6 /* Button+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Extension.swift"; sourceTree = "<group>"; };
 		8ACA06E527F593B6000F6D4C /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		8ACA06E727F596A0000F6D4C /* SessionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailView.swift; sourceTree = "<group>"; };
 		8ACA06E927F5A550000F6D4C /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
@@ -255,6 +259,7 @@
 				8A07164F282CEE8B00AC8C87 /* Collection+Extension.swift */,
 				8A06D67E282265540049EA9A /* UIColor+Extension.swift */,
 				085B664327B02D00000CCC99 /* String+Extension.swift */,
+				8AC4D136282DB81900C227F6 /* Button+Extension.swift */,
 				08735D4027CEC5AE001571F5 /* Int64+Extension.swift */,
 				08D562A327B30BA7009C72B1 /* View+Extension.swift */,
 				8A07164A282B961100AC8C87 /* UINavigationController+Extension.swift */,
@@ -421,6 +426,7 @@
 				087179DE27ADDD890005C074 /* Extensions */,
 				083512A027DC13E500065228 /* UI Components */,
 				08B3E2F227B9AA02009E4DD7 /* Logo.swift */,
+				8A04CFCA282DAD5700DEDA67 /* HeaderView.swift */,
 				08288174279EF8D10064C9E8 /* AddNewPlayerView.swift */,
 				8ACA06E927F5A550000F6D4C /* Rules.swift */,
 				08AD236027AA912600BBDB16 /* HapticsManager.swift */,
@@ -593,6 +599,7 @@
 				08BE48EA279CA14900EA431F /* HomeView.swift in Sources */,
 				0827298227DDE74C00E48F4D /* TimesDrawnPicker.swift in Sources */,
 				8A5E01142815A34800703CE5 /* AppearanceManager.swift in Sources */,
+				8AC4D137282DB81900C227F6 /* Button+Extension.swift in Sources */,
 				089CA6F9279EA4B9007E34E8 /* PlayerListView.swift in Sources */,
 				0835129D27DC123700065228 /* SessionScore.swift in Sources */,
 				08A0103327DFB68C000D0AEB /* AppState.swift in Sources */,
@@ -612,6 +619,7 @@
 				08BE48D8279CA0FA00EA431F /* TriomiCountApp.swift in Sources */,
 				08288175279EF8D10064C9E8 /* AddNewPlayerView.swift in Sources */,
 				0855A22127DCD5AE00E882AC /* Color.swift in Sources */,
+				8A04CFCB282DAD5700DEDA67 /* HeaderView.swift in Sources */,
 				08BE48F3279CA42D00EA431F /* SessionViewModel.swift in Sources */,
 				0835129E27DC123700065228 /* Session.swift in Sources */,
 				08A2C64127A341E70076C196 /* PlayerDetailView.swift in Sources */,

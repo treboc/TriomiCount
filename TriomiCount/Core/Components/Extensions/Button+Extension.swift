@@ -8,6 +8,7 @@
 import SwiftUI
 import SFSafeSymbols
 
+/// https://www.swiftbysundell.com/tips/swiftui-extensions-using-generics/
 extension Button where Label == Image {
   init(iconName: SFSymbol, action: @escaping () -> Void) {
     self.init(action: action) {
