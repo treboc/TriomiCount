@@ -15,7 +15,7 @@ struct SessionDetailView: View {
   var body: some View {
     ZStack(alignment: .topLeading) {
       Color.primaryBackground
-      .ignoresSafeArea()
+        .ignoresSafeArea()
 
       VStack(alignment: .center) {
         header
@@ -97,20 +97,10 @@ extension SessionDetailView {
 
 extension SessionDetailView {
   fileprivate var header: some View {
-    HStack {
-      Text("\(L10n.SessionListRowView.session) #\(session.id)")
-    }
-    .font(.title.bold())
-    .glassStyled()
-    .overlay(
-      Button(action: {
+    HeaderView(title: "Session #\(session.id)") {
+      Button(iconName: .arrowLeft) {
         dismiss()
-      }, label: {
-        Image(systemSymbol: .arrowBackward)
-          .font(.headline)
-          .foregroundColor(.primary)
-          .padding(.leading)
-      }), alignment: .leading
-    )
+      }
+    }
   }
 }
