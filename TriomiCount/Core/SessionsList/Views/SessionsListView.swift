@@ -18,22 +18,11 @@ struct SessionsListView: View {
       Color.primaryBackground
         .ignoresSafeArea()
 
-      VStack {
-        header
-
-        ScrollView {
-          ForEach(sessions) { session in
-            NavigationLink {
-              SessionDetailView(session: session)
-            } label: {
-              SessionListRowView(session: session)
-            }
-            .padding(.horizontal)
-            .buttonStyle(.offsetStyle)
-          }
+      scrollView
+        .safeAreaInset(edge: .top, spacing: 10) {
+          header
         }
-      }
-      .navigationBarHidden(true)
+        .navigationBarHidden(true)
     }
   }
 
@@ -49,6 +38,19 @@ extension SessionsListView {
     HeaderView(title: L10n.sessions) {
       Button(iconName: .arrowLeft) {
         dismiss()
+      }
+    }
+  }
+
+  private var scrollView: some View {
+    ScrollView(showsIndicators: false) {
+      ForEach(sessions) { session in
+        NavigationLink {
+          SessionDetailView(session: session)
+        } label: {
+          SessionListRowView(session: session)
+        }
+        .padding(.horizontal)
       }
     }
   }

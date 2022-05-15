@@ -18,7 +18,7 @@
 		0835129A27DC123700065228 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835129227DC123700065228 /* Player.swift */; };
 		0835129D27DC123700065228 /* SessionScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835129527DC123700065228 /* SessionScore.swift */; };
 		0835129E27DC123700065228 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835129627DC123700065228 /* Session.swift */; };
-		083512A927DC15DA00065228 /* OffsetOnTapStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083512A827DC15DA00065228 /* OffsetOnTapStyle.swift */; };
+		083512A927DC15DA00065228 /* OffsetStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083512A827DC15DA00065228 /* OffsetStyle.swift */; };
 		083974DB27D294F7002B90E4 /* SessionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083974DA27D294F7002B90E4 /* SessionsListView.swift */; };
 		083974DD27D2A172002B90E4 /* PushStyledNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083974DC27D2A172002B90E4 /* PushStyledNavigationLink.swift */; };
 		083974E327D2C11D002B90E4 /* PageSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 083974E227D2C11D002B90E4 /* PageSheet */; };
@@ -91,7 +91,7 @@
 		0835129227DC123700065228 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		0835129527DC123700065228 /* SessionScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionScore.swift; sourceTree = "<group>"; };
 		0835129627DC123700065228 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		083512A827DC15DA00065228 /* OffsetOnTapStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetOnTapStyle.swift; sourceTree = "<group>"; };
+		083512A827DC15DA00065228 /* OffsetStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetStyle.swift; sourceTree = "<group>"; };
 		083974DA27D294F7002B90E4 /* SessionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsListView.swift; sourceTree = "<group>"; };
 		083974DC27D2A172002B90E4 /* PushStyledNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushStyledNavigationLink.swift; sourceTree = "<group>"; };
 		083BFD4F27CABB7200B5BE50 /* PointsSubmitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsSubmitView.swift; sourceTree = "<group>"; };
@@ -460,7 +460,7 @@
 		8A858C8327FF5C20002385E1 /* ButtonStyles */ = {
 			isa = PBXGroup;
 			children = (
-				083512A827DC15DA00065228 /* OffsetOnTapStyle.swift */,
+				083512A827DC15DA00065228 /* OffsetStyle.swift */,
 				08093A6727DD4CA90061352D /* CircularOffsetStyle.swift */,
 				8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */,
 			);
@@ -628,7 +628,7 @@
 				08093A6827DD4CA90061352D /* CircularOffsetStyle.swift in Sources */,
 				087179E027ADDD9A0005C074 /* NSManagedObject+Extensions.swift in Sources */,
 				8A071650282CEE8B00AC8C87 /* Collection+Extension.swift in Sources */,
-				083512A927DC15DA00065228 /* OffsetOnTapStyle.swift in Sources */,
+				083512A927DC15DA00065228 /* OffsetStyle.swift in Sources */,
 				8A06D67F282265540049EA9A /* UIColor+Extension.swift in Sources */,
 				083974DB27D294F7002B90E4 /* SessionsListView.swift in Sources */,
 				8AB0179F27FC1F5B00FFEF46 /* BonusEventPicker.swift in Sources */,

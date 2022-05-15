@@ -7,22 +7,22 @@
 
 import SwiftUI
 
-extension ButtonStyle where Self == OffsetOnTapStyle {
+extension ButtonStyle where Self == OffsetStyle {
   static var offsetStyle: Self {
     return .init()
   }
 }
 
-struct OffsetOnTapStyle: ButtonStyle {
+struct OffsetStyle: ButtonStyle {
   @Environment(\.isEnabled) var isEnabled
 
   let primaryColor: Color
   let secondaryColor: Color
   var borderColor: Color = .secondaryBackground
 
-  init(primaryColor: Color = Color.primaryAccentColor,
-       secondaryColor: Color = Color.secondaryAccentColor,
-       role: ButtonRole = .cancel) {
+  public init(primaryColor: Color = Color.primaryAccentColor,
+              secondaryColor: Color = Color.secondaryAccentColor,
+              role: ButtonRole = .cancel) {
     if role == .destructive {
       self.primaryColor = Color.destructiveButtonPrimaryColor
       self.secondaryColor = Color.destructiveButtonSecondaryColor

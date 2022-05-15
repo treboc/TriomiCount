@@ -20,23 +20,23 @@ struct SessionOnboardingView: View {
     ZStack {
       background
 
-      VStack {
-        header
-
-        playerList
-
-        if !viewModel.chosenPlayers.isEmpty {
-          startSessionButton
+      playerList
+        .safeAreaInset(edge: .top, spacing: 10) {
+          header
         }
-      }
-      .onDisappear {
-        viewModel.resetState(of: players)
-      }
-      .pageSheet(isPresented: $newPlayerSheedIsShown) {
-        AddNewPlayerView()
-          .sheetPreference(.detents([PageSheet.Detent.medium()]))
-          .sheetPreference(.grabberVisible(true))
-      }
+        .safeAreaInset(edge: .bottom, spacing: 10) {
+          if !viewModel.chosenPlayers.isEmpty {
+            startSessionButton
+          }
+        }
+    }
+    .onDisappear {
+      viewModel.resetState(of: players)
+    }
+    .pageSheet(isPresented: $newPlayerSheedIsShown) {
+      AddNewPlayerView()
+        .sheetPreference(.detents([PageSheet.Detent.medium()]))
+        .sheetPreference(.grabberVisible(true))
     }
     .navigationBarHidden(true)
   }
@@ -79,7 +79,7 @@ extension SessionOnboardingView {
   }
 
   private var playerList: some View {
-    ScrollView {
+    ScrollView(showsIndicators: false) {
       ForEach(players) { player in
         SessionOnboardingRowView(player: player, position: viewModel.getPosition(ofChosenPlayer: player))
           .contentShape(Rectangle())
