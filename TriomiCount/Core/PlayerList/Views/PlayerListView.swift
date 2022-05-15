@@ -128,7 +128,6 @@ struct PlayerListView_Previews: PreviewProvider {
 //            .buttonStyle(.offsetStyle)
 //          }
 //        }
-//  @State private var selectedSort: PlayerListSort = .default
 //  @State private var searchTerm: String = ""
 //
 //  var searchQuery: Binding<String> {

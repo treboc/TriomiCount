@@ -46,5 +46,5 @@ struct PlayerListSort: Hashable, Identifiable {
       ])
   ]
 
-  static var `default`: PlayerListSort { sorts[0] }
+  static var `default`: PlayerListSort { sorts[2] }
 }

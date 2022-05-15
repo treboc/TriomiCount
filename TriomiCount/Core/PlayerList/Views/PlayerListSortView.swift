@@ -22,7 +22,7 @@ struct PlayerListSortView: View {
     } label: {
       Label(
         "Sort",
-        systemSymbol: .lineHorizontal3DecreaseCircle)
+        systemSymbol: .arrowUpArrowDown)
     }
   }
 }
