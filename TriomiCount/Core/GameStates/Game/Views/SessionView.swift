@@ -278,7 +278,7 @@ extension SessionView {
           sessionOverviewIsShown.toggle()
         }
       }
-      .padding(.trailing)
+      .padding([.top, .trailing])
   }
 
   struct SessionOverview: View {

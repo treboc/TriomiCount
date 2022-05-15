@@ -13,10 +13,18 @@ struct AddNewPlayerView: View {
 
   @State private var alertIsShown: Bool = false
   @State private var alertTitle: String = ""
-  @State private var alertMessage: String = ""
+  private var alertMessage: String {
+    if nameTextFieldText.isEmpty {
+      return L10n.AddNewPlayerView.AlertTextFieldEmpty.message
+    } else if nameTextFieldText.count > 20 {
+      return L10n.AddNewPlayerView.AlertNameToLong.message
+    } else {
+      return ""
+    }
+  }
 
-  @State private var nameIsValid: Bool = false
   @State private var nameTextFieldText: String = ""
+  @State private var nameIsValid: Bool = true
   @State private var favoriteColor: UIColor = .blue
 
   var body: some View {
@@ -25,51 +33,12 @@ struct AddNewPlayerView: View {
         .ignoresSafeArea()
 
       VStack(alignment: .leading, spacing: 30) {
-        textLabel
-
+        textFieldLabel
         nameTextField
-
         FavoriteColorPicker(favoriteColor: $favoriteColor)
-
-        Button {
-          createPlayer()
-        } label: {
-          Text(L10n.AddNewPlayerView.CreateButton.labelText)
-            .frame(maxWidth: .infinity)
-        }
-        .buttonStyle(.offsetStyle)
-        .padding(.horizontal, 20)
-        .disabled(!nameIsValid)
+        createPlayerButton
       }
       .padding(.horizontal)
-      .alert(alertTitle, isPresented: $alertIsShown) {
-        Button("OK") { textFieldIsFocused = true }
-      } message: {
-        Text(alertMessage)
-      }
-    }
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        Button("Tesst") {}
-      }
-    }
-  }
-
-  func focusTextField() {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-      textFieldIsFocused = true
-    }
-  }
-
-  func createPlayer() {
-    nameTextFieldText = nameTextFieldText.trimmingCharacters(in: .whitespacesAndNewlines)
-
-    if nameTextFieldText.isValidName {
-      Player.addNewPlayer(name: nameTextFieldText, favoriteColor: favoriteColor)
-      dismiss()
-    } else {
-      HapticManager.shared.notification(type: .error)
-      nameIsValid = false
     }
   }
 }
@@ -81,7 +50,7 @@ struct AddNewPlayerView_Previews: PreviewProvider {
 }
 
 extension AddNewPlayerView {
-  private var textLabel: some View {
+  private var textFieldLabel: some View {
     Text(L10n.AddNewPlayerView.NameLabel.labelText)
       .underline()
       .font(.title3)
@@ -90,43 +59,51 @@ extension AddNewPlayerView {
   }
 
   private var nameTextField: some View {
-    TextField("", text: $nameTextFieldText)
-      .placeholder(when: nameTextFieldText.isEmpty, placeholder: {
-        Text(L10n.AddNewPlayerView.NameLabel.textfieldText)
-          .foregroundColor(.gray)
-      })
-      .foregroundColor(.primary)
-      .padding(.leading, 10)
-      .frame(height: Constants.buttonHeight)
-      .frame(maxWidth: .infinity)
-      .background(Color.secondaryBackground)
-      .cornerRadius(Constants.cornerRadius)
-      .padding(.horizontal, 20)
-      .textInputAutocapitalization(.words)
-      .textContentType(.givenName)
-      .disableAutocorrection(true)
-      .focused($textFieldIsFocused, equals: true)
-      .keyboardType(.alphabet)
-      .submitLabel(.go)
-      .onAppear {
-        focusTextField()
-      }
-      .onSubmit {
-        createPlayer()
-      }
-      .onChange(of: nameTextFieldText, perform: { _ in
-        if nameTextFieldText.isEmpty {
-          alertMessage = L10n.AddNewPlayerView.AlertTextFieldEmpty.message
-          nameIsValid = false
-        } else if nameTextFieldText.count > 20 {
-          alertMessage = L10n.AddNewPlayerView.AlertNameToLong.message
-          nameIsValid = false
-        } else {
-          nameIsValid = true
+    ZStack(alignment: .trailing) {
+      TextField("", text: $nameTextFieldText)
+        .placeholder(when: nameTextFieldText.isEmpty, placeholder: {
+          Text(L10n.AddNewPlayerView.NameLabel.textfieldText)
+            .foregroundColor(.gray)
+        })
+        .foregroundColor(.primary)
+        .padding(.leading, 10)
+        .frame(height: Constants.buttonHeight)
+        .frame(maxWidth: .infinity)
+        .background(Color.secondaryBackground)
+        .cornerRadius(Constants.cornerRadius)
+        .padding(.horizontal, 20)
+        .textInputAutocapitalization(.words)
+        .disableAutocorrection(true)
+        .focused($textFieldIsFocused, equals: true)
+        .keyboardType(.alphabet)
+        .submitLabel(.done)
+        .onAppear {
+          focusTextField()
         }
-      })
-      .overlayedAlert(with: alertMessage, bool: nameIsValid)
-      .overlay(nameTextFieldText.isEmpty ? nil : deleteButton.transition(.move(edge: .trailing)), alignment: .trailing)
+        .onSubmit {
+          createPlayer()
+        }
+        .onChange(of: nameTextFieldText, perform: isNameValid)
+        .overlayedAlert(with: alertMessage, bool: nameIsValid)
+
+      if !nameTextFieldText.isEmpty {
+        deleteButton
+          .transition(.slide)
+      }
+
+    }
+  }
+
+  private var createPlayerButton: some View {
+    Button {
+      createPlayer()
+    } label: {
+      Text(L10n.AddNewPlayerView.CreateButton.labelText)
+        .frame(maxWidth: .infinity)
+    }
+    .buttonStyle(.offsetStyle)
+    .padding(.horizontal, 20)
+    .disabled(!nameIsValid)
   }
 
   private var deleteButton: some View {
@@ -175,6 +152,33 @@ extension AddNewPlayerView {
         Text(colorName)
           .animation(.none, value: colorName)
       }
+    }
+  }
+}
+
+extension AddNewPlayerView {
+  func isNameValid(_ value: String) {
+    if nameTextFieldText.isEmpty || nameTextFieldText.count > 20 {
+      nameIsValid = false
+    } else {
+      nameIsValid = true
+    }
+  }
+
+  func focusTextField() {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+      textFieldIsFocused = true
+    }
+  }
+
+  func createPlayer() {
+    nameTextFieldText = nameTextFieldText.trimmingCharacters(in: .whitespacesAndNewlines)
+
+    if nameTextFieldText.isValidName {
+      Player.addNewPlayer(name: nameTextFieldText, favoriteColor: favoriteColor)
+      dismiss()
+    } else {
+      textFieldIsFocused = false
     }
   }
 }

@@ -19,7 +19,7 @@ extension String {
   }
 
   var isValidName: Bool {
-    !self.isEmpty && self.count < 15
+    !self.isEmpty && self.count < 21
   }
 
   var isInt: Bool {
