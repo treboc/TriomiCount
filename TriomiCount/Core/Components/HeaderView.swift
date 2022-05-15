@@ -12,7 +12,9 @@ struct HeaderView<LeadingButton: View, TrailingButton: View>: View {
   var leadingButton: LeadingButton?
   var trailingButton: TrailingButton?
 
-  init(title: String, @ViewBuilder leadingButton: () -> LeadingButton, @ViewBuilder trailingButton: () -> TrailingButton) {
+  init(title: String,
+       @ViewBuilder leadingButton: () -> LeadingButton,
+       @ViewBuilder trailingButton: () -> TrailingButton) {
     self.title = title
     self.trailingButton = trailingButton()
     self.leadingButton = leadingButton()
@@ -28,28 +30,30 @@ struct HeaderView<LeadingButton: View, TrailingButton: View>: View {
   }
 
   var body: some View {
-    Text(title)
-      .foregroundColor(.primary)
-      .font(.headline)
-      .padding()
-      .frame(maxWidth: .infinity)
-      .background(
-        Rectangle()
-          .fill(.regularMaterial)
-          .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
-          .shadow(color: Color(uiColor: .black).opacity(0.5), radius: 8, x: 0, y: 2.5)
-          .ignoresSafeArea(.all, edges: .top)
-      )
-      .overlay(
-        leadingButton
-          .padding(.leading)
-          .foregroundColor(.primary)
-          .font(.headline), alignment: .leading)
-      .overlay(
-        trailingButton
-          .padding(.trailing)
-          .foregroundColor(.primary)
-          .font(.headline), alignment: .trailing)
+    HStack {
+      leadingButton
+        .foregroundColor(.primary)
+        .font(.headline)
+        .padding(.leading)
+      Spacer()
+      Text(title)
+        .foregroundColor(.primary)
+        .font(.headline)
+        .padding()
+      Spacer()
+      trailingButton
+        .foregroundColor(.primary)
+        .font(.headline)
+        .padding(.trailing)
+    }
+    .frame(maxWidth: .infinity)
+    .background(
+      Rectangle()
+        .fill(.regularMaterial)
+        .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
+        .shadow(color: Color(uiColor: .black).opacity(0.5), radius: 8, x: 0, y: 2.5)
+        .ignoresSafeArea(.all, edges: .top)
+    )
   }
 }
 
