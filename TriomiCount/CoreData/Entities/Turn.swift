@@ -15,15 +15,15 @@ public class Turn: NSManagedObject {}
 extension Turn {
   @NSManaged public var createdOn: Date?
   @NSManaged public var session: Session?
+  @NSManaged public var score: Int16
+  @NSManaged public var playerID: UUID?
 
-  convenience init(_ session: Session) {
+  convenience init(_ session: Session, score: Int16, playerOnTurn: Player) {
     self.init(context: PersistentStore.shared.context)
     self.session = session
     self.wrappedCreatedOn = Date()
-
-    if let players = session.players {
-      self.addToPlayersInTurn(players)
-    }
+    self.score = score
+    self.playerID = playerOnTurn.id
   }
 
   @nonobjc public class func fetchRequest() -> NSFetchRequest<Turn> {
@@ -33,6 +33,13 @@ extension Turn {
   public var wrappedCreatedOn: Date {
     get { createdOn ?? Date() }
     set { createdOn = newValue }
+  }
+
+  public var player: Player? {
+    if let uuid = self.playerID {
+      return Player.object(withID: uuid)
+    }
+    return nil
   }
 
 }

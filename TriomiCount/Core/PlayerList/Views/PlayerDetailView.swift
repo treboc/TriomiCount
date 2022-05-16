@@ -57,7 +57,7 @@ struct PlayerDetailView: View {
         Button(L10n.PlayerDetailView.DeleteButton.title, role: .destructive) {
           showDeletePlayerAlert.toggle()
         }
-        .buttonStyle(OffsetOnTapStyle(role: .destructive))
+        .buttonStyle(OffsetStyle(role: .destructive))
         .padding(.horizontal, 50)
       }
       .padding(.vertical)

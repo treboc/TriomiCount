@@ -17,8 +17,9 @@ public class Player: NSManagedObject {
 }
 
 extension Player {
+  @NSManaged public var id: UUID?
   @NSManaged public var createdOn: Date?
-  @NSManaged public var currentScore: Int64
+  @NSManaged public var currentScore: Int16
   @NSManaged public var highscore: Int64
   @NSManaged public var name: String?
   @NSManaged public var position: Int16
@@ -31,6 +32,7 @@ extension Player {
 
   convenience init(name: String, position: Int16, context: NSManagedObjectContext) {
     self.init(context: context)
+    self.id = UUID()
     self.position = position
     self.createdOn = Date()
     self.name = name
@@ -49,7 +51,7 @@ extension Player {
     set { position = newValue }
   }
 
-  var wrappedLastScore: Int64 {
+  var wrappedLastScore: Int16 {
     get { currentScore }
     set { currentScore = newValue }
   }
@@ -99,7 +101,7 @@ extension Player {
     return request
   }
 
-  func getPlayerScore(ofSession sessionID: NSManagedObjectID) -> Int64? {
+  func getPlayerScore(ofSession sessionID: NSManagedObjectID) -> Int16? {
     if let sessionScores = SessionScore.getSessionScoresWith(sessionKey: sessionID) {
       return sessionScores.first { $0.playerID == self.objectID.description }?.scoreValue
     }
@@ -130,6 +132,7 @@ extension Player {
   class func addNewPlayer(name: String, favoriteColor: UIColor) {
     let context = PersistentStore.shared.context
     let newPlayer = Player(context: context)
+    newPlayer.id = UUID()
     newPlayer.wrappedName = name
     newPlayer.wrappedCreatedOn = Date()
     newPlayer.favoriteColor = favoriteColor
@@ -149,7 +152,7 @@ extension Player {
   // toggles the isChosen flag for a player
   func toggleIsChosenStatus() { self.isChosen.toggle() }
 
-  func updateScore(score: Int64) {
+  func updateScore(score: Int16) {
     self.currentScore += score
   }
 

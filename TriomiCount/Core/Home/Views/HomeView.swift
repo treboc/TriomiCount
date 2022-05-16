@@ -92,11 +92,14 @@ extension HomeView {
       .padding([.top, .trailing])
   }
 
+  @ViewBuilder
   private var lastSessionButton: some View {
-    PushStyledNavigationLink(title: L10n.HomeView.resume) {
-      SessionMainView(viewModel: SessionViewModel(lastSession: lastSession!))
+    if let lastSession = lastSession {
+      PushStyledNavigationLink(title: L10n.HomeView.resume) {
+        SessionMainView(viewModel: SessionViewModel(lastSession: lastSession))
+      }
+      .offset(y: isAnimating ? 0 : 800)
+      .animation(.easeInOut(duration: 0.4), value: isAnimating)
     }
-    .offset(y: isAnimating ? 0 : 800)
-    .animation(.easeInOut(duration: 0.4), value: isAnimating)
   }
 }

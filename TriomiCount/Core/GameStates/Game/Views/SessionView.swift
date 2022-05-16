@@ -167,12 +167,14 @@ extension SessionView {
           .zIndex(1)
       }
     }
-
   }
 
   private var buttonStack: some View {
     VStack {
-      nextPlayerButton
+      HStack {
+        undoButton
+        nextPlayerButton
+      }
       HStack {
         exitSessionButton
         endSessionButton
@@ -233,6 +235,16 @@ extension SessionView {
       .frame(height: 2)
       .frame(maxWidth: .infinity)
       .padding(.horizontal, 0)
+  }
+
+  private var undoButton: some View {
+    Button(L10n.SessionView.UndoButton.labelText) {
+      viewModel.undoLastTurn()
+      toggleScaleAnimation()
+      HapticManager.shared.notification(type: .success)
+    }
+    .buttonStyle(.offsetStyle)
+    .disabled(viewModel.session.turns?.count == 0)
   }
 
   private var nextPlayerButton: some View {

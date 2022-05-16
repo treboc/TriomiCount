@@ -296,6 +296,10 @@ internal enum L10n {
       /// How often did you have to draw?
       internal static let labelText = L10n.tr("Localizable", "sessionView.timesDrawnPicker.labelText")
     }
+    internal enum UndoButton {
+      /// Undo last turn
+      internal static let labelText = L10n.tr("Localizable", "sessionView.undoButton.labelText")
+    }
   }
 
   internal enum SettingsView {

@@ -68,7 +68,6 @@ final class PersistentStore: ObservableObject {
     if context.hasChanges {
       do {
         try context.save()
-        print("saved")
       } catch let error as NSError {
         NSLog("Unresolved error saving context: \(error), \(error.userInfo)")
       }

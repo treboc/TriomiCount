@@ -33,6 +33,7 @@
 "sessionView.bonusEventPicker.hexagon" = "Hexagon";
 "sessionView.bonusEventPicker.twoHexagons" = "Two Hexagons";
 "sessionView.bonusEventPicker.threeHexagons" = "Three Hexagons";
+"sessionView.undoButton.labelText" = "Undo last turn";
 "sessionView.nextPlayerButton.labelText" = "Next Player";
 "sessionView.exitSessionButton.labelText" = "Exit Session";
 "sessionView.endSessionButton.labelText" = "End Session";

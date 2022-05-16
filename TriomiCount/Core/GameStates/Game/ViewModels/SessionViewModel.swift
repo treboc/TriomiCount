@@ -70,7 +70,7 @@ class SessionViewModel: ObservableObject {
   @Published var bonusEvent: BonusEvent = .none
   @Published var bonusEventPickerOverlayIsShown = false
 
-  var calculatedScore: Int64 {
+  var calculatedScore: Int16 {
     var calculatedScore = self.scoreSliderValue
 
     if timesDrawn != 3 {
@@ -98,7 +98,7 @@ class SessionViewModel: ObservableObject {
       calculatedScore += 70
     }
 
-    return Int64(calculatedScore)
+    return Int16(calculatedScore)
   }
 
   var turnHasChanges: Bool {
@@ -113,20 +113,37 @@ class SessionViewModel: ObservableObject {
   }
 
   func nextPlayer() {
+    guard let player = currentPlayerOnTurn else { return }
     // update the current player with the score from the currentTurnScore
-    updateScore(of: currentPlayerOnTurn, with: calculatedScore)
+    updateScore(of: player, with: calculatedScore)
 
     // append the actual turn to the turns-array to keep track of the turns,
-    let newTurn = Turn(session)
-    session.addToTurns(newTurn)
+    let turn = Turn(session, score: calculatedScore, playerOnTurn: player)
+    session.addToTurns(turn)
 
     saveSessionState()
     resetTurnState()
   }
 
-  func updateScore(of player: Player?, with score: Int64) {
+  func undoLastTurn() {
+    guard let lastTurn = session.turnsArray.last else { return }
+    let lastPlayer = session.playersArray.first { $0.id == lastTurn.playerID }
+    updateScore(of: lastPlayer, with: -lastTurn.score)
+    session.removeFromTurns(lastTurn)
+    store.context.delete(lastTurn)
+    saveSessionState()
+  }
+
+  func updateScore(of player: Player?, with score: Int16) {
     if let player = player {
-      player.currentScore += score
+      var currentPlayersScore: Int16 = 0
+
+      let turns = session.turnsArray.filter { $0.playerID == player.id }
+      for turn in turns {
+        currentPlayersScore += turn.score
+      }
+      currentPlayersScore += score
+      player.currentScore = currentPlayersScore
     }
   }
 
@@ -141,7 +158,7 @@ class SessionViewModel: ObservableObject {
   var playerToAskForPoints: Player? {
     return playersWithoutLastPlayer[safe: playerToAskForPointsIndex]
   }
-  @Published var scoreOfPlayersWithoutLastPlayer: Int64 = 0
+  @Published var scoreOfPlayersWithoutLastPlayer: Int16 = 0
   @Published var isTie: Bool = false
 
   func sessionWillEnd() {
@@ -161,7 +178,7 @@ class SessionViewModel: ObservableObject {
     }
   }
 
-  func addPoints(with points: Int64) {
+  func addPoints(with points: Int16) {
     scoreOfPlayersWithoutLastPlayer += points
 
     if playerToAskForPointsIndex < playersWithoutLastPlayer.count - 1 {
@@ -189,7 +206,7 @@ class SessionViewModel: ObservableObject {
 
       for player in session.playersArray {
         if player.currentScore > player.highscore {
-          player.highscore = player.currentScore
+          player.highscore = Int64(player.currentScore)
         }
         _ = SessionScore.init(sessionKey: session.objectID.uriRepresentation().absoluteString, player: player)
       }

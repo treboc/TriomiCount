@@ -33,6 +33,7 @@
 "sessionView.bonusEventPicker.hexagon" = "Sechseck";
 "sessionView.bonusEventPicker.twoHexagons" = "Zwei Sechsecke";
 "sessionView.bonusEventPicker.threeHexagons" = "Drei Sechsecke";
+"sessionView.undoButton.labelText" = "Letzten Zug rückgängig machen";
 "sessionView.nextPlayerButton.labelText" = "Zug beenden";
 "sessionView.exitSessionButton.labelText" = "Zum Hauptmenü";
 "sessionView.endSessionButton.labelText" = "Runde beenden";

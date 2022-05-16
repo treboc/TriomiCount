@@ -61,7 +61,7 @@ struct PointsSubmitView: View {
   }
 
   func addPoints() {
-    if let endPoints = Int64(endPoints) {
+    if let endPoints = Int16(endPoints) {
       viewModel.addPoints(with: endPoints)
       self.endPoints = ""
     }

@@ -21,7 +21,7 @@ extension SessionScore {
 
   @NSManaged public var id: UUID
   @NSManaged public var sessionKey: String
-  @NSManaged public var scoreValue: Int64
+  @NSManaged public var scoreValue: Int16
   @NSManaged public var playerID: String
 
   convenience init(sessionKey: String, player: Player, context: NSManagedObjectContext = PersistentStore.shared.context) {
