@@ -9,13 +9,14 @@ import Inject
 import SwiftUI
 
 struct SessionView: View {
-  @StateObject var viewModel: SessionViewModel
+  @ObservedObject var viewModel: SessionViewModel
   @EnvironmentObject var appState: AppState
   @AppStorage(SettingsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
   @State private var isAnimated: Bool = false
   @State private var bgIsAnimated: Bool = false
   @State private var sessionOverviewIsShown: Bool = false
   @State private var resetButtonIsShown: Bool = false
+  @State private var menuIsShown: Bool = false
 
   var body: some View {
     ZStack {
@@ -29,40 +30,15 @@ struct SessionView: View {
         Spacer(minLength: 10)
         buttonStack
       }
-      .blur(radius: sessionOverviewIsShown ? 2 : 0)
+      .blur(radius: sessionOverviewIsShown || menuIsShown ? 2 : 0)
       .scaleEffect(sessionOverviewIsShown ? 0.95 : 1)
-      .scaleEffect(isAnimated ? 1.05 : 1.0)
+      .animation(.easeIn(duration: 0.1), value: menuIsShown)
       .onAppear(perform: viewModel.resetTurnState)
       .onChange(of: viewModel.turnHasChanges, perform: { newValue in
         withAnimation {
           resetButtonIsShown = newValue
         }
       })
-      .alert(L10n.ExitSessionAlert.title, isPresented: $viewModel.showExitSessionAlert) {
-        Button(L10n.cancel, role: .cancel) {}
-        Button(action: { exitSession() },
-               label: { Text(L10n.ExitSessionAlert.buttonTitle) }
-        )
-      } message: {
-        Text(L10n.ExitSessionAlert.message)
-      }
-      .confirmationDialog(L10n.EndSessionConfirmationDialogue.title, isPresented: $viewModel.showEndSessionAlert, titleVisibility: .visible) {
-        Button(action: { viewModel.sessionWillEnd() },
-               label: { Text(L10n.EndSessionConfirmationDialogue.messageWinner(viewModel.currentPlayerOnTurn?.wrappedName ?? "Unknown")) }
-        )
-        Button(L10n.EndSessionConfirmationDialogue.messageTie) {
-          viewModel.isTie = true
-          viewModel.sessionWillEnd()
-        }
-      }
-      .onAppear {
-        if idleDimmingDisabled {
-          UIApplication.shared.isIdleTimerDisabled = true
-        }
-      }
-      .onDisappear {
-        UIApplication.shared.isIdleTimerDisabled = false
-      }
 
       if sessionOverviewIsShown {
         SessionOverview(players: viewModel.session.playersArray)
@@ -74,10 +50,41 @@ struct SessionView: View {
             }
           }
       }
-    }
-    .overlay(sessionInfoButton, alignment: .topTrailing)
 
-    .animation(.default, value: isAnimated)
+      if menuIsShown {
+        MenuOverlay(viewModel: viewModel,
+                    menuIsShown: $menuIsShown,
+                    exitSession: exitSession,
+                    toggleScaleAnimation: toggleScaleAnimation)
+      }
+    }
+    .scaleEffect(isAnimated ? 1.025 : 1)
+    .overlay(sessionInfoButton, alignment: .topTrailing)
+    .alert(L10n.ExitSessionAlert.title, isPresented: $viewModel.showExitSessionAlert) {
+      Button(L10n.cancel, role: .cancel) {}
+      Button(action: { exitSession() },
+             label: { Text(L10n.ExitSessionAlert.buttonTitle) }
+      )
+    } message: {
+      Text(L10n.ExitSessionAlert.message)
+    }
+    .confirmationDialog(L10n.EndSessionConfirmationDialogue.title, isPresented: $viewModel.showEndSessionAlert, titleVisibility: .visible) {
+      Button(action: { viewModel.sessionWillEnd() },
+             label: { Text(L10n.EndSessionConfirmationDialogue.messageWinner(viewModel.currentPlayerOnTurn?.wrappedName ?? "Unknown")) }
+      )
+      Button(L10n.EndSessionConfirmationDialogue.messageTie) {
+        viewModel.isTie = true
+        viewModel.sessionWillEnd()
+      }
+    }
+    .onAppear {
+      if idleDimmingDisabled {
+        UIApplication.shared.isIdleTimerDisabled = true
+      }
+    }
+    .onDisappear {
+      UIApplication.shared.isIdleTimerDisabled = false
+    }
   }
 }
 
@@ -169,16 +176,11 @@ extension SessionView {
     }
   }
 
+  // MARK: - ButtonStack
   private var buttonStack: some View {
-    VStack {
-      HStack {
-        undoButton
-        nextPlayerButton
-      }
-      HStack {
-        exitSessionButton
-        endSessionButton
-      }
+    HStack {
+      nextPlayerButton
+      menuButton
     }
     .padding([.horizontal, .bottom])
   }
@@ -237,16 +239,6 @@ extension SessionView {
       .padding(.horizontal, 0)
   }
 
-  private var undoButton: some View {
-    Button(L10n.SessionView.UndoButton.labelText) {
-      viewModel.undoLastTurn()
-      toggleScaleAnimation()
-      HapticManager.shared.notification(type: .success)
-    }
-    .buttonStyle(.offsetStyle)
-    .disabled(viewModel.session.turns?.count == 0)
-  }
-
   private var nextPlayerButton: some View {
     Button(L10n.SessionView.NextPlayerButton.labelText) {
       viewModel.nextPlayer()
@@ -256,20 +248,14 @@ extension SessionView {
     .buttonStyle(.offsetStyle)
   }
 
-  private var exitSessionButton: some View {
-    Button(L10n.SessionView.ExitSessionButton.labelText) {
-      viewModel.exitSessionButtonTapped(exitSession: exitSession)
+  private var menuButton: some View {
+    Button(iconName: .squareStackFill) {
+      withAnimation {
+        menuIsShown.toggle()
+      }
     }
-    .buttonStyle(.offsetStyle)
-  }
-
-  private var endSessionButton: some View {
-    Button(L10n.SessionView.EndSessionButton.labelText) {
-      viewModel.showEndSessionAlert.toggle()
-      HapticManager.shared.notification(type: .success)
-    }
-    .buttonStyle(.offsetStyle)
-    .disabled(viewModel.session.turns?.count == 0)
+    .frame(width: Constants.buttonHeight, height: Constants.buttonHeight)
+    .buttonStyle(.circularOffsetStyle)
   }
 
   private var resetButton: some View {
@@ -284,13 +270,14 @@ extension SessionView {
 
   private var sessionInfoButton: some View {
     Image(systemSymbol: .infoCircle)
-      .font(.title3)
+      .font(.title2)
       .onTapGesture {
         withAnimation {
           sessionOverviewIsShown.toggle()
         }
       }
       .padding([.top, .trailing])
+      .blur(radius: menuIsShown ? 2 : 0)
   }
 
   struct SessionOverview: View {
@@ -342,14 +329,20 @@ extension SessionView {
         .padding(.horizontal, 0)
     }
   }
+
 }
 
 // MARK: - UI Methods
 extension SessionView {
   private func toggleScaleAnimation() {
-    isAnimated = true
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-      isAnimated = false
+    withAnimation {
+      isAnimated = true
+    }
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+      withAnimation {
+        isAnimated = false
+      }
     }
   }
 

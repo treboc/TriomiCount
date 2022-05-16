@@ -66,7 +66,13 @@ class SessionViewModel: ObservableObject {
       }
     }
   }
-  @Published var playedCard: Bool = true
+  @Published var playedCard: Bool = true {
+    didSet {
+      if !playedCard {
+        bonusEvent = .none
+      }
+    }
+  }
   @Published var bonusEvent: BonusEvent = .none
   @Published var bonusEventPickerOverlayIsShown = false
 
