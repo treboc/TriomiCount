@@ -241,7 +241,7 @@ extension SessionView {
 
   private var nextPlayerButton: some View {
     Button(L10n.SessionView.NextPlayerButton.labelText) {
-      viewModel.nextPlayer()
+      viewModel.endTurn()
       toggleScaleAnimation()
       HapticManager.shared.notification(type: .success)
     }
@@ -338,7 +338,7 @@ extension SessionView {
     withAnimation {
       isAnimated = true
     }
-    
+
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
       withAnimation {
         isAnimated = false

@@ -32,8 +32,11 @@
     </entity>
     <entity name="Turn" representedClassName="Turn" syncable="YES">
         <attribute name="createdOn" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="playedCard" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="playerID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="scoreSliderValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timesDrawn" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="turnCounter" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="turns" inverseEntity="Session"/>
     </entity>
@@ -41,6 +44,6 @@
         <element name="Player" positionX="160" positionY="192" width="128" height="209"/>
         <element name="Session" positionX="160" positionY="192" width="128" height="134"/>
         <element name="SessionScore" positionX="-36" positionY="198" width="128" height="104"/>
-        <element name="Turn" positionX="-230.140625" positionY="36" width="309.88671875" height="104"/>
+        <element name="Turn" positionX="-230.140625" positionY="36" width="309.88671875" height="149"/>
     </elements>
 </model>

@@ -25,7 +25,7 @@ struct SessionOnboardingView: View {
           header
         }
         .safeAreaInset(edge: .bottom, spacing: 10) {
-          if !viewModel.chosenPlayers.isEmpty {
+          if viewModel.chosenPlayers.count > 1 {
             startSessionButton
           }
         }
@@ -110,5 +110,6 @@ extension SessionOnboardingView {
     )
     .transition(.move(edge: .bottom))
     .zIndex(1)
+    .disabled(viewModel.chosenPlayers.count < 2)
   }
 }

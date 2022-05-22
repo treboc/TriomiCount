@@ -18,12 +18,25 @@ extension Turn {
   @NSManaged public var score: Int16
   @NSManaged public var playerID: UUID?
 
-  convenience init(_ session: Session, score: Int16, playerOnTurn: Player) {
+  @NSManaged public var scoreSliderValue: Int16
+  @NSManaged public var timesDrawn: Int16
+  @NSManaged public var playedCard: Bool
+
+  convenience init(_ session: Session,
+                   score: Int16,
+                   playerOnTurn: Player,
+                   scoreSliderValue: Int16,
+                   timesDrawn: Int16,
+                   playedCard: Bool
+  ) {
     self.init(context: PersistentStore.shared.context)
     self.session = session
     self.wrappedCreatedOn = Date()
     self.score = score
     self.playerID = playerOnTurn.id
+    self.scoreSliderValue = scoreSliderValue
+    self.timesDrawn = timesDrawn
+    self.playedCard = playedCard
   }
 
   @nonobjc public class func fetchRequest() -> NSFetchRequest<Turn> {

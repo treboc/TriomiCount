@@ -5,27 +5,13 @@
 //  Created by Marvin Lee Kobert on 24.01.22.
 //
 
+import Combine
 import SwiftUI
 
 struct AddNewPlayerView: View {
-  @Environment(\.dismiss) var dismiss
-  @FocusState private var textFieldIsFocused: Bool
-
-  @State private var alertIsShown: Bool = false
-  @State private var alertTitle: String = ""
-  private var alertMessage: String {
-    if nameTextFieldText.isEmpty {
-      return L10n.AddNewPlayerView.AlertTextFieldEmpty.message
-    } else if nameTextFieldText.count > 20 {
-      return L10n.AddNewPlayerView.AlertNameToLong.message
-    } else {
-      return ""
-    }
-  }
-
-  @State private var nameTextFieldText: String = ""
-  @State private var nameIsValid: Bool = true
-  @State private var favoriteColor: UIColor = .blue
+  @Environment(\.presentationMode) var presentationMode
+  @StateObject private var viewModel = AddNewPlayerViewModel()
+  @FocusState private var textFieldIsFocused
 
   var body: some View {
     ZStack {
@@ -35,10 +21,15 @@ struct AddNewPlayerView: View {
       VStack(alignment: .leading, spacing: 30) {
         textFieldLabel
         nameTextField
-        FavoriteColorPicker(favoriteColor: $favoriteColor)
+        FavoriteColorPicker(favoriteColor: $viewModel.favoriteColor)
         createPlayerButton
       }
       .padding(.horizontal)
+    }
+    .onReceive(viewModel.viewDismissalPublisher) { shouldDismiss in
+      if shouldDismiss {
+        presentationMode.wrappedValue.dismiss()
+      }
     }
   }
 }
@@ -60,8 +51,8 @@ extension AddNewPlayerView {
 
   private var nameTextField: some View {
     ZStack(alignment: .trailing) {
-      TextField("", text: $nameTextFieldText)
-        .placeholder(when: nameTextFieldText.isEmpty, placeholder: {
+      TextField("", text: $viewModel.nameTextFieldText)
+        .placeholder(when: viewModel.nameTextFieldText.isEmpty, placeholder: {
           Text(L10n.AddNewPlayerView.NameLabel.textfieldText)
             .foregroundColor(.gray)
         })
@@ -77,16 +68,16 @@ extension AddNewPlayerView {
         .focused($textFieldIsFocused, equals: true)
         .keyboardType(.alphabet)
         .submitLabel(.done)
-        .onAppear {
-          focusTextField()
-        }
-        .onSubmit {
-          createPlayer()
-        }
-        .onChange(of: nameTextFieldText, perform: isNameValid)
-        .overlayedAlert(with: alertMessage, bool: nameIsValid)
+        .onAppear(perform: viewModel.focusTextField)
+        .onSubmit(viewModel.createPlayer)
+        .overlayedAlert(with: viewModel.alertMessage, bool: (viewModel.nameIsValid))
+        .onReceive(viewModel.$textFieldIsFocused, perform: { isFocused in
+          self.textFieldIsFocused = isFocused
+        })
+        .onChange(of: viewModel.nameTextFieldText) { _ in viewModel.subscribeToTextfieldText() }
+        .onAppear { self.textFieldIsFocused = viewModel.textFieldIsFocused }
 
-      if !nameTextFieldText.isEmpty {
+      if !viewModel.nameTextFieldText.isEmpty {
         deleteButton
           .transition(.slide)
       }
@@ -95,20 +86,18 @@ extension AddNewPlayerView {
   }
 
   private var createPlayerButton: some View {
-    Button {
-      createPlayer()
-    } label: {
+    Button(action: viewModel.createPlayer) {
       Text(L10n.AddNewPlayerView.CreateButton.labelText)
         .frame(maxWidth: .infinity)
     }
     .buttonStyle(.offsetStyle)
     .padding(.horizontal, 20)
-    .disabled(!nameIsValid)
+    .disabled(!viewModel.nameIsValid)
   }
 
   private var deleteButton: some View {
     Button(action: {
-      nameTextFieldText.removeAll()
+      viewModel.nameTextFieldText.removeAll()
     }, label: {
       Image(systemSymbol: .xCircle)
         .font(.headline)
@@ -157,28 +146,4 @@ extension AddNewPlayerView {
 }
 
 extension AddNewPlayerView {
-  func isNameValid(_ value: String) {
-    if nameTextFieldText.isEmpty || nameTextFieldText.count > 20 {
-      nameIsValid = false
-    } else {
-      nameIsValid = true
-    }
-  }
-
-  func focusTextField() {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-      textFieldIsFocused = true
-    }
-  }
-
-  func createPlayer() {
-    nameTextFieldText = nameTextFieldText.trimmingCharacters(in: .whitespacesAndNewlines)
-
-    if nameTextFieldText.isValidName {
-      Player.addNewPlayer(name: nameTextFieldText, favoriteColor: favoriteColor)
-      dismiss()
-    } else {
-      textFieldIsFocused = false
-    }
-  }
 }

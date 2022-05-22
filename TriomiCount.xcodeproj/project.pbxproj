@@ -77,6 +77,7 @@
 		8ACA06E627F593B6000F6D4C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ACA06E527F593B6000F6D4C /* Launch Screen.storyboard */; };
 		8ACA06E827F596A0000F6D4C /* SessionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACA06E727F596A0000F6D4C /* SessionDetailView.swift */; };
 		8ACA06EA27F5A550000F6D4C /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACA06E927F5A550000F6D4C /* Rules.swift */; };
+		8AD1397B28379F1300A16EB0 /* AddNewPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1397A28379F1300A16EB0 /* AddNewPlayerViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -147,6 +148,7 @@
 		8ACA06E527F593B6000F6D4C /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		8ACA06E727F596A0000F6D4C /* SessionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailView.swift; sourceTree = "<group>"; };
 		8ACA06E927F5A550000F6D4C /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
+		8AD1397A28379F1300A16EB0 /* AddNewPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPlayerViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -423,18 +425,18 @@
 		08DEBD6827A19689005A0990 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8A5E01132815A34800703CE5 /* AppearanceManager.swift */,
+				08A0103227DFB68C000D0AEB /* AppState.swift */,
 				8A2C8CF32827A7DD005136AD /* Constants.swift */,
 				8A5D847128286B8C00286F14 /* CustomModifiers.swift */,
+				08AD236027AA912600BBDB16 /* HapticsManager.swift */,
+				8A04CFCA282DAD5700DEDA67 /* HeaderView.swift */,
+				08B3E2F227B9AA02009E4DD7 /* Logo.swift */,
+				8AB017A027FC3A3F00FFEF46 /* OverlayAlert.swift */,
+				8ACA06E927F5A550000F6D4C /* Rules.swift */,
+				8AD1397C28379F4F00A16EB0 /* AddNewPlayer */,
 				087179DE27ADDD890005C074 /* Extensions */,
 				083512A027DC13E500065228 /* UI Components */,
-				08B3E2F227B9AA02009E4DD7 /* Logo.swift */,
-				8A04CFCA282DAD5700DEDA67 /* HeaderView.swift */,
-				08288174279EF8D10064C9E8 /* AddNewPlayerView.swift */,
-				8ACA06E927F5A550000F6D4C /* Rules.swift */,
-				08AD236027AA912600BBDB16 /* HapticsManager.swift */,
-				8A5E01132815A34800703CE5 /* AppearanceManager.swift */,
-				8AB017A027FC3A3F00FFEF46 /* OverlayAlert.swift */,
-				08A0103227DFB68C000D0AEB /* AppState.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -468,6 +470,15 @@
 				8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */,
 			);
 			path = ButtonStyles;
+			sourceTree = "<group>";
+		};
+		8AD1397C28379F4F00A16EB0 /* AddNewPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				08288174279EF8D10064C9E8 /* AddNewPlayerView.swift */,
+				8AD1397A28379F1300A16EB0 /* AddNewPlayerViewModel.swift */,
+			);
+			path = AddNewPlayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -605,6 +616,7 @@
 				8A5E01142815A34800703CE5 /* AppearanceManager.swift in Sources */,
 				8AC4D137282DB81900C227F6 /* Button+Extension.swift in Sources */,
 				089CA6F9279EA4B9007E34E8 /* PlayerListView.swift in Sources */,
+				8AD1397B28379F1300A16EB0 /* AddNewPlayerViewModel.swift in Sources */,
 				0835129D27DC123700065228 /* SessionScore.swift in Sources */,
 				08A0103327DFB68C000D0AEB /* AppState.swift in Sources */,
 				085B664427B02D00000CCC99 /* String+Extension.swift in Sources */,

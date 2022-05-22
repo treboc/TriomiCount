@@ -118,13 +118,18 @@ class SessionViewModel: ObservableObject {
     bonusEvent = .none
   }
 
-  func nextPlayer() {
+  func endTurn() {
     guard let player = currentPlayerOnTurn else { return }
     // update the current player with the score from the currentTurnScore
     updateScore(of: player, with: calculatedScore)
 
     // append the actual turn to the turns-array to keep track of the turns,
-    let turn = Turn(session, score: calculatedScore, playerOnTurn: player)
+    let turn = Turn(session,
+                    score: calculatedScore,
+                    playerOnTurn: player,
+                    scoreSliderValue: Int16(scoreSliderValue),
+                    timesDrawn: Int16(timesDrawn),
+                    playedCard: playedCard)
     session.addToTurns(turn)
 
     saveSessionState()
@@ -134,6 +139,9 @@ class SessionViewModel: ObservableObject {
   func undoLastTurn() {
     guard let lastTurn = session.turnsArray.last else { return }
     let lastPlayer = session.playersArray.first { $0.id == lastTurn.playerID }
+    scoreSliderValue = Float(lastTurn.scoreSliderValue)
+    timesDrawn = Int(lastTurn.timesDrawn)
+    playedCard = lastTurn.playedCard
     updateScore(of: lastPlayer, with: -lastTurn.score)
     session.removeFromTurns(lastTurn)
     store.context.delete(lastTurn)
