@@ -76,13 +76,6 @@ struct PlayerDetailView: View {
   }
 }
 
-struct PlayerDetailView_Previews: PreviewProvider {
-  static var previews: some View {
-    PlayerDetailView(player: Player.allPlayers().first!)
-      .environment(\.managedObjectContext, PersistentStore.preview.context)
-  }
-}
-
 extension PlayerDetailView {
   struct PlayerDetailSection: View {
     let sectionTitle: String

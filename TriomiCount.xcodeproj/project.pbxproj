@@ -20,7 +20,7 @@
 		0835129E27DC123700065228 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835129627DC123700065228 /* Session.swift */; };
 		083512A927DC15DA00065228 /* OffsetStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083512A827DC15DA00065228 /* OffsetStyle.swift */; };
 		083974DB27D294F7002B90E4 /* SessionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083974DA27D294F7002B90E4 /* SessionsListView.swift */; };
-		083974DD27D2A172002B90E4 /* PushStyledNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083974DC27D2A172002B90E4 /* PushStyledNavigationLink.swift */; };
+		083974DD27D2A172002B90E4 /* OffsetStyledNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083974DC27D2A172002B90E4 /* OffsetStyledNavigationLink.swift */; };
 		083974E327D2C11D002B90E4 /* PageSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 083974E227D2C11D002B90E4 /* PageSheet */; };
 		083974E527D2C11D002B90E4 /* PageSheetCore in Frameworks */ = {isa = PBXBuildFile; productRef = 083974E427D2C11D002B90E4 /* PageSheetCore */; };
 		083974E727D2C11D002B90E4 /* PageSheetPlus in Frameworks */ = {isa = PBXBuildFile; productRef = 083974E627D2C11D002B90E4 /* PageSheetPlus */; };
@@ -95,7 +95,7 @@
 		0835129627DC123700065228 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		083512A827DC15DA00065228 /* OffsetStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetStyle.swift; sourceTree = "<group>"; };
 		083974DA27D294F7002B90E4 /* SessionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsListView.swift; sourceTree = "<group>"; };
-		083974DC27D2A172002B90E4 /* PushStyledNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushStyledNavigationLink.swift; sourceTree = "<group>"; };
+		083974DC27D2A172002B90E4 /* OffsetStyledNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetStyledNavigationLink.swift; sourceTree = "<group>"; };
 		083BFD4F27CABB7200B5BE50 /* PointsSubmitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsSubmitView.swift; sourceTree = "<group>"; };
 		0855A22027DCD5AE00E882AC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		085924C827C6DCA300364259 /* PlayerListSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerListSort.swift; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 		083512A027DC13E500065228 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
-				083974DC27D2A172002B90E4 /* PushStyledNavigationLink.swift */,
+				083974DC27D2A172002B90E4 /* OffsetStyledNavigationLink.swift */,
 				8A858C8327FF5C20002385E1 /* ButtonStyles */,
 			);
 			path = "UI Components";
@@ -328,13 +328,13 @@
 		08BE48D6279CA0FA00EA431F /* TriomiCount */ = {
 			isa = PBXGroup;
 			children = (
-				08BE48D7279CA0FA00EA431F /* TriomiCountApp.swift */,
 				0828817B279F434C0064C9E8 /* Info.plist */,
 				8ACA06E527F593B6000F6D4C /* Launch Screen.storyboard */,
-				083974DE27D2BECE002B90E4 /* Resources */,
-				082C53F627ABE69000AB5CD7 /* CoreData */,
+				08BE48D7279CA0FA00EA431F /* TriomiCountApp.swift */,
 				08DEBD6127A19597005A0990 /* Core */,
+				082C53F627ABE69000AB5CD7 /* CoreData */,
 				08BE48DD279CA0FB00EA431F /* Preview Content */,
+				083974DE27D2BECE002B90E4 /* Resources */,
 			);
 			path = TriomiCount;
 			sourceTree = "<group>";
@@ -594,7 +594,7 @@
 			files = (
 				08BBB1FA27A0A1D3001CD3DF /* SessionOnboardingRowView.swift in Sources */,
 				0835129A27DC123700065228 /* Player.swift in Sources */,
-				083974DD27D2A172002B90E4 /* PushStyledNavigationLink.swift in Sources */,
+				083974DD27D2A172002B90E4 /* OffsetStyledNavigationLink.swift in Sources */,
 				08F6F36127E681A200FFBCFB /* SessionView.swift in Sources */,
 				8A1A4F5F283249A30024BE58 /* MenuOverlay.swift in Sources */,
 				089D478B27A1A89B000E3BA8 /* SessionOnboardingViewModel.swift in Sources */,

@@ -39,10 +39,3 @@ struct SessionMainView: View {
     .navigationBarHidden(true)
   }
 }
-
-struct PlayerView_Previews: PreviewProvider {
-  static var previews: some View {
-    SessionMainView(viewModel: SessionViewModel(Player.allPlayers()))
-      .environment(\.managedObjectContext, PersistentStore.preview.context)
-  }
-}

@@ -33,12 +33,3 @@ struct PlayerListRowView: View {
     .listRowSeparator(.hidden)
   }
 }
-
-struct PlayerListRowView_Previews: PreviewProvider {
-  static var previews: some View {
-    PlayerListRowView(player: Player(context: PersistentStore.preview.context))
-      .environment(\.managedObjectContext, PersistentStore.preview.context)
-      .padding()
-//      .previewLayout(.sizeThatFits)
-  }
-}
