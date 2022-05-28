@@ -5,12 +5,12 @@
 //  Created by Marvin Lee Kobert on 26.02.22.
 //
 
+import Introspect
 import SwiftUI
 import Combine
 
 struct PointsSubmitView: View {
   @EnvironmentObject var viewModel: SessionViewModel
-  @FocusState private var textFieldIsFocused: Bool
   @State var endPoints: String = ""
   @State var endPointsIsInt: Bool = true
 
@@ -51,11 +51,6 @@ struct PointsSubmitView: View {
           .fill(.thinMaterial)
           .shadow(color: .black.opacity(0.5), radius: 8, x: 0, y: 2.5)
       )
-      .onAppear {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-          textFieldIsFocused.toggle()
-        }
-      }
       .padding()
     }
   }
@@ -84,7 +79,7 @@ extension PointsSubmitView {
       .cornerRadius(Constants.cornerRadius)
       .keyboardType(.numberPad)
       .submitLabel(.go)
-      .focused($textFieldIsFocused)
+      .introspectTextField { $0.becomeFirstResponder() }
       .overlayedAlert(with: L10n.PointsSubmitView.overlayAlertMessage, bool: endPointsIsInt)
       .onSubmit {
         addPoints()
