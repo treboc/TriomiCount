@@ -1,5 +1,5 @@
 //
-//  PushStyledNavigationLink.swift
+//  OffsetStyledNavigationLink.swift
 //  TriomiCount
 //
 //  Created by Marvin Lee Kobert on 04.03.22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PushStyledNavigationLink<Destination: View>: View {
+struct OffsetStyledNavigationLink<Destination: View>: View {
   let title: String
   let destination: Destination
 

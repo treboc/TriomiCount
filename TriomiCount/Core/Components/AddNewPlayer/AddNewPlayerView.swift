@@ -6,12 +6,13 @@
 //
 
 import Combine
+import Introspect
 import SwiftUI
+import SFSafeSymbols
 
 struct AddNewPlayerView: View {
   @Environment(\.presentationMode) var presentationMode
   @StateObject private var viewModel = AddNewPlayerViewModel()
-  @FocusState private var textFieldIsFocused
 
   var body: some View {
     ZStack {
@@ -65,23 +66,17 @@ extension AddNewPlayerView {
         .padding(.horizontal, 20)
         .textInputAutocapitalization(.words)
         .disableAutocorrection(true)
-        .focused($textFieldIsFocused, equals: true)
         .keyboardType(.alphabet)
         .submitLabel(.done)
         .onAppear(perform: viewModel.focusTextField)
         .onSubmit(viewModel.createPlayer)
         .overlayedAlert(with: viewModel.alertMessage, bool: (viewModel.nameIsValid))
-        .onReceive(viewModel.$textFieldIsFocused, perform: { isFocused in
-          self.textFieldIsFocused = isFocused
-        })
+        .introspectTextField { $0.becomeFirstResponder() }
         .onChange(of: viewModel.nameTextFieldText) { _ in viewModel.subscribeToTextfieldText() }
-        .onAppear { self.textFieldIsFocused = viewModel.textFieldIsFocused }
-
       if !viewModel.nameTextFieldText.isEmpty {
         deleteButton
           .transition(.slide)
       }
-
     }
   }
 
@@ -129,6 +124,14 @@ extension AddNewPlayerView {
                     colorName = favColor.name
                   }
                 }
+                .overlay(favColor.color == favoriteColor ?
+                  Image(systemSymbol: .checkmark)
+                    .foregroundColor(favColor.color.isDarkColor ? .white : .black)
+                    .font(.headline)
+                    .animation(.none, value: favoriteColor)
+                         :
+                          nil
+                )
             }
           }
           .padding()
