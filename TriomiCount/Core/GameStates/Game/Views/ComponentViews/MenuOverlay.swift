@@ -22,7 +22,7 @@ extension SessionView {
             closeMenu()
           }
 
-        VStack(alignment: .trailing) {
+        ZStack(alignment: .bottomTrailing) {
           if !viewModel.session.turnsArray.isEmpty {
             endSessionButton
             undoButton
@@ -54,29 +54,8 @@ extension SessionView {
       }
       .padding(.leading)
       .background(Capsule().fill(.thinMaterial))
-      .animation(.spring().delay(0.4), value: isAnimated)
-      .offset(x: isAnimated ? 0 : 400)
-    }
-
-    private var undoButton: some View {
-      HStack {
-        Text(L10n.SessionView.UndoButton.labelText)
-
-        Button(iconName: .arrowCounterclockwise) {
-          viewModel.undoLastTurn()
-          HapticManager.shared.notification(type: .success)
-          toggleScaleAnimation()
-          withAnimation {
-            menuIsShown.toggle()
-          }
-        }
-        .buttonStyle(.circularOffsetStyle)
-        .disabled(viewModel.session.turns?.count == 0)
-      }
-      .padding(.leading)
-      .background(Capsule().fill(.thinMaterial))
-      .animation(.spring().delay(0.2), value: isAnimated)
-      .offset(x: isAnimated ? 0 : 400)
+      .animation(.spring(), value: isAnimated)
+      .offset(isAnimated ? CGSize(width: 0, height: -100) : .zero)
     }
 
     private var exitSessionButton: some View {
@@ -91,20 +70,36 @@ extension SessionView {
       .padding(.leading)
       .background(Capsule().fill(.thinMaterial))
       .animation(.spring(), value: isAnimated)
-      .offset(x: isAnimated ? 0 : 400)
+      .offset(isAnimated ? CGSize(width: -25, height: -50) : .zero)
     }
 
-    private var closeMenuButton: some View {
+    private var undoButton: some View {
       HStack {
-        Text("Close")
-        Button(iconName: .xCircleFill) {
-          closeMenu()
+        Text(L10n.SessionView.UndoButton.labelText)
+
+        Button(iconName: .arrowCounterclockwise) {
+          withAnimation {
+            viewModel.undoLastTurn()
+            menuIsShown = false
+          }
+          HapticManager.shared.impact(style: .rigid)
+          toggleScaleAnimation()
         }
         .buttonStyle(.circularOffsetStyle)
+        .disabled(viewModel.session.turns?.count == 0)
       }
       .padding(.leading)
       .background(Capsule().fill(.thinMaterial))
-      .animation(.easeOut(duration: 0.1), value: isAnimated)
+      .animation(.spring(), value: isAnimated)
+      .offset(isAnimated ? CGSize(width: -50, height: 0) : .zero)
+    }
+
+    private var closeMenuButton: some View {
+      Button(iconName: .xCircleFill) {
+        closeMenu()
+      }
+      .buttonStyle(.circularOffsetStyle)
+      .transition(.opacity)
       .opacity(isAnimated ? 1 : 0)
     }
 
