@@ -33,7 +33,7 @@ final class AddNewPlayerViewModel: ObservableObject {
 
   @Published var nameTextFieldText: String = ""
   @Published private(set) var nameIsValid: Bool = true
-  @Published var favoriteColor: UIColor = .blue
+  @Published var favoriteColor: UIColor = UIColor.FavoriteColors.colors[0].color
 
   fileprivate var cancellables = Set<AnyCancellable>()
 
