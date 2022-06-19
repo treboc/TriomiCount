@@ -33,30 +33,8 @@ struct SessionOnboardingView: View {
     .onDisappear {
       viewModel.resetState(of: players)
     }
-    .pageSheet(isPresented: $newPlayerSheedIsShown) {
-      AddNewPlayerView()
-        .sheetPreference(.detents([PageSheet.Detent.medium()]))
-        .sheetPreference(.grabberVisible(true))
-    }
+    .pageSheet(isPresented: $newPlayerSheedIsShown, content: AddNewPlayerView.init)
     .navigationBarHidden(true)
-  }
-}
-
-struct SessionOnboardingView_Previews: PreviewProvider {
-  static var previews: some View {
-    Group {
-      NavigationView {
-        SessionOnboardingView()
-          .navigationBarHidden(true)
-          .preferredColorScheme(.dark)
-      }
-
-      NavigationView {
-        SessionOnboardingView()
-          .navigationBarHidden(true)
-          .preferredColorScheme(.light)
-      }
-    }
   }
 }
 
@@ -94,7 +72,7 @@ extension SessionOnboardingView {
   }
 
   private var startSessionButton: some View {
-    PushStyledNavigationLink(title: L10n.SessionOnboardingView.startSession) {
+    OffsetStyledNavigationLink(title: L10n.SessionOnboardingView.startSession) {
       SessionMainView(viewModel: SessionViewModel(viewModel.chosenPlayers))
     }
     .buttonStyle(.offsetStyle)

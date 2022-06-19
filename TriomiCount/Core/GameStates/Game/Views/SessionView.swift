@@ -12,17 +12,14 @@ struct SessionView: View {
   @ObservedObject var viewModel: SessionViewModel
   @EnvironmentObject var appState: AppState
   @AppStorage(SettingsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
-  @State private var isAnimated: Bool = false
-  @State private var bgIsAnimated: Bool = false
+
   @State private var sessionOverviewIsShown: Bool = false
-  @State private var resetButtonIsShown: Bool = false
   @State private var menuIsShown: Bool = false
 
-  var body: some View {
-    ZStack {
-      background
-        .ignoresSafeArea()
+  @State private var scale: CGFloat = 1
 
+  var body: some View {
+    ZStack(alignment: .top) {
       VStack(spacing: 0) {
         header
         Spacer(minLength: 10)
@@ -30,39 +27,30 @@ struct SessionView: View {
         Spacer(minLength: 10)
         buttonStack
       }
-      .blur(radius: sessionOverviewIsShown || menuIsShown ? 2 : 0)
-      .scaleEffect(sessionOverviewIsShown ? 0.95 : 1)
       .animation(.easeIn(duration: 0.1), value: menuIsShown)
       .onAppear(perform: viewModel.resetTurnState)
-      .onChange(of: viewModel.turnHasChanges, perform: { newValue in
-        withAnimation {
-          resetButtonIsShown = newValue
-        }
-      })
 
       if sessionOverviewIsShown {
-        SessionOverview(players: viewModel.session.playersArray)
-          .zIndex(1)
-          .transition(.move(edge: .top))
-          .onTapGesture {
-            withAnimation {
-              sessionOverviewIsShown.toggle()
-            }
+        SessionOverview(players: viewModel.session.playersArray) {
+          withAnimation {
+            sessionOverviewIsShown = false
           }
+        }
+        .zIndex(1)
+        .transition(.move(edge: .top))
       }
 
       if menuIsShown {
         MenuOverlay(viewModel: viewModel,
                     menuIsShown: $menuIsShown,
-                    exitSession: exitSession,
+                    exitSession: appState.exitSession,
                     toggleScaleAnimation: toggleScaleAnimation)
       }
     }
-    .scaleEffect(isAnimated ? 1.025 : 1)
-    .overlay(sessionInfoButton, alignment: .topTrailing)
+    .scaleEffect(scale)
     .alert(L10n.ExitSessionAlert.title, isPresented: $viewModel.showExitSessionAlert) {
       Button(L10n.cancel, role: .cancel) {}
-      Button(action: { exitSession() },
+      Button(action: { appState.exitSession() },
              label: { Text(L10n.ExitSessionAlert.buttonTitle) }
       )
     } message: {
@@ -70,7 +58,7 @@ struct SessionView: View {
     }
     .confirmationDialog(L10n.EndSessionConfirmationDialogue.title, isPresented: $viewModel.showEndSessionAlert, titleVisibility: .visible) {
       Button(action: { viewModel.sessionWillEnd() },
-             label: { Text(L10n.EndSessionConfirmationDialogue.messageWinner(viewModel.currentPlayerOnTurn?.wrappedName ?? "Unknown")) }
+             label: { Text(L10n.EndSessionConfirmationDialogue.messageWinner(viewModel.getCurrentPlayerOnTurn()?.wrappedName ?? "Unknown")) }
       )
       Button(L10n.EndSessionConfirmationDialogue.messageTie) {
         viewModel.isTie = true
@@ -89,33 +77,10 @@ struct SessionView: View {
 }
 
 extension SessionView {
-  // MARK: - Background
-  private var background: some View {
-    ZStack {
-      Rectangle()
-        .fill(.thinMaterial)
-        .ignoresSafeArea()
-        .background(
-          Circle()
-            .fill(Color(uiColor: viewModel.currentPlayerOnTurn?.wrappedFavoriteColor ?? .purple))
-            .frame(width: 150, height: 150), alignment: bgIsAnimated ? .topLeading : .bottomLeading
-        )
-        .background(
-          Circle()
-            .fill(
-              Color(uiColor: viewModel.currentPlayerOnTurn?.wrappedFavoriteColor ?? .purple)
-            )
-            .frame(width: 150, height: 150), alignment: bgIsAnimated ? .bottomTrailing : .topTrailing
-        )
-        .animation(.easeInOut(duration: 10).repeatForever(autoreverses: true), value: bgIsAnimated)
-    }
-    .onAppear { bgIsAnimated.toggle() }
-  }
-
   // MARK: - Header
   private var header: some View {
     VStack(alignment: .center, spacing: 10) {
-      Text(viewModel.currentPlayerOnTurn?.wrappedName ?? "Unknown")
+      Text(viewModel.getCurrentPlayerOnTurn()?.wrappedName ?? "Unknown")
         .font(.title)
         .bold()
 
@@ -124,7 +89,7 @@ extension SessionView {
           Text(L10n.SessionView.HeaderLabel.totalScore)
             .font(.headline)
             .fontWeight(.semibold)
-          Text("\(viewModel.currentPlayerOnTurn?.currentScore ?? 0)")
+          Text("\(viewModel.getCurrentPlayerOnTurn()?.currentScore ?? 0)")
             .font(.subheadline)
         }
         .lineLimit(1)
@@ -143,7 +108,8 @@ extension SessionView {
       }
     }
     .glassStyled()
-    .animation(.none, value: viewModel.currentPlayerOnTurn)
+    .animation(.none, value: viewModel.getCurrentPlayerOnTurn())
+    .overlay(sessionInfoButton, alignment: .topTrailing)
   }
 
   // MARK: - Center
@@ -162,10 +128,12 @@ extension SessionView {
         .padding()
         .frame(maxWidth: .infinity)
         .transition(.move(edge: .leading))
-        .overlay( resetButtonIsShown ? resetButton
+        .overlay(viewModel.turnHasChanges
+          ? resetButton
           .scaleEffect(0.8)
           .transition(.opacity)
           .offset(y: -30) : nil, alignment: .topTrailing )
+        .animation(.easeIn(duration: 0.2), value: viewModel.turnHasChanges)
       }
 
       if viewModel.bonusEventPickerOverlayIsShown {
@@ -282,43 +250,41 @@ extension SessionView {
 
   struct SessionOverview: View {
     let players: [Player]
+    let hideOverview: (() -> Void)
 
     var body: some View {
-      ZStack(alignment: .top) {
-        Color.black.opacity(0.001)
+      VStack {
+        Text(L10n.sessionOverview)
+          .font(.title2.bold())
+          .padding(.bottom)
 
-        VStack {
-          Text(L10n.sessionOverview)
-            .font(.title2.bold())
-            .padding(.bottom)
+        HStack {
+          Text(L10n.player)
+          Spacer()
+          Text(L10n.score)
+        }
+        .font(.title3.bold())
 
+        divider
+
+        ForEach(players.sorted(by: { $0.currentScore > $1.currentScore })) { player in
           HStack {
-            Text(L10n.player)
+            Text(player.wrappedName)
             Spacer()
-            Text(L10n.score)
-          }
-          .font(.title3.bold())
-
-          divider
-
-          ForEach(players.sorted(by: { $0.currentScore > $1.currentScore })) { player in
-            HStack {
-              Text(player.wrappedName)
-              Spacer()
-              Text("\(player.currentScore)")
-            }
+            Text("\(player.currentScore)")
           }
         }
-        .frame(maxWidth: .infinity)
-        .padding()
-        .background(
-          Rectangle()
-            .fill(.ultraThinMaterial)
-            .cornerRadius(20, corners: [.bottomRight, .bottomLeft])
-            .shadow(color: .black, radius: 5, x: 0, y: 2.5)
-            .ignoresSafeArea(.all, edges: .top)
-        )
       }
+      .frame(maxWidth: .infinity)
+      .padding()
+      .background(
+        Rectangle()
+          .fill(.ultraThinMaterial)
+          .cornerRadius(20, corners: [.bottomRight, .bottomLeft])
+          .shadow(color: .black, radius: 5, x: 0, y: 2.5)
+          .ignoresSafeArea(.all, edges: .top)
+      )
+      .onTapGesture(perform: hideOverview)
     }
 
     private var divider: some View {
@@ -335,19 +301,12 @@ extension SessionView {
 // MARK: - UI Methods
 extension SessionView {
   private func toggleScaleAnimation() {
-    withAnimation {
-      isAnimated = true
+    withAnimation(.linear(duration: 0.3)) {
+      scale = 1.01
     }
 
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-      withAnimation {
-        isAnimated = false
-      }
+    withAnimation(.linear.delay(0.3)) {
+      scale = 1
     }
-  }
-
-  fileprivate func exitSession() {
-    appState.homeViewID = UUID()
-    HapticManager.shared.impact(style: .medium)
   }
 }

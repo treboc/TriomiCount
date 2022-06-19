@@ -33,26 +33,30 @@ struct HomeView: View {
 
         VStack(spacing: 100) {
           Logo()
-          VStack(spacing: 15) {
-            if lastSession != nil {
-              lastSessionButton
-            }
 
-            PushStyledNavigationLink(title: L10n.HomeView.newSession) { SessionOnboardingView()
-                .id(appState.onboardingScreen)
+          if isAnimating {
+            VStack(spacing: 15) {
+              if let lastSession = lastSession {
+                NavigationLink(L10n.HomeView.resume) {
+                  SessionMainView(viewModel: SessionViewModel(lastSession: lastSession))
+                }
+              }
+
+              NavigationLink(L10n.HomeView.newSession) {
+                SessionOnboardingView()
+                  .id(appState.onboardingScreen)
+              }
+
+              NavigationLink(L10n.HomeView.players, destination: PlayerListView.init)
+
+              NavigationLink(L10n.HomeView.sessions, destination: SessionsListView.init)
             }
-            .offset(y: isAnimating ? 0 : 800)
-            .animation(.easeInOut(duration: 0.4).delay(lastSession != nil ? animationDelay : 0), value: isAnimating)
-            PushStyledNavigationLink(title: L10n.HomeView.players) { PlayerListView() }
-              .offset(y: isAnimating ? 0 : 800)
-              .animation(.easeInOut(duration: 0.4).delay(lastSession != nil ? animationDelay * 2 : animationDelay), value: isAnimating)
-            PushStyledNavigationLink(title: L10n.HomeView.sessions) { SessionsListView() }
-              .offset(y: isAnimating ? 0 : 800)
-              .animation(.easeInOut(duration: 0.4).delay(lastSession != nil ? animationDelay * 3 : animationDelay * 2), value: isAnimating)
+            .buttonStyle(.offsetStyle)
+            .frame(maxWidth: .infinity)
+            .padding(.horizontal, 50)
+            .padding(.bottom, 20)
           }
-          .frame(maxWidth: .infinity)
-          .padding(.horizontal, 50)
-          .padding(.bottom, 20)
+
         }
         .padding(.vertical)
         .navigationBarHidden(true)
@@ -66,7 +70,7 @@ struct HomeView: View {
 
     .pageSheet(isPresented: $settingsViewIsShown) {
       SettingsView()
-        .sheetPreference(.grabberVisible(true))
+        .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
     }
   }
 }
@@ -90,16 +94,5 @@ extension HomeView {
       }
       .buttonStyle(.circularOffsetStyle)
       .padding([.top, .trailing])
-  }
-
-  @ViewBuilder
-  private var lastSessionButton: some View {
-    if let lastSession = lastSession {
-      PushStyledNavigationLink(title: L10n.HomeView.resume) {
-        SessionMainView(viewModel: SessionViewModel(lastSession: lastSession))
-      }
-      .offset(y: isAnimating ? 0 : 800)
-      .animation(.easeInOut(duration: 0.4), value: isAnimating)
-    }
   }
 }
