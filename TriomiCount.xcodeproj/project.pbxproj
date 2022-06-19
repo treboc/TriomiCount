@@ -63,6 +63,7 @@
 		8A071650282CEE8B00AC8C87 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A07164F282CEE8B00AC8C87 /* Collection+Extension.swift */; };
 		8A1A4F5F283249A30024BE58 /* MenuOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1A4F5E283249A30024BE58 /* MenuOverlay.swift */; };
 		8A2C8CF42827A7DD005136AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C8CF32827A7DD005136AD /* Constants.swift */; };
+		8A34365C285EFB1E00B451E8 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 8A34365B285EFB1E00B451E8 /* Introspect */; };
 		8A5D847228286B8C00286F14 /* CustomModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5D847128286B8C00286F14 /* CustomModifiers.swift */; };
 		8A5E01102813491E00703CE5 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E010F2813491E00703CE5 /* L10n.swift */; };
 		8A5E011228154B3200703CE5 /* SettingsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E011128154B3200703CE5 /* SettingsKeys.swift */; };
@@ -160,6 +161,7 @@
 				8A07164E282B9CAA00AC8C87 /* Introspect in Frameworks */,
 				083974E527D2C11D002B90E4 /* PageSheetCore in Frameworks */,
 				083974E327D2C11D002B90E4 /* PageSheet in Frameworks */,
+				8A34365C285EFB1E00B451E8 /* Introspect in Frameworks */,
 				0897300027DC197D0029C94B /* SFSafeSymbols in Frameworks */,
 				083974E727D2C11D002B90E4 /* PageSheetPlus in Frameworks */,
 			);
@@ -505,6 +507,7 @@
 				08972FFF27DC197D0029C94B /* SFSafeSymbols */,
 				8A858C8527FF6E34002385E1 /* Inject */,
 				8A07164D282B9CAA00AC8C87 /* Introspect */,
+				8A34365B285EFB1E00B451E8 /* Introspect */,
 			);
 			productName = TriomiCount;
 			productReference = 08BE48D4279CA0FA00EA431F /* TriomiCount.app */;
@@ -540,6 +543,7 @@
 				08972FFE27DC197D0029C94B /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				8A858C8427FF6E34002385E1 /* XCRemoteSwiftPackageReference "Inject" */,
 				8A07164C282B9CAA00AC8C87 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				8A34365A285EFB1E00B451E8 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 08BE48D5279CA0FA00EA431F /* Products */;
 			projectDirPath = "";
@@ -807,13 +811,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TriomiCount/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TriomiCount;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -841,13 +845,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TriomiCount/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TriomiCount;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -910,6 +914,14 @@
 				minimumVersion = 0.1.4;
 			};
 		};
+		8A34365A285EFB1E00B451E8 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		8A858C8427FF6E34002385E1 /* XCRemoteSwiftPackageReference "Inject" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/krzysztofzablocki/Inject.git";
@@ -944,6 +956,11 @@
 		8A07164D282B9CAA00AC8C87 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8A07164C282B9CAA00AC8C87 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
+		8A34365B285EFB1E00B451E8 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8A34365A285EFB1E00B451E8 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
 		};
 		8A858C8527FF6E34002385E1 /* Inject */ = {
