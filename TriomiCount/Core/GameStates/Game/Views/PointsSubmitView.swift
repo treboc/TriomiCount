@@ -13,6 +13,7 @@ struct PointsSubmitView: View {
   @EnvironmentObject var viewModel: SessionViewModel
   @State var endPoints: String = ""
   @State var endPointsIsInt: Bool = true
+  @FocusState var textFieldIsFocused
 
   var body: some View {
     ZStack {
@@ -51,6 +52,7 @@ struct PointsSubmitView: View {
           .fill(.thinMaterial)
           .shadow(color: .black.opacity(0.5), radius: 8, x: 0, y: 2.5)
       )
+      .onChange(of: viewModel.playerToAskForPoints, perform: focusTextFieldAfterSubmit)
       .padding()
     }
   }
@@ -80,17 +82,10 @@ extension PointsSubmitView {
       .keyboardType(.numberPad)
       .submitLabel(.go)
       .introspectTextField { $0.becomeFirstResponder() }
+      .focused($textFieldIsFocused)
       .overlayedAlert(with: L10n.PointsSubmitView.overlayAlertMessage, bool: endPointsIsInt)
-      .onSubmit {
-        addPoints()
-      }
-      .onChange(of: endPoints, perform: { newValue in
-        if newValue.isInt {
-          endPointsIsInt = true
-        } else {
-          endPointsIsInt = false
-        }
-      })
+      .onSubmit(addPoints)
+      .onChange(of: endPoints, perform: checkEndpointsIsInt)
     /* Make sure the maximum input is 999 (no more as 3 digits),
      because more than this is not realistic and it avoids
      errors in the system b/c of too high scores. */
@@ -99,5 +94,15 @@ extension PointsSubmitView {
           endPoints.removeLast()
         }
       }
+  }
+
+  func checkEndpointsIsInt(_ value: String) {
+    endPointsIsInt = value.isInt
+  }
+
+  func focusTextFieldAfterSubmit(_ player: Player?) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+      textFieldIsFocused = true
+    }
   }
 }
