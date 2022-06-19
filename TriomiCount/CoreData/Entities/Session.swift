@@ -68,7 +68,6 @@ extension Session {
 
     for player in players {
       player.currentScore = 0
-      player.increaseSessionsPlayed()
       player.isChosen = false
     }
 

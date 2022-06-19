@@ -235,6 +235,8 @@ class SessionViewModel: ObservableObject {
       session.wrappedWinnerID = winner.objectID.uriRepresentation().absoluteString
 
       for player in session.playersArray {
+        player.increaseSessionsPlayed()
+
         if player.currentScore > player.highscore {
           player.highscore = Int64(player.currentScore)
         }
