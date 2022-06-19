@@ -45,7 +45,8 @@ class SessionViewModel: ObservableObject {
 
   @Published var session: Session
   @Published var state: SessionState = .playing
-  var currentPlayerOnTurn: Player? {
+
+  func getCurrentPlayerOnTurn() -> Player? {
     let players = session.playersArray.count
     let turns = session.turnsArray.count
 
@@ -135,7 +136,7 @@ class SessionViewModel: ObservableObject {
   }
 
   func endTurn() {
-    guard let player = currentPlayerOnTurn else { return }
+    guard let player = getCurrentPlayerOnTurn() else { return }
     // update the current player with the score from the currentTurnScore
     updateScore(of: player, with: calculatedScore)
 
@@ -192,13 +193,13 @@ class SessionViewModel: ObservableObject {
   @Published var isTie: Bool = false
 
   func sessionWillEnd() {
-    lastPlayer = currentPlayerOnTurn
+    lastPlayer = getCurrentPlayerOnTurn()
     if session.players?.count == 1 {
       endSession()
     }
 
     playersWithoutLastPlayer = session.playersArray.filter {
-      $0 != currentPlayerOnTurn
+      $0 != getCurrentPlayerOnTurn()
     }
 
     if isTie {
