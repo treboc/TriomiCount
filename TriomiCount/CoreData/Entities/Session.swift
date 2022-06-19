@@ -43,20 +43,7 @@ extension Session {
   }
 
   var playedBy: String {
-    var playerNames: [String] = []
-    for player in playersArray {
-      playerNames.append(player.wrappedName)
-    }
-
-    let seperator = L10n.joinStringAnd
-
-    if playerNames.count == 2 {
-      return playerNames.joined(separator: L10n.and)
-    } else if playerNames.count > 2 {
-      return playerNames.dropLast().joined(separator: ", ") + "\(seperator)" + playerNames.last!
-    } else {
-      return ""
-    }
+    return playersArray.compactMap { $0.name }.formatted()
   }
 
   var startedOnAsString: String {
