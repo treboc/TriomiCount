@@ -11,4 +11,9 @@ import Foundation
 final class AppState: ObservableObject {
   @Published var homeViewID: UUID = UUID()
   @Published var onboardingScreen: UUID = UUID()
+
+  func exitSession() {
+    self.homeViewID = UUID()
+    HapticManager.shared.impact(style: .medium)
+  }
 }
