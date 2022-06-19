@@ -44,7 +44,7 @@ extension SessionsListView {
 
   private var scrollView: some View {
     ScrollView(showsIndicators: false) {
-      ForEach(sessions) { session in
+      ForEach(sessions.filter { $0.hasEnded }) { session in
         NavigationLink {
           SessionDetailView(session: session)
         } label: {
