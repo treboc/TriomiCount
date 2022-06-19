@@ -14,6 +14,8 @@ extension ButtonStyle where Self == CircularOffsetStyle {
 }
 
 struct CircularOffsetStyle: ButtonStyle {
+  @State fileprivate var tap = false
+
   let primaryColor: Color
   let secondaryColor: Color
 
@@ -28,7 +30,6 @@ struct CircularOffsetStyle: ButtonStyle {
         .fill(.black.opacity(0.2))
         .frame(width: Constants.buttonHeight, height: Constants.buttonHeight)
         .shadow(color: .black.opacity(1), radius: configuration.isPressed ? 0 : 3, x: 0, y: 0)
-        .animation(.easeIn(duration: 0.1), value: configuration.isPressed)
         .offset(y: 4)
 
       configuration.label
@@ -39,5 +40,6 @@ struct CircularOffsetStyle: ButtonStyle {
         .font(.system(size: 16))
         .offset(y: configuration.isPressed ? 4 : 0)
     }
+    .animation(.easeInOut(duration: 0.3), value: configuration.isPressed)
   }
 }
