@@ -19,9 +19,6 @@ struct TimesDrawnPicker: View {
       }
     }
     .animation(.default, value: selection)
-    .onChange(of: selection) { _ in
-      HapticManager.shared.impact(style: .light)
-    }
   }
 
   struct ButtonToPick: View {
