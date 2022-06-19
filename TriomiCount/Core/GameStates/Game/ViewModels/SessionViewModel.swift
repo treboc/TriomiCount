@@ -9,8 +9,6 @@ import Foundation
 import SwiftUI
 
 class SessionViewModel: ObservableObject {
-  @EnvironmentObject var appState: AppState
-
   enum SessionState: Equatable {
     case exited
     case playing
@@ -18,12 +16,28 @@ class SessionViewModel: ObservableObject {
     case didEnd
   }
 
-  enum BonusEvent: LocalizedStringKey, CaseIterable {
-    case none = "sessionView.bonusEventPicker.none"
-    case bridge = "sessionView.bonusEventPicker.bridge"
-    case hexagon = "sessionView.bonusEventPicker.hexagon"
-    case twoHexagons = "sessionView.bonusEventPicker.twoHexagons"
-    case threeHexagons = "sessionView.bonusEventPicker.threeHexagons"
+  enum BonusEvent: CaseIterable {
+    case none
+    case bridge
+    case hexagon
+    case twoHexagons
+    case threeHexagons
+
+    var description: String {
+      switch self {
+      case .none:
+        return L10n.SessionView.BonusEventPicker.none
+      case .bridge:
+        return L10n.SessionView.BonusEventPicker.bridge
+      case .hexagon:
+        return L10n.SessionView.BonusEventPicker.hexagon
+      case .twoHexagons:
+        return L10n.SessionView.BonusEventPicker.twoHexagons
+      case .threeHexagons:
+        return L10n.SessionView.BonusEventPicker.threeHexagons
+
+      }
+    }
   }
 
   // MARK: - SessionState Playing
@@ -66,6 +80,7 @@ class SessionViewModel: ObservableObject {
       }
     }
   }
+
   @Published var playedCard: Bool = true {
     didSet {
       if !playedCard {
@@ -73,6 +88,7 @@ class SessionViewModel: ObservableObject {
       }
     }
   }
+
   @Published var bonusEvent: BonusEvent = .none
   @Published var bonusEventPickerOverlayIsShown = false
 

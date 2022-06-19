@@ -11,12 +11,12 @@ struct BonusEventPicker: View {
   @ObservedObject var viewModel: SessionViewModel
 
   var body: some View {
-    Button(viewModel.bonusEvent.rawValue) {
+    Button(viewModel.bonusEvent.description) {
       withAnimation {
         viewModel.bonusEventPickerOverlayIsShown = true
       }
     }
-    .animation(.none, value: viewModel.bonusEvent.rawValue)
+    .animation(.none, value: viewModel.bonusEvent.description)
     .buttonStyle(.offsetStyle)
     .onChange(of: viewModel.bonusEvent) { _ in
       HapticManager.shared.impact(style: .light)
@@ -29,7 +29,7 @@ struct BonusEventPicker: View {
     var body: some View {
       VStack(spacing: 15) {
         ForEach(SessionViewModel.BonusEvent.allCases, id: \.self) { bonusEvent in
-          Button(bonusEvent.rawValue) {
+          Button(bonusEvent.description) {
             withAnimation {
               viewModel.bonusEvent = bonusEvent
               viewModel.bonusEventPickerOverlayIsShown = false
