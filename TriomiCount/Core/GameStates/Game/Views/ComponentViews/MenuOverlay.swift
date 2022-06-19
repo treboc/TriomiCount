@@ -8,6 +8,9 @@
 import SwiftUI
 
 extension SessionView {
+  /// An overlaying menu for the session view.
+  /// Pops up on tap of the button in the lower trailing corner.
+  /// Shows buttons for ending or leaving the session and undo the last turn, if any were made in the current session.
   struct MenuOverlay: View {
     @StateObject var viewModel: SessionViewModel
     @Binding var menuIsShown: Bool
@@ -17,7 +20,8 @@ extension SessionView {
 
     var body: some View {
       ZStack(alignment: .bottomTrailing) {
-        Color.black.opacity(0.001)
+        Color.black.opacity(0.4)
+          .ignoresSafeArea()
           .onTapGesture {
             closeMenu()
           }
@@ -29,7 +33,6 @@ extension SessionView {
           }
           exitSessionButton
           closeMenuButton
-
         }
         .padding(.trailing)
         .padding(.bottom)
