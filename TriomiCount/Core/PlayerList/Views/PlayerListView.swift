@@ -59,7 +59,7 @@ extension PlayerListView {
   }
 
   private var sortView: some View {
-    PlayerListSortView(selectedSortItem: $selectedSort, sorts: PlayerListSort.sorts)
+    PlayerListSortView(selectedSortItem: $selectedSort)
       .labelStyle(.iconOnly)
       .onChange(of: selectedSort) { _ in
         players.sortDescriptors = selectedSort.descriptors
