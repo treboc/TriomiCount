@@ -58,16 +58,23 @@ extension UIColor {
 extension UIColor {
   struct FavoriteColor {
     let name: String
-    let color: UIColor
+    let red: CGFloat
+    let green: CGFloat
+    let blue: CGFloat
+    let alpha: CGFloat
+
+    var color: UIColor {
+      UIColor(red: red, green: green, blue: blue, alpha: alpha)
+    }
   }
 
   struct FavoriteColors {
     static let colors: [FavoriteColor] = [
-      FavoriteColor(name: "Winter Sky", color: UIColor(red: 1.00, green: 0.13, blue: 0.43, alpha: 1.00)),
-      FavoriteColor(name: "Lemon Glacier", color: UIColor(red: 0.98, green: 1.00, blue: 0.07, alpha: 1.00)),
-      FavoriteColor(name: "Maximum Blue Purple", color: UIColor(red: 0.67, green: 0.60, blue: 1.00, alpha: 1.00)),
-      FavoriteColor(name: "Oxford Blue", color: UIColor(red: 0.05, green: 0.13, blue: 0.29, alpha: 1.00)),
-      FavoriteColor(name: "Lime Green", color: UIColor(red: 0.01, green: 0.87, blue: 0.13, alpha: 1.00))
+      FavoriteColor(name: "Winter Sky", red: 1, green: 0.13, blue: 0.43, alpha: 1),
+      FavoriteColor(name: "Lemon Glacier", red: 0.98, green: 1.00, blue: 0.07, alpha: 1),
+      FavoriteColor(name: "Maximum Blue Purple", red: 0.67, green: 0.60, blue: 1.00, alpha: 1.00),
+      FavoriteColor(name: "Oxford Blue", red: 0.05, green: 0.13, blue: 0.29, alpha: 1.00),
+      FavoriteColor(name: "Lime Green", red: 0.01, green: 0.87, blue: 0.13, alpha: 1.00)
     ]
   }
 }
