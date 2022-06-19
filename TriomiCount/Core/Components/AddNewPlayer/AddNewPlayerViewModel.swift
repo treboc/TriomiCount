@@ -21,6 +21,7 @@ final class AddNewPlayerViewModel: ObservableObject {
 
   @Published var alertIsShown: Bool = false
   @Published var alertTitle: String = ""
+
   var alertMessage: String {
     if nameTextFieldText.isEmpty {
       return L10n.AddNewPlayerView.AlertTextFieldEmpty.message
@@ -40,7 +41,6 @@ final class AddNewPlayerViewModel: ObservableObject {
   func subscribeToTextfieldText() {
     if cancellables.isEmpty {
       $nameTextFieldText
-        .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
         .map { (text) -> Bool in
           if text.isValidName {
             return true

@@ -125,13 +125,13 @@ extension AddNewPlayerView {
                     colorName = favColor.name
                   }
                 }
-                .overlay(favColor.color == favoriteColor ?
-                  Image(systemSymbol: .checkmark)
-                    .foregroundColor(favColor.color.isDarkColor ? .white : .black)
-                    .font(.headline)
-                    .animation(.none, value: favoriteColor)
-                         :
-                          nil
+                .overlay(
+                  favColor.color == favoriteColor
+                ? Image(systemSymbol: .checkmark)
+                  .foregroundColor(favColor.color.isDarkColor ? .white : .black)
+                  .font(.headline)
+                  .animation(.none, value: favoriteColor)
+                : nil
                 )
             }
           }
@@ -147,7 +147,4 @@ extension AddNewPlayerView {
       }
     }
   }
-}
-
-extension AddNewPlayerView {
 }
