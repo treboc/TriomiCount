@@ -51,33 +51,30 @@ extension AddNewPlayerView {
   }
 
   private var nameTextField: some View {
-    ZStack(alignment: .trailing) {
-      TextField("", text: $viewModel.nameTextFieldText)
-        .placeholder(when: viewModel.nameTextFieldText.isEmpty, placeholder: {
-          Text(L10n.AddNewPlayerView.NameLabel.textfieldText)
-            .foregroundColor(.gray)
-        })
-        .foregroundColor(.primary)
-        .padding(.leading, 10)
-        .frame(height: Constants.buttonHeight)
-        .frame(maxWidth: .infinity)
-        .background(Color.secondaryBackground)
-        .cornerRadius(Constants.cornerRadius)
-        .padding(.horizontal, 20)
-        .textInputAutocapitalization(.words)
-        .disableAutocorrection(true)
-        .keyboardType(.alphabet)
-        .submitLabel(.done)
-        .onAppear(perform: viewModel.focusTextField)
-        .onSubmit(viewModel.createPlayer)
-        .overlayedAlert(with: viewModel.alertMessage, bool: (viewModel.nameIsValid))
-        .introspectTextField { $0.becomeFirstResponder() }
-        .onChange(of: viewModel.nameTextFieldText) { _ in viewModel.subscribeToTextfieldText() }
-      if !viewModel.nameTextFieldText.isEmpty {
-        deleteButton
-          .transition(.slide)
-      }
-    }
+    TextField("", text: $viewModel.nameTextFieldText)
+      .placeholder(when: viewModel.nameTextFieldText.isEmpty, placeholder: {
+        Text(L10n.AddNewPlayerView.NameLabel.textfieldText)
+          .foregroundColor(.gray)
+      })
+      .foregroundColor(.primary)
+      .padding(.leading, 10)
+      .frame(height: Constants.buttonHeight)
+      .frame(maxWidth: .infinity)
+      .background(Color.secondaryBackground)
+      .cornerRadius(Constants.cornerRadius)
+      .padding(.horizontal, 20)
+      .textInputAutocapitalization(.words)
+      .disableAutocorrection(true)
+      .keyboardType(.alphabet)
+      .submitLabel(.done)
+      .onAppear(perform: viewModel.focusTextField)
+      .onSubmit(viewModel.createPlayer)
+      .overlayedAlert(with: viewModel.alertMessage, bool: viewModel.nameIsValid)
+      .introspectTextField { $0.becomeFirstResponder() }
+      .onChange(of: viewModel.nameTextFieldText) { _ in viewModel.subscribeToTextfieldText() }
+      .overlay(viewModel.nameTextFieldText.isEmpty ? nil : deleteButton
+        .transition(.opacity), alignment: .trailing)
+      .animation(.easeIn(duration: 0.1), value: viewModel.nameTextFieldText.isEmpty)
   }
 
   private var createPlayerButton: some View {
