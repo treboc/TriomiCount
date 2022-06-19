@@ -33,7 +33,7 @@
 "sessionView.bonusEventPicker.hexagon" = "Sechseck";
 "sessionView.bonusEventPicker.twoHexagons" = "Zwei Sechsecke";
 "sessionView.bonusEventPicker.threeHexagons" = "Drei Sechsecke";
-"sessionView.undoButton.labelText" = "Letzten Zug rückgängig machen";
+"sessionView.undoButton.labelText" = "Zug rückgängig machen";
 "sessionView.nextPlayerButton.labelText" = "Zug beenden";
 "sessionView.exitSessionButton.labelText" = "Zum Hauptmenü";
 "sessionView.endSessionButton.labelText" = "Runde beenden";
@@ -105,42 +105,13 @@
 // Beginning
 "rules.title" = "Regeln";
 "rules.setup.header" = "Vorbereitung";
-"rules.setup.body" = "Mische die Steine auf dem Tisch. Ein Spieler notiert mit Hilfe dieser App die Punkte.
-
-Anzahl der Steine pro Spieler:
-- bei 2 Spielern: 9 Steine
-- bei 3 bis 4 Spielern: 7 Steine
-- bei 5 bis 6 Spielern: 6 Steine
-
-Jeder Spieler zieht die benötigte Menge an Steinen und legt sie so auf sein Brett, dass er die Punktzahlen sehen kann.
-Um herauszubekommen, welcher Spieler den ersten Zug macht, gibt es mehrere Wege. Zum Beispiel:
-
-**Erste Variante:**
-Alle Spieler ziehen einen Stein aus dem Vorrat und der Spieler, der den Stein mit der höchsten Punktzahl hat, fängt an. Er legt dann im Anschluss als ersten Spielzug einen Stein aus dem Vorrat direkt auf den Tisch.
-
-**Zweite Variante:**
-Der Spieler, der den Stein mit der höchsten, dreimal gleichen Zahl (z.B. 5 - 5 - 5, 4 - 4 - 4, etc.) fängt an. Er legt diesen Stein als ersten Spielzug direkt auf den Tisch.";
-
+"rules.setup.body" = "Mische die Steine auf dem Tisch. Ein Spieler notiert mit Hilfe dieser App die Punkte.\n\nAnzahl der Steine pro Spieler:\n- bei 2 Spielern: 9 Steine\n- bei 3 bis 4 Spielern: 7 Steine\n- bei 5 bis 6 Spielern: 6 Steine\n\nJeder Spieler zieht die benötigte Menge an Steinen und legt sie so auf sein Brett, dass er die Punktzahlen sehen kann.\nUm herauszubekommen, welcher Spieler den ersten Zug macht, gibt es mehrere Wege. Zum Beispiel:\n\nErste Variante:\nAlle Spieler ziehen einen Stein aus dem Vorrat und der Spieler, der den Stein mit der höchsten Punktzahl hat, fängt an. Er legt dann im Anschluss als ersten Spielzug einen Stein aus dem Vorrat direkt auf den Tisch.\n\nZweite Variante:\nDer Spieler, der den Stein mit der höchsten, dreimal gleichen Zahl (z.B. 5 - 5 - 5, 4 - 4 - 4, etc.) fängt an. Er legt diesen Stein als ersten Spielzug direkt auf den Tisch.";
 "rules.letsGo.header" = "Los geht's";
-"rules.letsGo.body" = "Nun legt jeder Spieler im Uhrzeigersinn einen passenden Stein an. An einer Kante müssen die Punkte an den jeweiligen Ecken dem anzulegenden Stein gleichen.
-
-Es ist wichtig, dass alle drei Ecken passen müssen, wenn der Stein in eine Lücke eingelegt wird.
-
-Wenn der Spieler keinen Stein anlegen kann oder möchte, muss er einen Stein aus dem Vorrat ziehen.
-Wenn er einen Stein zieht, bekommt er pro Stein 5 Strafpunkte, jede Runde können maximal 3 Steine gezogen werden.
-
-Wenn auch nach dem dritten, gezogenen Stein noch kein Anlegen möglich ist, bekommt der Spieler für diese Runde 25 Strafpunkte.
-Wenn du den Stein ablegen konntest, ist der Wert auf dem Stein mit den Strafpunkten zu verrechnen (z.B. -10 + 8 → -2 Punkte für diese Runde).";
-
+"rules.letsGo.body" = "Nun legt jeder Spieler im Uhrzeigersinn einen passenden Stein an. An einer Kante müssen die Punkte an den jeweiligen Ecken dem anzulegenden Stein gleichen.\n\nEs ist wichtig, dass alle drei Ecken passen müssen, wenn der Stein in eine Lücke eingelegt wird.\n\nWenn der Spieler keinen Stein anlegen kann oder möchte, muss er einen Stein aus dem Vorrat ziehen.\nWenn er einen Stein zieht, bekommt er pro Stein 5 Strafpunkte, jede Runde können maximal 3 Steine gezogen werden.\n\nWenn auch nach dem dritten, gezogenen Stein noch kein Anlegen möglich ist, bekommt der Spieler für diese Runde 25 Strafpunkte.\nWenn du den Stein ablegen konntest, ist der Wert auf dem Stein mit den Strafpunkten zu verrechnen (z.B. -10 + 8 → -2 Punkte für diese Runde).";
 "rules.endOfGame.header" = "Ende des Spiels";
 "rules.endOfGame.body" = "Der Spieler, der den letzten Stein legt, bekommt 25 Bonuspunkte. Er bekommt außerdem die Punkte aller Steine der anderen Spieler die sich noch auf deren Spielbänken befinden.";
-
 "rules.bonusPoints.header" = "Bonuspunkte";
-"rules.bonusPoints.body" = "Es ist möglich Bonuspunkte für besondere Züge zu bekommen.
-1. Brücke (eine passende Kante und eine passende Ecke gegenüber) - 40 Punkte.
-2. Ein Sechseck beenden - 50 Punkte.
-3. Zwei Sechsecke beenden - 60 Punkte.
-4. Drei Sechsecke beenden - 70 Punkte.";
+"rules.bonusPoints.body" = "Es ist möglich Bonuspunkte für besondere Züge zu bekommen.\n1. Brücke (eine passende Kante und eine passende Ecke gegenüber) - 40 Punkte.\n2. Ein Sechseck beenden - 50 Punkte.\n3. Zwei Sechsecke beenden - 60 Punkte.\n4. Drei Sechsecke beenden - 70 Punkte.";
 
 // Simple constants
 "yes" = "Ja";

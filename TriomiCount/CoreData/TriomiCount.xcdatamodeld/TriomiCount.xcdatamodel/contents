@@ -3,7 +3,7 @@
     <entity name="Player" representedClassName="Player" syncable="YES">
         <attribute name="createdOn" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="currentScore" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="favoriteColor" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="UIColor"/>
+        <attribute name="favoriteColor" optional="YES" attributeType="Transformable" valueTransformerName="UIColorValueTransformer" customClassName=".UIColor"/>
         <attribute name="highscore" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
