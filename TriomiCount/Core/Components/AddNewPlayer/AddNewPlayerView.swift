@@ -7,6 +7,7 @@
 
 import Combine
 import Introspect
+import PageSheet
 import SwiftUI
 import SFSafeSymbols
 
@@ -32,6 +33,9 @@ struct AddNewPlayerView: View {
         presentationMode.wrappedValue.dismiss()
       }
     }
+    .sheetPreference(.detents([PageSheet.Detent.medium()]))
+    .sheetPreference(.cornerRadius(20))
+    .sheetPreference(.grabberVisible(true))
   }
 }
 
