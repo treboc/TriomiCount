@@ -137,7 +137,7 @@ extension SessionView {
       }
 
       if viewModel.bonusEventPickerOverlayIsShown {
-        BonusEventPicker.SelectionOverlay(viewModel: viewModel)
+        BonusEventPicker.SelectionOverlay(bonusEvent: $viewModel.bonusEvent, bonusEventPickerOverlayIsShown: $viewModel.bonusEventPickerOverlayIsShown)
           .transition(.move(edge: .trailing))
           .zIndex(1)
       }
@@ -194,8 +194,11 @@ extension SessionView {
     VStack(alignment: .leading) {
       Text(L10n.SessionView.BonusEventPicker.labelText)
         .font(.headline)
-      BonusEventPicker(viewModel: viewModel)
-        .padding(.horizontal)
+      BonusEventPicker(
+        bonusEvent: $viewModel.bonusEvent,
+        bonusEventPickerOverlayIsShown: $viewModel.bonusEventPickerOverlayIsShown
+      )
+      .padding(.horizontal)
     }
   }
 
