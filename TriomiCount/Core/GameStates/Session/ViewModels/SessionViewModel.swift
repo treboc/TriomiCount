@@ -125,10 +125,13 @@ class SessionViewModel: ObservableObject {
   }
 
   func resetTurnState() {
-    scoreSliderValue = 0
-    timesDrawn = 0
-    playedCard = true
-    bonusEvent = .none
+    withAnimation {
+      scoreSliderValue = 0
+      timesDrawn = 0
+      playedCard = true
+      bonusEvent = .none
+      bonusEventPickerOverlayIsShown = false
+    }
   }
 
   func endTurn() {
