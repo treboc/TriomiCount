@@ -10,6 +10,7 @@ import SFSafeSymbols
 
 struct SessionMainView: View {
   @StateObject var viewModel: SessionViewModel
+  let session: Session
   @EnvironmentObject var appState: AppState
 
   // MARK: Body
@@ -37,5 +38,11 @@ struct SessionMainView: View {
       }
     }
     .navigationBarHidden(true)
+    .onAppear { print(viewModel.session.playersArray) }
+  }
+
+  init(session: Session) {
+    self.session = session
+    _viewModel = StateObject.init(wrappedValue: SessionViewModel(lastSession: session))
   }
 }

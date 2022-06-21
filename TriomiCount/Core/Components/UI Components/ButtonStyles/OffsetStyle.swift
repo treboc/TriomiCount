@@ -52,11 +52,6 @@ struct OffsetStyle: ButtonStyle {
         .font(.headline.bold())
         .offset(y: configuration.isPressed ? 4 : 0)
     }
-    .onChange(of: configuration.isPressed) { newValue in
-      if newValue {
-        HapticManager.shared.impact(style: .light)
-      }
-    }
     .if(!isEnabled) { view in
       view.grayscale(1)
     }

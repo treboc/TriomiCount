@@ -18,8 +18,6 @@ struct SessionDetailView: View {
         .ignoresSafeArea()
 
       VStack(alignment: .center) {
-        header
-
         VStack {
           SessionDetailSection(L10n.SessionDetailView.playedWith) {
             Text(session.playedBy)
@@ -49,8 +47,8 @@ struct SessionDetailView: View {
         .padding(.horizontal)
       }
     }
-    .navigationBarHidden(true)
-    .navigationBarBackButtonHidden(true)
+    .navigationTitle("Session #\(session.id)")
+    .roundedNavigationTitle()
   }
 }
 

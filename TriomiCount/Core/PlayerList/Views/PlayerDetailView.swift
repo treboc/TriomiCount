@@ -15,24 +15,12 @@ struct PlayerDetailView: View {
     ZStack {
       Color.primaryBackground
         .ignoresSafeArea()
-        .overlay(
-          Button(action: {
-            dismiss()
-          }, label: {
-            Image(systemSymbol: .arrowBackward)
-              .font(.headline)
-              .foregroundColor(.primary)
-          }).padding(), alignment: .topLeading
-        )
 
       VStack {
         PlayerInitialsCircle(player: player)
 
         ScrollView(.vertical, showsIndicators: false) {
           VStack {
-            PlayerDetailSection(L10n.PlayerDetailView.name) {
-              player.wrappedName
-            }
             PlayerDetailSection(L10n.PlayerDetailView.highscore) {
               "\(player.wrappedHighscore)"
             }
@@ -48,17 +36,15 @@ struct PlayerDetailView: View {
             PlayerDetailSection(L10n.PlayerDetailView.numberOfSessionsPlayed) {
               "\(player.sessionsPlayed)"
             }
+
+            Button(L10n.PlayerDetailView.DeleteButton.title, role: .destructive) {
+              showDeletePlayerAlert.toggle()
+            }
+            .buttonStyle(OffsetStyle(role: .destructive))
+            .padding(.horizontal, 50)
           }
           .padding(.horizontal, 20)
         }
-
-        Spacer()
-
-        Button(L10n.PlayerDetailView.DeleteButton.title, role: .destructive) {
-          showDeletePlayerAlert.toggle()
-        }
-        .buttonStyle(OffsetStyle(role: .destructive))
-        .padding(.horizontal, 50)
       }
       .padding(.vertical)
       .alert(L10n.PlayerDetailView.DeletePlayer.alertTitle, isPresented: $showDeletePlayerAlert, actions: {
@@ -67,7 +53,8 @@ struct PlayerDetailView: View {
         Text(L10n.PlayerDetailView.DeletePlayer.alertMessage(player.wrappedName))
       })
     }
-    .navigationBarHidden(true)
+    .navigationBarTitleDisplayMode(.inline)
+    //    .navigationBarHidden(true)
   }
 
   func deletePlayerAndDismissView() {

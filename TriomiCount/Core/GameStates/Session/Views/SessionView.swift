@@ -58,7 +58,7 @@ struct SessionView: View {
     }
     .confirmationDialog(L10n.EndSessionConfirmationDialogue.title, isPresented: $viewModel.showEndSessionAlert, titleVisibility: .visible) {
       Button(action: { viewModel.sessionWillEnd() },
-             label: { Text(L10n.EndSessionConfirmationDialogue.messageWinner(viewModel.getCurrentPlayerOnTurn()?.wrappedName ?? "Unknown")) }
+             label: { Text(L10n.EndSessionConfirmationDialogue.messageWinner(viewModel.currentPlayerOnTurn?.wrappedName ?? "Unknown")) }
       )
       Button(L10n.EndSessionConfirmationDialogue.messageTie) {
         viewModel.isTie = true
@@ -80,7 +80,7 @@ extension SessionView {
   // MARK: - Header
   private var header: some View {
     VStack(alignment: .center, spacing: 10) {
-      Text(viewModel.getCurrentPlayerOnTurn()?.wrappedName ?? "Unknown")
+      Text(viewModel.currentPlayerOnTurn?.wrappedName ?? "Unknown")
         .font(.title)
         .bold()
 
@@ -89,7 +89,7 @@ extension SessionView {
           Text(L10n.SessionView.HeaderLabel.totalScore)
             .font(.headline)
             .fontWeight(.semibold)
-          Text("\(viewModel.getCurrentPlayerOnTurn()?.currentScore ?? 0)")
+          Text("\(viewModel.currentPlayerOnTurn?.currentScore ?? 0)")
             .font(.subheadline)
         }
         .lineLimit(1)
@@ -108,7 +108,7 @@ extension SessionView {
       }
     }
     .glassStyled()
-    .animation(.none, value: viewModel.getCurrentPlayerOnTurn())
+    .animation(.none, value: viewModel.currentPlayerOnTurn)
     .overlay(sessionInfoButton, alignment: .topTrailing)
   }
 

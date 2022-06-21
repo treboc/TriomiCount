@@ -13,8 +13,8 @@ struct SessionListRowView: View {
   var body: some View {
     ZStack(alignment: .topLeading) {
       RoundedRectangle(cornerRadius: Constants.cornerRadius)
-        .fill(Color.primaryAccentColor.opacity(0.8))
-        .shadow(color: .black, radius: 3, x: 0, y: 3)
+        .fill(Color.primaryAccentColor)
+        .shadow(radius: 5)
 
       HStack(alignment: .top) {
         VStack(alignment: .leading, spacing: 3) {

@@ -12,10 +12,6 @@ import PageSheet
 import SFSafeSymbols
 
 struct HomeView: View {
-  @State private var isAnimating: Bool = false
-  let animationDelay = 0.25
-
-  @State private var settingsViewIsShown: Bool = false
   @EnvironmentObject var appState: AppState
   private var lastSession: Session? {
     if let lastSession = Session.getLastNotFinishedSession(context: PersistentStore.shared.context) {
@@ -25,53 +21,34 @@ struct HomeView: View {
     }
   }
 
+  @State private var selection: Int = 0
+
   var body: some View {
-    NavigationView {
-      ZStack {
-        Color.primaryBackground
-          .ignoresSafeArea()
-
-        VStack(spacing: 100) {
-          Logo()
-
-          if isAnimating {
-            VStack(spacing: 15) {
-              if let lastSession = lastSession {
-                NavigationLink(L10n.HomeView.resume) {
-                  SessionMainView(viewModel: SessionViewModel(lastSession: lastSession))
-                }
-              }
-
-              NavigationLink(L10n.HomeView.newSession) {
-                SessionOnboardingView()
-                  .id(appState.onboardingScreen)
-              }
-
-              NavigationLink(L10n.HomeView.players, destination: PlayerListView.init)
-
-              NavigationLink(L10n.HomeView.sessions, destination: SessionsListView.init)
-            }
-            .buttonStyle(.offsetStyle)
-            .frame(maxWidth: .infinity)
-            .padding(.horizontal, 50)
-            .padding(.bottom, 20)
-          }
-
+    TabView {
+      SessionOnboardingView()
+        .tabItem {
+          Label("New Session", systemSymbol: .house)
         }
-        .padding(.vertical)
-        .navigationBarHidden(true)
-        .tint(Color.primaryAccentColor)
-        .onAppear {
-          isAnimating = true
-        }
-      }
-      .overlay(settingsButton, alignment: .topTrailing)
-    }
 
-    .pageSheet(isPresented: $settingsViewIsShown) {
+      PlayerListView()
+        .tabItem {
+          Label("Players", systemSymbol: .person3Fill)
+        }
+
+      SessionsListView()
+        .tabItem {
+          Label("Sessions", systemSymbol: .listBulletRectangle)
+        }
+
       SettingsView()
-        .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+        .tabItem {
+          Label("Settings", systemSymbol: .wrenchAndScrewdriverFill)
+        }
     }
+  }
+
+  init() {
+    UITabBar.appearance().tintColor = UIColor(.primaryAccentColor)
   }
 }
 
@@ -83,16 +60,5 @@ struct MainMenuView_Previews: PreviewProvider {
         .preferredColorScheme(.dark)
         .previewInterfaceOrientation(.portrait)
     }
-  }
-}
-
-// MARK: - Components
-extension HomeView {
-  var settingsButton: some View {
-      Button("\(Image(systemSymbol: .wrenchAndScrewdriverFill))") {
-        settingsViewIsShown.toggle()
-      }
-      .buttonStyle(.circularOffsetStyle)
-      .padding([.top, .trailing])
   }
 }

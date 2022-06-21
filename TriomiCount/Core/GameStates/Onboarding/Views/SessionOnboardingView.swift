@@ -9,32 +9,32 @@ import SwiftUI
 import PageSheetCore
 
 struct SessionOnboardingView: View {
-  @StateObject var viewModel: SessionOnboardingViewModel = SessionOnboardingViewModel()
-  @Environment(\.dismiss) private var dismiss
-  @State private var newPlayerSheedIsShown: Bool = false
+  @StateObject var viewModel = SessionOnboardingViewModel()
+  @State private var newPlayerSheetIsShown: Bool = false
+  @State private var selectedSort: PlayerListSort = .default
 
-  @FetchRequest(fetchRequest: Player.allPlayersFR(), animation: .default)
+  @FetchRequest(sortDescriptors: PlayerListSort.default.descriptors, animation: .spring())
   var players: FetchedResults<Player>
 
   var body: some View {
-    ZStack {
-      background
+    NavigationView {
+      ZStack {
+        background
 
-      playerList
-        .safeAreaInset(edge: .top, spacing: 10) {
-          header
-        }
-        .safeAreaInset(edge: .bottom, spacing: 10) {
-          if viewModel.chosenPlayers.count > 1 {
-            startSessionButton
-          }
-        }
+        playerList
+      }
+      .fullScreenCover(isPresented: $viewModel.sessionIsShown) {
+        SessionMainView(session: viewModel.session!)
+      }
+      .navigationTitle(L10n.HomeView.newSession)
+      .toolbar(content: toolbarContent)
+      .onDisappear {
+        viewModel.resetState(of: players)
+      }
+      .pageSheet(isPresented: $newPlayerSheetIsShown, content: AddNewPlayerView.init)
+      .roundedNavigationTitle()
     }
-    .onDisappear {
-      viewModel.resetState(of: players)
-    }
-    .pageSheet(isPresented: $newPlayerSheedIsShown, content: AddNewPlayerView.init)
-    .navigationBarHidden(true)
+    .tint(.primaryAccentColor)
   }
 }
 
@@ -44,50 +44,52 @@ extension SessionOnboardingView {
       .ignoresSafeArea()
   }
 
-  private var header: some View {
-    HeaderView(title: L10n.SessionOnboardingView.participationHeaderText) {
-      Button(iconName: .arrowLeft) {
-        dismiss()
-      }
-    } trailingButton: {
-      Button(iconName: .plus) {
-        newPlayerSheedIsShown = true
-      }
-    }
-  }
-
   private var playerList: some View {
     ScrollView(showsIndicators: false) {
+      resumeLastSessionButton
+
       ForEach(players) { player in
-        SessionOnboardingRowView(player: player, position: viewModel.getPosition(ofChosenPlayer: player))
-          .contentShape(Rectangle())
-          .onTapGesture {
-            withAnimation {
-              viewModel.toggleIsChosenState(player)
-            }
-          }
-          .padding(.horizontal)
+        SessionOnboardingRowView(
+          name: player.wrappedName,
+          position: viewModel.getPosition(of: player),
+          isChosen: viewModel.isPlayerChosen(player)
+        )
+        .onTapGesture {
+          viewModel.toggleIsChosenState(player)
+        }
+        .padding(.horizontal)
       }
     }
   }
 
-  private var startSessionButton: some View {
-    OffsetStyledNavigationLink(title: L10n.SessionOnboardingView.startSession) {
-      SessionMainView(viewModel: SessionViewModel(viewModel.chosenPlayers))
+  @ViewBuilder
+  private var resumeLastSessionButton: some View {
+    Button(viewModel.session != nil && viewModel.chosenPlayers.count == 0
+           ? "Resume last session"
+           : "Start New Session"
+    ) {
+      viewModel.startSession()
     }
     .buttonStyle(.offsetStyle)
-    .foregroundColor(.primary)
-    .padding()
-    .frame(maxWidth: .infinity)
-    .background(
-      Rectangle()
-        .fill(.regularMaterial)
-        .cornerRadius(20, corners: [.topLeft, .topRight])
-        .shadow(color: Color(uiColor: .black).opacity(0.5), radius: 8, x: 0, y: -2.5)
-        .ignoresSafeArea(.all, edges: .bottom)
-    )
-    .transition(.move(edge: .bottom))
-    .zIndex(1)
-    .disabled(viewModel.chosenPlayers.count < 2)
+    .padding(.horizontal)
+    .disabled(viewModel.session == nil && viewModel.chosenPlayers.count < 2)
+  }
+
+  private var sortView: some View {
+    PlayerListSortView(selectedSortItem: $selectedSort)
+      .labelStyle(.iconOnly)
+      .onChange(of: selectedSort) { _ in
+        players.sortDescriptors = selectedSort.descriptors
+      }
+  }
+
+  @ToolbarContentBuilder
+  func toolbarContent() -> some ToolbarContent {
+    ToolbarItem(placement: .navigationBarTrailing) {
+      HStack(spacing: 15) {
+        sortView
+        AddPlayerToolbarButton(newPlayerSheetIsShown: $newPlayerSheetIsShown)
+      }
+    }
   }
 }

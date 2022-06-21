@@ -20,7 +20,6 @@
 		0835129E27DC123700065228 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835129627DC123700065228 /* Session.swift */; };
 		083512A927DC15DA00065228 /* OffsetStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083512A827DC15DA00065228 /* OffsetStyle.swift */; };
 		083974DB27D294F7002B90E4 /* SessionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083974DA27D294F7002B90E4 /* SessionsListView.swift */; };
-		083974DD27D2A172002B90E4 /* OffsetStyledNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083974DC27D2A172002B90E4 /* OffsetStyledNavigationLink.swift */; };
 		083974E327D2C11D002B90E4 /* PageSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 083974E227D2C11D002B90E4 /* PageSheet */; };
 		083974E527D2C11D002B90E4 /* PageSheetCore in Frameworks */ = {isa = PBXBuildFile; productRef = 083974E427D2C11D002B90E4 /* PageSheetCore */; };
 		083974E727D2C11D002B90E4 /* PageSheetPlus in Frameworks */ = {isa = PBXBuildFile; productRef = 083974E627D2C11D002B90E4 /* PageSheetPlus */; };
@@ -61,6 +60,7 @@
 		8A07164B282B961100AC8C87 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A07164A282B961100AC8C87 /* UINavigationController+Extension.swift */; };
 		8A07164E282B9CAA00AC8C87 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 8A07164D282B9CAA00AC8C87 /* Introspect */; };
 		8A071650282CEE8B00AC8C87 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A07164F282CEE8B00AC8C87 /* Collection+Extension.swift */; };
+		8A0D1EB128619A0500B392E7 /* AddPlayerToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0D1EB028619A0500B392E7 /* AddPlayerToolbarButton.swift */; };
 		8A1A4F5F283249A30024BE58 /* MenuOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1A4F5E283249A30024BE58 /* MenuOverlay.swift */; };
 		8A2C8CF42827A7DD005136AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C8CF32827A7DD005136AD /* Constants.swift */; };
 		8A34365C285EFB1E00B451E8 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 8A34365B285EFB1E00B451E8 /* Introspect */; };
@@ -96,7 +96,6 @@
 		0835129627DC123700065228 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		083512A827DC15DA00065228 /* OffsetStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetStyle.swift; sourceTree = "<group>"; };
 		083974DA27D294F7002B90E4 /* SessionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsListView.swift; sourceTree = "<group>"; };
-		083974DC27D2A172002B90E4 /* OffsetStyledNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetStyledNavigationLink.swift; sourceTree = "<group>"; };
 		083BFD4F27CABB7200B5BE50 /* PointsSubmitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsSubmitView.swift; sourceTree = "<group>"; };
 		0855A22027DCD5AE00E882AC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		085924C827C6DCA300364259 /* PlayerListSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerListSort.swift; sourceTree = "<group>"; };
@@ -134,6 +133,7 @@
 		8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerModifier.swift; sourceTree = "<group>"; };
 		8A07164A282B961100AC8C87 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 		8A07164F282CEE8B00AC8C87 /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
+		8A0D1EB028619A0500B392E7 /* AddPlayerToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerToolbarButton.swift; sourceTree = "<group>"; };
 		8A1A4F5E283249A30024BE58 /* MenuOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOverlay.swift; sourceTree = "<group>"; };
 		8A2C8CF32827A7DD005136AD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8A5D847128286B8C00286F14 /* CustomModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifiers.swift; sourceTree = "<group>"; };
@@ -203,8 +203,8 @@
 		083512A027DC13E500065228 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
-				083974DC27D2A172002B90E4 /* OffsetStyledNavigationLink.swift */,
 				8A858C8327FF5C20002385E1 /* ButtonStyles */,
+				8A0D1EB028619A0500B392E7 /* AddPlayerToolbarButton.swift */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -282,13 +282,13 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		087F92F627A4A0CD0037268D /* Game */ = {
+		087F92F627A4A0CD0037268D /* Session */ = {
 			isa = PBXGroup;
 			children = (
 				087F92F727A4A0F40037268D /* Views */,
 				087F92F827A4A0FB0037268D /* ViewModels */,
 			);
-			path = Game;
+			path = Session;
 			sourceTree = "<group>";
 		};
 		087F92F727A4A0F40037268D /* Views */ = {
@@ -382,7 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				087F92F527A4A0C20037268D /* Onboarding */,
-				087F92F627A4A0CD0037268D /* Game */,
+				087F92F627A4A0CD0037268D /* Session */,
 			);
 			path = GameStates;
 			sourceTree = "<group>";
@@ -598,7 +598,6 @@
 			files = (
 				08BBB1FA27A0A1D3001CD3DF /* SessionOnboardingRowView.swift in Sources */,
 				0835129A27DC123700065228 /* Player.swift in Sources */,
-				083974DD27D2A172002B90E4 /* OffsetStyledNavigationLink.swift in Sources */,
 				08F6F36127E681A200FFBCFB /* SessionView.swift in Sources */,
 				8A1A4F5F283249A30024BE58 /* MenuOverlay.swift in Sources */,
 				089D478B27A1A89B000E3BA8 /* SessionOnboardingViewModel.swift in Sources */,
@@ -641,6 +640,7 @@
 				0855A22127DCD5AE00E882AC /* Color.swift in Sources */,
 				8A04CFCB282DAD5700DEDA67 /* HeaderView.swift in Sources */,
 				08BE48F3279CA42D00EA431F /* SessionViewModel.swift in Sources */,
+				8A0D1EB128619A0500B392E7 /* AddPlayerToolbarButton.swift in Sources */,
 				0835129E27DC123700065228 /* Session.swift in Sources */,
 				08A2C64127A341E70076C196 /* PlayerDetailView.swift in Sources */,
 				0859748327CD7CAC0030A4E5 /* SessionResultsView.swift in Sources */,

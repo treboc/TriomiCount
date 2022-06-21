@@ -15,6 +15,9 @@ extension SessionView {
     @StateObject var viewModel: SessionViewModel
     @Binding var menuIsShown: Bool
     @State private var isAnimated: Bool = false
+
+    @Environment(\.dismiss) var dismiss
+
     var exitSession: () -> Void
     var toggleScaleAnimation: () -> Void
 
@@ -66,7 +69,8 @@ extension SessionView {
         Text(L10n.SessionView.ExitSessionButton.labelText)
 
         Button(iconName: .houseFill) {
-          viewModel.exitSessionButtonTapped(exitSession: exitSession)
+          dismiss()
+//          viewModel.exitSessionButtonTapped(exitSession: exitSession)
         }
         .buttonStyle(.circularOffsetStyle)
       }

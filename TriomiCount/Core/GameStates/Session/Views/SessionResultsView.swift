@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SessionResultsView: View {
   @EnvironmentObject var viewModel: SessionViewModel
+  @Environment(\.dismiss) var dismiss
   @EnvironmentObject var appState: AppState
 
   var body: some View {
@@ -40,7 +41,7 @@ struct SessionResultsView: View {
         Spacer()
 
         Button(L10n.backToMainMenu) {
-          appState.homeViewID = UUID()
+          dismiss()
         }
         .buttonStyle(.offsetStyle)
         .padding(.bottom, 50)
