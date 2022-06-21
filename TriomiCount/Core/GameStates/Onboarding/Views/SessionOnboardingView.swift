@@ -48,6 +48,8 @@ extension SessionOnboardingView {
     ScrollView(showsIndicators: false) {
       resumeLastSessionButton
 
+      Divider()
+
       ForEach(players) { player in
         SessionOnboardingRowView(
           name: player.wrappedName,
@@ -64,11 +66,12 @@ extension SessionOnboardingView {
 
   @ViewBuilder
   private var resumeLastSessionButton: some View {
-    Button(viewModel.session != nil && viewModel.chosenPlayers.count == 0
-           ? "Resume last session"
+    Button(action: viewModel.startSession) {
+      Text(viewModel.session != nil && viewModel.chosenPlayers.count == 0
+           ? "Resume Last Session"
            : "Start New Session"
-    ) {
-      viewModel.startSession()
+      )
+      .font(.system(.headline, design: .rounded))
     }
     .buttonStyle(.offsetStyle)
     .padding(.horizontal)
