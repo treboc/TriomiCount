@@ -11,8 +11,8 @@ import PageSheetCore
 struct SessionOnboardingView: View {
   @StateObject var viewModel = SessionOnboardingViewModel()
   @State private var newPlayerSheetIsShown: Bool = false
-  @State private var selectedSort: PlayerListSort = .default
 
+  @State private var selectedSort: PlayerListSort = .default
   @FetchRequest(sortDescriptors: PlayerListSort.default.descriptors, animation: .spring())
   var players: FetchedResults<Player>
 

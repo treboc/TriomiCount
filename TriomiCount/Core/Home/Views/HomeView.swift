@@ -12,17 +12,6 @@ import PageSheet
 import SFSafeSymbols
 
 struct HomeView: View {
-  @EnvironmentObject var appState: AppState
-  private var lastSession: Session? {
-    if let lastSession = Session.getLastNotFinishedSession(context: PersistentStore.shared.context) {
-      return lastSession
-    } else {
-      return nil
-    }
-  }
-
-  @State private var selection: Int = 0
-
   var body: some View {
     TabView {
       SessionOnboardingView()

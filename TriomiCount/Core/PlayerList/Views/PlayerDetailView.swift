@@ -54,7 +54,6 @@ struct PlayerDetailView: View {
       })
     }
     .navigationBarTitleDisplayMode(.inline)
-    //    .navigationBarHidden(true)
   }
 
   func deletePlayerAndDismissView() {
