@@ -23,16 +23,16 @@ struct SessionOnboardingView: View {
 
         playerList
       }
-      .fullScreenCover(isPresented: $viewModel.sessionIsShown) {
+      .fullScreenCover(isPresented: $viewModel.sessionIsShown, onDismiss: viewModel.checkForUnfinishedSession) {
         SessionMainView(session: viewModel.session!)
       }
       .navigationTitle(L10n.HomeView.newSession)
+      .roundedNavigationTitle()
       .toolbar(content: toolbarContent)
       .onDisappear {
         viewModel.resetState(of: players)
       }
       .pageSheet(isPresented: $newPlayerSheetIsShown, content: AddNewPlayerView.init)
-      .roundedNavigationTitle()
     }
     .tint(.primaryAccentColor)
   }
@@ -64,10 +64,20 @@ extension SessionOnboardingView {
     }
   }
 
+  var buttonIsDisabled: Bool {
+    if viewModel.session != nil && viewModel.chosenPlayers.count < 2 {
+      return false
+    } else if viewModel.chosenPlayers.count > 1 {
+      return false
+    } else {
+      return true
+    }
+  }
+
   @ViewBuilder
   private var resumeLastSessionButton: some View {
     Button(action: viewModel.startSession) {
-      Text(viewModel.session != nil && viewModel.chosenPlayers.count == 0
+      Text(viewModel.session != nil && viewModel.chosenPlayers.count < 2
            ? "Resume Last Session"
            : "Start New Session"
       )
@@ -75,7 +85,7 @@ extension SessionOnboardingView {
     }
     .buttonStyle(.offsetStyle)
     .padding(.horizontal)
-    .disabled(viewModel.session == nil && viewModel.chosenPlayers.count < 2)
+    .disabled(buttonIsDisabled)
   }
 
   private var sortView: some View {

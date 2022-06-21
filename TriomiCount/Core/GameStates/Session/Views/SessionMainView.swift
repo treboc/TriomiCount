@@ -38,7 +38,6 @@ struct SessionMainView: View {
       }
     }
     .navigationBarHidden(true)
-    .onAppear { print(viewModel.session.playersArray) }
   }
 
   init(session: Session) {

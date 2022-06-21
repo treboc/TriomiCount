@@ -33,7 +33,10 @@ struct SessionsListView: View {
 extension SessionsListView {
   private var scrollView: some View {
     ScrollView(showsIndicators: false) {
-      ForEach(sessions.filter { $0.hasEnded }) { session in
+      ForEach(sessions
+        .filter { $0.hasEnded }
+        .sorted { $0.id > $1.id }
+      ) { session in
         NavigationLink(destination: SessionDetailView(session: session)) {
           SessionListRowView(session: session)
         }

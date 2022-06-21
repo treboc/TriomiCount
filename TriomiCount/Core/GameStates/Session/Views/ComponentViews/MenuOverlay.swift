@@ -70,7 +70,6 @@ extension SessionView {
 
         Button(iconName: .houseFill) {
           dismiss()
-//          viewModel.exitSessionButtonTapped(exitSession: exitSession)
         }
         .buttonStyle(.circular)
       }

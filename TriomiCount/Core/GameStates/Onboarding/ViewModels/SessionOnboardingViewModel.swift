@@ -56,4 +56,8 @@ class SessionOnboardingViewModel: ObservableObject {
     }
     chosenPlayers.removeAll()
   }
+
+  func checkForUnfinishedSession() {
+    session = .getLastNotFinishedSession()
+  }
 }

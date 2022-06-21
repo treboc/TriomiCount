@@ -203,6 +203,8 @@
 		083512A027DC13E500065228 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
+				8A5D847128286B8C00286F14 /* CustomModifiers.swift */,
+				8AB017A027FC3A3F00FFEF46 /* OverlayAlert.swift */,
 				8A858C8327FF5C20002385E1 /* ButtonStyles */,
 				8A0D1EB028619A0500B392E7 /* AddPlayerToolbarButton.swift */,
 			);
@@ -430,11 +432,9 @@
 				8A5E01132815A34800703CE5 /* AppearanceManager.swift */,
 				08A0103227DFB68C000D0AEB /* AppState.swift */,
 				8A2C8CF32827A7DD005136AD /* Constants.swift */,
-				8A5D847128286B8C00286F14 /* CustomModifiers.swift */,
 				08AD236027AA912600BBDB16 /* HapticsManager.swift */,
 				8A04CFCA282DAD5700DEDA67 /* HeaderView.swift */,
 				08B3E2F227B9AA02009E4DD7 /* Logo.swift */,
-				8AB017A027FC3A3F00FFEF46 /* OverlayAlert.swift */,
 				8ACA06E927F5A550000F6D4C /* Rules.swift */,
 				8AD1397C28379F4F00A16EB0 /* AddNewPlayer */,
 				087179DE27ADDD890005C074 /* Extensions */,

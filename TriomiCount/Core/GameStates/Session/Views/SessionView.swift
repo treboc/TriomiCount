@@ -107,7 +107,7 @@ extension SessionView {
         .lineLimit(1)
       }
     }
-    .glassStyled()
+    .glassStyled(withColor: viewModel.currentPlayerOnTurn?.wrappedFavoriteColor ?? .black)
     .animation(.none, value: viewModel.currentPlayerOnTurn)
     .overlay(sessionInfoButton.padding(.trailing), alignment: .topTrailing)
   }
@@ -226,7 +226,7 @@ extension SessionView {
       }
     }
     .frame(width: Constants.buttonHeight, height: Constants.buttonHeight)
-    .buttonStyle(.circular)
+    .buttonStyle(.offsetStyle)
   }
 
   private var resetButton: some View {
@@ -242,6 +242,7 @@ extension SessionView {
   private var sessionInfoButton: some View {
     Image(systemSymbol: .infoCircle)
       .font(.title2)
+      .foregroundColor(viewModel.currentPlayerOnTurn?.wrappedFavoriteColor.isDarkColor ?? false ? .white : .black)
       .onTapGesture {
         withAnimation {
           sessionOverviewIsShown.toggle()
@@ -249,6 +250,7 @@ extension SessionView {
       }
       .padding([.top, .trailing])
       .blur(radius: menuIsShown ? 2 : 0)
+      .animation(.none, value: viewModel.currentPlayerOnTurn)
   }
 
   struct SessionOverview: View {

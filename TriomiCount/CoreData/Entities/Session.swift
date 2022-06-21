@@ -43,7 +43,7 @@ extension Session {
   }
 
   var playedBy: String {
-    return playersArray.compactMap { $0.name }.formatted()
+    return playersArray.sorted { $0.position < $1.position }.compactMap { $0.name }.formatted()
   }
 
   var startedOnAsString: String {
