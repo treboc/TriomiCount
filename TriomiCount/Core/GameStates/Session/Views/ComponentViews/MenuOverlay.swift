@@ -55,7 +55,7 @@ extension SessionView {
           viewModel.showEndSessionAlert.toggle()
           HapticManager.shared.notification(type: .success)
         }
-        .buttonStyle(.circularOffsetStyle)
+        .buttonStyle(.circular)
         .disabled(viewModel.session.turns?.count == 0)
       }
       .padding(.leading)
@@ -72,7 +72,7 @@ extension SessionView {
           dismiss()
 //          viewModel.exitSessionButtonTapped(exitSession: exitSession)
         }
-        .buttonStyle(.circularOffsetStyle)
+        .buttonStyle(.circular)
       }
       .padding(.leading)
       .background(Capsule().fill(.thinMaterial))
@@ -92,7 +92,7 @@ extension SessionView {
           HapticManager.shared.impact(style: .rigid)
           toggleScaleAnimation()
         }
-        .buttonStyle(.circularOffsetStyle)
+        .buttonStyle(.circular)
         .disabled(viewModel.session.turns?.count == 0)
       }
       .padding(.leading)
@@ -105,7 +105,7 @@ extension SessionView {
       Button(iconName: .xCircleFill) {
         closeMenu()
       }
-      .buttonStyle(.circularOffsetStyle)
+      .buttonStyle(.circular)
       .transition(.opacity)
       .opacity(isAnimated ? 1 : 0)
     }

@@ -109,7 +109,7 @@ extension SessionView {
     }
     .glassStyled()
     .animation(.none, value: viewModel.currentPlayerOnTurn)
-    .overlay(sessionInfoButton, alignment: .topTrailing)
+    .overlay(sessionInfoButton.padding(.trailing), alignment: .topTrailing)
   }
 
   // MARK: - Center
@@ -226,7 +226,7 @@ extension SessionView {
       }
     }
     .frame(width: Constants.buttonHeight, height: Constants.buttonHeight)
-    .buttonStyle(.circularOffsetStyle)
+    .buttonStyle(.circular)
   }
 
   private var resetButton: some View {
@@ -235,7 +235,7 @@ extension SessionView {
     } label: {
       Image(systemSymbol: .arrowCounterclockwise)
     }
-    .buttonStyle(.circularOffsetStyle)
+    .buttonStyle(.circular)
     .padding(5)
   }
 

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		08093A6827DD4CA90061352D /* CircularOffsetStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08093A6727DD4CA90061352D /* CircularOffsetStyle.swift */; };
+		08093A6827DD4CA90061352D /* CircularButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08093A6727DD4CA90061352D /* CircularButtonStyle.swift */; };
 		0827298227DDE74C00E48F4D /* TimesDrawnPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0827298127DDE74C00E48F4D /* TimesDrawnPicker.swift */; };
 		0827298427DE488900E48F4D /* PlayedCardPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0827298327DE488900E48F4D /* PlayedCardPicker.swift */; };
 		08288175279EF8D10064C9E8 /* AddNewPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08288174279EF8D10064C9E8 /* AddNewPlayerView.swift */; };
@@ -82,7 +82,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		08093A6727DD4CA90061352D /* CircularOffsetStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularOffsetStyle.swift; sourceTree = "<group>"; };
+		08093A6727DD4CA90061352D /* CircularButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularButtonStyle.swift; sourceTree = "<group>"; };
 		0827298127DDE74C00E48F4D /* TimesDrawnPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesDrawnPicker.swift; sourceTree = "<group>"; };
 		0827298327DE488900E48F4D /* PlayedCardPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayedCardPicker.swift; sourceTree = "<group>"; };
 		08288174279EF8D10064C9E8 /* AddNewPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPlayerView.swift; sourceTree = "<group>"; };
@@ -468,7 +468,7 @@
 			isa = PBXGroup;
 			children = (
 				083512A827DC15DA00065228 /* OffsetStyle.swift */,
-				08093A6727DD4CA90061352D /* CircularOffsetStyle.swift */,
+				08093A6727DD4CA90061352D /* CircularButtonStyle.swift */,
 				8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */,
 			);
 			path = ButtonStyles;
@@ -645,7 +645,7 @@
 				08A2C64127A341E70076C196 /* PlayerDetailView.swift in Sources */,
 				0859748327CD7CAC0030A4E5 /* SessionResultsView.swift in Sources */,
 				8A5D847228286B8C00286F14 /* CustomModifiers.swift in Sources */,
-				08093A6827DD4CA90061352D /* CircularOffsetStyle.swift in Sources */,
+				08093A6827DD4CA90061352D /* CircularButtonStyle.swift in Sources */,
 				087179E027ADDD9A0005C074 /* NSManagedObject+Extensions.swift in Sources */,
 				8A071650282CEE8B00AC8C87 /* Collection+Extension.swift in Sources */,
 				083512A927DC15DA00065228 /* OffsetStyle.swift in Sources */,

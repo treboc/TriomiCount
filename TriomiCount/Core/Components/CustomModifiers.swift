@@ -24,10 +24,10 @@ struct GlassStyledHeader: ViewModifier {
       .background(
         Rectangle()
           .fill(.regularMaterial)
-          .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
-          .shadow(color: Color(uiColor: .black).opacity(0.5), radius: 8, x: 0, y: 2.5)
-          .ignoresSafeArea(.all, edges: .top)
+          .cornerRadius(Constants.cornerRadius)
+          .shadow(radius: 5)
       )
+      .padding(.horizontal)
   }
 }
 
