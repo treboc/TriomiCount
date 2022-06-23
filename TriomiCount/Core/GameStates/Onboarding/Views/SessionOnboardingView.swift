@@ -21,7 +21,12 @@ struct SessionOnboardingView: View {
       ZStack {
         background
 
-        playerList
+        VStack {
+          resumeLastSessionButton
+          Divider()
+          playerList
+        }
+        .overlay(onboardingText)
       }
       .fullScreenCover(isPresented: $viewModel.sessionIsShown, onDismiss: viewModel.checkForUnfinishedSession) {
         SessionMainView(session: viewModel.session!)
@@ -46,10 +51,6 @@ extension SessionOnboardingView {
 
   private var playerList: some View {
     ScrollView(showsIndicators: false) {
-      resumeLastSessionButton
-
-      Divider()
-
       ForEach(players) { player in
         SessionOnboardingRowView(
           name: player.wrappedName,
@@ -61,6 +62,15 @@ extension SessionOnboardingView {
         }
         .padding(.horizontal)
       }
+    }
+  }
+
+  @ViewBuilder
+  private var onboardingText: some View {
+    if players.count < 2 {
+      Text("Please add a minimum of two players, by tapping on the \(Image(systemSymbol: .plus)) on the top.")
+        .font(.system(.headline, design: .rounded))
+        .padding(.horizontal)
     }
   }
 
@@ -78,8 +88,8 @@ extension SessionOnboardingView {
   private var resumeLastSessionButton: some View {
     Button(action: viewModel.startSession) {
       Text(viewModel.session != nil && viewModel.chosenPlayers.count < 2
-           ? "Resume Last Session"
-           : "Start New Session"
+           ? L10n.HomeView.resumeLastSession
+           : L10n.HomeView.startNewSession
       )
       .font(.system(.headline, design: .rounded))
     }
@@ -88,21 +98,10 @@ extension SessionOnboardingView {
     .disabled(buttonIsDisabled)
   }
 
-  private var sortView: some View {
-    PlayerListSortView(selectedSortItem: $selectedSort)
-      .labelStyle(.iconOnly)
-      .onChange(of: selectedSort) { _ in
-        players.sortDescriptors = selectedSort.descriptors
-      }
-  }
-
   @ToolbarContentBuilder
   func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
-      HStack(spacing: 15) {
-        sortView
-        AddPlayerToolbarButton(newPlayerSheetIsShown: $newPlayerSheetIsShown)
-      }
+      AddPlayerToolbarButton(newPlayerSheetIsShown: $newPlayerSheetIsShown)
     }
   }
 }

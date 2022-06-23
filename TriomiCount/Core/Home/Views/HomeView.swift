@@ -16,28 +16,24 @@ struct HomeView: View {
     TabView {
       SessionOnboardingView()
         .tabItem {
-          Label("New Session", systemSymbol: .house)
+          Label(L10n.HomeView.newSession, systemSymbol: .house)
         }
 
       PlayerListView()
         .tabItem {
-          Label("Players", systemSymbol: .person3Fill)
+          Label(L10n.HomeView.players, systemSymbol: .person3Fill)
         }
 
       SessionsListView()
         .tabItem {
-          Label("Sessions", systemSymbol: .listBulletRectangle)
+          Label(L10n.HomeView.sessions, systemSymbol: .listBulletRectangle)
         }
 
       SettingsView()
         .tabItem {
-          Label("Settings", systemSymbol: .wrenchAndScrewdriverFill)
+          Label(L10n.SettingsView.settings, systemSymbol: .wrenchAndScrewdriverFill)
         }
     }
-  }
-
-  init() {
-    UITabBar.appearance().tintColor = UIColor(.primaryAccentColor)
   }
 }
 
