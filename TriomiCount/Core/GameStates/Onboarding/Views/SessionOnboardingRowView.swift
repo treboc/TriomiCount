@@ -24,16 +24,17 @@ struct SessionOnboardingRowView: View {
         ZStack {
           Image(systemName: "circle.dotted")
             .font(.title)
-         position != nil ? Text("\(position ?? 0)") : Text("")
+          position != nil ? Text("\(position ?? 0)") : Text("")
         }
         .monospacedDigit()
         .frame(width: 25, height: 25)
 
         Text("\(name)")
+          .font(.system(.headline, design: .rounded))
         Spacer()
       }
       .padding(.horizontal)
-      .foregroundColor(.white)
+      .foregroundColor(.primary)
     }
     .listRowSeparator(.hidden)
     .animation(.none, value: position)

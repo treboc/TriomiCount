@@ -31,6 +31,7 @@ struct PlayerListSortView: View {
         "Sort",
         systemSymbol: .arrowUpArrowDown)
       .font(.system(.body, design: .rounded).bold())
+      .foregroundColor(.accentColor)
     }
   }
 }

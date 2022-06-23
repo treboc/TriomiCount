@@ -26,7 +26,7 @@ struct PlayerListRowView: View {
             .font(.caption)
         }
       }
-      .foregroundColor(.white)
+      .foregroundColor(.primary)
       .padding()
     }
     .frame(maxWidth: .infinity)

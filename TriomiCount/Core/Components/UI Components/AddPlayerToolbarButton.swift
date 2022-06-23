@@ -15,6 +15,7 @@ struct AddPlayerToolbarButton: View {
       newPlayerSheetIsShown = true
     }
     .font(.system(.headline, design: .rounded))
+    .foregroundColor(.accentColor)
   }
 }
 

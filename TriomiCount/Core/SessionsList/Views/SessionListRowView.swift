@@ -35,7 +35,7 @@ struct SessionListRowView: View {
         Text(session.startedOnAsString)
           .font(.caption)
       }
-      .foregroundColor(.white)
+      .foregroundColor(.primary)
       .padding(.horizontal)
       .padding(.vertical, 10)
     }

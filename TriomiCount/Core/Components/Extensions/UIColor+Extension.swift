@@ -6,6 +6,13 @@
 //
 
 import UIKit
+import SwiftUI
+
+extension Color {
+  var isDarkColor: Bool {
+    return UIColor(self).isDarkColor
+  }
+}
 
 extension UIColor {
   // credit: @beyowulf
