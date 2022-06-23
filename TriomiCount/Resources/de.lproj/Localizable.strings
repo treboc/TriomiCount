@@ -8,7 +8,8 @@
 
 // HomeView
 "homeView.newSession" = "Neues Spiel";
-"homeView.resume" = "Weiterspielen";
+"homeView.resumeLastSession" = "Zurück zum letzten Spiel";
+"homeView.startNewSession" = "Neues Spiel Starten";
 "homeView.players" = "Spieler";
 "homeView.sessions" = "Spiele";
 
