@@ -20,6 +20,7 @@ struct SettingsView: View {
 
         Section {
           Toggle(L10n.SettingsView.IdleDimmingDisabled.pickerLabelText, isOn: $idleDimmingDisabled)
+            .tint(.accentColor)
         } header: {
           Text(L10n.SettingsView.IdleDimmingDisabled.options)
         } footer: {

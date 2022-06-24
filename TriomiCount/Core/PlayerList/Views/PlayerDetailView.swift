@@ -109,7 +109,7 @@ extension PlayerDetailView {
           )
           .overlay(
             Text(player.wrappedName.initials)
-              .font(.largeTitle)
+              .font(.system(.largeTitle, design: .rounded))
               .foregroundColor(player.wrappedFavoriteColor.isDarkColor ? .white : .black)
           )
           .frame(width: 100, height: 100)

@@ -55,7 +55,7 @@ extension PlayerListView {
         NavigationLink(destination: PlayerDetailView.init(player: player)) {
           PlayerListRowView(player: player)
         }
-        .buttonStyle(.offsetStyle)
+        .buttonStyle(.shadowed)
         .padding(.horizontal)
       }
     }

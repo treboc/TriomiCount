@@ -93,7 +93,7 @@ extension SessionOnboardingView {
       )
       .font(.system(.headline, design: .rounded))
     }
-    .buttonStyle(.offsetStyle)
+    .buttonStyle(.shadowed)
     .padding(.horizontal)
     .disabled(buttonIsDisabled)
   }
