@@ -233,7 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				0855A21E27DCD58000E882AC /* Images */,
-				0855A21F27DCD59100E882AC /* Color */,
+				0855A21F27DCD59100E882AC /* Colors */,
 				08288179279F42570064C9E8 /* Fonts */,
 				8A5E010F2813491E00703CE5 /* L10n.swift */,
 				0888914C27D573E900061754 /* Localizable.strings */,
@@ -250,13 +250,13 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
-		0855A21F27DCD59100E882AC /* Color */ = {
+		0855A21F27DCD59100E882AC /* Colors */ = {
 			isa = PBXGroup;
 			children = (
 				0896440B27A526CE0091C6F8 /* Colors.xcassets */,
 				0855A22027DCD5AE00E882AC /* Color.swift */,
 			);
-			path = Color;
+			path = Colors;
 			sourceTree = "<group>";
 		};
 		087179DE27ADDD890005C074 /* Extensions */ = {
