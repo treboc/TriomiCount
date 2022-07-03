@@ -18,7 +18,6 @@ struct OffsetStyle: ButtonStyle {
 
   let primaryColor: Color
   let secondaryColor: Color
-  var borderColor: Color = .secondaryBackground
 
   public init(primaryColor: Color = Color.primaryAccentColor,
               secondaryColor: Color = Color.secondaryAccentColor,
@@ -26,7 +25,6 @@ struct OffsetStyle: ButtonStyle {
     if role == .destructive {
       self.primaryColor = Color.destructiveButtonPrimaryColor
       self.secondaryColor = Color.destructiveButtonSecondaryColor
-      self.borderColor = .secondaryBackground.opacity(0.4)
     } else {
       self.primaryColor = primaryColor
       self.secondaryColor = secondaryColor
@@ -44,21 +42,13 @@ struct OffsetStyle: ButtonStyle {
 
       configuration.label
         .font(.headline)
-        .foregroundColor(.white)
+        .foregroundColor(isEnabled ? .primary : .systemGray6)
         .frame(height: Constants.buttonHeight)
         .frame(maxWidth: .infinity)
-        .background(primaryColor)
+        .background(isEnabled ? primaryColor : .systemGray3)
         .cornerRadius(Constants.cornerRadius)
         .font(.headline.bold())
         .offset(y: configuration.isPressed ? 4 : 0)
-    }
-    .onChange(of: configuration.isPressed) { newValue in
-      if newValue {
-        HapticManager.shared.impact(style: .light)
-      }
-    }
-    .if(!isEnabled) { view in
-      view.grayscale(1)
     }
   }
 }

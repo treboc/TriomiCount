@@ -8,7 +8,8 @@
 
 // HomeView
 "homeView.newSession" = "New Session";
-"homeView.resume" = "Resume";
+"homeView.resumeLastSession" = "Resume Last Session";
+"homeView.startNewSession" = "Start New Session";
 "homeView.players" = "Players";
 "homeView.sessions" = "Sessions";
 

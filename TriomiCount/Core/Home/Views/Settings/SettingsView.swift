@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SettingsView: View {
-  @Environment(\.dismiss) var dismiss
   @AppStorage(SettingsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
   @State private var showRules: [Bool] = Array(repeating: false, count: 4)
 
@@ -21,6 +20,7 @@ struct SettingsView: View {
 
         Section {
           Toggle(L10n.SettingsView.IdleDimmingDisabled.pickerLabelText, isOn: $idleDimmingDisabled)
+            .tint(.accentColor)
         } header: {
           Text(L10n.SettingsView.IdleDimmingDisabled.options)
         } footer: {
@@ -34,15 +34,13 @@ struct SettingsView: View {
 
         Section(footer: footer, content: { EmptyView() })
       }
-      .toolbar(content: {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button(L10n.cancel) {
-            dismiss()
-          }
-        }
-      })
       .navigationTitle(L10n.SettingsView.settings)
+      .roundedNavigationTitle()
     }
+    // Set the forms background
+    .introspectTableView(customize: { tableView in
+      tableView.backgroundColor = UIColor(.primaryBackground)
+    })
     // accentColor will be deprecated, but .tint() does not work here!
     .accentColor(.primaryAccentColor)
   }
@@ -97,7 +95,7 @@ extension SettingsView {
     }
 
     var body: some View {
-      Picker(pickerTitle, selection: $appearanceManager.appearance) {
+      Picker("Choose Appearance", selection: $appearanceManager.appearance) {
         HStack {
           Text(L10n.SettingsView.ColorScheme.system)
           Spacer()
@@ -128,7 +126,8 @@ extension SettingsView {
         .contentShape(Rectangle())
         .onTapGesture { appearanceManager.appearance = .dark }
       }
-      .pickerStyle(.automatic)
+      .pickerStyle(.inline)
+      .labelsHidden()
     }
   }
 }

@@ -43,7 +43,7 @@ extension Session {
   }
 
   var playedBy: String {
-    return playersArray.compactMap { $0.name }.formatted()
+    return playersArray.sorted { $0.position < $1.position }.compactMap { $0.name }.formatted()
   }
 
   var startedOnAsString: String {
@@ -63,7 +63,7 @@ extension Session {
     return nil
   }
 
-  convenience init(players: [Player], context: NSManagedObjectContext) {
+  convenience init(players: [Player], context: NSManagedObjectContext = PersistentStore.shared.context) {
     self.init(context: context)
 
     for player in players {
@@ -106,7 +106,7 @@ extension Session {
   /// 2) make sure, there's atleast one not finished session
   /// 3) loop over all, delete all but not the latest
 
-  class func getLastNotFinishedSession(context: NSManagedObjectContext) -> Session? {
+  class func getLastNotFinishedSession(context: NSManagedObjectContext = PersistentStore.shared.context) -> Session? {
     let predicate = NSPredicate(format: "hasEnded = false")
     let fetchRequest: NSFetchRequest<Session> = NSFetchRequest<Session>(entityName: Session.description())
     fetchRequest.predicate = predicate

@@ -89,10 +89,12 @@ internal enum L10n {
     internal static let newSession = L10n.tr("Localizable", "homeView.newSession")
     /// Players
     internal static let players = L10n.tr("Localizable", "homeView.players")
-    /// Resume
-    internal static let resume = L10n.tr("Localizable", "homeView.resume")
+    /// Resume Last Session
+    internal static let resumeLastSession = L10n.tr("Localizable", "homeView.resumeLastSession")
     /// Sessions
     internal static let sessions = L10n.tr("Localizable", "homeView.sessions")
+    /// Start New Session
+    internal static let startNewSession = L10n.tr("Localizable", "homeView.startNewSession")
   }
 
   internal enum PlayerDetailView {
@@ -174,19 +176,17 @@ internal enum L10n {
     }
     internal enum Setup {
       /// Mix the tiles face down on the table. One player tracks the score with the help of this app.
-      /// 
       /// Number of tiles:
       /// - 2 players, 9 tiles per player
       /// - 3 to 4 players, 7 tiles
       /// - 5 to 6 players, 6 tiles
-      /// 
       /// Place them on your rack, with the numbered side up, so you can see them.
       /// For getting the first player, there are different ways.
       /// 
-      /// **First variant:**
+      /// First variant:
       /// All players are picking up a tile from the “well” and the player with the highest valued stone begins. This player places a random tile from the well as his first play.
       /// 
-      /// **Second variant:**
+      /// Second variant:
       /// The player with the highest valued stone, with three of the same numbers (e.g. 5 - 5 -5, then 4 - 4 - 4, and so on) on his rack, begins by playing this stone out as his first play.
       internal static let body = L10n.tr("Localizable", "rules.setup.body")
       /// Setup

@@ -18,8 +18,6 @@ struct SessionDetailView: View {
         .ignoresSafeArea()
 
       VStack(alignment: .center) {
-        header
-
         VStack {
           SessionDetailSection(L10n.SessionDetailView.playedWith) {
             Text(session.playedBy)
@@ -34,7 +32,10 @@ struct SessionDetailView: View {
 
           SessionDetailSection(L10n.SessionDetailView.points) {
             VStack(alignment: .leading) {
-              ForEach(SessionScore.getSessionScoreDictWith(sessionKey: session.objectID.uriRepresentation().absoluteString)!) { dict in
+              ForEach(
+                SessionScore
+                  .getSessionScoreDictWith(sessionKey: session.objectID.uriRepresentation().absoluteString)!
+                  .sorted { $0.scoreValue > $1.scoreValue }) { dict in
                 HStack {
                   Text(dict.playerName)
                     .frame(minWidth: 50, alignment: .leading)
@@ -49,8 +50,8 @@ struct SessionDetailView: View {
         .padding(.horizontal)
       }
     }
-    .navigationBarHidden(true)
-    .navigationBarBackButtonHidden(true)
+    .navigationTitle("Session #\(session.id)")
+    .roundedNavigationTitle()
   }
 }
 

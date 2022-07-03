@@ -15,6 +15,9 @@ extension SessionView {
     @StateObject var viewModel: SessionViewModel
     @Binding var menuIsShown: Bool
     @State private var isAnimated: Bool = false
+
+    @Environment(\.dismiss) var dismiss
+
     var exitSession: () -> Void
     var toggleScaleAnimation: () -> Void
 
@@ -52,7 +55,7 @@ extension SessionView {
           viewModel.showEndSessionAlert.toggle()
           HapticManager.shared.notification(type: .success)
         }
-        .buttonStyle(.circularOffsetStyle)
+        .buttonStyle(.circular)
         .disabled(viewModel.session.turns?.count == 0)
       }
       .padding(.leading)
@@ -66,9 +69,9 @@ extension SessionView {
         Text(L10n.SessionView.ExitSessionButton.labelText)
 
         Button(iconName: .houseFill) {
-          viewModel.exitSessionButtonTapped(exitSession: exitSession)
+          dismiss()
         }
-        .buttonStyle(.circularOffsetStyle)
+        .buttonStyle(.circular)
       }
       .padding(.leading)
       .background(Capsule().fill(.thinMaterial))
@@ -88,7 +91,7 @@ extension SessionView {
           HapticManager.shared.impact(style: .rigid)
           toggleScaleAnimation()
         }
-        .buttonStyle(.circularOffsetStyle)
+        .buttonStyle(.circular)
         .disabled(viewModel.session.turns?.count == 0)
       }
       .padding(.leading)
@@ -101,7 +104,7 @@ extension SessionView {
       Button(iconName: .xCircleFill) {
         closeMenu()
       }
-      .buttonStyle(.circularOffsetStyle)
+      .buttonStyle(.circular)
       .transition(.opacity)
       .opacity(isAnimated ? 1 : 0)
     }

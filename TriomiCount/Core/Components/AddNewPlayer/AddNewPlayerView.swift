@@ -34,7 +34,7 @@ struct AddNewPlayerView: View {
       }
     }
     .sheetPreference(.detents([PageSheet.Detent.medium()]))
-    .sheetPreference(.cornerRadius(20))
+    .sheetPreference(.cornerRadius(Constants.cornerRadius))
     .sheetPreference(.grabberVisible(true))
   }
 }
@@ -71,7 +71,6 @@ extension AddNewPlayerView {
       .disableAutocorrection(true)
       .keyboardType(.alphabet)
       .submitLabel(.done)
-      .onAppear(perform: viewModel.focusTextField)
       .onSubmit(viewModel.createPlayer)
       .overlayedAlert(with: viewModel.alertMessage, bool: viewModel.nameIsValid)
       .introspectTextField { $0.becomeFirstResponder() }

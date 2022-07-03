@@ -58,7 +58,7 @@ struct SessionView: View {
     }
     .confirmationDialog(L10n.EndSessionConfirmationDialogue.title, isPresented: $viewModel.showEndSessionAlert, titleVisibility: .visible) {
       Button(action: { viewModel.sessionWillEnd() },
-             label: { Text(L10n.EndSessionConfirmationDialogue.messageWinner(viewModel.getCurrentPlayerOnTurn()?.wrappedName ?? "Unknown")) }
+             label: { Text(L10n.EndSessionConfirmationDialogue.messageWinner(viewModel.currentPlayerOnTurn?.wrappedName ?? "Unknown")) }
       )
       Button(L10n.EndSessionConfirmationDialogue.messageTie) {
         viewModel.isTie = true
@@ -80,7 +80,7 @@ extension SessionView {
   // MARK: - Header
   private var header: some View {
     VStack(alignment: .center, spacing: 10) {
-      Text(viewModel.getCurrentPlayerOnTurn()?.wrappedName ?? "Unknown")
+      Text(viewModel.currentPlayerOnTurn?.wrappedName ?? "Unknown")
         .font(.title)
         .bold()
 
@@ -89,7 +89,7 @@ extension SessionView {
           Text(L10n.SessionView.HeaderLabel.totalScore)
             .font(.headline)
             .fontWeight(.semibold)
-          Text("\(viewModel.getCurrentPlayerOnTurn()?.currentScore ?? 0)")
+          Text("\(viewModel.currentPlayerOnTurn?.currentScore ?? 0)")
             .font(.subheadline)
         }
         .lineLimit(1)
@@ -107,9 +107,9 @@ extension SessionView {
         .lineLimit(1)
       }
     }
-    .glassStyled()
-    .animation(.none, value: viewModel.getCurrentPlayerOnTurn())
-    .overlay(sessionInfoButton, alignment: .topTrailing)
+    .glassStyled(withColor: viewModel.currentPlayerOnTurn?.wrappedFavoriteColor ?? .black)
+    .animation(.none, value: viewModel.currentPlayerOnTurn)
+    .overlay(sessionInfoButton.padding(.trailing), alignment: .topTrailing)
   }
 
   // MARK: - Center
@@ -137,7 +137,7 @@ extension SessionView {
       }
 
       if viewModel.bonusEventPickerOverlayIsShown {
-        BonusEventPicker.SelectionOverlay(viewModel: viewModel)
+        BonusEventPicker.SelectionOverlay(bonusEvent: $viewModel.bonusEvent, bonusEventPickerOverlayIsShown: $viewModel.bonusEventPickerOverlayIsShown)
           .transition(.move(edge: .trailing))
           .zIndex(1)
       }
@@ -194,8 +194,11 @@ extension SessionView {
     VStack(alignment: .leading) {
       Text(L10n.SessionView.BonusEventPicker.labelText)
         .font(.headline)
-      BonusEventPicker(viewModel: viewModel)
-        .padding(.horizontal)
+      BonusEventPicker(
+        bonusEvent: $viewModel.bonusEvent,
+        bonusEventPickerOverlayIsShown: $viewModel.bonusEventPickerOverlayIsShown
+      )
+      .padding(.horizontal)
     }
   }
 
@@ -223,7 +226,7 @@ extension SessionView {
       }
     }
     .frame(width: Constants.buttonHeight, height: Constants.buttonHeight)
-    .buttonStyle(.circularOffsetStyle)
+    .buttonStyle(.offsetStyle)
   }
 
   private var resetButton: some View {
@@ -232,13 +235,14 @@ extension SessionView {
     } label: {
       Image(systemSymbol: .arrowCounterclockwise)
     }
-    .buttonStyle(.circularOffsetStyle)
+    .buttonStyle(.circular)
     .padding(5)
   }
 
   private var sessionInfoButton: some View {
     Image(systemSymbol: .infoCircle)
       .font(.title2)
+      .foregroundColor(viewModel.currentPlayerOnTurn?.wrappedFavoriteColor.isDarkColor ?? false ? .white : .black)
       .onTapGesture {
         withAnimation {
           sessionOverviewIsShown.toggle()
@@ -246,6 +250,7 @@ extension SessionView {
       }
       .padding([.top, .trailing])
       .blur(radius: menuIsShown ? 2 : 0)
+      .animation(.none, value: viewModel.currentPlayerOnTurn)
   }
 
   struct SessionOverview: View {

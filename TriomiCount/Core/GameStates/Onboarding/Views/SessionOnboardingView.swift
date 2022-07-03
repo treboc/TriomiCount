@@ -9,32 +9,37 @@ import SwiftUI
 import PageSheetCore
 
 struct SessionOnboardingView: View {
-  @StateObject var viewModel: SessionOnboardingViewModel = SessionOnboardingViewModel()
-  @Environment(\.dismiss) private var dismiss
-  @State private var newPlayerSheedIsShown: Bool = false
+  @StateObject var viewModel = SessionOnboardingViewModel()
+  @State private var newPlayerSheetIsShown: Bool = false
 
-  @FetchRequest(fetchRequest: Player.allPlayersFR(), animation: .default)
+  @State private var selectedSort: PlayerListSort = .default
+  @FetchRequest(sortDescriptors: PlayerListSort.default.descriptors, animation: .spring())
   var players: FetchedResults<Player>
 
   var body: some View {
-    ZStack {
-      background
+    NavigationView {
+      ZStack {
+        background
 
-      playerList
-        .safeAreaInset(edge: .top, spacing: 10) {
-          header
+        VStack {
+          resumeLastSessionButton
+          Divider()
+          playerList
         }
-        .safeAreaInset(edge: .bottom, spacing: 10) {
-          if viewModel.chosenPlayers.count > 1 {
-            startSessionButton
-          }
-        }
+        .overlay(onboardingText)
+      }
+      .fullScreenCover(isPresented: $viewModel.sessionIsShown, onDismiss: viewModel.checkForUnfinishedSession) {
+        SessionMainView(session: viewModel.session!)
+      }
+      .navigationTitle(L10n.HomeView.newSession)
+      .roundedNavigationTitle()
+      .toolbar(content: toolbarContent)
+      .onDisappear {
+        viewModel.resetState(of: players)
+      }
+      .pageSheet(isPresented: $newPlayerSheetIsShown, content: AddNewPlayerView.init)
     }
-    .onDisappear {
-      viewModel.resetState(of: players)
-    }
-    .pageSheet(isPresented: $newPlayerSheedIsShown, content: AddNewPlayerView.init)
-    .navigationBarHidden(true)
+    .tint(.primaryAccentColor)
   }
 }
 
@@ -44,50 +49,59 @@ extension SessionOnboardingView {
       .ignoresSafeArea()
   }
 
-  private var header: some View {
-    HeaderView(title: L10n.SessionOnboardingView.participationHeaderText) {
-      Button(iconName: .arrowLeft) {
-        dismiss()
-      }
-    } trailingButton: {
-      Button(iconName: .plus) {
-        newPlayerSheedIsShown = true
-      }
-    }
-  }
-
   private var playerList: some View {
     ScrollView(showsIndicators: false) {
       ForEach(players) { player in
-        SessionOnboardingRowView(player: player, position: viewModel.getPosition(ofChosenPlayer: player))
-          .contentShape(Rectangle())
-          .onTapGesture {
-            withAnimation {
-              viewModel.toggleIsChosenState(player)
-            }
-          }
-          .padding(.horizontal)
+        SessionOnboardingRowView(
+          name: player.wrappedName,
+          position: viewModel.getPosition(of: player),
+          isChosen: viewModel.isPlayerChosen(player)
+        )
+        .onTapGesture {
+          viewModel.toggleIsChosenState(player)
+        }
+        .padding(.horizontal)
       }
     }
   }
 
-  private var startSessionButton: some View {
-    OffsetStyledNavigationLink(title: L10n.SessionOnboardingView.startSession) {
-      SessionMainView(viewModel: SessionViewModel(viewModel.chosenPlayers))
+  @ViewBuilder
+  private var onboardingText: some View {
+    if players.count < 2 {
+      Text("Please add a minimum of two players, by tapping on the \(Image(systemSymbol: .plus)) on the top.")
+        .font(.system(.headline, design: .rounded))
+        .padding(.horizontal)
     }
-    .buttonStyle(.offsetStyle)
-    .foregroundColor(.primary)
-    .padding()
-    .frame(maxWidth: .infinity)
-    .background(
-      Rectangle()
-        .fill(.regularMaterial)
-        .cornerRadius(20, corners: [.topLeft, .topRight])
-        .shadow(color: Color(uiColor: .black).opacity(0.5), radius: 8, x: 0, y: -2.5)
-        .ignoresSafeArea(.all, edges: .bottom)
-    )
-    .transition(.move(edge: .bottom))
-    .zIndex(1)
-    .disabled(viewModel.chosenPlayers.count < 2)
+  }
+
+  var buttonIsDisabled: Bool {
+    if viewModel.session != nil && viewModel.chosenPlayers.count < 2 {
+      return false
+    } else if viewModel.chosenPlayers.count > 1 {
+      return false
+    } else {
+      return true
+    }
+  }
+
+  @ViewBuilder
+  private var resumeLastSessionButton: some View {
+    Button(action: viewModel.startSession) {
+      Text(viewModel.session != nil && viewModel.chosenPlayers.count < 2
+           ? L10n.HomeView.resumeLastSession
+           : L10n.HomeView.startNewSession
+      )
+      .font(.system(.headline, design: .rounded))
+    }
+    .buttonStyle(.shadowed)
+    .padding(.horizontal)
+    .disabled(buttonIsDisabled)
+  }
+
+  @ToolbarContentBuilder
+  func toolbarContent() -> some ToolbarContent {
+    ToolbarItem(placement: .navigationBarTrailing) {
+      AddPlayerToolbarButton(newPlayerSheetIsShown: $newPlayerSheetIsShown)
+    }
   }
 }

@@ -54,18 +54,14 @@ final class AddNewPlayerViewModel: ObservableObject {
     }
   }
 
-  func focusTextField() {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-      self?.textFieldIsFocused = true
-    }
-  }
-
   func createPlayer() {
-    nameTextFieldText = nameTextFieldText.trimmingCharacters(in: .whitespacesAndNewlines)
-
-    if nameTextFieldText.isValidName {
-      Player.addNewPlayer(name: nameTextFieldText, favoriteColor: favoriteColor)
-      shouldDismiss = true
+    let name = nameTextFieldText.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard name.isValidName else {
+      nameIsValid = false
+      return
     }
+
+    Player.addNewPlayer(name: nameTextFieldText, favoriteColor: favoriteColor)
+    shouldDismiss = true
   }
 }

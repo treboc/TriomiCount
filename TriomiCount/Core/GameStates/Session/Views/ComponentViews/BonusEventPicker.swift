@@ -8,31 +8,33 @@
 import SwiftUI
 
 struct BonusEventPicker: View {
-  @ObservedObject var viewModel: SessionViewModel
+  @Binding var bonusEvent: SessionViewModel.BonusEvent
+  @Binding var bonusEventPickerOverlayIsShown: Bool
 
   var body: some View {
-    Button(viewModel.bonusEvent.description) {
+    Button(bonusEvent.description) {
       withAnimation {
-        viewModel.bonusEventPickerOverlayIsShown = true
+        bonusEventPickerOverlayIsShown = true
       }
     }
-    .animation(.none, value: viewModel.bonusEvent.description)
+    .animation(.none, value: bonusEvent.description)
     .buttonStyle(.offsetStyle)
-    .onChange(of: viewModel.bonusEvent) { _ in
+    .onChange(of: bonusEvent) { _ in
       HapticManager.shared.impact(style: .light)
     }
   }
 
   struct SelectionOverlay: View {
-    @ObservedObject var viewModel: SessionViewModel
+    @Binding var bonusEvent: SessionViewModel.BonusEvent
+    @Binding var bonusEventPickerOverlayIsShown: Bool
 
     var body: some View {
       VStack(spacing: 15) {
         ForEach(SessionViewModel.BonusEvent.allCases, id: \.self) { bonusEvent in
           Button(bonusEvent.description) {
             withAnimation {
-              viewModel.bonusEvent = bonusEvent
-              viewModel.bonusEventPickerOverlayIsShown = false
+              self.bonusEvent = bonusEvent
+              bonusEventPickerOverlayIsShown = false
             }
           }
           .buttonStyle(.offsetStyle)
@@ -47,18 +49,6 @@ struct BonusEventPicker: View {
           .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 0)
       )
       .padding(.horizontal)
-    }
-
-    private var closeButton: some View {
-      Button(action: {
-        viewModel.bonusEventPickerOverlayIsShown = false
-      }, label: {
-        Label("Close BonusEventPicker", systemImage: "xmark")
-          .labelStyle(.iconOnly)
-      })
-      .buttonStyle(.circularOffsetStyle)
-      .padding(5)
-      .scaleEffect(0.8)
     }
   }
 }

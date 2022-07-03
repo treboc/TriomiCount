@@ -10,30 +10,28 @@ import SwiftUI
 import PageSheet
 
 struct PlayerListView: View {
-  @State private var showAddPlayerPage: Bool = false
+  @State private var newPlayerSheetIsShown: Bool = false
   @State private var selectedSort: PlayerListSort = .default
   @Environment(\.dismiss) private var dismiss
 
-  @FetchRequest(sortDescriptors: PlayerListSort.default.descriptors, animation: .default)
+  @FetchRequest(sortDescriptors: PlayerListSort.default.descriptors, animation: .spring())
   private var players: FetchedResults<Player>
 
   var body: some View {
-    ZStack {
-      background
+    NavigationView {
+      ZStack {
+        background
 
-      scrollView
-        .safeAreaInset(edge: .top, spacing: 10) {
-          header
-        }
+        scrollView
+      }
+      .pageSheet(isPresented: $newPlayerSheetIsShown) {
+        AddNewPlayerView()
+      }
+      .navigationTitle(L10n.players)
+      .toolbar(content: toolbarContent)
+      .roundedNavigationTitle()
     }
-    .ignoresSafeArea(.container, edges: .bottom)
-    .pageSheet(isPresented: $showAddPlayerPage) {
-      AddNewPlayerView()
-        .sheetPreference(.detents([PageSheet.Detent.medium()]))
-        .sheetPreference(.cornerRadius(20))
-        .sheetPreference(.grabberVisible(true))
-    }
-    .navigationBarHidden(true)
+    .tint(.primaryAccentColor)
   }
 }
 
@@ -41,21 +39,6 @@ extension PlayerListView {
   private var background: some View {
     Color.primaryBackground
       .ignoresSafeArea()
-  }
-
-  private var header: some View {
-    HeaderView(title: L10n.players) {
-      Button(iconName: .arrowLeft) {
-        dismiss()
-      }
-    } trailingButton: {
-      HStack(spacing: 15) {
-        sortView
-        Button(iconName: .plus) {
-          showAddPlayerPage = true
-        }
-      }
-    }
   }
 
   private var sortView: some View {
@@ -69,22 +52,19 @@ extension PlayerListView {
   private var scrollView: some View {
     ScrollView(showsIndicators: false) {
       ForEach(players) { player in
-        NavigationLink {
-          PlayerDetailView(player: player)
-        } label: {
+        NavigationLink(destination: PlayerDetailView.init(player: player)) {
           PlayerListRowView(player: player)
         }
-        .buttonStyle(.offsetStyle)
+        .buttonStyle(.shadowed)
         .padding(.horizontal)
       }
-      .padding(.bottom, 30)
     }
   }
 
   private var buttonStack: some View {
     VStack(spacing: 10) {
       Button(L10n.addNewPlayer) {
-        showAddPlayerPage.toggle()
+        newPlayerSheetIsShown.toggle()
       }
 
       Button(L10n.backToMainMenu) {
@@ -94,6 +74,17 @@ extension PlayerListView {
     .buttonStyle(.offsetStyle)
     .padding([.horizontal, .bottom])
   }
+
+  @ToolbarContentBuilder
+  func toolbarContent() -> some ToolbarContent {
+    ToolbarItem(placement: .navigationBarTrailing) {
+      HStack(spacing: 15) {
+        sortView
+        AddPlayerToolbarButton(newPlayerSheetIsShown: $newPlayerSheetIsShown)
+      }
+    }
+  }
+
 }
 
 struct PlayerListView_Previews: PreviewProvider {
@@ -111,40 +102,3 @@ struct PlayerListView_Previews: PreviewProvider {
     }
   }
 }
-
-// MARK: - Sorting & Adding New Player
-//        .toolbar {
-//          ToolbarItemGroup(placement: .navigationBarTrailing) {
-//            PlayerListSortView(
-//              selectedSortItem: $selectedSort,
-//              sorts: PlayerListSort.sorts)
-//              .onChange(of: selectedSort) { _ in
-//                players.sortDescriptors = selectedSort.descriptors
-//              }
-//            Button("Add") {
-//              showAddPlayerPage.toggle()
-//            }
-//            .frame(width: 50, height: 20)
-//            .buttonStyle(.offsetStyle)
-//          }
-//        }
-//  @State private var searchTerm: String = ""
-//
-//  var searchQuery: Binding<String> {
-//    Binding {
-//      searchTerm
-//    }
-//    set: { newValue in
-//      searchTerm = newValue
-//
-//      guard !newValue.isEmpty else {
-//        players.nsPredicate = nil
-//        return
-//      }
-//
-//      players.nsPredicate = NSPredicate(
-//        format: "name_ contains[cd] %@", newValue
-//      )
-//    }
-//  }
-//  .searchable(text: searchQuery, placement: .automatic, prompt: "Search for Player")
