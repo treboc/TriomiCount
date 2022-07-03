@@ -34,7 +34,7 @@ struct ShadowedStyle: ButtonStyle {
   func makeBody(configuration: Configuration) -> some View {
     configuration.label
       .font(.headline)
-      .foregroundColor(isEnabled ? .primary : .systemGray6)
+      .foregroundColor(isEnabled ? .white : .systemGray6)
       .frame(minHeight: Constants.buttonHeight)
       .frame(maxWidth: .infinity)
       .background(isEnabled ? primaryColor : .systemGray3)

@@ -31,13 +31,9 @@ struct SessionView: View {
       .onAppear(perform: viewModel.resetTurnState)
 
       if sessionOverviewIsShown {
-        SessionOverview(players: viewModel.session.playersArray) {
-          withAnimation {
-            sessionOverviewIsShown = false
-          }
-        }
-        .zIndex(1)
-        .transition(.move(edge: .top))
+        SessionOverview(players: viewModel.session.playersArray, hideOverview: toggleSessionOverview)
+          .zIndex(1)
+          .transition(.move(edge: .top).combined(with: .opacity))
       }
 
       if menuIsShown {
@@ -45,6 +41,7 @@ struct SessionView: View {
                     menuIsShown: $menuIsShown,
                     exitSession: appState.exitSession,
                     toggleScaleAnimation: toggleScaleAnimation)
+        .zIndex(1)
       }
     }
     .scaleEffect(scale)
@@ -150,6 +147,7 @@ extension SessionView {
       nextPlayerButton
       menuButton
     }
+    .buttonStyle(.shadowed)
     .padding([.horizontal, .bottom])
   }
 
@@ -216,17 +214,16 @@ extension SessionView {
       toggleScaleAnimation()
       HapticManager.shared.notification(type: .success)
     }
-    .buttonStyle(.offsetStyle)
   }
 
   private var menuButton: some View {
-    Button(iconName: .squareStackFill) {
+    Button(iconName: menuIsShown ? .xmark : .squareStackFill) {
       withAnimation {
         menuIsShown.toggle()
       }
     }
     .frame(width: Constants.buttonHeight, height: Constants.buttonHeight)
-    .buttonStyle(.offsetStyle)
+    .animation(.none, value: menuIsShown)
   }
 
   private var resetButton: some View {
@@ -249,7 +246,6 @@ extension SessionView {
         }
       }
       .padding([.top, .trailing])
-      .blur(radius: menuIsShown ? 2 : 0)
       .animation(.none, value: viewModel.currentPlayerOnTurn)
   }
 
@@ -312,6 +308,12 @@ extension SessionView {
 
     withAnimation(.linear.delay(0.3)) {
       scale = 1
+    }
+  }
+
+  func toggleSessionOverview() {
+    withAnimation {
+      sessionOverviewIsShown.toggle()
     }
   }
 }

@@ -18,7 +18,7 @@ struct BonusEventPicker: View {
       }
     }
     .animation(.none, value: bonusEvent.description)
-    .buttonStyle(.offsetStyle)
+    .buttonStyle(.shadowed)
     .onChange(of: bonusEvent) { _ in
       HapticManager.shared.impact(style: .light)
     }

@@ -9,13 +9,15 @@ import SwiftUI
 import CoreData
 
 struct SessionsListView: View {
-  @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Session.hasEnded, ascending: false)],
-                animation: .default) private var sessions: FetchedResults<Session>
+  @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Session.id, ascending: false)],
+                predicate: NSPredicate(format: "hasEnded == TRUE"),
+                animation: .default)
+  private var sessions: FetchedResults<Session>
 
   var body: some View {
     NavigationView {
       ZStack {
-        Color.primaryBackground.ignoresSafeArea()
+        Background()
         scrollView
       }
       .navigationTitle(L10n.sessions)
@@ -31,12 +33,16 @@ struct SessionsListView: View {
 }
 
 extension SessionsListView {
+  private var background: some View {
+    LinearGradient(colors: [.primaryBackground.opacity(0.8), .primaryBackground.opacity(0.2)],
+                   startPoint: .top,
+                   endPoint: .bottom)
+    .ignoresSafeArea()
+  }
+
   private var scrollView: some View {
     ScrollView(showsIndicators: false) {
-      ForEach(sessions
-        .filter { $0.hasEnded }
-        .sorted { $0.id > $1.id }
-      ) { session in
+      ForEach(sessions) { session in
         NavigationLink(destination: SessionDetailView(session: session)) {
           SessionListRowView(session: session)
         }

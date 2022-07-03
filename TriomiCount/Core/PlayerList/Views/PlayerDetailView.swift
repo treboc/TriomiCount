@@ -13,8 +13,7 @@ struct PlayerDetailView: View {
 
   var body: some View {
     ZStack {
-      Color.primaryBackground
-        .ignoresSafeArea()
+      Background()
 
       VStack {
         PlayerInitialsCircle(player: player)
@@ -40,8 +39,9 @@ struct PlayerDetailView: View {
             Button(L10n.PlayerDetailView.DeleteButton.title, role: .destructive) {
               showDeletePlayerAlert.toggle()
             }
-            .buttonStyle(OffsetStyle(role: .destructive))
+            .buttonStyle(ShadowedStyle(role: .destructive))
             .padding(.horizontal, 50)
+            .padding(.top)
           }
           .padding(.horizontal, 20)
         }

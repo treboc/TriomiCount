@@ -61,22 +61,7 @@ extension SessionView {
       .padding(.leading)
       .background(Capsule().fill(.thinMaterial))
       .animation(.spring(), value: isAnimated)
-      .offset(isAnimated ? CGSize(width: 0, height: -100) : .zero)
-    }
-
-    private var exitSessionButton: some View {
-      HStack {
-        Text(L10n.SessionView.ExitSessionButton.labelText)
-
-        Button(iconName: .houseFill) {
-          dismiss()
-        }
-        .buttonStyle(.circular)
-      }
-      .padding(.leading)
-      .background(Capsule().fill(.thinMaterial))
-      .animation(.spring(), value: isAnimated)
-      .offset(isAnimated ? CGSize(width: -25, height: -50) : .zero)
+      .offset(isAnimated ? CGSize(width: 0, height: -(Constants.buttonHeight + 10) * 3) : .zero)
     }
 
     private var undoButton: some View {
@@ -97,16 +82,32 @@ extension SessionView {
       .padding(.leading)
       .background(Capsule().fill(.thinMaterial))
       .animation(.spring(), value: isAnimated)
-      .offset(isAnimated ? CGSize(width: -50, height: 0) : .zero)
+      .offset(isAnimated ? CGSize(width: 0, height: -(Constants.buttonHeight + 10) * 2) : .zero)
+    }
+
+    private var exitSessionButton: some View {
+      HStack {
+        Text(L10n.SessionView.ExitSessionButton.labelText)
+
+        Button(iconName: .houseFill) {
+          dismiss()
+        }
+        .buttonStyle(.circular)
+      }
+      .padding(.leading)
+      .background(Capsule().fill(.thinMaterial))
+      .animation(.spring(), value: isAnimated)
+      .offset(isAnimated ? CGSize(width: 0, height: -(Constants.buttonHeight + 10)) : .zero)
     }
 
     private var closeMenuButton: some View {
-      Button(iconName: .xCircleFill) {
+      Button(iconName: .xmark) {
         closeMenu()
       }
-      .buttonStyle(.circular)
+      .buttonStyle(.shadowed)
       .transition(.opacity)
       .opacity(isAnimated ? 1 : 0)
+      .frame(width: Constants.buttonHeight, height: Constants.buttonHeight)
     }
 
     func closeMenu() {

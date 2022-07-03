@@ -19,7 +19,7 @@ struct SessionOnboardingView: View {
   var body: some View {
     NavigationView {
       ZStack {
-        background
+        Background()
 
         VStack {
           resumeLastSessionButton
@@ -44,11 +44,6 @@ struct SessionOnboardingView: View {
 }
 
 extension SessionOnboardingView {
-  private var background: some View {
-    Color.primaryBackground
-      .ignoresSafeArea()
-  }
-
   private var playerList: some View {
     ScrollView(showsIndicators: false) {
       ForEach(players) { player in

@@ -26,8 +26,8 @@ struct PlayerListRowView: View {
             .font(.caption)
         }
       }
-      .foregroundColor(.primary)
-      .padding()
+      .foregroundColor(.white)
+      .padding(.horizontal)
     }
     .frame(maxWidth: .infinity)
     .listRowSeparator(.hidden)

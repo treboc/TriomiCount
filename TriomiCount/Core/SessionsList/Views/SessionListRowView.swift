@@ -24,7 +24,7 @@ struct SessionListRowView: View {
           HStack(alignment: .firstTextBaseline) {
             Text(L10n.SessionListRowView.playedBy)
               .fontWeight(.semibold)
-            Text(session.playedBy)
+            Text(session.playedBy())
               .multilineTextAlignment(.leading)
           }
           .font(.subheadline)
@@ -35,7 +35,7 @@ struct SessionListRowView: View {
         Text(session.startedOnAsString)
           .font(.caption)
       }
-      .foregroundColor(.primary)
+      .foregroundColor(.white)
       .padding(.horizontal)
       .padding(.vertical, 10)
     }

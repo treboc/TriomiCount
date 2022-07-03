@@ -22,7 +22,7 @@ struct SessionOnboardingRowView: View {
 
       HStack {
         ZStack {
-          Image(systemName: "circle.dotted")
+          Image(systemSymbol: .circleDashed)
             .font(.title)
           position != nil ? Text("\(position ?? 0)") : Text("")
         }
@@ -34,7 +34,7 @@ struct SessionOnboardingRowView: View {
         Spacer()
       }
       .padding(.horizontal)
-      .foregroundColor(.primary)
+      .foregroundColor(.white)
     }
     .listRowSeparator(.hidden)
     .animation(.none, value: position)

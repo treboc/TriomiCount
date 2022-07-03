@@ -13,33 +13,40 @@ struct SettingsView: View {
 
   var body: some View {
     NavigationView {
-      Form {
-        Section(L10n.SettingsView.ColorScheme.title) {
-          ColorSchemePicker()
-        }
+      ZStack {
+        LinearGradient(colors: [.primaryBackground.opacity(0.8), .primaryBackground.opacity(0.2)],
+                       startPoint: .top,
+                       endPoint: .bottom)
+        .ignoresSafeArea()
 
-        Section {
-          Toggle(L10n.SettingsView.IdleDimmingDisabled.pickerLabelText, isOn: $idleDimmingDisabled)
-            .tint(.accentColor)
-        } header: {
-          Text(L10n.SettingsView.IdleDimmingDisabled.options)
-        } footer: {
-          Text(L10n.SettingsView.IdleDimmingDisabled.importantMessage)
-            .font(.caption)
-        }
+        Form {
+          Section(L10n.SettingsView.ColorScheme.title) {
+            ColorSchemePicker()
+          }
 
-        Section(L10n.Rules.title) {
-          rulesSection
-        }
+          Section {
+            Toggle(L10n.SettingsView.IdleDimmingDisabled.pickerLabelText, isOn: $idleDimmingDisabled)
+              .tint(.accentColor)
+          } header: {
+            Text(L10n.SettingsView.IdleDimmingDisabled.options)
+          } footer: {
+            Text(L10n.SettingsView.IdleDimmingDisabled.importantMessage)
+              .font(.caption)
+          }
 
-        Section(footer: footer, content: { EmptyView() })
+          Section(L10n.Rules.title) {
+            rulesSection
+          }
+
+          Section(footer: footer, content: { EmptyView() })
+        }
       }
       .navigationTitle(L10n.SettingsView.settings)
       .roundedNavigationTitle()
     }
     // Set the forms background
     .introspectTableView(customize: { tableView in
-      tableView.backgroundColor = UIColor(.primaryBackground)
+      tableView.backgroundColor = .clear
     })
     // accentColor will be deprecated, but .tint() does not work here!
     .accentColor(.primaryAccentColor)
@@ -65,17 +72,8 @@ extension SettingsView {
   }
 
   private var footer: some View {
-    VStack(spacing: 10) {
-      Text("Made with ☕️ and 💚 by")
-        .font(.headline)
-      Text("Marvin Lee")
-        .font(.subheadline.bold())
-      Text("Version 1.0.0")
-
-      AboutView()
-
-    }
-    .frame(maxWidth: .infinity, alignment: .center)
+    AboutView()
+      .frame(maxWidth: .infinity, alignment: .center)
   }
 }
 

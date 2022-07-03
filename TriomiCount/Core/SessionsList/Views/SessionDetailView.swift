@@ -14,13 +14,12 @@ struct SessionDetailView: View {
 
   var body: some View {
     ZStack(alignment: .topLeading) {
-      Color.primaryBackground
-        .ignoresSafeArea()
+      Background()
 
       VStack(alignment: .center) {
         VStack {
           SessionDetailSection(L10n.SessionDetailView.playedWith) {
-            Text(session.playedBy)
+            Text(session.playedBy())
               .multilineTextAlignment(.leading)
           }
 

@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct AboutView: View {
+  @Environment(\.colorScheme) var colorScheme
+
   let twitterUrl = URL(string: "https://twitter.com/treb0c")!
   let githubUrl = URL(string: "https://github.com/treboc")!
 
   var body: some View {
-    VStack {
+    VStack(spacing: 10) {
+      Text("Made with ☕️ and 💚 by")
+        .font(.subheadline.bold())
+      Text("Marvin Lee")
+        .font(.subheadline)
+      Text("Version 1.0.0")
+        .font(.caption)
+
       HStack(spacing: 20) {
         Image("github-logo")
           .resizable()
@@ -20,7 +29,6 @@ struct AboutView: View {
           .frame(width: 32, height: 32)
 
         Link("treboc @ GitHub", destination: githubUrl)
-          .font(.headline)
       }
 
       HStack(spacing: 20) {
@@ -30,9 +38,9 @@ struct AboutView: View {
           .frame(width: 32, height: 32)
 
         Link("treb0c @ Twitter", destination: twitterUrl)
-          .font(.headline)
       }
     }
+    .tint(colorScheme == .dark ? .orange : .accentColor)
   }
 }
 

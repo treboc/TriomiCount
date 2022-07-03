@@ -42,10 +42,6 @@ extension Session {
     }
   }
 
-  var playedBy: String {
-    return playersArray.sorted { $0.position < $1.position }.compactMap { $0.name }.formatted()
-  }
-
   var startedOnAsString: String {
     let formatter = DateFormatter()
     formatter.dateStyle = .short
@@ -75,6 +71,11 @@ extension Session {
     self.turns = NSSet()
     self.startedOn = Date()
   }
+
+  func playedBy() -> String {
+    return playersArray.sorted { $0.wrappedName < $1.wrappedName }.compactMap { $0.name }.formatted()
+  }
+
 }
 
 // MARK: - Fronting Properties

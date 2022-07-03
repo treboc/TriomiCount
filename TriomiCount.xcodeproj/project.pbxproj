@@ -64,6 +64,7 @@
 		8A0D1EB628645A4600B392E7 /* ShadowedButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0D1EB528645A4600B392E7 /* ShadowedButtonStyle.swift */; };
 		8A1A4F5F283249A30024BE58 /* MenuOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1A4F5E283249A30024BE58 /* MenuOverlay.swift */; };
 		8A2C8CF42827A7DD005136AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C8CF32827A7DD005136AD /* Constants.swift */; };
+		8A3525A8287202DF00393BCD /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3525A7287202DF00393BCD /* Background.swift */; };
 		8A5D847228286B8C00286F14 /* CustomModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5D847128286B8C00286F14 /* CustomModifiers.swift */; };
 		8A5E01102813491E00703CE5 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E010F2813491E00703CE5 /* L10n.swift */; };
 		8A5E011228154B3200703CE5 /* SettingsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E011128154B3200703CE5 /* SettingsKeys.swift */; };
@@ -137,6 +138,7 @@
 		8A0D1EB528645A4600B392E7 /* ShadowedButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowedButtonStyle.swift; sourceTree = "<group>"; };
 		8A1A4F5E283249A30024BE58 /* MenuOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOverlay.swift; sourceTree = "<group>"; };
 		8A2C8CF32827A7DD005136AD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8A3525A7287202DF00393BCD /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		8A5D847128286B8C00286F14 /* CustomModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifiers.swift; sourceTree = "<group>"; };
 		8A5E010F2813491E00703CE5 /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = L10n.swift; path = TriomiCount/Resources/L10n.swift; sourceTree = SOURCE_ROOT; };
 		8A5E011128154B3200703CE5 /* SettingsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsKeys.swift; sourceTree = "<group>"; };
@@ -435,6 +437,7 @@
 				08AD236027AA912600BBDB16 /* HapticsManager.swift */,
 				8A04CFCA282DAD5700DEDA67 /* HeaderView.swift */,
 				08B3E2F227B9AA02009E4DD7 /* Logo.swift */,
+				8A3525A7287202DF00393BCD /* Background.swift */,
 				8ACA06E927F5A550000F6D4C /* Rules.swift */,
 				8AD1397C28379F4F00A16EB0 /* AddNewPlayer */,
 				087179DE27ADDD890005C074 /* Extensions */,
@@ -654,6 +657,7 @@
 				8AB0179F27FC1F5B00FFEF46 /* BonusEventPicker.swift in Sources */,
 				08BBB1F627A08F98001CD3DF /* SessionOnboardingView.swift in Sources */,
 				085924CF27C7685400364259 /* PlayerListSortView.swift in Sources */,
+				8A3525A8287202DF00393BCD /* Background.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
