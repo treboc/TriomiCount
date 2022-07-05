@@ -29,7 +29,7 @@ extension Turn {
                    timesDrawn: Int16,
                    playedCard: Bool
   ) {
-    self.init(context: PersistentStore.shared.context)
+    self.init(context: CoreDataManager.shared.context)
     self.session = session
     self.wrappedCreatedOn = Date()
     self.score = score
@@ -47,14 +47,6 @@ extension Turn {
     get { createdOn ?? Date() }
     set { createdOn = newValue }
   }
-
-  public var player: Player? {
-    if let uuid = self.playerID {
-      return Player.object(withID: uuid)
-    }
-    return nil
-  }
-
 }
 
 // MARK: Generated accessors for playersInTurn
@@ -77,7 +69,7 @@ extension Turn: Identifiable {}
 
 extension Turn {
   class func allTurns() -> [Turn] {
-    return allObjects(context: PersistentStore.shared.context) as? [Turn] ?? []
+    return allObjects(context: CoreDataManager.shared.context) as? [Turn] ?? []
   }
 
   class func allTurnsFR() -> NSFetchRequest<Turn> {

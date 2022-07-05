@@ -24,7 +24,7 @@ extension SessionScore {
   @NSManaged public var scoreValue: Int16
   @NSManaged public var playerID: String
 
-  convenience init(sessionKey: String, player: Player, context: NSManagedObjectContext = PersistentStore.shared.context) {
+  convenience init(sessionKey: String, player: Player, context: NSManagedObjectContext = CoreDataManager.shared.context) {
     self.init(context: context)
     self.id = UUID()
     self.sessionKey = sessionKey
@@ -44,7 +44,7 @@ extension SessionScore {
 extension SessionScore: Identifiable {}
 
 extension SessionScore {
-  class func getSessionScoreDictWith(sessionKey: String, context: NSManagedObjectContext = PersistentStore.shared.context) -> [SessionScore]? {
+  class func getSessionScoreDictWith(sessionKey: String, context: NSManagedObjectContext = CoreDataManager.shared.context) -> [SessionScore]? {
     let fetchRequest: NSFetchRequest<SessionScore> =
     NSFetchRequest<SessionScore>(entityName: SessionScore.description())
     fetchRequest.predicate = NSPredicate(format: "sessionKey == %@", sessionKey as CVarArg)
@@ -57,7 +57,7 @@ extension SessionScore {
     return nil
   }
 
-  class func getSessionScoresWith(sessionKey: NSManagedObjectID, context: NSManagedObjectContext = PersistentStore.shared.context) -> [SessionScore]? {
+  class func getSessionScoresWith(sessionKey: NSManagedObjectID, context: NSManagedObjectContext = CoreDataManager.shared.context) -> [SessionScore]? {
     let fetchRequest: NSFetchRequest<SessionScore> =
     NSFetchRequest<SessionScore>(entityName: SessionScore.description())
     fetchRequest.predicate = NSPredicate(format: "sessionKey == %@", sessionKey as CVarArg)

@@ -41,7 +41,7 @@ class SessionViewModel: ObservableObject {
   }
 
   // MARK: - SessionState Playing
-  let store = PersistentStore.shared
+  let store = CoreDataManager.shared
 
   @Published var session: Session
   @Published var state: SessionState = .playing
@@ -248,13 +248,13 @@ class SessionViewModel: ObservableObject {
 
       session.hasEnded = true
       state = .didEnd
-      store.saveContext(context: store.context)
+      store.save()
     }
   }
 
   func saveSessionState() {
     if session.hasChanges {
-      store.saveContext(context: store.context)
+      store.save()
     }
   }
 }

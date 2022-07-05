@@ -50,16 +50,16 @@ extension Session {
 
   var winner: String? {
     if let objectIDURL = URL(string: wrappedWinnerID) {
-      let coordinator: NSPersistentStoreCoordinator = PersistentStore.shared.persistentContainer.persistentStoreCoordinator
+      let coordinator: NSPersistentStoreCoordinator = CoreDataManager.shared.persistentContainer.persistentStoreCoordinator
       if let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectIDURL) {
-        let winner = PersistentStore.shared.context.object(with: managedObjectID) as? Player
+        let winner = CoreDataManager.shared.context.object(with: managedObjectID) as? Player
         return winner?.wrappedName ?? "No Player with this ID found."
       }
     }
     return nil
   }
 
-  convenience init(players: [Player], context: NSManagedObjectContext = PersistentStore.shared.context) {
+  convenience init(players: [Player], context: NSManagedObjectContext = CoreDataManager.shared.context) {
     self.init(context: context)
 
     for player in players {
@@ -107,7 +107,7 @@ extension Session {
   /// 2) make sure, there's atleast one not finished session
   /// 3) loop over all, delete all but not the latest
 
-  class func getLastNotFinishedSession(context: NSManagedObjectContext = PersistentStore.shared.context) -> Session? {
+  class func getLastNotFinishedSession(context: NSManagedObjectContext = CoreDataManager.shared.context) -> Session? {
     let predicate = NSPredicate(format: "hasEnded = false")
     let fetchRequest: NSFetchRequest<Session> = NSFetchRequest<Session>(entityName: Session.description())
     fetchRequest.predicate = predicate
@@ -118,7 +118,7 @@ extension Session {
       // deleting all older, not finished sessions, but the last
       for session in result {
         if (session != lastSession) && (!session.hasEnded) {
-          PersistentStore.shared.context.delete(session)
+          CoreDataManager.shared.context.delete(session)
         }
       }
 
@@ -130,7 +130,7 @@ extension Session {
   }
 
   class func getAllSessions() -> [Session] {
-    return allObjects(context: PersistentStore.shared.context) as? [Session] ?? []
+    return allObjects(context: CoreDataManager.shared.context) as? [Session] ?? []
   }
 }
 

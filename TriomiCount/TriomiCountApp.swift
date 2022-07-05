@@ -20,7 +20,7 @@ struct TriomiCountApp: App {
     WindowGroup {
       HomeView()
         .id(appState.homeViewID)
-        .environment(\.managedObjectContext, PersistentStore.shared.context)
+        .environment(\.managedObjectContext, CoreDataManager.shared.context)
         .environmentObject(appState)
         .environmentObject(appearanceManager)
         .onAppear {
@@ -37,10 +37,10 @@ struct TriomiCountApp: App {
 
   func handleResignActive(_ note: Notification) {
     // when going into background, save Core Data and shutdown timer
-    PersistentStore.shared.saveContext(context: PersistentStore.shared.context)
-    if PersistentStore.shared.context.hasChanges {
+    CoreDataManager.shared.save(context: CoreDataManager.shared.context)
+    if CoreDataManager.shared.context.hasChanges {
       do {
-        try PersistentStore.shared.context.save()
+        try CoreDataManager.shared.context.save()
       } catch let error as NSError {
         print("Error saving state on going to background \(error.localizedDescription)")
       }
