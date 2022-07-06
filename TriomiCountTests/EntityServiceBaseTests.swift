@@ -9,11 +9,10 @@ import XCTest
 @testable import TriomiCount
 
 class EntityServiceBaseTests: XCTestCase {
-//  var sut: EntityServiceBase
-  var coreDataManager: CoreDataManager!
+  var coreDataManager: TestCoreDataManager!
 
   override func setUpWithError() throws {
-    coreDataManager = CoreDataManager(.inMemory)
+    coreDataManager = TestCoreDataManager()
   }
 
   override func tearDownWithError() throws {
@@ -45,14 +44,14 @@ class EntityServiceBaseTests: XCTestCase {
     XCTAssertEqual(player, expected)
   }
 
-//  func test_deleteObject() {
-//    let player = Player(name: "Dummy", context: coreDataManager.context)
-//
-//    EntityServiceBase.deleteObject(player, in: coreDataManager.context)
-//
-//    let objects: [Player] = EntityServiceBase.allObjects(in: coreDataManager.context)
-//
-//    XCTAssertEqual(0, objects.count)
-//  }
+  func test_deleteObject() {
+    let player = Player(name: "Dummy", context: coreDataManager.context)
+
+    EntityServiceBase.deleteObject(player, in: coreDataManager.context)
+
+    let objects = EntityServiceBase.allObjects(Player.self, in: coreDataManager.context)
+
+    XCTAssertEqual(0, objects.count)
+  }
 
 }
