@@ -58,7 +58,6 @@ public class EntityServiceBase {
    static func deleteObject<T: NSManagedObject>(_ entity: T,
                                                 in context: NSManagedObjectContext = CoreDataManager.shared.context) {
     context.delete(entity)
-
     CoreDataManager.shared.save(context: context)
   }
 }

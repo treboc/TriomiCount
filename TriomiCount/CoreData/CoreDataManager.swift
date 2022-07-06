@@ -12,7 +12,7 @@ enum StorageType {
 }
 
 class CoreDataManager {
-  private(set) static var shared = CoreDataManager()
+  static let shared = CoreDataManager()
 
   var persistentContainer: NSPersistentContainer
   let context: NSManagedObjectContext

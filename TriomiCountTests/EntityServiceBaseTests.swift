@@ -9,10 +9,10 @@ import XCTest
 @testable import TriomiCount
 
 class EntityServiceBaseTests: XCTestCase {
-  var coreDataManager: TestCoreDataManager!
+  var coreDataManager: CoreDataManager!
 
   override func setUpWithError() throws {
-    coreDataManager = TestCoreDataManager()
+    coreDataManager = CoreDataManager(.inMemory)
   }
 
   override func tearDownWithError() throws {
