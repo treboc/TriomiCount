@@ -56,7 +56,7 @@ final class AddNewPlayerViewModel: ObservableObject {
       nameIsValid = false
       return
     }
-    PlayerService.addNewPlayer(name)
+    PlayerService.addNewPlayer(name, favoriteColor: favoriteColor)
     shouldDismiss = true
   }
 }
