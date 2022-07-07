@@ -41,8 +41,6 @@ class SessionViewModel: ObservableObject {
   }
 
   // MARK: - SessionState Playing
-  let store = CoreDataManager.shared
-
   @Published var session: Session
   @Published var state: SessionState = .playing
 
@@ -137,44 +135,34 @@ class SessionViewModel: ObservableObject {
   func endTurn() {
     guard let player = currentPlayerOnTurn else { return }
     // update the current player with the score from the currentTurnScore
-    updateScore(of: player, with: calculatedScore)
+    PlayerService.updateScore(of: player, with: calculatedScore)
 
     // append the actual turn to the turns-array to keep track of the turns,
-    let turn = Turn(session,
-                    score: calculatedScore,
-                    playerOnTurn: player,
-                    scoreSliderValue: Int16(scoreSliderValue),
-                    timesDrawn: Int16(timesDrawn),
-                    playedCard: playedCard)
-    session.addToTurns(turn)
+    let turnProperties = TurnService.TurnProperties(session: session,
+                                                    calculatedScore: calculatedScore,
+                                                    playerOnTurn: player,
+                                                    scoreSliderValue: Int16(scoreSliderValue),
+                                                    timesDrawn: Int16(timesDrawn),
+                                                    playedCard: playedCard)
+    TurnService.addTurn(with: turnProperties)
 
-    saveSessionState()
     resetTurnState()
   }
 
   func undoLastTurn() {
     guard let lastTurn = session.turnsArray.last else { return }
-    let lastPlayer = session.playersArray.first { $0.id == lastTurn.playerID }
+    if let lastPlayer = session.playersArray.first(where: { $0.id == lastTurn.playerID }) {
+      resetUIAfterUndoTurn(lastTurn)
+      PlayerService.updateScore(of: lastPlayer, with: -lastTurn.score)
+      session.removeFromTurns(lastTurn)
+      EntityServiceBase.deleteObject(lastTurn)
+    }
+  }
+
+  func resetUIAfterUndoTurn(_ lastTurn: Turn) {
     scoreSliderValue = Float(lastTurn.scoreSliderValue)
     timesDrawn = Int(lastTurn.timesDrawn)
     playedCard = lastTurn.playedCard
-    updateScore(of: lastPlayer, with: -lastTurn.score)
-    session.removeFromTurns(lastTurn)
-    store.context.delete(lastTurn)
-    saveSessionState()
-  }
-
-  func updateScore(of player: Player?, with score: Int16) {
-    if let player = player {
-      var currentPlayersScore: Int16 = 0
-
-      let turns = session.turnsArray.filter { $0.playerID == player.id }
-      for turn in turns {
-        currentPlayersScore += turn.score
-      }
-      currentPlayersScore += score
-      player.currentScore = currentPlayersScore
-    }
   }
 
   // MARK: - SessionState Ending
@@ -231,11 +219,11 @@ class SessionViewModel: ObservableObject {
 
       // get winner with highest score
       let winner = session.playersArray.sorted(by: { $0.currentScore > $1.currentScore }).first!
-      winner.increaseSessionsWon()
+      PlayerService.incrementSessionsWon(of: winner)
       session.wrappedWinnerID = winner.objectID.uriRepresentation().absoluteString
 
       for player in session.playersArray {
-        player.increaseSessionsPlayed()
+        PlayerService.increaseSessionsPlayed(of: player)
 
         if player.currentScore > player.highscore {
           player.highscore = Int64(player.currentScore)
@@ -248,13 +236,13 @@ class SessionViewModel: ObservableObject {
 
       session.hasEnded = true
       state = .didEnd
-      store.save()
+      CoreDataManager.shared.save()
     }
   }
 
   func saveSessionState() {
     if session.hasChanges {
-      store.save()
+      CoreDataManager.shared.save()
     }
   }
 }

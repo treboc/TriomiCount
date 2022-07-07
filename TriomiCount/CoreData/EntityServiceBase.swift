@@ -8,6 +8,8 @@
 import CoreData
 
 public class EntityServiceBase {
+  internal static let context = CoreDataManager.shared.context
+
   static func allObjects<T: NSManagedObject>(_ type: T.Type, in context: NSManagedObjectContext = CoreDataManager.shared.context) -> [T] {
     let fetchRequest: NSFetchRequest<T> = NSFetchRequest<T>(entityName: T.description())
     do {
@@ -55,8 +57,8 @@ public class EntityServiceBase {
     return 0
   }
 
-   static func deleteObject<T: NSManagedObject>(_ entity: T,
-                                                in context: NSManagedObjectContext = CoreDataManager.shared.context) {
+  static func deleteObject<T: NSManagedObject>(_ entity: T,
+                                               in context: NSManagedObjectContext = CoreDataManager.shared.context) {
     context.delete(entity)
     CoreDataManager.shared.save(context: context)
   }

@@ -43,9 +43,3 @@ struct SessionListRowView: View {
     .listRowSeparator(.hidden)
   }
 }
-
-struct SessionListRowView_Previews: PreviewProvider {
-    static var previews: some View {
-      SessionListRowView(session: Session.getAllSessions().first!)
-    }
-}

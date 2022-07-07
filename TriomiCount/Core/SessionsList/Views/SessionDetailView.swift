@@ -54,12 +54,6 @@ struct SessionDetailView: View {
   }
 }
 
-struct GameDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-      SessionDetailView(session: Session.getAllSessions().first!)
-    }
-}
-
 extension SessionDetailView {
   struct SessionDetailSection<Content: View>: View {
     let sectionTitle: String

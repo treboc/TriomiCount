@@ -37,6 +37,7 @@ struct SessionOnboardingView: View {
       .onDisappear {
         viewModel.resetState(of: players)
       }
+      .onChange(of: players.count) { _ in viewModel.checkForUnfinishedSession() }
       .pageSheet(isPresented: $newPlayerSheetIsShown, content: AddNewPlayerView.init)
     }
     .tint(.primaryAccentColor)

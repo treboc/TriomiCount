@@ -57,7 +57,7 @@ struct PlayerDetailView: View {
   }
 
   func deletePlayerAndDismissView() {
-    Player.deletePlayer(player)
+    PlayerService.deleteObject(player)
     dismiss()
   }
 }

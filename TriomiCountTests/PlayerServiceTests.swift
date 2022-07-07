@@ -22,10 +22,10 @@ class PlayerServiceTests: XCTestCase {
   func test_addNewPlayer_withNameGiven_hasBasicProperties() {
     PlayerService.addNewPlayer("Dummy", in: coreDataManager.context)
 
-    let player = PlayerService.allObjects(Player.self, in: coreDataManager.context).first!
+    let player: Player = PlayerService.allObjects(Player.self, in: coreDataManager.context).first!
 
     let expectedName = "Dummy"
-    let favoriteColor = UIColor.clear
+    let favoriteColor = UIColor.red
     let sessionsPlayed: Int16 = 0
     let sessionsWon: Int16 = 0
 
@@ -39,7 +39,7 @@ class PlayerServiceTests: XCTestCase {
   func test_addNewPlayer_withNameGiven_shouldCreatePlayerEntityWithName() {
     PlayerService.addNewPlayer("Dummy", in: coreDataManager.context)
 
-    let expected = PlayerService.allObjects(Player.self, in: coreDataManager.context).first!
+    let expected: Player = PlayerService.allObjects(Player.self, in: coreDataManager.context).first!
 
     XCTAssertEqual(expected.wrappedName, "Dummy")
   }
@@ -47,7 +47,7 @@ class PlayerServiceTests: XCTestCase {
   func test_addNewPlayer_withNameAndFavoriteColorGiven_shouldCreatePlayerEntityWithNameAndFavoriteColor() throws {
     PlayerService.addNewPlayer("Dummy", in: coreDataManager.context)
 
-    let expected = PlayerService.allObjects(Player.self, in: coreDataManager.context).first!
+    let expected: Player = PlayerService.allObjects(Player.self, in: coreDataManager.context).first!
 
     XCTAssertEqual(expected.wrappedName, "Dummy")
   }

@@ -77,6 +77,8 @@
 		8A9DFD1D287386CB00E77DD0 /* PlayerServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DFD1C287386CB00E77DD0 /* PlayerServiceTests.swift */; };
 		8A9DFD1F28738C9400E77DD0 /* EntityServiceBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DFD1E28738C9400E77DD0 /* EntityServiceBase.swift */; };
 		8A9DFD222874087B00E77DD0 /* EntityServiceBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DFD212874087B00E77DD0 /* EntityServiceBaseTests.swift */; };
+		8A9DFD2D2876B69600E77DD0 /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DFD2C2876B69600E77DD0 /* SessionService.swift */; };
+		8A9DFD2F2876C68F00E77DD0 /* TurnService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DFD2E2876C68F00E77DD0 /* TurnService.swift */; };
 		8AB0179D27FBABE900FFEF46 /* SessionListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0179C27FBABE900FFEF46 /* SessionListRowView.swift */; };
 		8AB0179F27FC1F5B00FFEF46 /* BonusEventPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0179E27FC1F5B00FFEF46 /* BonusEventPicker.swift */; };
 		8AB017A127FC3A3F00FFEF46 /* OverlayAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB017A027FC3A3F00FFEF46 /* OverlayAlert.swift */; };
@@ -166,6 +168,8 @@
 		8A9DFD1C287386CB00E77DD0 /* PlayerServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerServiceTests.swift; sourceTree = "<group>"; };
 		8A9DFD1E28738C9400E77DD0 /* EntityServiceBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityServiceBase.swift; sourceTree = "<group>"; };
 		8A9DFD212874087B00E77DD0 /* EntityServiceBaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityServiceBaseTests.swift; sourceTree = "<group>"; };
+		8A9DFD2C2876B69600E77DD0 /* SessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionService.swift; sourceTree = "<group>"; };
+		8A9DFD2E2876C68F00E77DD0 /* TurnService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnService.swift; sourceTree = "<group>"; };
 		8AB0179C27FBABE900FFEF46 /* SessionListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListRowView.swift; sourceTree = "<group>"; };
 		8AB0179E27FC1F5B00FFEF46 /* BonusEventPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusEventPicker.swift; sourceTree = "<group>"; };
 		8AB017A027FC3A3F00FFEF46 /* OverlayAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayAlert.swift; sourceTree = "<group>"; };
@@ -223,10 +227,10 @@
 		0835129F27DC123C00065228 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				0835129627DC123700065228 /* Session.swift */,
 				0835129227DC123700065228 /* Player.swift */,
-				0835129027DC123700065228 /* Turn.swift */,
+				0835129627DC123700065228 /* Session.swift */,
 				0835129527DC123700065228 /* SessionScore.swift */,
+				0835129027DC123700065228 /* Turn.swift */,
 				8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */,
 			);
 			path = Entities;
@@ -524,6 +528,8 @@
 			isa = PBXGroup;
 			children = (
 				8A9DFD1A2873866600E77DD0 /* PlayerService.swift */,
+				8A9DFD2C2876B69600E77DD0 /* SessionService.swift */,
+				8A9DFD2E2876C68F00E77DD0 /* TurnService.swift */,
 			);
 			path = EntityServices;
 			sourceTree = "<group>";
@@ -699,6 +705,7 @@
 				08B3E2F327B9AA02009E4DD7 /* Logo.swift in Sources */,
 				08D562A427B30BA7009C72B1 /* View+Extension.swift in Sources */,
 				08BE48EA279CA14900EA431F /* HomeView.swift in Sources */,
+				8A9DFD2F2876C68F00E77DD0 /* TurnService.swift in Sources */,
 				0827298227DDE74C00E48F4D /* TimesDrawnPicker.swift in Sources */,
 				8A5E01142815A34800703CE5 /* AppearanceManager.swift in Sources */,
 				8AC4D137282DB81900C227F6 /* Button+Extension.swift in Sources */,
@@ -714,6 +721,7 @@
 				083BFD5027CABB7200B5BE50 /* PointsSubmitView.swift in Sources */,
 				8A5E01102813491E00703CE5 /* L10n.swift in Sources */,
 				8A5E011B2816943500703CE5 /* AboutView.swift in Sources */,
+				8A9DFD2D2876B69600E77DD0 /* SessionService.swift in Sources */,
 				0896440E27A527F30091C6F8 /* Color+Extenstion.swift in Sources */,
 				8A9DFD1F28738C9400E77DD0 /* EntityServiceBase.swift in Sources */,
 				0827298427DE488900E48F4D /* PlayedCardPicker.swift in Sources */,

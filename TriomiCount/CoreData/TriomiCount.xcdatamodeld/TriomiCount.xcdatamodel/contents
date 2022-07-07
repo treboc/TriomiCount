@@ -18,6 +18,7 @@
         <attribute name="endedOn" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="hasEnded" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="playerNamesHash" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startedOn" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="winnerID" optional="YES" attributeType="String"/>
         <relationship name="players" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Player" inverseName="sessions" inverseEntity="Player"/>
@@ -42,7 +43,7 @@
     </entity>
     <elements>
         <element name="Player" positionX="160" positionY="192" width="128" height="209"/>
-        <element name="Session" positionX="160" positionY="192" width="128" height="134"/>
+        <element name="Session" positionX="160" positionY="192" width="128" height="149"/>
         <element name="SessionScore" positionX="-36" positionY="198" width="128" height="104"/>
         <element name="Turn" positionX="-230.140625" positionY="36" width="309.88671875" height="149"/>
     </elements>
