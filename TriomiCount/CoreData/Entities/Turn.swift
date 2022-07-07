@@ -66,15 +66,3 @@ extension Turn {
 }
 
 extension Turn: Identifiable {}
-
-extension Turn {
-  class func allTurns() -> [Turn] {
-    return allObjects(context: CoreDataManager.shared.context) as? [Turn] ?? []
-  }
-
-  class func allTurnsFR() -> NSFetchRequest<Turn> {
-    let request: NSFetchRequest<Turn> = Turn.fetchRequest()
-    request.sortDescriptors = []
-    return request
-  }
-}

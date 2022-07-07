@@ -33,7 +33,7 @@ extension SessionScore {
   }
 
   var playerName: String {
-    if let player = Player.objectBy(objectID: playerID) {
+    if let player: Player = PlayerService.object(with: playerID) {
       return player.wrappedName
     } else {
       return "Unknown Player"

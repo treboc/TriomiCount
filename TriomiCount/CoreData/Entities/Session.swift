@@ -25,6 +25,7 @@ extension Session {
   @NSManaged public var winnerID: String?
   @NSManaged public var turns: NSSet?
   @NSManaged public var players: NSSet?
+  @NSManaged public var playerNamesHash: Int64
 
   public var turnsArray: [Turn] {
     let turnsSet = turns as? Set<Turn> ?? []
@@ -59,19 +60,6 @@ extension Session {
     return nil
   }
 
-  convenience init(players: [Player], context: NSManagedObjectContext = CoreDataManager.shared.context) {
-    self.init(context: context)
-
-    for player in players {
-      player.currentScore = 0
-      player.isChosen = false
-    }
-
-    self.addToPlayers(NSSet(array: players))
-    self.turns = NSSet()
-    self.startedOn = Date()
-  }
-
   func playedBy() -> String {
     return playersArray.sorted { $0.wrappedName < $1.wrappedName }.compactMap { $0.name }.formatted()
   }
@@ -98,39 +86,6 @@ extension Session {
   public var wrappedWinnerID: String {
     get { winnerID ?? "No ID found." }
     set { winnerID = newValue }
-  }
-}
-
-// MARK: - Class Functions
-extension Session {
-  /// 1) get all not yet finished sessions
-  /// 2) make sure, there's atleast one not finished session
-  /// 3) loop over all, delete all but not the latest
-
-  class func getLastNotFinishedSession(context: NSManagedObjectContext = CoreDataManager.shared.context) -> Session? {
-    let predicate = NSPredicate(format: "hasEnded = false")
-    let fetchRequest: NSFetchRequest<Session> = NSFetchRequest<Session>(entityName: Session.description())
-    fetchRequest.predicate = predicate
-    do {
-      let result = try context.fetch(fetchRequest)
-      guard let lastSession = result.last else { return nil }
-
-      // deleting all older, not finished sessions, but the last
-      for session in result {
-        if (session != lastSession) && (!session.hasEnded) {
-          CoreDataManager.shared.context.delete(session)
-        }
-      }
-
-      if !lastSession.hasEnded { return lastSession }
-    } catch let error as NSError {
-      print("Could not find any session that has not ended. Error: \(error.localizedDescription)")
-    }
-    return nil
-  }
-
-  class func getAllSessions() -> [Session] {
-    return allObjects(context: CoreDataManager.shared.context) as? [Session] ?? []
   }
 }
 

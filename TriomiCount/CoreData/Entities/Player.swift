@@ -13,10 +13,6 @@ import SwiftUI
 
 @objc(Player)
 public class Player: NSManagedObject {
-  var isChosen: Bool = false
-}
-
-extension Player {
   @NSManaged public var id: UUID?
   @NSManaged public var createdOn: Date?
   @NSManaged public var currentScore: Int16
@@ -29,6 +25,8 @@ extension Player {
   @NSManaged public var playerInTurn: Turn?
   @NSManaged public var sessionScores: [String]?
   @NSManaged public var favoriteColor: UIColor?
+
+  var isChosen: Bool = false
 
   convenience init(name: String, position: Int16, context: NSManagedObjectContext) {
     self.init(context: context)
@@ -81,69 +79,6 @@ extension Player {
   public var wrappedFavoriteColor: UIColor {
     get { favoriteColor ?? .blue }
     set { favoriteColor = newValue }
-  }
-
-  // MARK: - Useful Fetch Requests
-//  class func allPlayersFR() -> NSFetchRequest<Player> {
-//    let request: NSFetchRequest<Player> = NSFetchRequest<Player>(entityName: "Player")
-//    request.sortDescriptors = [NSSortDescriptor(key: "createdOn", ascending: true)]
-//    return request
-//  }
-//
-//  class func allPlayersByHighscoreFR() -> NSFetchRequest<Player> {
-//    let request: NSFetchRequest<Player> = NSFetchRequest<Player>(entityName: "Player")
-//    request.sortDescriptors = [NSSortDescriptor(key: "highscore", ascending: false)]
-//    return request
-//  }
-//
-//  class func fetchPlayersBy(_ sortDescriptorKey: String, ascending: Bool) -> NSFetchRequest<Player> {
-//    let request: NSFetchRequest<Player> = NSFetchRequest<Player>(entityName: "Player")
-//    request.sortDescriptors = [NSSortDescriptor(key: sortDescriptorKey, ascending: ascending)]
-//    return request
-//  }
-//
-//  func getPlayerScore(ofSession sessionID: NSManagedObjectID) -> Int16? {
-//    if let sessionScores = SessionScore.getSessionScoresWith(sessionKey: sessionID) {
-//      return sessionScores.first { $0.playerID == self.objectID.description }?.scoreValue
-//    }
-//    return nil
-//  }
-
-  // MARK: - Class functions for CRUD operations
-//  class func addNewPlayer(name: String,
-//                          favoriteColor: UIColor? = .blue,
-//                          _ context: NSManagedObjectContext = CoreDataManager.shared.context) {
-//    let newPlayer = Player(context: context)
-//    newPlayer.id = UUID()
-//    newPlayer.wrappedName = name
-//    newPlayer.wrappedCreatedOn = Date()
-//    newPlayer.favoriteColor = favoriteColor
-//    newPlayer.sessionsPlayed = 0
-//    newPlayer.sessionsWon = 0
-//    CoreDataManager.shared.save(context: context)
-//  }
-
-  class func deletePlayer(_ playerEntity: Player) {
-    let context = CoreDataManager.shared.context
-    context.delete(playerEntity)
-    CoreDataManager.shared.save(context: context)
-  }
-
-  // MARK: - Object Methods
-
-  // toggles the isChosen flag for a player
-  func toggleIsChosenStatus() { self.isChosen.toggle() }
-
-  func updateScore(with score: Int16) {
-    self.currentScore += score
-  }
-
-  func increaseSessionsWon() {
-    sessionsWon += 1
-  }
-
-  func increaseSessionsPlayed() {
-    sessionsPlayed += 1
   }
 }
 
