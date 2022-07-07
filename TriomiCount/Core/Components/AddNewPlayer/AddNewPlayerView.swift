@@ -85,7 +85,7 @@ extension AddNewPlayerView {
       Text(L10n.AddNewPlayerView.CreateButton.labelText)
         .frame(maxWidth: .infinity)
     }
-    .buttonStyle(.offsetStyle)
+    .buttonStyle(.shadowed)
     .padding(.horizontal, 20)
     .disabled(!viewModel.nameIsValid)
   }
