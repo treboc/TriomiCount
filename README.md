@@ -18,7 +18,7 @@ I learn a lot better when building something, than rebuild the next to-do app or
 * look into previous games and its statistics *(work in progress)*
 
 ## To-do
-- [ ] 'undo' last turn in a session
+- [x] 'undo' last turn in a session
 - [x] ~~prevent display from dimming / turning off~~
     - [x] ~~make it a setting~~
 - [ ] get some kind of chart into player and session statistics
@@ -27,13 +27,14 @@ I learn a lot better when building something, than rebuild the next to-do app or
 - [x] ~~some kind of quicklook feature in session (*maybe with tap on the header?*)~~
     - [ ] add some onboarding for this feature
 - [ ] feature: favorite color of player, choose on creating, edit in PlayerDetailView
-- [ ] color the GameView into player's favorite color?
+- [x] color the GameView into player's favorite color?
 
 ## Screenshots
 <p float="left">
-  <img src="./screenshots/homeView.png" width="200" />
-  <img src="./screenshots/gameView.png" width="200" />
-  <img src="./screenshots/playerDetailView.png" width="200" />
+  <img src="./screenshots/screenshot_1.png" width="200" />
+  <img src="./screenshots/screenshot_2.png" width="200" />
+  <img src="./screenshots/screenshot_3.png" width="200" />
+  <img src="./screenshots/screenshot_4.png" width="200" />
 </p>
 
 ## Credits
@@ -43,6 +44,7 @@ I learn a lot better when building something, than rebuild the next to-do app or
     * [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)
     * [Swiftgen](https://github.com/SwiftGen/SwiftGen)
     * [Inject](https://github.com/krzysztofzablocki/Inject)
+    * [Introspect](https://github.com/siteline/SwiftUI-Introspect)
 
 ## Requirements
 * Xcode 13.0+ & Swift 5.5+
