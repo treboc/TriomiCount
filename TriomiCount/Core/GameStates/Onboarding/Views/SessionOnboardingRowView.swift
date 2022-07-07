@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SessionOnboardingRowView: View {
   let name: String
-  let position: Int?
+  let position: Int16?
   let isChosen: Bool
 
   var body: some View {
@@ -24,7 +24,9 @@ struct SessionOnboardingRowView: View {
         ZStack {
           Image(systemSymbol: .circleDashed)
             .font(.title)
-          position != nil ? Text("\(position ?? 0)") : Text("")
+          if let position = position {
+            Text("\(position)")
+          }
         }
         .monospacedDigit()
         .frame(width: 25, height: 25)

@@ -15,8 +15,8 @@ import CoreData
 extension NSManagedObject {
 	// makes it easy to count NSManagedObjects in a given context.  useful during
 	// app development.
-	class func count(context: NSManagedObjectContext) -> Int {
-		let fetchRequest: NSFetchRequest<Self> = NSFetchRequest<Self>(entityName: Self.description())
+  class func countAllObjects<T: NSManagedObject>(ofType type: T, context: NSManagedObjectContext) -> Int {
+		let fetchRequest: NSFetchRequest<T> = NSFetchRequest<T>(entityName: T.description())
 		do {
 			let result = try context.count(for: fetchRequest)
 			return result
@@ -54,9 +54,9 @@ extension NSManagedObject {
   // finds an NSManagedObject with given ObjectID as string
   class func objectBy(objectID: String) -> Self? {
     if let objectIDURL = URL(string: objectID) {
-      let coordinator = PersistentStore.shared.persistentContainer.persistentStoreCoordinator
+      let coordinator = CoreDataManager.shared.persistentContainer.persistentStoreCoordinator
       if let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectIDURL) {
-        return PersistentStore.shared.context.object(with: managedObjectID) as? Self
+        return CoreDataManager.shared.context.object(with: managedObjectID) as? Self
       }
     }
     return nil

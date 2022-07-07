@@ -18,10 +18,6 @@ final class AddNewPlayerViewModel: ObservableObject {
   }
 
   @Published var textFieldIsFocused: Bool = false
-
-  @Published var alertIsShown: Bool = false
-  @Published var alertTitle: String = ""
-
   var alertMessage: String {
     if nameTextFieldText.isEmpty {
       return L10n.AddNewPlayerView.AlertTextFieldEmpty.message
@@ -60,8 +56,7 @@ final class AddNewPlayerViewModel: ObservableObject {
       nameIsValid = false
       return
     }
-
-    Player.addNewPlayer(name: nameTextFieldText, favoriteColor: favoriteColor)
+    PlayerService.addNewPlayer(name, favoriteColor: favoriteColor)
     shouldDismiss = true
   }
 }

@@ -37,6 +37,7 @@ struct SessionOnboardingView: View {
       .onDisappear {
         viewModel.resetState(of: players)
       }
+      .onChange(of: players.count) { _ in viewModel.checkForUnfinishedSession() }
       .pageSheet(isPresented: $newPlayerSheetIsShown, content: AddNewPlayerView.init)
     }
     .tint(.primaryAccentColor)
@@ -49,7 +50,7 @@ extension SessionOnboardingView {
       ForEach(players) { player in
         SessionOnboardingRowView(
           name: player.wrappedName,
-          position: viewModel.getPosition(of: player),
+          position: PlayerService.getPosition(of: player, in: viewModel.chosenPlayers),
           isChosen: viewModel.isPlayerChosen(player)
         )
         .onTapGesture {
@@ -65,7 +66,8 @@ extension SessionOnboardingView {
     if players.count < 2 {
       Text("Please add a minimum of two players, by tapping on the \(Image(systemSymbol: .plus)) on the top.")
         .font(.system(.headline, design: .rounded))
-        .padding(.horizontal)
+        .padding(.horizontal, 100)
+        .multilineTextAlignment(.center)
     }
   }
 

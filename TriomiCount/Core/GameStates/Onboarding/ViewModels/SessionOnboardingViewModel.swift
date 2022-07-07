@@ -10,26 +10,19 @@ import SwiftUI
 
 class SessionOnboardingViewModel: ObservableObject {
   @Published var chosenPlayers: [Player] = []
-  @Published var session = Session.getLastNotFinishedSession()
+  @Published var session = SessionService.getLastNotFinishedSession()
 
   @Published var sessionIsShown: Bool = false
 
   func toggleIsChosenState(_ player: Player) {
-    player.toggleIsChosenStatus()
+    PlayerService.toggleChosenState(player)
     if player.isChosen {
       chosenPlayers.append(player)
-      player.position = Int16(getPosition(of: player)!)
+      player.position = PlayerService.getPosition(of: player, in: chosenPlayers) ?? 0
     } else if let index = chosenPlayers.firstIndex(where: { $0.id == player.id }) {
       chosenPlayers.remove(at: index)
       player.position = 0
     }
-  }
-
-  func getPosition(of player: Player) -> Int? {
-    if let index = chosenPlayers.firstIndex(where: { $0.id == player.id }) {
-      return index + 1
-    }
-    return nil
   }
 
   func resetState(of fetchedPlayers: FetchedResults<Player>) {
@@ -45,7 +38,7 @@ class SessionOnboardingViewModel: ObservableObject {
 
   func startSession() {
     if chosenPlayers.count > 1 {
-      session = Session(players: chosenPlayers)
+      session = SessionService.addSession(with: chosenPlayers)
       sessionIsShown = true
     } else if session != nil {
       sessionIsShown = true
@@ -58,6 +51,6 @@ class SessionOnboardingViewModel: ObservableObject {
   }
 
   func checkForUnfinishedSession() {
-    session = .getLastNotFinishedSession()
+    session = SessionService.getLastNotFinishedSession()
   }
 }
