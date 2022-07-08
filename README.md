@@ -18,7 +18,7 @@ I learn a lot better when building something, than rebuild the next to-do app or
 * look into previous games and its statistics *(work in progress)*
 
 ## To-do
-- [x] 'undo' last turn in a session
+- [x] ~~'undo' last turn in a session~~
 - [x] ~~prevent display from dimming / turning off~~
     - [x] ~~make it a setting~~
 - [ ] get some kind of chart into player and session statistics
@@ -27,7 +27,7 @@ I learn a lot better when building something, than rebuild the next to-do app or
 - [x] ~~some kind of quicklook feature in session (*maybe with tap on the header?*)~~
     - [ ] add some onboarding for this feature
 - [ ] feature: favorite color of player, choose on creating, edit in PlayerDetailView
-- [x] color the GameView into player's favorite color?
+- [x] ~~color the GameView into player's favorite color?~~
 
 ## Screenshots
 <p float="left">
