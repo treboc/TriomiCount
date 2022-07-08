@@ -60,12 +60,7 @@ extension AddNewPlayerView {
         Text(L10n.AddNewPlayerView.NameLabel.textfieldText)
           .foregroundColor(.gray)
       })
-      .foregroundColor(.primary)
-      .padding(.leading, 10)
-      .frame(height: Constants.buttonHeight)
-      .frame(maxWidth: .infinity)
-      .background(Color.secondaryBackground)
-      .cornerRadius(Constants.cornerRadius)
+      .borderedTextFieldStyle()
       .padding(.horizontal, 20)
       .textInputAutocapitalization(.words)
       .disableAutocorrection(true)
@@ -75,8 +70,9 @@ extension AddNewPlayerView {
       .overlayedAlert(with: viewModel.alertMessage, bool: viewModel.nameIsValid)
       .introspectTextField { $0.becomeFirstResponder() }
       .onChange(of: viewModel.nameTextFieldText) { _ in viewModel.subscribeToTextfieldText() }
-      .overlay(viewModel.nameTextFieldText.isEmpty ? nil : deleteButton
-        .transition(.opacity), alignment: .trailing)
+      .overlay(viewModel.nameTextFieldText.isEmpty
+               ? nil
+               : deleteButton.transition(.opacity), alignment: .trailing)
       .animation(.easeIn(duration: 0.1), value: viewModel.nameTextFieldText.isEmpty)
   }
 
@@ -106,6 +102,7 @@ extension AddNewPlayerView {
   struct FavoriteColorPicker: View {
     @Binding var favoriteColor: UIColor
     @State var colorName: String = UIColor.FavoriteColors.colors[0].name
+    @Namespace private var namespace
 
     var body: some View {
       VStack {
@@ -127,18 +124,18 @@ extension AddNewPlayerView {
                 .overlay(
                   favColor.color == favoriteColor
                 ? Image(systemSymbol: .checkmark)
+                    .matchedGeometryEffect(id: "checkmark", in: namespace)
                   .foregroundColor(favColor.color.isDarkColor ? .white : .black)
                   .font(.headline)
                   .animation(.none, value: favoriteColor)
                 : nil
                 )
+                .padding(5)
             }
           }
-          .padding()
         }
         .frame(maxWidth: .infinity)
-        .background(Color.secondaryBackground)
-        .cornerRadius(Constants.cornerRadius)
+        .borderedTextFieldStyle()
         .padding(.horizontal, 20)
 
         Text(colorName)
