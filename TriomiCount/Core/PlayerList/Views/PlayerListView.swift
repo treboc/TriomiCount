@@ -63,20 +63,6 @@ extension PlayerListView {
     }
   }
 
-  private var buttonStack: some View {
-    VStack(spacing: 10) {
-      Button(L10n.addNewPlayer) {
-        newPlayerSheetIsShown.toggle()
-      }
-
-      Button(L10n.backToMainMenu) {
-        dismiss()
-      }
-    }
-    .buttonStyle(.offsetStyle)
-    .padding([.horizontal, .bottom])
-  }
-
   @ToolbarContentBuilder
   func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
@@ -86,7 +72,6 @@ extension PlayerListView {
       }
     }
   }
-
 }
 
 struct PlayerListView_Previews: PreviewProvider {

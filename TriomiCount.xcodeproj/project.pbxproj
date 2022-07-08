@@ -63,9 +63,11 @@
 		8A0D1EB128619A0500B392E7 /* AddPlayerToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0D1EB028619A0500B392E7 /* AddPlayerToolbarButton.swift */; };
 		8A0D1EB628645A4600B392E7 /* ShadowedButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0D1EB528645A4600B392E7 /* ShadowedButtonStyle.swift */; };
 		8A1A4F5F283249A30024BE58 /* MenuOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1A4F5E283249A30024BE58 /* MenuOverlay.swift */; };
+		8A22B9662878D4FB0045E09D /* RoundedNavigationTitle-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A22B9652878D4FB0045E09D /* RoundedNavigationTitle-ViewModifier.swift */; };
+		8A22B9682878D5140045E09D /* BorderedTextField-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A22B9672878D5140045E09D /* BorderedTextField-ViewModifier.swift */; };
 		8A2C8CF42827A7DD005136AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C8CF32827A7DD005136AD /* Constants.swift */; };
 		8A3525A8287202DF00393BCD /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3525A7287202DF00393BCD /* Background.swift */; };
-		8A5D847228286B8C00286F14 /* CustomModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5D847128286B8C00286F14 /* CustomModifiers.swift */; };
+		8A5D847228286B8C00286F14 /* GlassStyledHeaderView-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5D847128286B8C00286F14 /* GlassStyledHeaderView-ViewModifier.swift */; };
 		8A5E01102813491E00703CE5 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E010F2813491E00703CE5 /* L10n.swift */; };
 		8A5E011228154B3200703CE5 /* SettingsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E011128154B3200703CE5 /* SettingsKeys.swift */; };
 		8A5E01142815A34800703CE5 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E01132815A34800703CE5 /* AppearanceManager.swift */; };
@@ -154,10 +156,12 @@
 		8A0D1EB028619A0500B392E7 /* AddPlayerToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerToolbarButton.swift; sourceTree = "<group>"; };
 		8A0D1EB528645A4600B392E7 /* ShadowedButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowedButtonStyle.swift; sourceTree = "<group>"; };
 		8A1A4F5E283249A30024BE58 /* MenuOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOverlay.swift; sourceTree = "<group>"; };
+		8A22B9652878D4FB0045E09D /* RoundedNavigationTitle-ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoundedNavigationTitle-ViewModifier.swift"; sourceTree = "<group>"; };
+		8A22B9672878D5140045E09D /* BorderedTextField-ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BorderedTextField-ViewModifier.swift"; sourceTree = "<group>"; };
 		8A2C8CF32827A7DD005136AD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8A3525A7287202DF00393BCD /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		8A3525AF287205C200393BCD /* TriomiCountTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TriomiCountTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A5D847128286B8C00286F14 /* CustomModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifiers.swift; sourceTree = "<group>"; };
+		8A5D847128286B8C00286F14 /* GlassStyledHeaderView-ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GlassStyledHeaderView-ViewModifier.swift"; sourceTree = "<group>"; };
 		8A5E010F2813491E00703CE5 /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = L10n.swift; path = TriomiCount/Resources/L10n.swift; sourceTree = SOURCE_ROOT; };
 		8A5E011128154B3200703CE5 /* SettingsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsKeys.swift; sourceTree = "<group>"; };
 		8A5E01132815A34800703CE5 /* AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
@@ -239,7 +243,9 @@
 		083512A027DC13E500065228 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
-				8A5D847128286B8C00286F14 /* CustomModifiers.swift */,
+				8A5D847128286B8C00286F14 /* GlassStyledHeaderView-ViewModifier.swift */,
+				8A22B9652878D4FB0045E09D /* RoundedNavigationTitle-ViewModifier.swift */,
+				8A22B9672878D5140045E09D /* BorderedTextField-ViewModifier.swift */,
 				8AB017A027FC3A3F00FFEF46 /* OverlayAlert.swift */,
 				8A858C8327FF5C20002385E1 /* ButtonStyles */,
 				8A0D1EB028619A0500B392E7 /* AddPlayerToolbarButton.swift */,
@@ -695,6 +701,7 @@
 				8A06D6832824FA160049EA9A /* RoundedCornerModifier.swift in Sources */,
 				08A2C64327A34BBB0076C196 /* SettingsView.swift in Sources */,
 				8ACA06E827F596A0000F6D4C /* SessionDetailView.swift in Sources */,
+				8A22B9662878D4FB0045E09D /* RoundedNavigationTitle-ViewModifier.swift in Sources */,
 				8A0D1EB628645A4600B392E7 /* ShadowedButtonStyle.swift in Sources */,
 				08BE48F7279CA82E00EA431F /* SessionMainView.swift in Sources */,
 				8A07164B282B961100AC8C87 /* UINavigationController+Extension.swift in Sources */,
@@ -727,6 +734,7 @@
 				0827298427DE488900E48F4D /* PlayedCardPicker.swift in Sources */,
 				082C540127ABE88F00AB5CD7 /* CoreDataManager.swift in Sources */,
 				0835129827DC123700065228 /* Turn.swift in Sources */,
+				8A22B9682878D5140045E09D /* BorderedTextField-ViewModifier.swift in Sources */,
 				8A2C8CF42827A7DD005136AD /* Constants.swift in Sources */,
 				08BE48D8279CA0FA00EA431F /* TriomiCountApp.swift in Sources */,
 				08288175279EF8D10064C9E8 /* AddNewPlayerView.swift in Sources */,
@@ -737,7 +745,7 @@
 				0835129E27DC123700065228 /* Session.swift in Sources */,
 				08A2C64127A341E70076C196 /* PlayerDetailView.swift in Sources */,
 				0859748327CD7CAC0030A4E5 /* SessionResultsView.swift in Sources */,
-				8A5D847228286B8C00286F14 /* CustomModifiers.swift in Sources */,
+				8A5D847228286B8C00286F14 /* GlassStyledHeaderView-ViewModifier.swift in Sources */,
 				08093A6827DD4CA90061352D /* CircularButtonStyle.swift in Sources */,
 				087179E027ADDD9A0005C074 /* NSManagedObject+Extensions.swift in Sources */,
 				8A071650282CEE8B00AC8C87 /* Collection+Extension.swift in Sources */,
