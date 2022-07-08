@@ -196,6 +196,7 @@ extension SessionView {
         bonusEvent: $viewModel.bonusEvent,
         bonusEventPickerOverlayIsShown: $viewModel.bonusEventPickerOverlayIsShown
       )
+      .disabled(!viewModel.playedCard)
       .padding(.horizontal)
     }
   }
