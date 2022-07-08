@@ -11,6 +11,7 @@ struct SessionOnboardingRowView: View {
   let name: String
   let position: Int16?
   let isChosen: Bool
+  @State var angle: Angle = Angle(degrees: 0)
 
   var body: some View {
     ZStack {
@@ -23,6 +24,10 @@ struct SessionOnboardingRowView: View {
       HStack {
         ZStack {
           Image(systemSymbol: .circleDashed)
+            .rotationEffect(.degrees(isChosen ? 360 : 0))
+            .animation(isChosen
+                       ? .linear(duration: 5).repeatForever(autoreverses: false)
+                       : .default, value: isChosen)
             .font(.title)
           if let position = position {
             Text("\(position)")

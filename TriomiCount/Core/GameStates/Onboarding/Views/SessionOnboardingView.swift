@@ -54,7 +54,7 @@ extension SessionOnboardingView {
           isChosen: viewModel.isPlayerChosen(player)
         )
         .onTapGesture {
-          viewModel.toggleIsChosenState(player)
+          viewModel.choose(player)
         }
         .padding(.horizontal)
       }
