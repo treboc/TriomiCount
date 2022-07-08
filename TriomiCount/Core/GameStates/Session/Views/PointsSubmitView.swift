@@ -31,7 +31,6 @@ struct PointsSubmitView: View {
             Button(L10n.back) {
               viewModel.playerToAskForPointsIndex -= 1
             }
-            .buttonStyle(.offsetStyle)
           }
 
           Button(viewModel.playerToAskForPointsIndex ==
@@ -42,9 +41,9 @@ struct PointsSubmitView: View {
               endPointsIsInt = false
             }
           }
-          .buttonStyle(.offsetStyle)
           .disabled(!endPoints.isInt)
         }
+        .buttonStyle(.shadowed)
       }
       .padding()
       .background(

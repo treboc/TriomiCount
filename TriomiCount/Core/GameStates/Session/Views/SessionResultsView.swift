@@ -43,7 +43,7 @@ struct SessionResultsView: View {
         Button(L10n.backToMainMenu) {
           dismiss()
         }
-        .buttonStyle(.offsetStyle)
+        .buttonStyle(.shadowed)
         .padding(.bottom, 50)
       }
       .padding(.horizontal, 30)

@@ -37,7 +37,7 @@ struct BonusEventPicker: View {
               bonusEventPickerOverlayIsShown = false
             }
           }
-          .buttonStyle(.offsetStyle)
+          .buttonStyle(.shadowed)
           .padding(.horizontal)
         }
       }
