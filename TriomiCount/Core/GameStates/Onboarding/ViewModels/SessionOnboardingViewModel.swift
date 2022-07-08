@@ -14,7 +14,7 @@ class SessionOnboardingViewModel: ObservableObject {
 
   @Published var sessionIsShown: Bool = false
 
-  func toggleIsChosenState(_ player: Player) {
+  func choose(_ player: Player) {
     PlayerService.toggleChosenState(player)
     if player.isChosen {
       chosenPlayers.append(player)
