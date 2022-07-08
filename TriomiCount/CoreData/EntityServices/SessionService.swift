@@ -29,9 +29,7 @@ public class SessionService: EntityServiceBase {
     for player in players {
       hasher.combine(player.wrappedName)
     }
-    print(hasher.finalize())
     return Int64(hasher.finalize())
-
   }
 
   static func getLastNotFinishedSession(in context: NSManagedObjectContext = CoreDataManager.shared.context) -> Session? {
