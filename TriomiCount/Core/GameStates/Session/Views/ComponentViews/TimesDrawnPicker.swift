@@ -39,7 +39,6 @@ struct TimesDrawnPicker: View {
 
     var body: some View {
       Text("\(number)")
-        .font(.headline)
         .frame(height: Constants.buttonHeight)
         .frame(maxWidth: .infinity)
         .background(firstBackgroundColor)

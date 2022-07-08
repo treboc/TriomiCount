@@ -33,8 +33,6 @@ struct PlayedCardPicker: View {
     @Binding var timesDrawn: Int
     let action: () -> Void
 
-    let height: CGFloat = Constants.buttonHeight
-
     var isSelected: Bool {
       if title == L10n.yes && selection {
         return true
@@ -53,8 +51,7 @@ struct PlayedCardPicker: View {
 
     var body: some View {
       Text(title)
-        .font(.headline)
-        .frame(height: height)
+        .frame(height: Constants.buttonHeight)
         .frame(maxWidth: .infinity)
         .background(firstBackgroundColor)
         .cornerRadius(Constants.cornerRadius)
@@ -64,8 +61,8 @@ struct PlayedCardPicker: View {
         .background(
           secondBackgroundColor
             .opacity(0.25)
-            .frame(height: height)
-            .cornerRadius(20)
+            .frame(height: Constants.buttonHeight)
+            .cornerRadius(Constants.cornerRadius)
             .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 0)
         )
         .onTapGesture {
