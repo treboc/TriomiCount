@@ -104,7 +104,7 @@ extension SessionView {
         .lineLimit(1)
       }
     }
-    .glassStyled(withColor: viewModel.currentPlayerOnTurn?.wrappedFavoriteColor ?? .black)
+    .glassStyled(withColor: viewModel.currentPlayerOnTurn?.wrappedFavoriteColor ?? .orange)
     .animation(.none, value: viewModel.currentPlayerOnTurn)
     .overlay(sessionInfoButton.padding(.trailing), alignment: .topTrailing)
   }
@@ -174,7 +174,7 @@ extension SessionView {
     VStack(alignment: .leading) {
       Text(L10n.SessionView.TimesDrawnPicker.labelText)
         .font(.headline)
-      TimesDrawnPicker(selection: $viewModel.timesDrawn)
+      TimesDrawnPicker(selection: $viewModel.timesDrawn, color: viewModel.currentPlayerOnTurn?.wrappedFavoriteColor ?? .orange)
         .padding(.horizontal)
     }
   }
@@ -183,7 +183,7 @@ extension SessionView {
     VStack(alignment: .leading) {
       Text(L10n.SessionView.PlayedCardPicker.labelText)
         .font(.headline)
-      PlayedCardPicker(selection: $viewModel.playedCard, timesDrawn: $viewModel.timesDrawn)
+      PlayedCardPicker(selection: $viewModel.playedCard, timesDrawn: $viewModel.timesDrawn, color: viewModel.currentPlayerOnTurn?.wrappedFavoriteColor ?? .orange)
         .padding(.horizontal)
     }
   }

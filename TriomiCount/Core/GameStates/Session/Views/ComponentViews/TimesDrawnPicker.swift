@@ -9,11 +9,12 @@ import SwiftUI
 
 struct TimesDrawnPicker: View {
   @Binding var selection: Int
+  let color: UIColor
 
   var body: some View {
     HStack {
       ForEach(0..<4, id: \.self) { number in
-        ButtonToPick(number: number, selection: $selection) {
+        ButtonToPick(number: number, selection: $selection, color: color) {
           selection = number
         }
       }
@@ -24,6 +25,7 @@ struct TimesDrawnPicker: View {
   struct ButtonToPick: View {
     let number: Int
     @Binding var selection: Int
+    let color: UIColor
 
     var isToggled: Bool {
       number == selection
@@ -31,7 +33,7 @@ struct TimesDrawnPicker: View {
 
     let action: () -> Void
     var firstBackgroundColor: Color {
-      isToggled ? Color.secondaryAccentColor : Color.primaryAccentColor
+      isToggled ? Color(uiColor: color) : Color.primaryAccentColor
     }
     var secondBackgroundColor: Color {
       isToggled ? .secondaryAccentColor : .tertiaryAccentColor
@@ -43,7 +45,7 @@ struct TimesDrawnPicker: View {
         .frame(maxWidth: .infinity)
         .background(firstBackgroundColor)
         .cornerRadius(Constants.cornerRadius)
-        .foregroundColor(.white)
+        .foregroundColor(isToggled ? color.isDarkColor ? .white : .black : .white)
         .font(.headline.bold())
         .offset(y: isToggled ? 0 : -4)
         .background(
@@ -56,6 +58,7 @@ struct TimesDrawnPicker: View {
         .onTapGesture {
           action()
         }
+        .disabled(isToggled)
     }
   }
 }
