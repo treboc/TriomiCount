@@ -28,12 +28,9 @@ struct GlassStyledHeader: ViewModifier {
           .fill(
             LinearGradient(
               colors: [
+                Color(uiColor: color.shade(.light)),
                 Color(uiColor: color),
-                Color(uiColor: color),
-                Color(uiColor: color.isDarkColor
-                      ? color.shade(.darkest)
-                      : color.shade(.lightest)
-                     )
+                Color(uiColor: color.shade(.dark))
               ],
               startPoint: .topLeading,
               endPoint: .bottomTrailing)
