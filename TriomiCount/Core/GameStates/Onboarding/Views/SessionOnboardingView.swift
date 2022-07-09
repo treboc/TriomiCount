@@ -31,7 +31,7 @@ struct SessionOnboardingView: View {
       .fullScreenCover(isPresented: $viewModel.sessionIsShown, onDismiss: viewModel.checkForUnfinishedSession) {
         SessionMainView(session: viewModel.session!)
       }
-      .navigationTitle(L10n.HomeView.newSession)
+      .navigationTitle(L10n.newSession)
       .roundedNavigationTitle()
       .toolbar(content: toolbarContent)
       .onDisappear {
@@ -58,13 +58,14 @@ extension SessionOnboardingView {
         }
         .padding(.horizontal)
       }
+      .padding(.bottom, 20)
     }
   }
 
   @ViewBuilder
   private var onboardingText: some View {
     if players.count < 2 {
-      Text("Please add a minimum of two players, by tapping on the \(Image(systemSymbol: .plus)) on the top.")
+      Text(L10n.SessionOnboardingView.addTwoPlayers)
         .font(.system(.headline, design: .rounded))
         .padding(.horizontal, 100)
         .multilineTextAlignment(.center)
@@ -85,8 +86,8 @@ extension SessionOnboardingView {
   private var resumeLastSessionButton: some View {
     Button(action: viewModel.startSession) {
       Text(viewModel.session != nil && viewModel.chosenPlayers.count < 2
-           ? L10n.HomeView.resumeLastSession
-           : L10n.HomeView.startNewSession
+           ? L10n.Button.resumeLastSession
+           : L10n.Button.startNewSession
       )
       .font(.system(.headline, design: .rounded))
     }

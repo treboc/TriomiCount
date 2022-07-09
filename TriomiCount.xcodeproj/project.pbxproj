@@ -53,7 +53,6 @@
 		08BE48F7279CA82E00EA431F /* SessionMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE48F6279CA82E00EA431F /* SessionMainView.swift */; };
 		08D562A427B30BA7009C72B1 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D562A327B30BA7009C72B1 /* View+Extension.swift */; };
 		08F6F36127E681A200FFBCFB /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F36027E681A200FFBCFB /* SessionView.swift */; };
-		8A04CFCB282DAD5700DEDA67 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A04CFCA282DAD5700DEDA67 /* HeaderView.swift */; };
 		8A06D67F282265540049EA9A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D67E282265540049EA9A /* UIColor+Extension.swift */; };
 		8A06D681282273F00049EA9A /* UIColorValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */; };
 		8A06D6832824FA160049EA9A /* RoundedCornerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */; };
@@ -147,7 +146,6 @@
 		08BE48F6279CA82E00EA431F /* SessionMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionMainView.swift; sourceTree = "<group>"; };
 		08D562A327B30BA7009C72B1 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		08F6F36027E681A200FFBCFB /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
-		8A04CFCA282DAD5700DEDA67 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		8A06D67E282265540049EA9A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorValueTransformer.swift; sourceTree = "<group>"; };
 		8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerModifier.swift; sourceTree = "<group>"; };
@@ -477,7 +475,6 @@
 				08A0103227DFB68C000D0AEB /* AppState.swift */,
 				8A2C8CF32827A7DD005136AD /* Constants.swift */,
 				08AD236027AA912600BBDB16 /* HapticsManager.swift */,
-				8A04CFCA282DAD5700DEDA67 /* HeaderView.swift */,
 				08B3E2F227B9AA02009E4DD7 /* Logo.swift */,
 				8A3525A7287202DF00393BCD /* Background.swift */,
 				8ACA06E927F5A550000F6D4C /* Rules.swift */,
@@ -739,7 +736,6 @@
 				08BE48D8279CA0FA00EA431F /* TriomiCountApp.swift in Sources */,
 				08288175279EF8D10064C9E8 /* AddNewPlayerView.swift in Sources */,
 				0855A22127DCD5AE00E882AC /* Color.swift in Sources */,
-				8A04CFCB282DAD5700DEDA67 /* HeaderView.swift in Sources */,
 				08BE48F3279CA42D00EA431F /* SessionViewModel.swift in Sources */,
 				8A0D1EB128619A0500B392E7 /* AddPlayerToolbarButton.swift in Sources */,
 				0835129E27DC123700065228 /* Session.swift in Sources */,

@@ -16,22 +16,22 @@ struct HomeView: View {
     TabView {
       SessionOnboardingView()
         .tabItem {
-          Label(L10n.HomeView.newSession, systemSymbol: .house)
+          Label(L10n.newSession, systemSymbol: .house)
         }
 
       PlayerListView()
         .tabItem {
-          Label(L10n.HomeView.players, systemSymbol: .person3Fill)
+          Label(L10n.players, systemSymbol: .person3Fill)
         }
 
       SessionsListView()
         .tabItem {
-          Label(L10n.HomeView.sessions, systemSymbol: .listBulletRectangle)
+          Label(L10n.sessions, systemSymbol: .listBulletRectangle)
         }
 
       SettingsView()
         .tabItem {
-          Label(L10n.SettingsView.settings, systemSymbol: .wrenchAndScrewdriverFill)
+          Label(L10n.settings, systemSymbol: .wrenchAndScrewdriverFill)
         }
     }
   }

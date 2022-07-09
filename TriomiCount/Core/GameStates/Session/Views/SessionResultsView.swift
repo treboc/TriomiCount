@@ -40,7 +40,7 @@ struct SessionResultsView: View {
 
         Spacer()
 
-        Button(L10n.backToMainMenu) {
+        Button(L10n.Button.backToMainMenu) {
           dismiss()
         }
         .buttonStyle(.shadowed)

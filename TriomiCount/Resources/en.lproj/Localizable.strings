@@ -6,18 +6,8 @@
 
  */
 
-// HomeView
-"homeView.newSession" = "New Session";
-"homeView.resumeLastSession" = "Resume Last Session";
-"homeView.startNewSession" = "Start New Session";
-"homeView.players" = "Players";
-"homeView.sessions" = "Sessions";
-
 // SessionOnboardingView
-"sessionOnboardingView.participationHeaderText" = "Please chose the players who are participating in the session.";
-"sessionOnboardingView.addNewPlayer" = "Add New Player";
-"sessionOnboardingView.startSession" = "Start Session";
-"sessionOnboardingView.backToMainMenu" = "Back to Main Menu";
+"sessionOnboardingView.addTwoPlayers" = "Please add atleast two players to start a game.";
 
 // SessionView
 "sessionView.headerLabel.totalScore" = "Total score";
@@ -83,7 +73,6 @@
 "sessionDetailView.points" = "Points";
 
 // SettingsView
-"settingsView.settings" = "Settings";
 "settingsView.colorScheme.title" = "Appearance";
 "settingsView.colorScheme.light" = "Light";
 "settingsView.colorScheme.dark" = "Dark";
@@ -127,10 +116,11 @@
 "sessionOverview" = "Session Overview";
 "players" = "Players";
 "sessions" = "Sessions";
-
-"and" = " and ";
-"joinStringAnd" = ", and ";
+"newSession" = "New Session";
+"settings" = "Settings";
 
 // Buttons
-"backToMainMenu" = "Back to Main Menu";
-"addNewPlayer" = "Add new player";
+"button.backToMainMenu" = "Back to Main Menu";
+"button.addNewPlayer" = "Add new player";
+"button.startNewSession" = "Start New Session";
+"button.resumeLastSession" = "Resume Last Session";

@@ -6,18 +6,8 @@
   
 */
 
-// HomeView
-"homeView.newSession" = "Neues Spiel";
-"homeView.resumeLastSession" = "Zurück zum letzten Spiel";
-"homeView.startNewSession" = "Neues Spiel Starten";
-"homeView.players" = "Spieler";
-"homeView.sessions" = "Spiele";
-
-// SessionOnboardingView
-"sessionOnboardingView.participationHeaderText" = "Bitte wähle die Spieler aus, die mitspielen sollen.";
-"sessionOnboardingView.addNewPlayer" = "Neuen Spieler erstellen";
-"sessionOnboardingView.startSession" = "Spiel starten";
-"sessionOnboardingView.backToMainMenu" = "Zurück zum Hauptmenü";
+// SessionOnboardingView (New Session - Tab)
+"sessionOnboardingView.addTwoPlayers" = "Erstelle bitte mindestens zwei Spieler, um ein Spiel starten zu können.";
 
 // SessionView
 "sessionView.headerLabel.totalScore" = "Punkte";
@@ -127,10 +117,11 @@
 "sessionOverview" = "Aktueller Punktestand";
 "players" = "Spieler";
 "sessions" = "Spiele";
-
-"and" = " und ";
-"joinStringAnd" = " und ";
+"newSession" = "Neues Spiel";
+"settings" = "Einstellungen";
 
 // Buttons
-"backToMainMenu" = "Zurück zum Hauptmenü";
-"addNewPlayer" = "Spieler hinzufügen";
+"button.backToMainMenu" = "Zurück zum Hauptmenü";
+"button.addNewPlayer" = "Spieler hinzufügen";
+"button.startNewSession" = "Neues Spiel Starten";
+"button.resumeLastSession" = "Zurück zum letzten Spiel";

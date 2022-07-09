@@ -41,7 +41,7 @@ struct SettingsView: View {
           Section(footer: footer, content: { EmptyView() })
         }
       }
-      .navigationTitle(L10n.SettingsView.settings)
+      .navigationTitle(L10n.settings)
       .roundedNavigationTitle()
     }
     // Set the forms background

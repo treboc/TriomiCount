@@ -88,13 +88,3 @@ extension SessionDetailView {
     }
   }
 }
-
-extension SessionDetailView {
-  fileprivate var header: some View {
-    HeaderView(title: "Session #\(session.id)") {
-      Button(iconName: .arrowLeft) {
-        dismiss()
-      }
-    }
-  }
-}

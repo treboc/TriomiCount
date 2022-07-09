@@ -10,18 +10,12 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
-  /// Add new player
-  internal static let addNewPlayer = L10n.tr("Localizable", "addNewPlayer")
-  ///  and 
-  internal static let and = L10n.tr("Localizable", "and")
   /// Back
   internal static let back = L10n.tr("Localizable", "back")
-  /// Back to Main Menu
-  internal static let backToMainMenu = L10n.tr("Localizable", "backToMainMenu")
   /// Cancel
   internal static let cancel = L10n.tr("Localizable", "cancel")
-  /// , and 
-  internal static let joinStringAnd = L10n.tr("Localizable", "joinStringAnd")
+  /// New Session
+  internal static let newSession = L10n.tr("Localizable", "newSession")
   /// Next
   internal static let next = L10n.tr("Localizable", "next")
   /// No
@@ -38,6 +32,8 @@ internal enum L10n {
   internal static let sessionOverview = L10n.tr("Localizable", "sessionOverview")
   /// Sessions
   internal static let sessions = L10n.tr("Localizable", "sessions")
+  /// Settings
+  internal static let settings = L10n.tr("Localizable", "settings")
   /// Submit
   internal static let submit = L10n.tr("Localizable", "submit")
   /// Yes
@@ -64,6 +60,17 @@ internal enum L10n {
     }
   }
 
+  internal enum Button {
+    /// Add new player
+    internal static let addNewPlayer = L10n.tr("Localizable", "button.addNewPlayer")
+    /// Back to Main Menu
+    internal static let backToMainMenu = L10n.tr("Localizable", "button.backToMainMenu")
+    /// Resume Last Session
+    internal static let resumeLastSession = L10n.tr("Localizable", "button.resumeLastSession")
+    /// Start New Session
+    internal static let startNewSession = L10n.tr("Localizable", "button.startNewSession")
+  }
+
   internal enum EndSessionConfirmationDialogue {
     /// No one can place a tile.
     internal static let messageTie = L10n.tr("Localizable", "endSessionConfirmationDialogue.messageTie")
@@ -82,19 +89,6 @@ internal enum L10n {
     internal static let message = L10n.tr("Localizable", "exitSessionAlert.message")
     /// Are you sure?
     internal static let title = L10n.tr("Localizable", "exitSessionAlert.title")
-  }
-
-  internal enum HomeView {
-    /// New Session
-    internal static let newSession = L10n.tr("Localizable", "homeView.newSession")
-    /// Players
-    internal static let players = L10n.tr("Localizable", "homeView.players")
-    /// Resume Last Session
-    internal static let resumeLastSession = L10n.tr("Localizable", "homeView.resumeLastSession")
-    /// Sessions
-    internal static let sessions = L10n.tr("Localizable", "homeView.sessions")
-    /// Start New Session
-    internal static let startNewSession = L10n.tr("Localizable", "homeView.startNewSession")
   }
 
   internal enum PlayerDetailView {
@@ -220,14 +214,8 @@ internal enum L10n {
   }
 
   internal enum SessionOnboardingView {
-    /// Add New Player
-    internal static let addNewPlayer = L10n.tr("Localizable", "sessionOnboardingView.addNewPlayer")
-    /// Back to Main Menu
-    internal static let backToMainMenu = L10n.tr("Localizable", "sessionOnboardingView.backToMainMenu")
-    /// Please chose the players who are participating in the session.
-    internal static let participationHeaderText = L10n.tr("Localizable", "sessionOnboardingView.participationHeaderText")
-    /// Start Session
-    internal static let startSession = L10n.tr("Localizable", "sessionOnboardingView.startSession")
+    /// Please add atleast two players to start a game.
+    internal static let addTwoPlayers = L10n.tr("Localizable", "sessionOnboardingView.addTwoPlayers")
   }
 
   internal enum SessionResultsView {
@@ -303,8 +291,6 @@ internal enum L10n {
   }
 
   internal enum SettingsView {
-    /// Settings
-    internal static let settings = L10n.tr("Localizable", "settingsView.settings")
     internal enum ColorScheme {
       /// Dark
       internal static let dark = L10n.tr("Localizable", "settingsView.colorScheme.dark")
