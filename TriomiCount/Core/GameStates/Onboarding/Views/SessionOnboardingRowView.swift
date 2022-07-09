@@ -11,7 +11,7 @@ struct SessionOnboardingRowView: View {
   let name: String
   let position: Int16?
   let isChosen: Bool
-  @State var angle: Angle = Angle(degrees: 0)
+  @State private var phase = 0.0
 
   var body: some View {
     ZStack {
@@ -20,14 +20,21 @@ struct SessionOnboardingRowView: View {
         .frame(height: Constants.buttonHeight)
         .frame(maxWidth: .infinity)
         .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 3)
+        .overlay(isChosen ?
+                 RoundedRectangle(cornerRadius: Constants.cornerRadius)
+          .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [10], dashPhase: phase), antialiased: true)
+          .foregroundColor(.white)
+                 : nil
+        )
+        .onChange(of: isChosen) { _ in
+          withAnimation(.linear(duration: 5).repeatForever(autoreverses: false)) {
+            phase -= 100
+          }
+        }
 
       HStack {
         ZStack {
-          Image(systemSymbol: .circleDashed)
-            .rotationEffect(.degrees(isChosen ? 360 : 0))
-            .animation(isChosen
-                       ? .linear(duration: 5).repeatForever(autoreverses: false)
-                       : .default, value: isChosen)
+          Image(systemSymbol: .circle)
             .font(.title)
           if let position = position {
             Text("\(position)")
