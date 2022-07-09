@@ -105,7 +105,7 @@ extension AddNewPlayerView {
     @Namespace private var namespace
 
     var body: some View {
-      VStack {
+      VStack(spacing: 20) {
         ScrollView(.horizontal, showsIndicators: false) {
           HStack {
             ForEach(UIColor.FavoriteColors.colors, id: \.name) { favColor in
@@ -134,13 +134,21 @@ extension AddNewPlayerView {
             }
           }
         }
-        .frame(maxWidth: .infinity)
-        .borderedTextFieldStyle()
-        .padding(.horizontal, 20)
 
         Text(colorName)
+          .font(.system(.headline, design: .rounded))
           .animation(.none, value: colorName)
       }
+        .frame(maxWidth: .infinity)
+        .foregroundColor(.primary)
+        .padding(10)
+        .frame(maxWidth: .infinity)
+        .background(
+          RoundedRectangle(cornerRadius: Constants.cornerRadius)
+            .fill(Color.secondaryBackground)
+            .shadow(radius: 3)
+        )
+        .padding(20)
     }
   }
 }

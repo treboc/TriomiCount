@@ -23,10 +23,7 @@ struct BorderedTextField: ViewModifier {
       .background(
         RoundedRectangle(cornerRadius: Constants.cornerRadius)
           .fill(Color.secondaryBackground)
-          .overlay(
-            RoundedRectangle(cornerRadius: Constants.cornerRadius)
-              .strokeBorder(lineWidth: 2, antialiased: true)
-          )
+          .shadow(radius: 3)
       )
   }
 }
