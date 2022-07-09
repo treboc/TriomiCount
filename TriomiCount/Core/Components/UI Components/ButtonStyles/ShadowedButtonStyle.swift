@@ -40,7 +40,7 @@ struct ShadowedStyle: ButtonStyle {
       .background(isEnabled ? primaryColor : .systemGray3)
       .cornerRadius(Constants.cornerRadius)
       .font(.headline.bold())
-      .scaleEffect(configuration.isPressed ? 0.97 : 1)
+      .scaleEffect(configuration.isPressed ? 0.99 : 1)
       .shadow(radius: !isEnabled ? 0 : configuration.isPressed ? 0 : 3)
       .animation(.easeIn(duration: 0.1), value: configuration.isPressed)
   }
