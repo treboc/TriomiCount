@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct SettingsView: View {
   @AppStorage(SettingsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
@@ -45,11 +46,9 @@ struct SettingsView: View {
       .roundedNavigationTitle()
     }
     // Set the forms background
-    .introspectTableView(customize: { tableView in
-      tableView.backgroundColor = .clear
-    })
-    // accentColor will be deprecated, but .tint() does not work here!
-    .accentColor(.primaryAccentColor)
+    .introspectTableView {
+      $0.backgroundColor = .clear
+    }
   }
 }
 

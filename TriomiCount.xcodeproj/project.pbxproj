@@ -38,7 +38,6 @@
 		089CA6F9279EA4B9007E34E8 /* PlayerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089CA6F8279EA4B9007E34E8 /* PlayerListView.swift */; };
 		089CA6FD279EA624007E34E8 /* PlayerListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089CA6FC279EA624007E34E8 /* PlayerListRowView.swift */; };
 		089D478B27A1A89B000E3BA8 /* SessionOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089D478A27A1A89B000E3BA8 /* SessionOnboardingViewModel.swift */; };
-		08A0103327DFB68C000D0AEB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0103227DFB68C000D0AEB /* AppState.swift */; };
 		08A2C64127A341E70076C196 /* PlayerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A2C64027A341E70076C196 /* PlayerDetailView.swift */; };
 		08A2C64327A34BBB0076C196 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A2C64227A34BBB0076C196 /* SettingsView.swift */; };
 		08AD236127AA912600BBDB16 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AD236027AA912600BBDB16 /* HapticsManager.swift */; };
@@ -72,6 +71,7 @@
 		8A5E01142815A34800703CE5 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E01132815A34800703CE5 /* AppearanceManager.swift */; };
 		8A5E01162816929D00703CE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E01152816929D00703CE5 /* Images.xcassets */; };
 		8A5E011B2816943500703CE5 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E011A2816943500703CE5 /* AboutView.swift */; };
+		8A67A080287B854D00AB6900 /* NoHighlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A67A07F287B854D00AB6900 /* NoHighlight.swift */; };
 		8A858C8627FF6E34002385E1 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = 8A858C8527FF6E34002385E1 /* Inject */; };
 		8A9DFD192872CD4500E77DD0 /* SessionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DFD182872CD4500E77DD0 /* SessionViewModelTests.swift */; };
 		8A9DFD1B2873866600E77DD0 /* PlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DFD1A2873866600E77DD0 /* PlayerService.swift */; };
@@ -130,7 +130,6 @@
 		089CA6F8279EA4B9007E34E8 /* PlayerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerListView.swift; sourceTree = "<group>"; };
 		089CA6FC279EA624007E34E8 /* PlayerListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerListRowView.swift; sourceTree = "<group>"; };
 		089D478A27A1A89B000E3BA8 /* SessionOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionOnboardingViewModel.swift; sourceTree = "<group>"; };
-		08A0103227DFB68C000D0AEB /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		08A2C64027A341E70076C196 /* PlayerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailView.swift; sourceTree = "<group>"; };
 		08A2C64227A34BBB0076C196 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		08AD236027AA912600BBDB16 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
@@ -165,6 +164,7 @@
 		8A5E01132815A34800703CE5 /* AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
 		8A5E01152816929D00703CE5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8A5E011A2816943500703CE5 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		8A67A07F287B854D00AB6900 /* NoHighlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoHighlight.swift; sourceTree = "<group>"; };
 		8A9DFD182872CD4500E77DD0 /* SessionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewModelTests.swift; sourceTree = "<group>"; };
 		8A9DFD1A2873866600E77DD0 /* PlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerService.swift; sourceTree = "<group>"; };
 		8A9DFD1C287386CB00E77DD0 /* PlayerServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerServiceTests.swift; sourceTree = "<group>"; };
@@ -472,7 +472,6 @@
 			isa = PBXGroup;
 			children = (
 				8A5E01132815A34800703CE5 /* AppearanceManager.swift */,
-				08A0103227DFB68C000D0AEB /* AppState.swift */,
 				8A2C8CF32827A7DD005136AD /* Constants.swift */,
 				08AD236027AA912600BBDB16 /* HapticsManager.swift */,
 				08B3E2F227B9AA02009E4DD7 /* Logo.swift */,
@@ -523,6 +522,7 @@
 				8A0D1EB528645A4600B392E7 /* ShadowedButtonStyle.swift */,
 				08093A6727DD4CA90061352D /* CircularButtonStyle.swift */,
 				8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */,
+				8A67A07F287B854D00AB6900 /* NoHighlight.swift */,
 			);
 			path = ButtonStyles;
 			sourceTree = "<group>";
@@ -716,7 +716,6 @@
 				089CA6F9279EA4B9007E34E8 /* PlayerListView.swift in Sources */,
 				8AD1397B28379F1300A16EB0 /* AddNewPlayerViewModel.swift in Sources */,
 				0835129D27DC123700065228 /* SessionScore.swift in Sources */,
-				08A0103327DFB68C000D0AEB /* AppState.swift in Sources */,
 				085B664427B02D00000CCC99 /* String+Extension.swift in Sources */,
 				8AB017A127FC3A3F00FFEF46 /* OverlayAlert.swift in Sources */,
 				8AB0179D27FBABE900FFEF46 /* SessionListRowView.swift in Sources */,
@@ -732,6 +731,7 @@
 				082C540127ABE88F00AB5CD7 /* CoreDataManager.swift in Sources */,
 				0835129827DC123700065228 /* Turn.swift in Sources */,
 				8A22B9682878D5140045E09D /* BorderedTextField-ViewModifier.swift in Sources */,
+				8A67A080287B854D00AB6900 /* NoHighlight.swift in Sources */,
 				8A2C8CF42827A7DD005136AD /* Constants.swift in Sources */,
 				08BE48D8279CA0FA00EA431F /* TriomiCountApp.swift in Sources */,
 				08288175279EF8D10064C9E8 /* AddNewPlayerView.swift in Sources */,
@@ -990,7 +990,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8KAQMJ37RH;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marvinlee.TriomiCountTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1009,7 +1009,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8KAQMJ37RH;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marvinlee.TriomiCountTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

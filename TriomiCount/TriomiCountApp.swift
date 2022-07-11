@@ -12,16 +12,12 @@ import SwiftUI
 @main
 struct TriomiCountApp: App {
   @StateObject private var appearanceManager = AppearanceManager()
-
   @AppStorage("selectedAppearance") private var selectedAppearance: Int = 2
-  @StateObject private var appState = AppState()
 
   var body: some Scene {
     WindowGroup {
       HomeView()
-        .id(appState.homeViewID)
         .environment(\.managedObjectContext, CoreDataManager.shared.context)
-        .environmentObject(appState)
         .environmentObject(appearanceManager)
         .onAppear {
           UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
@@ -37,14 +33,7 @@ struct TriomiCountApp: App {
 
   func handleResignActive(_ note: Notification) {
     // when going into background, save Core Data and shutdown timer
-    CoreDataManager.shared.save(context: CoreDataManager.shared.context)
-    if CoreDataManager.shared.context.hasChanges {
-      do {
-        try CoreDataManager.shared.context.save()
-      } catch let error as NSError {
-        print("Error saving state on going to background \(error.localizedDescription)")
-      }
-    }
+    CoreDataManager.shared.save()
   }
 
   func handleBecomeActive(_ note: Notification) {
