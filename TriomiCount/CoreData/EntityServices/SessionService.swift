@@ -33,29 +33,17 @@ public class SessionService: EntityServiceBase {
   }
 
   static func getLastNotFinishedSession(in context: NSManagedObjectContext = CoreDataManager.shared.context) -> Session? {
-    let predicate = NSPredicate(format: "hasEnded = false")
-    let fetchRequest: NSFetchRequest<Session> = NSFetchRequest<Session>(entityName: Session.description())
-    fetchRequest.predicate = predicate
-    do {
-      let result = try context.fetch(fetchRequest)
-      guard let lastSession = result.last else { return nil }
-
-      // deleting all older, not finished sessions, but the last
-      for session in result {
-        if (session != lastSession) && (!session.hasEnded) {
-          EntityServiceBase.deleteObject(session, in: context)
-        }
-      }
-
-      if getHash(of: lastSession.playersArray) != lastSession.playerNamesHash {
-        EntityServiceBase.deleteObject(lastSession, in: context)
+    let result = EntityServiceBase.allObjects(Session.self, in: context)
+      .filter { !$0.hasEnded }
+      .sorted { $0.wrappedStartedOn < $1.wrappedStartedOn }
+    // deleting all older, not finished sessions, but the last
+    for session in result {
+      if session != result.last {
+        EntityServiceBase.deleteObject(session, in: context)
       } else {
-        return lastSession
+        return session
       }
-    } catch let error as NSError {
-      print("Could not find any session that has not ended. Error: \(error.localizedDescription)")
     }
     return nil
   }
-
 }
