@@ -19,7 +19,7 @@ public class SessionService: EntityServiceBase {
     session.addToPlayers(NSSet(array: players))
     session.turns = NSSet()
     session.startedOn = .now
-    session.playerNamesHash = getHash(of: session.playersArray)
+    session.playerNamesHash = Int64(session.playersArray.hashValue)
 
     return session
   }

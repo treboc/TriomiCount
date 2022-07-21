@@ -12,12 +12,13 @@ import SwiftUI
 @main
 struct TriomiCountApp: App {
   @StateObject private var appearanceManager = AppearanceManager()
+  private let context = CoreDataManager.shared.persistentContainer.viewContext
   @AppStorage("selectedAppearance") private var selectedAppearance: Int = 2
 
   var body: some Scene {
     WindowGroup {
-      HomeView()
-        .environment(\.managedObjectContext, CoreDataManager.shared.context)
+      HomeTabView()
+        .environment(\.managedObjectContext, context)
         .environmentObject(appearanceManager)
         .onAppear {
           UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")

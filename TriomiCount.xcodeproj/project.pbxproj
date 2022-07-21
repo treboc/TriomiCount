@@ -47,7 +47,7 @@
 		08BE48D8279CA0FA00EA431F /* TriomiCountApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE48D7279CA0FA00EA431F /* TriomiCountApp.swift */; };
 		08BE48DC279CA0FB00EA431F /* Icon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08BE48DB279CA0FB00EA431F /* Icon.xcassets */; };
 		08BE48DF279CA0FB00EA431F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08BE48DE279CA0FB00EA431F /* Preview Assets.xcassets */; };
-		08BE48EA279CA14900EA431F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE48E9279CA14900EA431F /* HomeView.swift */; };
+		08BE48EA279CA14900EA431F /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE48E9279CA14900EA431F /* HomeTabView.swift */; };
 		08BE48F3279CA42D00EA431F /* SessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE48F2279CA42D00EA431F /* SessionViewModel.swift */; };
 		08BE48F7279CA82E00EA431F /* SessionMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE48F6279CA82E00EA431F /* SessionMainView.swift */; };
 		08D562A427B30BA7009C72B1 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D562A327B30BA7009C72B1 /* View+Extension.swift */; };
@@ -71,8 +71,6 @@
 		8A5E01142815A34800703CE5 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E01132815A34800703CE5 /* AppearanceManager.swift */; };
 		8A5E01162816929D00703CE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E01152816929D00703CE5 /* Images.xcassets */; };
 		8A5E011B2816943500703CE5 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E011A2816943500703CE5 /* AboutView.swift */; };
-		8A67A080287B854D00AB6900 /* NoHighlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A67A07F287B854D00AB6900 /* NoHighlight.swift */; };
-		8A858C8627FF6E34002385E1 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = 8A858C8527FF6E34002385E1 /* Inject */; };
 		8A9DFD192872CD4500E77DD0 /* SessionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DFD182872CD4500E77DD0 /* SessionViewModelTests.swift */; };
 		8A9DFD1B2873866600E77DD0 /* PlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DFD1A2873866600E77DD0 /* PlayerService.swift */; };
 		8A9DFD1D287386CB00E77DD0 /* PlayerServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DFD1C287386CB00E77DD0 /* PlayerServiceTests.swift */; };
@@ -140,7 +138,7 @@
 		08BE48D7279CA0FA00EA431F /* TriomiCountApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriomiCountApp.swift; sourceTree = "<group>"; };
 		08BE48DB279CA0FB00EA431F /* Icon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icon.xcassets; sourceTree = "<group>"; };
 		08BE48DE279CA0FB00EA431F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		08BE48E9279CA14900EA431F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		08BE48E9279CA14900EA431F /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
 		08BE48F2279CA42D00EA431F /* SessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewModel.swift; sourceTree = "<group>"; };
 		08BE48F6279CA82E00EA431F /* SessionMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionMainView.swift; sourceTree = "<group>"; };
 		08D562A327B30BA7009C72B1 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 		8A5E01132815A34800703CE5 /* AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
 		8A5E01152816929D00703CE5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8A5E011A2816943500703CE5 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
-		8A67A07F287B854D00AB6900 /* NoHighlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoHighlight.swift; sourceTree = "<group>"; };
 		8A9DFD182872CD4500E77DD0 /* SessionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewModelTests.swift; sourceTree = "<group>"; };
 		8A9DFD1A2873866600E77DD0 /* PlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerService.swift; sourceTree = "<group>"; };
 		8A9DFD1C287386CB00E77DD0 /* PlayerServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerServiceTests.swift; sourceTree = "<group>"; };
@@ -187,7 +184,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A858C8627FF6E34002385E1 /* Inject in Frameworks */,
 				8A07164E282B9CAA00AC8C87 /* Introspect in Frameworks */,
 				083974E527D2C11D002B90E4 /* PageSheetCore in Frameworks */,
 				083974E327D2C11D002B90E4 /* PageSheet in Frameworks */,
@@ -404,7 +400,7 @@
 		08DEBD6027A19586005A0990 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				08BE48E9279CA14900EA431F /* HomeView.swift */,
+				08BE48E9279CA14900EA431F /* HomeTabView.swift */,
 				8A5E0117281692C900703CE5 /* Settings */,
 			);
 			path = Views;
@@ -522,7 +518,6 @@
 				8A0D1EB528645A4600B392E7 /* ShadowedButtonStyle.swift */,
 				08093A6727DD4CA90061352D /* CircularButtonStyle.swift */,
 				8A06D6822824FA160049EA9A /* RoundedCornerModifier.swift */,
-				8A67A07F287B854D00AB6900 /* NoHighlight.swift */,
 			);
 			path = ButtonStyles;
 			sourceTree = "<group>";
@@ -568,7 +563,6 @@
 				083974E427D2C11D002B90E4 /* PageSheetCore */,
 				083974E627D2C11D002B90E4 /* PageSheetPlus */,
 				08972FFF27DC197D0029C94B /* SFSafeSymbols */,
-				8A858C8527FF6E34002385E1 /* Inject */,
 				8A07164D282B9CAA00AC8C87 /* Introspect */,
 			);
 			productName = TriomiCount;
@@ -625,7 +619,6 @@
 			packageReferences = (
 				083974E127D2C11D002B90E4 /* XCRemoteSwiftPackageReference "PageSheet" */,
 				08972FFE27DC197D0029C94B /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
-				8A858C8427FF6E34002385E1 /* XCRemoteSwiftPackageReference "Inject" */,
 				8A07164C282B9CAA00AC8C87 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 08BE48D5279CA0FA00EA431F /* Products */;
@@ -708,7 +701,7 @@
 				085924C927C6DCA300364259 /* PlayerListSort.swift in Sources */,
 				08B3E2F327B9AA02009E4DD7 /* Logo.swift in Sources */,
 				08D562A427B30BA7009C72B1 /* View+Extension.swift in Sources */,
-				08BE48EA279CA14900EA431F /* HomeView.swift in Sources */,
+				08BE48EA279CA14900EA431F /* HomeTabView.swift in Sources */,
 				8A9DFD2F2876C68F00E77DD0 /* TurnService.swift in Sources */,
 				0827298227DDE74C00E48F4D /* TimesDrawnPicker.swift in Sources */,
 				8A5E01142815A34800703CE5 /* AppearanceManager.swift in Sources */,
@@ -731,7 +724,6 @@
 				082C540127ABE88F00AB5CD7 /* CoreDataManager.swift in Sources */,
 				0835129827DC123700065228 /* Turn.swift in Sources */,
 				8A22B9682878D5140045E09D /* BorderedTextField-ViewModifier.swift in Sources */,
-				8A67A080287B854D00AB6900 /* NoHighlight.swift in Sources */,
 				8A2C8CF42827A7DD005136AD /* Constants.swift in Sources */,
 				08BE48D8279CA0FA00EA431F /* TriomiCountApp.swift in Sources */,
 				08288175279EF8D10064C9E8 /* AddNewPlayerView.swift in Sources */,
@@ -1077,14 +1069,6 @@
 				minimumVersion = 0.1.4;
 			};
 		};
-		8A858C8427FF6E34002385E1 /* XCRemoteSwiftPackageReference "Inject" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/krzysztofzablocki/Inject.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1112,11 +1096,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8A07164C282B9CAA00AC8C87 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
-		};
-		8A858C8527FF6E34002385E1 /* Inject */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8A858C8427FF6E34002385E1 /* XCRemoteSwiftPackageReference "Inject" */;
-			productName = Inject;
 		};
 /* End XCSwiftPackageProductDependency section */
 

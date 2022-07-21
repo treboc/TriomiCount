@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct PlayedCardPicker: View {
+  @Namespace private var cardPicker
   @Binding var selection: Bool
   @Binding var timesDrawn: Int
   let color: UIColor
 
   var body: some View {
     HStack {
-      ButtonToPick(title: L10n.yes, selection: $selection, timesDrawn: $timesDrawn, color: color) {
+      ButtonToPick(namespace: cardPicker, title: L10n.yes, selection: $selection, timesDrawn: $timesDrawn, color: color) {
         self.selection = true
       }
 
-      ButtonToPick(title: L10n.no, selection: $selection, timesDrawn: $timesDrawn, color: color) {
+      ButtonToPick(namespace: cardPicker, title: L10n.no, selection: $selection, timesDrawn: $timesDrawn, color: color) {
         self.selection = false
       }
     }
@@ -29,6 +30,7 @@ struct PlayedCardPicker: View {
   }
 
   struct ButtonToPick: View {
+    let namespace: Namespace.ID
     let title: String
     @Binding var selection: Bool
     @Binding var timesDrawn: Int
@@ -44,33 +46,30 @@ struct PlayedCardPicker: View {
       return false
     }
 
-    var firstBackgroundColor: Color {
-      isSelected ? Color(uiColor: color) : Color.primaryAccentColor
-    }
-    var secondBackgroundColor: Color {
-      isSelected ? .secondaryAccentColor : .tertiaryAccentColor
-    }
-
     var body: some View {
-      Button(action: action) {
+      ZStack {
+        if isSelected {
+          RoundedRectangle(cornerRadius: Constants.cornerRadius, style: .circular)
+            .fill(Color.primaryAccentColor)
+            .shadow(radius: 5)
+            .matchedGeometryEffect(id: "background", in: namespace)
+        }
+
         Text(title)
-          .frame(height: Constants.buttonHeight)
-          .frame(maxWidth: .infinity)
-          .background(firstBackgroundColor)
-          .cornerRadius(Constants.cornerRadius)
-          .foregroundColor(isSelected ? color.isDarkColor ? .white : .black : .white)
+          .foregroundColor(isSelected ? .white : .primary)
           .font(.headline.bold())
-          .offset(y: (isSelected ? 0 : -4))
-          .background(
-            secondBackgroundColor
-              .opacity(0.25)
-              .frame(height: Constants.buttonHeight)
-              .cornerRadius(Constants.cornerRadius)
-              .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 0)
-          )
+      }
+      .frame(height: Constants.buttonHeight)
+      .frame(maxWidth: .infinity)
+      .onTapGesture {
+        withAnimation(.linear) {
+          action()
+        }
       }
       .disabled(timesDrawn != 3)
-      .buttonStyle(.plain)
+      .grayscale(timesDrawn != 3 ? 1 : 0)
+      .accessibilityAddTraits(.isButton)
+      .accessibilityLabel(title)
     }
   }
 }

@@ -9,56 +9,60 @@ import SwiftUI
 
 struct TimesDrawnPicker: View {
   @Binding var selection: Int
+  @Namespace private var buttonBackground
   let color: UIColor
 
   var body: some View {
     HStack {
       ForEach(0..<4, id: \.self) { number in
-        ButtonToPick(number: number, selection: $selection, color: color) {
+        ButtonToPick(namespace: buttonBackground,
+                     selection: $selection,
+                     number: number,
+                     color: color) {
           selection = number
         }
       }
     }
-    .animation(.default, value: selection)
   }
 
   struct ButtonToPick: View {
-    let number: Int
+    let namespace: Namespace.ID
     @Binding var selection: Int
+    let number: Int
     let color: UIColor
+    let action: () -> Void
 
-    var isToggled: Bool {
+    var textColor: Color {
+      isSelected ? .white : .primary
+    }
+
+    var isSelected: Bool {
       number == selection
     }
 
-    let action: () -> Void
-    var firstBackgroundColor: Color {
-      isToggled ? Color(uiColor: color) : Color.primaryAccentColor
-    }
-    var secondBackgroundColor: Color {
-      isToggled ? .secondaryAccentColor : .tertiaryAccentColor
-    }
-
     var body: some View {
-      Text("\(number)")
-        .frame(height: Constants.buttonHeight)
-        .frame(maxWidth: .infinity)
-        .background(firstBackgroundColor)
-        .cornerRadius(Constants.cornerRadius)
-        .foregroundColor(isToggled ? color.isDarkColor ? .white : .black : .white)
-        .font(.headline.bold())
-        .offset(y: isToggled ? 0 : -4)
-        .background(
-          secondBackgroundColor
-            .opacity(0.25)
-            .frame(height: Constants.buttonHeight)
-            .cornerRadius(Constants.cornerRadius)
-            .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 0)
-        )
-        .onTapGesture {
+      ZStack {
+        if isSelected {
+          RoundedRectangle(cornerRadius: Constants.cornerRadius, style: .circular)
+            .fill(Color.primaryAccentColor)
+            .shadow(radius: 5)
+            .matchedGeometryEffect(id: "background", in: namespace)
+        }
+
+        Text("\(number)")
+          .foregroundColor(textColor)
+          .font(.headline.bold())
+      }
+      .frame(height: Constants.buttonHeight)
+      .frame(maxWidth: .infinity)
+      .contentShape(Rectangle())
+      .onTapGesture {
+        withAnimation(.linear) {
           action()
         }
-        .disabled(isToggled)
+      }
+      .disabled(isSelected)
+      .animation(.none, value: textColor)
     }
   }
 }
