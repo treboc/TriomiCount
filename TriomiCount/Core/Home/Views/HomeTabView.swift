@@ -5,11 +5,10 @@
 //  Created by Marvin Lee Kobert on 22.01.22.
 //
 
-import Inject
 import SwiftUI
 import SFSafeSymbols
 
-struct HomeView: View {
+struct HomeTabView: View {
   var body: some View {
     TabView {
       SessionOnboardingView()
@@ -38,7 +37,7 @@ struct HomeView: View {
 struct MainMenuView_Previews: PreviewProvider {
   static var previews: some View {
     Group {
-      HomeView()
+      HomeTabView()
         .previewDevice("iPhone 12")
         .preferredColorScheme(.dark)
         .previewInterfaceOrientation(.portrait)
