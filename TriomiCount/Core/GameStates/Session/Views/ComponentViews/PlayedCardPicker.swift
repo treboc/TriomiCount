@@ -61,6 +61,7 @@ struct PlayedCardPicker: View {
       }
       .frame(height: Constants.buttonHeight)
       .frame(maxWidth: .infinity)
+      .contentShape(Rectangle())
       .onTapGesture {
         withAnimation(.linear) {
           action()

@@ -52,6 +52,7 @@ struct TimesDrawnPicker: View {
         Text("\(number)")
           .foregroundColor(textColor)
           .font(.headline.bold())
+          .animation(.none, value: number)
       }
       .frame(height: Constants.buttonHeight)
       .frame(maxWidth: .infinity)
@@ -62,7 +63,6 @@ struct TimesDrawnPicker: View {
         }
       }
       .disabled(isSelected)
-      .animation(.none, value: textColor)
     }
   }
 }
