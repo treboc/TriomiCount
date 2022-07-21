@@ -5,85 +5,31 @@
 //  Created by Marvin Lee Kobert on 22.01.22.
 //
 
+import Combine
+import CoreData
 import Foundation
 import SwiftUI
 
 class SessionViewModel: ObservableObject {
-  enum SessionState: Equatable {
-    case exited
-    case playing
-    case willEnd
-    case didEnd
-  }
-
-  enum BonusEvent: CaseIterable {
-    case none
-    case bridge
-    case hexagon
-    case twoHexagons
-    case threeHexagons
-
-    var description: String {
-      switch self {
-      case .none:
-        return L10n.SessionView.BonusEventPicker.none
-      case .bridge:
-        return L10n.SessionView.BonusEventPicker.bridge
-      case .hexagon:
-        return L10n.SessionView.BonusEventPicker.hexagon
-      case .twoHexagons:
-        return L10n.SessionView.BonusEventPicker.twoHexagons
-      case .threeHexagons:
-        return L10n.SessionView.BonusEventPicker.threeHexagons
-
-      }
-    }
-  }
+  private var cancellableSet = Set<AnyCancellable>()
 
   // MARK: - SessionState Playing
-  @Published var session: Session
+  var session: Session
   @Published var state: SessionState = .playing
-
-  var currentPlayerOnTurn: Player? {
-    let players = session.playersArray.count
-    let turns = session.turnsArray.count
-
-    if turns == 0 {
-      if let firstPlayer = session.playersArray.first {
-        return firstPlayer
-      }
-    } else {
-      if let player = session.playersArray[safe: turns % players] {
-        return player
-      }
-    }
-    return nil
-  }
-
+  @Published var playerOnTurn: Player!
   @AppStorage("sessionID") var sessionID: Int = 0
 
   init(lastSession: Session) {
     self.session = lastSession
+    subscribeToSession()
+    subscribeToPlayedCardPublisher()
+    subscribeToTimesDrawnPublisher()
   }
 
   // MARK: - Score Calculation
   @Published var scoreSliderValue: Float = 0
-  @Published var timesDrawn: Int = 0 {
-    didSet {
-      if timesDrawn != 3 {
-        playedCard = true
-      }
-    }
-  }
-
-  @Published var playedCard: Bool = true {
-    didSet {
-      if !playedCard {
-        bonusEvent = .none
-      }
-    }
-  }
-
+  @Published var timesDrawn: Int = 0
+  @Published var playedCard: Bool = true
   @Published var bonusEvent: BonusEvent = .none
   @Published var bonusEventPickerOverlayIsShown = false
 
@@ -122,6 +68,51 @@ class SessionViewModel: ObservableObject {
     return scoreSliderValue != 0 || timesDrawn != 0 || bonusEvent != .none
   }
 
+  private func subscribeToSession() {
+    session.publisher(for: \.turns)
+      .receive(on: RunLoop.main)
+      .sink { [weak self] turns in
+        guard let turns = turns else { return }
+        self?.setPlayerOnTurn(onTurn: turns.count)
+      }
+      .store(in: &cancellableSet)
+  }
+
+  private func subscribeToTimesDrawnPublisher() {
+    $timesDrawn
+      .map { output in
+        return output != 3
+      }
+      .sink { [weak self] value in
+        self?.playedCard = value
+      }
+      .store(in: &cancellableSet)
+  }
+
+  private func subscribeToPlayedCardPublisher() {
+    $playedCard
+      .sink { [weak self] value in
+        if value == false {
+          self?.bonusEvent = .none
+        }
+      }
+      .store(in: &cancellableSet)
+  }
+
+  private func setPlayerOnTurn(onTurn turnCount: Int) {
+    let players = session.playersArray.count
+
+    if turnCount == 0 {
+      if let firstPlayer = session.playersArray.first {
+        playerOnTurn = firstPlayer
+      }
+    } else {
+      if let player = session.playersArray[safe: turnCount % players] {
+        playerOnTurn = player
+      }
+    }
+  }
+
   func resetTurnState() {
     withAnimation {
       scoreSliderValue = 0
@@ -133,19 +124,17 @@ class SessionViewModel: ObservableObject {
   }
 
   func endTurn() {
-    guard let player = currentPlayerOnTurn else { return }
     // update the current player with the score from the currentTurnScore
-    PlayerService.updateScore(of: player, with: calculatedScore)
+    PlayerService.updateScore(of: playerOnTurn, with: calculatedScore)
 
     // append the actual turn to the turns-array to keep track of the turns,
     let turnProperties = TurnService.TurnProperties(session: session,
                                                     calculatedScore: calculatedScore,
-                                                    playerOnTurn: player,
+                                                    playerOnTurn: playerOnTurn,
                                                     scoreSliderValue: Int16(scoreSliderValue),
                                                     timesDrawn: Int16(timesDrawn),
                                                     playedCard: playedCard)
     TurnService.addTurn(with: turnProperties)
-
     resetTurnState()
   }
 
@@ -159,7 +148,7 @@ class SessionViewModel: ObservableObject {
     }
   }
 
-  func resetUIAfterUndoTurn(_ lastTurn: Turn) {
+  private func resetUIAfterUndoTurn(_ lastTurn: Turn) {
     scoreSliderValue = Float(lastTurn.scoreSliderValue)
     timesDrawn = Int(lastTurn.timesDrawn)
     playedCard = lastTurn.playedCard
@@ -180,13 +169,9 @@ class SessionViewModel: ObservableObject {
   @Published var isTie: Bool = false
 
   func sessionWillEnd() {
-    lastPlayer = currentPlayerOnTurn
-    if session.players?.count == 1 {
-      endSession()
-    }
-
+    lastPlayer = playerOnTurn
     playersWithoutLastPlayer = session.playersArray.filter {
-      $0 != currentPlayerOnTurn
+      $0 != playerOnTurn
     }
 
     if isTie {
@@ -248,11 +233,33 @@ class SessionViewModel: ObservableObject {
 }
 
 extension SessionViewModel {
-  func exitSessionButtonTapped(exitSession: () -> Void) {
-    if session.turnsArray.count > 0 {
-      showExitSessionAlert.toggle()
-    } else {
-      exitSession()
+  enum SessionState: Equatable {
+    case exited
+    case playing
+    case willEnd
+    case didEnd
+  }
+
+  enum BonusEvent: CaseIterable {
+    case none
+    case bridge
+    case hexagon
+    case twoHexagons
+    case threeHexagons
+
+    var description: String {
+      switch self {
+      case .none:
+        return L10n.SessionView.BonusEventPicker.none
+      case .bridge:
+        return L10n.SessionView.BonusEventPicker.bridge
+      case .hexagon:
+        return L10n.SessionView.BonusEventPicker.hexagon
+      case .twoHexagons:
+        return L10n.SessionView.BonusEventPicker.twoHexagons
+      case .threeHexagons:
+        return L10n.SessionView.BonusEventPicker.threeHexagons
+      }
     }
   }
 }

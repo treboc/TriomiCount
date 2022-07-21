@@ -5,6 +5,7 @@
 //  Created by Marvin Lee Kobert on 08.07.22.
 //
 
+import Introspect
 import SwiftUI
 
 extension View {

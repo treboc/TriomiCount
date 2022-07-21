@@ -9,9 +9,8 @@ import SwiftUI
 import SFSafeSymbols
 
 struct SessionMainView: View {
-  @StateObject var viewModel: SessionViewModel
   let session: Session
-  @EnvironmentObject var appState: AppState
+  @StateObject var viewModel: SessionViewModel
 
   // MARK: Body
   var body: some View {
@@ -21,22 +20,22 @@ struct SessionMainView: View {
 
       switch viewModel.state {
       case .playing:
-        SessionView(viewModel: viewModel)
+        SessionView()
       case .willEnd:
         ZStack {
-          SessionView(viewModel: viewModel)
+          SessionView()
             .blur(radius: 10)
             .allowsHitTesting(false)
           PointsSubmitView()
-            .environmentObject(viewModel)
         }
       case .didEnd:
         SessionResultsView()
-          .environmentObject(viewModel)
       case .exited:
-        Text("Game was exited.")
+        Text("Exited")
+          .onAppear { print("exited") }
       }
     }
+    .environmentObject(viewModel)
     .navigationBarHidden(true)
   }
 
@@ -44,4 +43,5 @@ struct SessionMainView: View {
     self.session = session
     _viewModel = StateObject.init(wrappedValue: SessionViewModel(lastSession: session))
   }
+
 }

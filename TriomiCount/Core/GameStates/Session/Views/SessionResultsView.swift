@@ -10,7 +10,6 @@ import SwiftUI
 struct SessionResultsView: View {
   @EnvironmentObject var viewModel: SessionViewModel
   @Environment(\.dismiss) var dismiss
-  @EnvironmentObject var appState: AppState
 
   var body: some View {
     ZStack {

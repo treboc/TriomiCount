@@ -5,12 +5,11 @@
 //  Created by Marvin Lee Kobert on 19.03.22.
 //
 
-import Inject
 import SwiftUI
 
 struct SessionView: View {
-  @ObservedObject var viewModel: SessionViewModel
-  @EnvironmentObject var appState: AppState
+  @EnvironmentObject var viewModel: SessionViewModel
+  @Environment(\.dismiss) var dismiss
   @AppStorage(SettingsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
 
   @State private var sessionOverviewIsShown: Bool = false
@@ -37,26 +36,16 @@ struct SessionView: View {
       }
 
       if menuIsShown {
-        MenuOverlay(viewModel: viewModel,
-                    menuIsShown: $menuIsShown,
-                    exitSession: appState.exitSession,
+        MenuOverlay(menuIsShown: $menuIsShown,
                     toggleScaleAnimation: toggleScaleAnimation)
         .zIndex(1)
       }
     }
     .scaleEffect(scale)
-    .alert(L10n.ExitSessionAlert.title, isPresented: $viewModel.showExitSessionAlert) {
-      Button(L10n.cancel, role: .cancel) {}
-      Button(action: { appState.exitSession() },
-             label: { Text(L10n.ExitSessionAlert.buttonTitle) }
-      )
-    } message: {
-      Text(L10n.ExitSessionAlert.message)
-    }
     .confirmationDialog(L10n.EndSessionConfirmationDialogue.title, isPresented: $viewModel.showEndSessionAlert, titleVisibility: .visible) {
-      Button(action: { viewModel.sessionWillEnd() },
-             label: { Text(L10n.EndSessionConfirmationDialogue.messageWinner(viewModel.currentPlayerOnTurn?.wrappedName ?? "Unknown")) }
-      )
+      Button(action: viewModel.sessionWillEnd) {
+        Text(L10n.EndSessionConfirmationDialogue.messageWinner(viewModel.playerOnTurn?.wrappedName ?? "Unknown"))
+      }
       Button(L10n.EndSessionConfirmationDialogue.messageTie) {
         viewModel.isTie = true
         viewModel.sessionWillEnd()
@@ -77,7 +66,7 @@ extension SessionView {
   // MARK: - Header
   private var header: some View {
     VStack(alignment: .center, spacing: 10) {
-      Text(viewModel.currentPlayerOnTurn?.wrappedName ?? "Unknown")
+      Text(viewModel.playerOnTurn?.wrappedName ?? "Unknown")
         .font(.title)
         .bold()
 
@@ -86,7 +75,7 @@ extension SessionView {
           Text(L10n.SessionView.HeaderLabel.totalScore)
             .font(.headline)
             .fontWeight(.semibold)
-          Text("\(viewModel.currentPlayerOnTurn?.currentScore ?? 0)")
+          Text("\(viewModel.playerOnTurn?.currentScore ?? 0)")
             .font(.subheadline)
         }
         .lineLimit(1)
@@ -104,8 +93,8 @@ extension SessionView {
         .lineLimit(1)
       }
     }
-    .glassStyled(withColor: viewModel.currentPlayerOnTurn?.wrappedFavoriteColor ?? .orange)
-    .animation(.none, value: viewModel.currentPlayerOnTurn)
+    .glassStyled(withColor: viewModel.playerOnTurn?.wrappedFavoriteColor ?? .orange)
+    .animation(.none, value: viewModel.playerOnTurn)
     .overlay(sessionInfoButton.padding(.trailing), alignment: .topTrailing)
   }
 
@@ -126,7 +115,7 @@ extension SessionView {
         .frame(maxWidth: .infinity)
         .transition(.move(edge: .leading))
         .overlay(viewModel.turnHasChanges
-          ? resetButton
+                 ? resetButton
           .scaleEffect(0.8)
           .transition(.opacity)
           .offset(y: -30) : nil, alignment: .topTrailing )
@@ -174,7 +163,7 @@ extension SessionView {
     VStack(alignment: .leading) {
       Text(L10n.SessionView.TimesDrawnPicker.labelText)
         .font(.headline)
-      TimesDrawnPicker(selection: $viewModel.timesDrawn, color: viewModel.currentPlayerOnTurn?.wrappedFavoriteColor ?? .orange)
+      TimesDrawnPicker(selection: $viewModel.timesDrawn, color: viewModel.playerOnTurn?.wrappedFavoriteColor ?? .orange)
         .padding(.horizontal)
     }
   }
@@ -183,7 +172,7 @@ extension SessionView {
     VStack(alignment: .leading) {
       Text(L10n.SessionView.PlayedCardPicker.labelText)
         .font(.headline)
-      PlayedCardPicker(selection: $viewModel.playedCard, timesDrawn: $viewModel.timesDrawn, color: viewModel.currentPlayerOnTurn?.wrappedFavoriteColor ?? .orange)
+      PlayedCardPicker(selection: $viewModel.playedCard, timesDrawn: $viewModel.timesDrawn, color: viewModel.playerOnTurn?.wrappedFavoriteColor ?? .orange)
         .padding(.horizontal)
     }
   }
@@ -196,8 +185,9 @@ extension SessionView {
         bonusEvent: $viewModel.bonusEvent,
         bonusEventPickerOverlayIsShown: $viewModel.bonusEventPickerOverlayIsShown
       )
-      .disabled(!viewModel.playedCard)
       .padding(.horizontal)
+      .allowsHitTesting(viewModel.playedCard)
+      .grayscale(!viewModel.playedCard ? 1 : 0)
     }
   }
 
@@ -240,14 +230,14 @@ extension SessionView {
   private var sessionInfoButton: some View {
     Image(systemSymbol: .infoCircle)
       .font(.title2)
-      .foregroundColor(viewModel.currentPlayerOnTurn?.wrappedFavoriteColor.isDarkColor ?? false ? .white : .black)
+      .foregroundColor(viewModel.playerOnTurn?.wrappedFavoriteColor.isDarkColor ?? false ? .white : .black)
       .onTapGesture {
         withAnimation {
           sessionOverviewIsShown.toggle()
         }
       }
       .padding([.top, .trailing])
-      .animation(.none, value: viewModel.currentPlayerOnTurn)
+      .animation(.none, value: viewModel.playerOnTurn)
   }
 
   struct SessionOverview: View {

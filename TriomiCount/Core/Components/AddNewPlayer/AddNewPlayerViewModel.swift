@@ -10,13 +10,6 @@ import Foundation
 import UIKit
 
 final class AddNewPlayerViewModel: ObservableObject {
-  var viewDismissalPublisher = PassthroughSubject<Bool, Never>()
-  private var shouldDismiss: Bool = false {
-    didSet {
-      viewDismissalPublisher.send(shouldDismiss)
-    }
-  }
-
   @Published var textFieldIsFocused: Bool = false
   var alertMessage: String {
     if nameTextFieldText.isEmpty {
@@ -34,29 +27,31 @@ final class AddNewPlayerViewModel: ObservableObject {
 
   fileprivate var cancellables = Set<AnyCancellable>()
 
-  func subscribeToTextfieldText() {
-    if cancellables.isEmpty {
-      $nameTextFieldText
-        .map { (text) -> Bool in
-          if text.isValidName {
-            return true
-          }
-          return false
-        }
-        .sink { [weak self] isValid in
-          self?.nameIsValid = isValid
-        }
-        .store(in: &cancellables)
-    }
+  init() {
+    subscribeToTextfieldText()
   }
 
-  func createPlayer() {
+  func subscribeToTextfieldText() {
+    $nameTextFieldText
+      .map { (text) -> Bool in
+        if text.isValidName {
+          return true
+        }
+        return false
+      }
+      .sink { [weak self] isValid in
+        self?.nameIsValid = isValid
+      }
+      .store(in: &cancellables)
+  }
+
+  func createPlayer(_ completion: () -> Void) {
     let name = nameTextFieldText.trimmingCharacters(in: .whitespacesAndNewlines)
     guard name.isValidName else {
       nameIsValid = false
       return
     }
     PlayerService.addNewPlayer(name, favoriteColor: favoriteColor)
-    shouldDismiss = true
+    completion()
   }
 }

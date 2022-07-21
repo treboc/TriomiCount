@@ -11,8 +11,8 @@ import PageSheetCore
 struct SessionOnboardingView: View {
   @StateObject var viewModel = SessionOnboardingViewModel()
   @State private var newPlayerSheetIsShown: Bool = false
-
   @State private var selectedSort: PlayerListSort = .default
+
   @FetchRequest(sortDescriptors: PlayerListSort.default.descriptors, animation: .spring())
   var players: FetchedResults<Player>
 
@@ -37,7 +37,6 @@ struct SessionOnboardingView: View {
       .onDisappear {
         viewModel.resetState(of: players)
       }
-      .onChange(of: players.count) { _ in viewModel.checkForUnfinishedSession() }
       .pageSheet(isPresented: $newPlayerSheetIsShown, content: AddNewPlayerView.init)
     }
     .tint(.primaryAccentColor)
@@ -72,16 +71,6 @@ extension SessionOnboardingView {
     }
   }
 
-  var buttonIsDisabled: Bool {
-    if viewModel.session != nil && viewModel.chosenPlayers.count < 2 {
-      return false
-    } else if viewModel.chosenPlayers.count > 1 {
-      return false
-    } else {
-      return true
-    }
-  }
-
   @ViewBuilder
   private var resumeLastSessionButton: some View {
     Button(action: viewModel.startSession) {
@@ -93,7 +82,7 @@ extension SessionOnboardingView {
     }
     .buttonStyle(.shadowed)
     .padding(.horizontal)
-    .disabled(buttonIsDisabled)
+    .disabled(viewModel.startSessionButtonIsDisabled)
   }
 
   @ToolbarContentBuilder

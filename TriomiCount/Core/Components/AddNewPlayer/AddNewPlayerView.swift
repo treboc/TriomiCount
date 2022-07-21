@@ -12,7 +12,7 @@ import SwiftUI
 import SFSafeSymbols
 
 struct AddNewPlayerView: View {
-  @Environment(\.presentationMode) var presentationMode
+  @Environment(\.dismiss) var dismiss
   @StateObject private var viewModel = AddNewPlayerViewModel()
 
   var body: some View {
@@ -27,11 +27,6 @@ struct AddNewPlayerView: View {
         createPlayerButton
       }
       .padding(.horizontal)
-    }
-    .onReceive(viewModel.viewDismissalPublisher) { shouldDismiss in
-      if shouldDismiss {
-        presentationMode.wrappedValue.dismiss()
-      }
     }
     .sheetPreference(.detents([PageSheet.Detent.medium()]))
     .sheetPreference(.cornerRadius(Constants.cornerRadius))
@@ -66,10 +61,11 @@ extension AddNewPlayerView {
       .disableAutocorrection(true)
       .keyboardType(.alphabet)
       .submitLabel(.done)
-      .onSubmit(viewModel.createPlayer)
+      .onSubmit {
+        viewModel.createPlayer(dismiss.callAsFunction)
+      }
       .overlayedAlert(with: viewModel.alertMessage, bool: viewModel.nameIsValid)
       .introspectTextField { $0.becomeFirstResponder() }
-      .onChange(of: viewModel.nameTextFieldText) { _ in viewModel.subscribeToTextfieldText() }
       .overlay(viewModel.nameTextFieldText.isEmpty
                ? nil
                : deleteButton.transition(.opacity), alignment: .trailing)
@@ -77,7 +73,9 @@ extension AddNewPlayerView {
   }
 
   private var createPlayerButton: some View {
-    Button(action: viewModel.createPlayer) {
+    Button {
+      viewModel.createPlayer(dismiss.callAsFunction)
+    } label: {
       Text(L10n.AddNewPlayerView.CreateButton.labelText)
         .frame(maxWidth: .infinity)
     }
@@ -121,16 +119,17 @@ extension AddNewPlayerView {
                     colorName = favColor.name
                   }
                 }
+                .padding(.vertical, 10)
+                .padding(.horizontal, 3)
                 .overlay(
                   favColor.color == favoriteColor
-                ? Image(systemSymbol: .checkmark)
+                  ? Image(systemSymbol: .checkmark)
                     .matchedGeometryEffect(id: "checkmark", in: namespace)
-                  .foregroundColor(favColor.color.isDarkColor ? .white : .black)
-                  .font(.headline)
-                  .animation(.none, value: favoriteColor)
-                : nil
+                    .foregroundColor(favColor.color.isDarkColor ? .white : .black)
+                    .font(.headline)
+                    .animation(.none, value: favoriteColor)
+                  : nil
                 )
-                .padding(5)
             }
           }
         }
@@ -139,16 +138,16 @@ extension AddNewPlayerView {
           .font(.system(.headline, design: .rounded))
           .animation(.none, value: colorName)
       }
-        .frame(maxWidth: .infinity)
-        .foregroundColor(.primary)
-        .padding(10)
-        .frame(maxWidth: .infinity)
-        .background(
-          RoundedRectangle(cornerRadius: Constants.cornerRadius)
-            .fill(Color.secondaryBackground)
-            .shadow(radius: 3)
-        )
-        .padding(20)
+      .frame(maxWidth: .infinity)
+      .foregroundColor(.primary)
+      .padding(10)
+      .frame(maxWidth: .infinity)
+      .background(
+        RoundedRectangle(cornerRadius: Constants.cornerRadius)
+          .fill(Color.secondaryBackground)
+          .shadow(radius: 3)
+      )
+      .padding(20)
     }
   }
 }
