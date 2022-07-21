@@ -45,11 +45,9 @@ class EntityServiceBaseTests: XCTestCase {
   }
 
   func test_deleteObject() {
-    let player = Player(name: "Dummy", context: coreDataManager.context)
-
-    EntityServiceBase.deleteObject(player, in: coreDataManager.context)
-
-    let objects = EntityServiceBase.allObjects(Player.self, in: coreDataManager.context)
+    let player = Player(name: "Dummy", context: coreDataManager.persistentContainer.viewContext)
+    EntityServiceBase.deleteObject(player, in: coreDataManager.persistentContainer.viewContext)
+    let objects = EntityServiceBase.allObjects(Player.self, in: coreDataManager.persistentContainer.viewContext)
 
     XCTAssertEqual(0, objects.count)
   }

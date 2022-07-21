@@ -65,8 +65,10 @@ class SessionOnboardingViewModelTests: XCTestCase {
 
   func test_choose_callTwice_shouldResetPlayersPositionTo0() {
     PlayerService.addNewPlayer("Dummy", in: coreDataManager.context)
-    let player = PlayerService.allObjects(Player.self, in: coreDataManager.context).first!
-
+    guard let player = PlayerService.allObjects(Player.self, in: coreDataManager.context).first else {
+      XCTFail("Could not fetch player object.")
+      return
+    }
     sut.choose(player)
     sut.choose(player)
 
@@ -74,9 +76,12 @@ class SessionOnboardingViewModelTests: XCTestCase {
     XCTAssertEqual(expected, player.position)
   }
 
-  func test_choose_callTwice_shouldRemovePlayerFromChosenPlayers() {
+  func test_choose_calledTwice_shouldRemovePlayerFromChosenPlayers() {
     PlayerService.addNewPlayer("Dummy", in: coreDataManager.context)
-    let player = PlayerService.allObjects(Player.self, in: coreDataManager.context).first!
+    guard let player = PlayerService.allObjects(Player.self, in: coreDataManager.context).first else {
+      XCTFail("Could not fetch player object.")
+      return
+    }
 
     sut.choose(player)
     sut.choose(player)
