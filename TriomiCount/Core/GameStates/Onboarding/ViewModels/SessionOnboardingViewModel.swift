@@ -14,6 +14,16 @@ class SessionOnboardingViewModel: ObservableObject {
 
   @Published var sessionIsShown: Bool = false
 
+  var startSessionButtonIsDisabled: Bool {
+    if session != nil && chosenPlayers.count < 2 {
+      return false
+    } else if chosenPlayers.count > 1 {
+      return false
+    } else {
+      return true
+    }
+  }
+
   func choose(_ player: Player) {
     PlayerService.toggleChosenState(player)
     if player.isChosen {
