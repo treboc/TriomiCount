@@ -22,7 +22,7 @@ struct SettingsView: View {
 
         Form {
           Section(L10n.SettingsView.ColorScheme.title) {
-            ColorSchemePicker()
+            AppearancePicker()
           }
 
           Section {
@@ -73,58 +73,5 @@ extension SettingsView {
   private var footer: some View {
     AboutView()
       .frame(maxWidth: .infinity, alignment: .center)
-  }
-}
-
-extension SettingsView {
-  struct ColorSchemePicker: View {
-    @EnvironmentObject var appearanceManager: AppearanceManager
-
-    var pickerTitle: String {
-      switch appearanceManager.appearance {
-      case .dark:
-        return L10n.SettingsView.ColorScheme.dark
-      case .light:
-        return L10n.SettingsView.ColorScheme.light
-      case .system:
-        return L10n.SettingsView.ColorScheme.system
-      }
-    }
-
-    var body: some View {
-      Picker("Choose Appearance", selection: $appearanceManager.appearance) {
-        HStack {
-          Text(L10n.SettingsView.ColorScheme.system)
-          Spacer()
-          if appearanceManager.appearance == .system {
-            Image(systemName: "checkmark")
-          }
-        }
-        .contentShape(Rectangle())
-        .onTapGesture { appearanceManager.appearance = .system }
-
-        HStack {
-          Text(L10n.SettingsView.ColorScheme.light)
-          Spacer()
-          if appearanceManager.appearance == .light {
-            Image(systemName: "checkmark")
-          }
-        }
-        .contentShape(Rectangle())
-        .onTapGesture { appearanceManager.appearance = .light }
-
-        HStack {
-          Text(L10n.SettingsView.ColorScheme.dark)
-          Spacer()
-          if appearanceManager.appearance == .dark {
-            Image(systemName: "checkmark")
-          }
-        }
-        .contentShape(Rectangle())
-        .onTapGesture { appearanceManager.appearance = .dark }
-      }
-      .pickerStyle(.inline)
-      .labelsHidden()
-    }
   }
 }

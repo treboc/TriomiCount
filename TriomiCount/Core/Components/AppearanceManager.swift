@@ -17,7 +17,7 @@ class AppearanceManager: ObservableObject {
     }
   }
 
-  enum Appearance: String {
+  enum Appearance: String, CaseIterable {
     case light
     case dark
     case system
