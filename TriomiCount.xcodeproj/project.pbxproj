@@ -81,7 +81,7 @@
 		8A9DFD2F2876C68F00E77DD0 /* TurnService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DFD2E2876C68F00E77DD0 /* TurnService.swift */; };
 		8AB0179D27FBABE900FFEF46 /* SessionListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0179C27FBABE900FFEF46 /* SessionListRowView.swift */; };
 		8AB0179F27FC1F5B00FFEF46 /* BonusEventPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0179E27FC1F5B00FFEF46 /* BonusEventPicker.swift */; };
-		8AB017A127FC3A3F00FFEF46 /* OverlayAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB017A027FC3A3F00FFEF46 /* OverlayAlert.swift */; };
+		8AB017A127FC3A3F00FFEF46 /* OverlayAlert-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB017A027FC3A3F00FFEF46 /* OverlayAlert-ViewModifier.swift */; };
 		8AC4D137282DB81900C227F6 /* Button+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4D136282DB81900C227F6 /* Button+Extension.swift */; };
 		8ACA06E627F593B6000F6D4C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ACA06E527F593B6000F6D4C /* Launch Screen.storyboard */; };
 		8ACA06E827F596A0000F6D4C /* SessionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACA06E727F596A0000F6D4C /* SessionDetailView.swift */; };
@@ -173,7 +173,7 @@
 		8A9DFD2E2876C68F00E77DD0 /* TurnService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnService.swift; sourceTree = "<group>"; };
 		8AB0179C27FBABE900FFEF46 /* SessionListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListRowView.swift; sourceTree = "<group>"; };
 		8AB0179E27FC1F5B00FFEF46 /* BonusEventPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusEventPicker.swift; sourceTree = "<group>"; };
-		8AB017A027FC3A3F00FFEF46 /* OverlayAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayAlert.swift; sourceTree = "<group>"; };
+		8AB017A027FC3A3F00FFEF46 /* OverlayAlert-ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OverlayAlert-ViewModifier.swift"; sourceTree = "<group>"; };
 		8AC4D136282DB81900C227F6 /* Button+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Extension.swift"; sourceTree = "<group>"; };
 		8ACA06E527F593B6000F6D4C /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		8ACA06E727F596A0000F6D4C /* SessionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailView.swift; sourceTree = "<group>"; };
@@ -239,13 +239,9 @@
 		083512A027DC13E500065228 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
-				8A5D847128286B8C00286F14 /* GlassStyledHeaderView-ViewModifier.swift */,
-				8A22B9652878D4FB0045E09D /* RoundedNavigationTitle-ViewModifier.swift */,
-				8A22B9672878D5140045E09D /* BorderedTextField-ViewModifier.swift */,
-				8A06D6822824FA160049EA9A /* RoundedCorner-ViewModifier.swift */,
-				8AB017A027FC3A3F00FFEF46 /* OverlayAlert.swift */,
-				8A858C8327FF5C20002385E1 /* ButtonStyles */,
 				8A0D1EB028619A0500B392E7 /* AddPlayerToolbarButton.swift */,
+				8A5D706C288A051300B5671B /* ViewModifier */,
+				8A858C8327FF5C20002385E1 /* ButtonStyles */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -504,6 +500,18 @@
 			path = TriomiCountTests;
 			sourceTree = "<group>";
 		};
+		8A5D706C288A051300B5671B /* ViewModifier */ = {
+			isa = PBXGroup;
+			children = (
+				8A5D847128286B8C00286F14 /* GlassStyledHeaderView-ViewModifier.swift */,
+				8A22B9652878D4FB0045E09D /* RoundedNavigationTitle-ViewModifier.swift */,
+				8A22B9672878D5140045E09D /* BorderedTextField-ViewModifier.swift */,
+				8A06D6822824FA160049EA9A /* RoundedCorner-ViewModifier.swift */,
+				8AB017A027FC3A3F00FFEF46 /* OverlayAlert-ViewModifier.swift */,
+			);
+			path = ViewModifier;
+			sourceTree = "<group>";
+		};
 		8A5E0117281692C900703CE5 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -713,7 +721,7 @@
 				8AD1397B28379F1300A16EB0 /* AddNewPlayerViewModel.swift in Sources */,
 				0835129D27DC123700065228 /* SessionScore.swift in Sources */,
 				085B664427B02D00000CCC99 /* String+Extension.swift in Sources */,
-				8AB017A127FC3A3F00FFEF46 /* OverlayAlert.swift in Sources */,
+				8AB017A127FC3A3F00FFEF46 /* OverlayAlert-ViewModifier.swift in Sources */,
 				8AB0179D27FBABE900FFEF46 /* SessionListRowView.swift in Sources */,
 				8ACA06EA27F5A550000F6D4C /* Rules.swift in Sources */,
 				8A5E011228154B3200703CE5 /* SettingsKeys.swift in Sources */,
