@@ -5,8 +5,6 @@
 //  Created by Marvin Lee Kobert on 22.01.22.
 //
 
-// @ObservedObject private var iO = Inject.observer
-
 import SwiftUI
 
 @main
