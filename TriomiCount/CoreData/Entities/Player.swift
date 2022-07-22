@@ -28,14 +28,6 @@ public class Player: NSManagedObject {
 
   var isChosen: Bool = false
 
-  convenience init(name: String, position: Int16, context: NSManagedObjectContext) {
-    self.init(context: context)
-    self.id = UUID()
-    self.position = position
-    self.createdOn = Date()
-    self.name = name
-  }
-
   convenience init(name: String, context: NSManagedObjectContext) {
     self.init(context: context)
     self.id = UUID()
