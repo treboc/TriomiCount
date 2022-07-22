@@ -218,10 +218,9 @@ extension SessionView {
   }
 
   private var resetButton: some View {
-    Button {
-      viewModel.resetTurnState()
-    } label: {
+    Button(action: viewModel.resetTurnState) {
       Image(systemSymbol: .arrowCounterclockwise)
+        .font(.title2.weight(.semibold))
     }
     .buttonStyle(.circular)
     .padding(5)
