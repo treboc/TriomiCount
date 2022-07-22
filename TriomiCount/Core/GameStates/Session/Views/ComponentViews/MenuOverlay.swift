@@ -5,6 +5,7 @@
 //  Created by Marvin Lee Kobert on 16.05.22.
 //
 
+import SFSafeSymbols
 import SwiftUI
 
 extension SessionView {
@@ -29,14 +30,28 @@ extension SessionView {
 
         ZStack(alignment: .bottomTrailing) {
           if !viewModel.session.turnsArray.isEmpty {
-            endSessionButton
-            undoButton
+            // End Session
+            button(symbol: .stopFill, title: L10n.SessionView.EndSessionButton.labelText) {
+              viewModel.showEndSessionAlert.toggle()
+              HapticManager.shared.notification(type: .success)
+            }
+            .offset(isAnimated ? CGSize(width: 0, height: -(Constants.buttonHeight + 10) * 2) : .zero)
+
+            // Undo Last Turn
+            button(symbol: .arrowCounterclockwise, title: L10n.SessionView.UndoButton.labelText) {
+              viewModel.undoLastTurn()
+              menuIsShown = false
+            }
+            .offset(isAnimated ? CGSize(width: 0, height: -(Constants.buttonHeight + 10))  : .zero)
           }
-          exitSessionButton
+
+          // Exit Session
+          button(symbol: .houseFill, title: L10n.SessionView.ExitSessionButton.labelText, action: dismiss.callAsFunction)
+
+          // Close Menu
           closeMenuButton
         }
-        .padding(.trailing)
-        .padding(.bottom)
+        .padding([.trailing, .bottom])
       }
       .onAppear {
         withAnimation {
@@ -45,50 +60,14 @@ extension SessionView {
       }
     }
 
-    private var endSessionButton: some View {
+    private func button(symbol: SFSymbol, title: String? = nil, action: @escaping () -> Void) -> some View {
       HStack {
-        Text(L10n.SessionView.EndSessionButton.labelText)
-
-        Button(iconName: .stopFill) {
-          viewModel.showEndSessionAlert.toggle()
-          HapticManager.shared.notification(type: .success)
+        if let title = title {
+          Text(title)
         }
-        .buttonStyle(.circular)
-        .disabled(viewModel.session.turns?.count == 0)
-      }
-      .padding(.leading)
-      .background(Capsule().fill(.thinMaterial))
-      .animation(.spring(), value: isAnimated)
-      .offset(isAnimated ? CGSize(width: 0, height: -(Constants.buttonHeight + 10) * 3) : .zero)
-    }
 
-    private var undoButton: some View {
-      HStack {
-        Text(L10n.SessionView.UndoButton.labelText)
-
-        Button(iconName: .arrowCounterclockwise) {
-          withAnimation {
-            viewModel.undoLastTurn()
-            menuIsShown = false
-          }
-          HapticManager.shared.impact(style: .rigid)
-          toggleScaleAnimation()
-        }
-        .buttonStyle(.circular)
-        .disabled(viewModel.session.turns?.count == 0)
-      }
-      .padding(.leading)
-      .background(Capsule().fill(.thinMaterial))
-      .animation(.spring(), value: isAnimated)
-      .offset(isAnimated ? CGSize(width: 0, height: -(Constants.buttonHeight + 10) * 2) : .zero)
-    }
-
-    private var exitSessionButton: some View {
-      HStack {
-        Text(L10n.SessionView.ExitSessionButton.labelText)
-
-        Button(iconName: .houseFill) {
-          dismiss()
+        Button(iconName: symbol) {
+          action()
         }
         .buttonStyle(.circular)
       }
