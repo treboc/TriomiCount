@@ -10,15 +10,16 @@ import CoreData
 public class SessionService: EntityServiceBase {
   static func addSession(with players: [Player], in context: NSManagedObjectContext = CoreDataManager.shared.context) -> Session {
     let session = Session(context: context)
+    session.id = UUID()
+    session.startedOn = Date()
+    session.turns = NSSet()
 
-    for player in players {
-      player.currentScore = 0
-      player.isChosen = false
+    players.forEach {
+      $0.currentScore = 0
+      $0.isChosen = false
     }
 
     session.addToPlayers(NSSet(array: players))
-    session.turns = NSSet()
-    session.startedOn = .now
     session.playerNamesHash = Int64(session.playersArray.hashValue)
 
     return session

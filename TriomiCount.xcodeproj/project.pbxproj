@@ -72,6 +72,7 @@
 		8A5E01142815A34800703CE5 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E01132815A34800703CE5 /* AppearanceManager.swift */; };
 		8A5E01162816929D00703CE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E01152816929D00703CE5 /* Images.xcassets */; };
 		8A5E011B2816943500703CE5 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E011A2816943500703CE5 /* AboutView.swift */; };
+		8A768C91288BEF6B005582BF /* SessionScoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A768C90288BEF6B005582BF /* SessionScoreService.swift */; };
 		8A9DFD192872CD4500E77DD0 /* SessionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DFD182872CD4500E77DD0 /* SessionViewModelTests.swift */; };
 		8A9DFD1B2873866600E77DD0 /* PlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DFD1A2873866600E77DD0 /* PlayerService.swift */; };
 		8A9DFD1D287386CB00E77DD0 /* PlayerServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DFD1C287386CB00E77DD0 /* PlayerServiceTests.swift */; };
@@ -164,6 +165,7 @@
 		8A5E01132815A34800703CE5 /* AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
 		8A5E01152816929D00703CE5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8A5E011A2816943500703CE5 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		8A768C90288BEF6B005582BF /* SessionScoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionScoreService.swift; sourceTree = "<group>"; };
 		8A9DFD182872CD4500E77DD0 /* SessionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewModelTests.swift; sourceTree = "<group>"; };
 		8A9DFD1A2873866600E77DD0 /* PlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerService.swift; sourceTree = "<group>"; };
 		8A9DFD1C287386CB00E77DD0 /* PlayerServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerServiceTests.swift; sourceTree = "<group>"; };
@@ -537,6 +539,7 @@
 			isa = PBXGroup;
 			children = (
 				8A9DFD1A2873866600E77DD0 /* PlayerService.swift */,
+				8A768C90288BEF6B005582BF /* SessionScoreService.swift */,
 				8A9DFD2C2876B69600E77DD0 /* SessionService.swift */,
 				8A9DFD2E2876C68F00E77DD0 /* TurnService.swift */,
 			);
@@ -754,6 +757,7 @@
 				083974DB27D294F7002B90E4 /* SessionsListView.swift in Sources */,
 				8AB0179F27FC1F5B00FFEF46 /* BonusEventPicker.swift in Sources */,
 				08BBB1F627A08F98001CD3DF /* SessionOnboardingView.swift in Sources */,
+				8A768C91288BEF6B005582BF /* SessionScoreService.swift in Sources */,
 				085924CF27C7685400364259 /* PlayerListSortView.swift in Sources */,
 				8A3525A8287202DF00393BCD /* Background.swift in Sources */,
 			);

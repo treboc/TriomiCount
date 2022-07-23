@@ -23,8 +23,8 @@ public class Player: NSManagedObject {
   @NSManaged public var sessionsPlayed: Int16
   @NSManaged public var sessionsWon: Int16
   @NSManaged public var playerInTurn: Turn?
-  @NSManaged public var sessionScores: [String]?
   @NSManaged public var favoriteColor: UIColor?
+  @NSManaged public var sessionScores: NSSet?
 
   var isChosen: Bool = false
 
@@ -33,6 +33,12 @@ public class Player: NSManagedObject {
     self.id = UUID()
     self.createdOn = Date()
     self.name = name
+  }
+
+  public var gameScoreDictsArray: [SessionScore] {
+    let gameScoreDictsSet = sessionScores as? Set<SessionScore> ?? []
+
+    return Array.init(gameScoreDictsSet)
   }
 }
 
@@ -63,11 +69,6 @@ extension Player {
     set { createdOn = newValue }
   }
 
-  public var wrappedSessionScores: [String] {
-    get { sessionScores ?? [] }
-    set { sessionScores = newValue }
-  }
-
   public var wrappedFavoriteColor: UIColor {
     get { favoriteColor ?? .blue }
     set { favoriteColor = newValue }
@@ -75,3 +76,20 @@ extension Player {
 }
 
 extension Player: Identifiable {}
+
+// MARK: Generated accessors for sessionScores
+extension Player {
+
+  @objc(addSessionScoresObject:)
+  @NSManaged public func addToSessionScores(_ value: SessionScore)
+
+  @objc(removeSessionScoresObject:)
+  @NSManaged public func removeFromSessionScores(_ value: SessionScore)
+
+  @objc(addSessionScores:)
+  @NSManaged public func addToSessionScores(_ values: NSSet)
+
+  @objc(removeSessionScores:)
+  @NSManaged public func removeFromSessionScores(_ values: NSSet)
+
+}

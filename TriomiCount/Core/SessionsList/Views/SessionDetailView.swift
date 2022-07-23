@@ -11,6 +11,7 @@ import SwiftUI
 struct SessionDetailView: View {
   @Environment(\.dismiss) var dismiss
   let session: Session
+  var sessionScores: [Dictionary<String, Int16>.Element]
 
   var body: some View {
     ZStack(alignment: .topLeading) {
@@ -31,15 +32,12 @@ struct SessionDetailView: View {
 
           SessionDetailSection(L10n.SessionDetailView.points) {
             VStack(alignment: .leading) {
-              ForEach(
-                SessionScore
-                  .getSessionScoreDictWith(sessionKey: session.objectID.uriRepresentation().absoluteString)!
-                  .sorted { $0.scoreValue > $1.scoreValue }) { dict in
+              ForEach(sessionScores, id: \.key) { key, value in
                 HStack {
-                  Text(dict.playerName)
+                  Text(key)
                     .frame(minWidth: 50, alignment: .leading)
                   Spacer()
-                  Text("\(dict.scoreValue)")
+                  Text("\(value)")
                     .frame(minWidth: 50, alignment: .trailing)
                 }
               }
@@ -49,8 +47,13 @@ struct SessionDetailView: View {
         .padding(.horizontal)
       }
     }
-    .navigationTitle("Session #\(session.id)")
+    .navigationTitle("Session #\(session.sessionCounter)")
     .roundedNavigationTitle()
+  }
+
+  init(session: Session) {
+    self.session = session
+    self.sessionScores = Array(SessionScoreService.getScores(of: session))
   }
 }
 

@@ -18,7 +18,7 @@ struct SessionListRowView: View {
 
       HStack(alignment: .top) {
         VStack(alignment: .leading, spacing: 3) {
-          Text("\(L10n.SessionListRowView.session) #\(session.id)")
+          Text("\(L10n.SessionListRowView.session) #\(session.sessionCounter)")
             .font(.headline.bold())
 
           HStack(alignment: .firstTextBaseline) {

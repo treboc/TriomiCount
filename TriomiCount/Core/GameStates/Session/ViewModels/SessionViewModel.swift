@@ -17,7 +17,7 @@ class SessionViewModel: ObservableObject {
   var session: Session
   @Published var state: SessionState = .playing
   @Published var playerOnTurn: Player!
-  @AppStorage("sessionID") var sessionID: Int = 0
+  @AppStorage("sessionCounter") var sessionCounter: Int = 0
 
   init(lastSession: Session) {
     self.session = lastSession
@@ -207,17 +207,20 @@ class SessionViewModel: ObservableObject {
       PlayerService.incrementSessionsWon(of: winner)
       session.wrappedWinnerID = winner.objectID.uriRepresentation().absoluteString
 
-      for player in session.playersArray {
+      session.playersArray.forEach { player in
         PlayerService.increaseSessionsPlayed(of: player)
 
         if player.currentScore > player.highscore {
           player.highscore = Int64(player.currentScore)
         }
-        _ = SessionScore.init(sessionKey: session.objectID.uriRepresentation().absoluteString, player: player)
+        let sessionScore = SessionScore(sessionID: session.id,
+                                        scoreValue: player.currentScore,
+                                        player: player)
+        player.addToSessionScores(sessionScore)
       }
 
-      sessionID += 1
-      session.id = Int16(sessionID)
+      sessionCounter += 1
+      session.sessionCounter = Int16(sessionCounter)
 
       session.hasEnded = true
       state = .didEnd

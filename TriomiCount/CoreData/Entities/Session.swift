@@ -18,7 +18,8 @@ extension Session {
     return NSFetchRequest<Session>(entityName: "Session")
   }
 
-  @NSManaged public var id: Int16
+  @NSManaged public var id: UUID
+  @NSManaged public var sessionCounter: Int16
   @NSManaged public var startedOn: Date?
   @NSManaged public var endedOn: Date?
   @NSManaged public var hasEnded: Bool
@@ -63,7 +64,6 @@ extension Session {
   func playedBy() -> String {
     return playersArray.sorted { $0.wrappedName < $1.wrappedName }.compactMap { $0.name }.formatted()
   }
-
 }
 
 // MARK: - Fronting Properties

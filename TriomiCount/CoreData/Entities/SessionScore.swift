@@ -20,24 +20,16 @@ extension SessionScore {
   }
 
   @NSManaged public var id: UUID
-  @NSManaged public var sessionKey: String
+  @NSManaged public var sessionID: UUID
   @NSManaged public var scoreValue: Int16
-  @NSManaged public var playerID: String
+  @NSManaged public var player: Player?
 
-  convenience init(sessionKey: String, player: Player, context: NSManagedObjectContext = CoreDataManager.shared.context) {
+  convenience init(sessionID: UUID, scoreValue: Int16, player: Player, context: NSManagedObjectContext = CoreDataManager.shared.context) {
     self.init(context: context)
     self.id = UUID()
-    self.sessionKey = sessionKey
-    self.scoreValue = player.currentScore
-    self.playerID = player.objectID.uriRepresentation().absoluteString
-  }
-
-  var playerName: String {
-    if let player: Player = PlayerService.object(with: playerID) {
-      return player.wrappedName
-    } else {
-      return "Unknown Player"
-    }
+    self.sessionID = sessionID
+    self.scoreValue = scoreValue
+    self.player = player
   }
 }
 
@@ -70,3 +62,4 @@ extension SessionScore {
     return []
   }
 }
+
