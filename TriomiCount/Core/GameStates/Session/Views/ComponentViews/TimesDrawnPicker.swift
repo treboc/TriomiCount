@@ -45,7 +45,7 @@ struct TimesDrawnPicker: View {
         if isSelected {
           RoundedRectangle(cornerRadius: Constants.cornerRadius, style: .circular)
             .fill(Color.primaryAccentColor)
-            .shadow(radius: 5)
+            .shadow(radius: Constants.shadowRadius)
             .matchedGeometryEffect(id: "background", in: namespace)
         }
 

@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct AboutView: View {
-  @Environment(\.colorScheme) var colorScheme
-
   let twitterUrl = URL(string: "https://twitter.com/treb0c")!
   let githubUrl = URL(string: "https://github.com/treboc")!
 
@@ -40,7 +38,8 @@ struct AboutView: View {
         Link("treb0c @ Twitter", destination: twitterUrl)
       }
     }
-    .tint(colorScheme == .dark ? .orange : .accentColor)
+    .frame(maxWidth: .infinity, alignment: .center)
+//    .tint(.primaryAccentColor)
   }
 }
 

@@ -33,7 +33,7 @@ struct SettingsView: View {
             Text(L10n.SettingsView.IdleDimmingDisabled.importantMessage)
               .font(.caption)
           }
-          .tint(.accentColor)
+          .tint(.primaryAccentColor)
 
           Section(L10n.Rules.title) {
             rulesSection
@@ -72,6 +72,5 @@ extension SettingsView {
 
   private var footer: some View {
     AboutView()
-      .frame(maxWidth: .infinity, alignment: .center)
   }
 }

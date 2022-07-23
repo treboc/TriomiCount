@@ -22,14 +22,6 @@ struct AppearancePicker: View {
     }
   }
 
-  private var primaryForegroundColor: Color {
-    if colorScheme == .dark {
-      return .black
-    } else {
-      return .white
-    }
-  }
-
   var body: some View {
     GeometryReader { proxy in
       HStack(spacing: 0) {
@@ -37,25 +29,24 @@ struct AppearancePicker: View {
           Text(appearence.title)
             .fontWeight(.semibold)
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 6)
+            .padding(.vertical, 8)
         }
       }
       .overlay(alignment: .leading) {
         RoundedRectangle(cornerRadius: Constants.cornerRadius)
-          .fill(Color.accentColor)
+          .fill(Color.primaryAccentColor)
           .overlay(alignment: .leading, content: {
             GeometryReader { _ in
               HStack(spacing: 0) {
-                ForEach(AppearanceManager.Appearance.allCases, id: \.self) { appearence in
-                  Text(appearence.rawValue.capitalized)
+                ForEach(AppearanceManager.Appearance.allCases, id: \.self) { appearance in
+                  Text(appearance.title)
                     .fontWeight(.semibold)
-                    .padding(.vertical, 6)
+                    .padding(.vertical, 8)
                     .frame(maxWidth: .infinity)
-                    .foregroundColor(appearence == appearanceManager.appearance ? primaryForegroundColor : .primary)
+                    .foregroundColor(appearance == appearanceManager.appearance ? .white : .primary)
+                    .contentShape(Rectangle())
                     .onTapGesture {
-                      withAnimation(.easeInOut) {
-                        appearanceManager.appearance = appearence
-                      }
+                      setAppearance(appearance)
                     }
                 }
               }
@@ -66,6 +57,15 @@ struct AppearancePicker: View {
           .frame(width: (proxy.size.width) / CGFloat(3))
           .mask { RoundedRectangle(cornerRadius: Constants.cornerRadius) }
           .offset(x: offset(proxy))
+      }
+    }
+    .frame(alignment: .center)
+  }
+
+  func setAppearance(_ appearance: AppearanceManager.Appearance) {
+    withAnimation(.easeInOut) {
+      if appearance != appearanceManager.appearance {
+        appearanceManager.appearance = appearance
       }
     }
   }

@@ -9,5 +9,6 @@ import SwiftUI
 
 enum Constants {
   static let cornerRadius: CGFloat = 16
+  static let shadowRadius: CGFloat = 3
   static let buttonHeight: CGFloat = 48
 }
