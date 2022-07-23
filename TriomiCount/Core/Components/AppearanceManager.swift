@@ -21,6 +21,17 @@ class AppearanceManager: ObservableObject {
     case light
     case dark
     case system
+
+    var title: String {
+      switch self {
+      case .dark:
+        return L10n.SettingsView.ColorScheme.dark
+      case .light:
+        return L10n.SettingsView.ColorScheme.light
+      case .system:
+        return L10n.SettingsView.ColorScheme.system
+      }
+    }
   }
 
   func setAppearance() {

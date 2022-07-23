@@ -9,17 +9,7 @@ import SwiftUI
 
 struct AppearancePicker: View {
   @EnvironmentObject var appearanceManager: AppearanceManager
-
-  func title(_ appearance: AppearanceManager.Appearance) -> String {
-    switch appearance {
-    case .dark:
-      return L10n.SettingsView.ColorScheme.dark
-    case .light:
-      return L10n.SettingsView.ColorScheme.light
-    case .system:
-      return L10n.SettingsView.ColorScheme.system
-    }
-  }
+  @Environment(\.colorScheme) private var colorScheme
 
   func offset(_ proxy: GeometryProxy) -> CGFloat {
     switch appearanceManager.appearance {
