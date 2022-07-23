@@ -22,32 +22,39 @@ struct AppearancePicker: View {
     }
   }
 
+  private var primaryForegroundColor: Color {
+    if colorScheme == .dark {
+      return .black
+    } else {
+      return .white
+    }
+  }
+
   var body: some View {
     GeometryReader { proxy in
       HStack(spacing: 0) {
         ForEach(AppearanceManager.Appearance.allCases, id: \.self) { appearence in
-          Text(title(appearence))
+          Text(appearence.title)
             .fontWeight(.semibold)
-            .foregroundColor(.secondary)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 6)
         }
       }
       .overlay(alignment: .leading) {
-        RoundedRectangle(cornerRadius: 4)
+        RoundedRectangle(cornerRadius: Constants.cornerRadius)
           .fill(Color.accentColor)
           .overlay(alignment: .leading, content: {
             GeometryReader { _ in
               HStack(spacing: 0) {
-                ForEach(AppearanceManager.Appearance.allCases, id: \.self) { appearance in
-                  Text(appearance.rawValue.capitalized)
+                ForEach(AppearanceManager.Appearance.allCases, id: \.self) { appearence in
+                  Text(appearence.rawValue.capitalized)
                     .fontWeight(.semibold)
                     .padding(.vertical, 6)
                     .frame(maxWidth: .infinity)
-                    .foregroundColor(.label)
+                    .foregroundColor(appearence == appearanceManager.appearance ? primaryForegroundColor : .primary)
                     .onTapGesture {
                       withAnimation(.easeInOut) {
-                        appearanceManager.appearance = appearance
+                        appearanceManager.appearance = appearence
                       }
                     }
                 }
@@ -57,7 +64,7 @@ struct AppearancePicker: View {
             .frame(width: proxy.size.width)
           })
           .frame(width: (proxy.size.width) / CGFloat(3))
-          .mask { RoundedRectangle(cornerRadius: 4) }
+          .mask { RoundedRectangle(cornerRadius: Constants.cornerRadius) }
           .offset(x: offset(proxy))
       }
     }

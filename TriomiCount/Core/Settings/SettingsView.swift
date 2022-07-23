@@ -27,13 +27,13 @@ struct SettingsView: View {
 
           Section {
             Toggle(L10n.SettingsView.IdleDimmingDisabled.pickerLabelText, isOn: $idleDimmingDisabled)
-              .tint(.accentColor)
           } header: {
             Text(L10n.SettingsView.IdleDimmingDisabled.options)
           } footer: {
             Text(L10n.SettingsView.IdleDimmingDisabled.importantMessage)
               .font(.caption)
           }
+          .tint(.accentColor)
 
           Section(L10n.Rules.title) {
             rulesSection
