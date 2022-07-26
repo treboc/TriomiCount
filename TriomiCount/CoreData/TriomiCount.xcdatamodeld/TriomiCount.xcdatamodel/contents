@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21256.2" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Player" representedClassName="Player" syncable="YES">
         <attribute name="createdOn" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="currentScore" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -35,17 +35,12 @@
         <attribute name="createdOn" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="playedCard" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="playerID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="playersScoreInTurn" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="playersScoreTilNow" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="scoreSliderValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timesDrawn" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="turnCounter" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="turns" inverseEntity="Player"/>
         <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="turns" inverseEntity="Session"/>
     </entity>
-    <elements>
-        <element name="Player" positionX="160" positionY="192" width="128" height="209"/>
-        <element name="Session" positionX="160" positionY="192" width="128" height="164"/>
-        <element name="SessionScore" positionX="160" positionY="192" width="128" height="89"/>
-        <element name="Turn" positionX="160" positionY="192" width="128" height="164"/>
-    </elements>
 </model>

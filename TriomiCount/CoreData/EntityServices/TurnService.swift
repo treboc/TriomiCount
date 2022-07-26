@@ -11,7 +11,8 @@ public class TurnService: EntityServiceBase {
   static func addTurn(with turnProperties: TurnProperties,
                       in context: NSManagedObjectContext = context) {
     let turn = Turn(session: turnProperties.session,
-                    score: turnProperties.calculatedScore,
+                    scoreInTurn: turnProperties.calculatedScore,
+                    scoreTilNow: turnProperties.playersScoreTilNow,
                     player: turnProperties.player,
                     scoreSliderValue: turnProperties.scoreSliderValue,
                     timesDrawn: turnProperties.timesDrawn,
@@ -23,6 +24,7 @@ public class TurnService: EntityServiceBase {
   struct TurnProperties {
     let session: Session
     let calculatedScore: Int16
+    let playersScoreTilNow: Int16
     let player: Player
     let scoreSliderValue: Int16
     let timesDrawn: Int16

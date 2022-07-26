@@ -130,6 +130,7 @@ class SessionViewModel: ObservableObject {
     // append the actual turn to the turns-array to keep track of the turns,
     let turnProperties = TurnService.TurnProperties(session: session,
                                                     calculatedScore: calculatedScore,
+                                                    playersScoreTilNow: playerOnTurn.currentScore,
                                                     player: playerOnTurn,
                                                     scoreSliderValue: Int16(scoreSliderValue),
                                                     timesDrawn: Int16(timesDrawn),
@@ -143,7 +144,7 @@ class SessionViewModel: ObservableObject {
     guard let lastTurn = session.turnsArray.last else { return }
     if let lastPlayer = session.playersArray.first(where: { $0.id == lastTurn.playerID }) {
       resetUIAfterUndoTurn(lastTurn)
-      PlayerService.updateScore(of: lastPlayer, with: -lastTurn.score)
+      PlayerService.updateScore(of: lastPlayer, with: -lastTurn.playersScoreInTurn)
       session.removeFromTurns(lastTurn)
       EntityServiceBase.deleteObject(lastTurn)
     }
