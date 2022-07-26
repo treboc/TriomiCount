@@ -82,7 +82,7 @@ extension PointsSubmitView {
       .submitLabel(.go)
       .introspectTextField { $0.becomeFirstResponder() }
       .focused($textFieldIsFocused)
-      .overlayedAlert(with: L10n.PointsSubmitView.overlayAlertMessage, bool: endPointsIsInt)
+      .overlayedAlert(with: L10n.PointsSubmitView.overlayAlertMessage, alertIsShown: !endPointsIsInt)
       .onSubmit(addPoints)
       .onChange(of: endPoints, perform: checkEndpointsIsInt)
     /* Make sure the maximum input is 999 (no more as 3 digits),

@@ -17,23 +17,22 @@ extension Turn {
   @NSManaged public var session: Session?
   @NSManaged public var score: Int16
   @NSManaged public var playerID: UUID?
-
   @NSManaged public var scoreSliderValue: Int16
   @NSManaged public var timesDrawn: Int16
   @NSManaged public var playedCard: Bool
 
-  convenience init(_ session: Session,
+  convenience init(session: Session,
                    score: Int16,
-                   playerOnTurn: Player,
+                   player: Player,
                    scoreSliderValue: Int16,
                    timesDrawn: Int16,
                    playedCard: Bool
   ) {
     self.init(context: CoreDataManager.shared.context)
     self.session = session
-    self.wrappedCreatedOn = Date()
+    self.createdOn = Date()
     self.score = score
-    self.playerID = playerOnTurn.id
+    self.playerID = player.id
     self.scoreSliderValue = scoreSliderValue
     self.timesDrawn = timesDrawn
     self.playedCard = playedCard

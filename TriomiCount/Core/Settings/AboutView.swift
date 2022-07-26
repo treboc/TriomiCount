@@ -39,7 +39,7 @@ struct AboutView: View {
       }
     }
     .frame(maxWidth: .infinity, alignment: .center)
-//    .tint(.primaryAccentColor)
+    .tint(.primaryAccentColor)
   }
 }
 

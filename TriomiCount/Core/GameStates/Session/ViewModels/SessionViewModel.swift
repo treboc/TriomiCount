@@ -130,10 +130,11 @@ class SessionViewModel: ObservableObject {
     // append the actual turn to the turns-array to keep track of the turns,
     let turnProperties = TurnService.TurnProperties(session: session,
                                                     calculatedScore: calculatedScore,
-                                                    playerOnTurn: playerOnTurn,
+                                                    player: playerOnTurn,
                                                     scoreSliderValue: Int16(scoreSliderValue),
                                                     timesDrawn: Int16(timesDrawn),
                                                     playedCard: playedCard)
+
     TurnService.addTurn(with: turnProperties)
     resetTurnState()
   }

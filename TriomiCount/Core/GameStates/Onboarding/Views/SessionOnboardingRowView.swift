@@ -19,7 +19,7 @@ struct SessionOnboardingRowView: View {
         .fill(isChosen ? Color.primaryAccentColor.opacity(0.8) : Color.primaryAccentColor)
         .frame(height: Constants.buttonHeight)
         .frame(maxWidth: .infinity)
-        .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 3)
+        .shadow(radius: Constants.shadowRadius)
         .overlay(isChosen ?
                  RoundedRectangle(cornerRadius: Constants.cornerRadius)
           .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [10], dashPhase: phase), antialiased: true)

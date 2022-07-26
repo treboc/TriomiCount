@@ -8,13 +8,14 @@
 import CoreData
 
 public class TurnService: EntityServiceBase {
-  static func addTurn(with turnProperties: TurnProperties, in context: NSManagedObjectContext = context) {
-    let turn = Turn(context: context)
-    turn.score = turnProperties.calculatedScore
-    turn.playerID = turnProperties.playerOnTurn.id
-    turn.scoreSliderValue = turnProperties.scoreSliderValue
-    turn.timesDrawn = turnProperties.timesDrawn
-    turn.playedCard = turnProperties.playedCard
+  static func addTurn(with turnProperties: TurnProperties,
+                      in context: NSManagedObjectContext = context) {
+    let turn = Turn(session: turnProperties.session,
+                    score: turnProperties.calculatedScore,
+                    player: turnProperties.player,
+                    scoreSliderValue: turnProperties.scoreSliderValue,
+                    timesDrawn: turnProperties.timesDrawn,
+                    playedCard: turnProperties.playedCard)
     turnProperties.session.addToTurns(turn)
     CoreDataManager.shared.save()
   }
@@ -22,7 +23,7 @@ public class TurnService: EntityServiceBase {
   struct TurnProperties {
     let session: Session
     let calculatedScore: Int16
-    let playerOnTurn: Player
+    let player: Player
     let scoreSliderValue: Int16
     let timesDrawn: Int16
     let playedCard: Bool

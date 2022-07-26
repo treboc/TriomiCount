@@ -62,4 +62,3 @@ extension SessionScore {
     return []
   }
 }
-
