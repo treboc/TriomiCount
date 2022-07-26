@@ -7,10 +7,11 @@
 
 import Combine
 import Foundation
-import UIKit
+import SwiftUI
 
 final class AddNewPlayerViewModel: ObservableObject {
   @Published var textFieldIsFocused: Bool = false
+
   var alertMessage: String {
     if nameTextFieldText.isEmpty {
       return L10n.AddNewPlayerView.AlertTextFieldEmpty.message
@@ -33,14 +34,15 @@ final class AddNewPlayerViewModel: ObservableObject {
 
   func subscribeToTextfieldText() {
     $nameTextFieldText
-      .map { (text) -> Bool in
-        if text.isValidName {
-          return true
+      .dropFirst(1)
+      .sink { [weak self] outputString in
+        withAnimation(.easeInOut(duration: 0.3)) {
+          if outputString.isValidName {
+            self?.nameIsValid = true
+          } else {
+            self?.nameIsValid = false
+          }
         }
-        return false
-      }
-      .sink { [weak self] isValid in
-        self?.nameIsValid = isValid
       }
       .store(in: &cancellables)
   }
