@@ -11,6 +11,12 @@ struct Logo: View {
   let font: Font = Font.custom("PhotographSignature", fixedSize: 120)
 
   struct CurvedTriangle: Shape {
+    let radius: CGFloat
+
+    init(radius: CGFloat = 10) {
+      self.radius = radius
+    }
+
     func path(in rect: CGRect) -> Path {
       var path = Path()
 
@@ -19,9 +25,9 @@ struct Logo: View {
       let point3 = CGPoint(x: 0, y: rect.maxY)
 
       path.move(to: CGPoint(x: 0, y: rect.maxY))
-      path.addArc(tangent1End: point1, tangent2End: point2, radius: 10)
-      path.addArc(tangent1End: point2, tangent2End: point3, radius: 10)
-      path.addArc(tangent1End: point3, tangent2End: point1, radius: 10)
+      path.addArc(tangent1End: point1, tangent2End: point2, radius: radius)
+      path.addArc(tangent1End: point2, tangent2End: point3, radius: radius)
+      path.addArc(tangent1End: point3, tangent2End: point1, radius: radius)
       path.closeSubpath()
       return path
     }
