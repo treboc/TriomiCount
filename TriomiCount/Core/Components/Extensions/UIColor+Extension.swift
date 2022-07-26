@@ -25,6 +25,10 @@ extension UIColor {
     return  lum < 0.50
   }
 
+  var asColor: Color {
+    return Color(uiColor: self)
+  }
+  
   class func color(withData data: Data) -> UIColor? {
     return try? NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data) // as UIColor?
   }
