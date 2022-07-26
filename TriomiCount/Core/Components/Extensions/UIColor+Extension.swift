@@ -12,6 +12,8 @@ extension Color {
   var isDarkColor: Bool {
     return UIColor(self).isDarkColor
   }
+
+
 }
 
 extension UIColor {
@@ -67,7 +69,7 @@ extension UIColor {
 }
 
 extension UIColor {
-  struct FavoriteColor {
+  struct FavoriteColor: Equatable {
     let name: String
     let red: CGFloat
     let green: CGFloat
@@ -85,7 +87,9 @@ extension UIColor {
       FavoriteColor(name: "Lemon Glacier", red: 0.98, green: 1.00, blue: 0.07, alpha: 1),
       FavoriteColor(name: "Maximum Blue Purple", red: 0.67, green: 0.60, blue: 1.00, alpha: 1.00),
       FavoriteColor(name: "Oxford Blue", red: 0.05, green: 0.13, blue: 0.29, alpha: 1.00),
-      FavoriteColor(name: "Lime Green", red: 0.01, green: 0.87, blue: 0.13, alpha: 1.00)
+      FavoriteColor(name: "Lime Green", red: 0.01, green: 0.87, blue: 0.13, alpha: 1.00),
+      FavoriteColor(name: "Blue Violet", red: 0.51, green: 0.22, blue: 0.925, alpha: 1.00),
+      FavoriteColor(name: "Jungle Green", red: 0.059, green: 0.69, blue: 0.56, alpha: 1.00)
     ]
   }
 }

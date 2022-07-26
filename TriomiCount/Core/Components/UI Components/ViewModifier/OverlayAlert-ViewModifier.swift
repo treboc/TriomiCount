@@ -9,24 +9,25 @@ import SwiftUI
 
 struct OverlayedAlert: ViewModifier {
   let message: String
-  let bool: Bool
+  let alertIsShown: Bool
 
   func body(content: Content) -> some View {
     content
       .overlay(
+        alertIsShown ?
         Text(message)
           .font(.subheadline)
           .foregroundColor(.red)
-          .offset(x: 25, y: 20)
-          .opacity(bool ? 0 : 1)
-          .animation(.default, value: bool),
+          .offset(y: 40)
+          .transition(.move(edge: .leading))
+        : nil ,
         alignment: .bottomLeading
       )
   }
 }
 
 extension View {
-  func overlayedAlert(with message: String, bool: Bool) -> some View {
-    modifier(OverlayedAlert(message: message, bool: bool))
+  func overlayedAlert(with message: String, alertIsShown: Bool) -> some View {
+    modifier(OverlayedAlert(message: message, alertIsShown: alertIsShown))
   }
 }

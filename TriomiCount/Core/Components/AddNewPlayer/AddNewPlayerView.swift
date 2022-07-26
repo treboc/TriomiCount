@@ -69,7 +69,6 @@ extension AddNewPlayerView {
       .overlay(viewModel.nameTextFieldText.isEmpty
                ? nil
                : deleteButton.transition(.opacity), alignment: .trailing)
-      .animation(.easeIn(duration: 0.1), value: viewModel.nameTextFieldText.isEmpty)
   }
 
   private var createPlayerButton: some View {
@@ -108,10 +107,20 @@ extension AddNewPlayerView {
           HStack {
             ForEach(UIColor.FavoriteColors.colors, id: \.name) { favColor in
               Circle()
-                .fill(
-                  Color(uiColor: favColor.color)
+                .fill(favColor.color.asColor)
+                .padding(4)
+                .background(
+                  favoriteColor == favColor.color
+                  ? Circle()
+                    .stroke(favColor.color.asColor, lineWidth: 3)
+                    .matchedGeometryEffect(id: "background-stroke", in: namespace)
+                  : nil
                 )
-                .shadow(color: .black, radius: 3, x: 0, y: 2.5)
+                .shadow(radius: Constants.shadowRadius)
+                .frame(width: 40, height: 34.66)
+                .rotationEffect(Angle(degrees:
+                                        UIColor.FavoriteColors.colors.firstIndex(of: favColor)?.isMultiple(of: 2) ?? true ? 180 : 0
+                                     ))
                 .frame(width: 32, height: 32)
                 .onTapGesture {
                   withAnimation {
@@ -119,19 +128,10 @@ extension AddNewPlayerView {
                     colorName = favColor.name
                   }
                 }
-                .padding(.vertical, 10)
-                .padding(.horizontal, 3)
-                .overlay(
-                  favColor.color == favoriteColor
-                  ? Image(systemSymbol: .checkmark)
-                    .matchedGeometryEffect(id: "checkmark", in: namespace)
-                    .foregroundColor(favColor.color.isDarkColor ? .white : .black)
-                    .font(.headline)
-                    .animation(.none, value: favoriteColor)
-                  : nil
-                )
+                .padding(.vertical, 7)
             }
           }
+          .padding(.leading, 3)
         }
 
         Text(colorName)
