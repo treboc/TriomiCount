@@ -12,15 +12,8 @@ import SwiftUI
 final class AddNewPlayerViewModel: ObservableObject {
   @Published var textFieldIsFocused: Bool = false
 
-  var alertMessage: String {
-    if nameTextFieldText.isEmpty {
-      return L10n.AddNewPlayerView.AlertTextFieldEmpty.message
-    } else if nameTextFieldText.count > 20 {
-      return L10n.AddNewPlayerView.AlertNameToLong.message
-    } else {
-      return ""
-    }
-  }
+  @Published private(set) var alertMessage: String?
+  @Published private(set) var nameValidationState: NameValidationState = .isValid
 
   @Published var nameTextFieldText: String = ""
   @Published private(set) var nameIsValid: Bool = true
@@ -34,26 +27,55 @@ final class AddNewPlayerViewModel: ObservableObject {
 
   func subscribeToTextfieldText() {
     $nameTextFieldText
-      .dropFirst(1)
-      .sink { [weak self] outputString in
-        withAnimation(.easeInOut(duration: 0.3)) {
-          if outputString.isValidName {
-            self?.nameIsValid = true
-          } else {
-            self?.nameIsValid = false
-          }
-        }
+      .dropFirst()
+      .debounce(for: 0.2, scheduler: RunLoop.main)
+      .sink { [weak self] _ in
+        self?.callAlert()
       }
       .store(in: &cancellables)
   }
 
   func createPlayer(_ completion: () -> Void) {
+    guard validate(name: nameTextFieldText) == .isValid else { return }
     let name = nameTextFieldText.trimmingCharacters(in: .whitespacesAndNewlines)
-    guard name.isValidName else {
-      nameIsValid = false
-      return
-    }
     PlayerService.addNewPlayer(name, favoriteColor: favoriteColor)
     completion()
+  }
+
+  func callAlert() {
+    withAnimation {
+      nameValidationState = validate(name: nameTextFieldText)
+      alertMessage = nameValidationState.message
+    }
+  }
+
+  func validate(name: String) -> NameValidationState {
+    let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+    if trimmedName.count == 0 {
+      return .empty(L10n.AddNewPlayerView.AlertTextFieldEmpty.message)
+    } else if trimmedName.count >= 25 {
+      return .tooLong(L10n.AddNewPlayerView.AlertNameToLong.message)
+    } else {
+      return .isValid
+    }
+  }
+}
+
+extension AddNewPlayerViewModel {
+  enum NameValidationState: Equatable {
+    case empty(String)
+    case tooLong(String)
+    case isValid
+
+    var message: String? {
+      switch self {
+      case .isValid:
+        return nil
+      case .empty(let message):
+        return message
+      case .tooLong(let message):
+        return message
+      }
+    }
   }
 }

@@ -54,8 +54,8 @@ extension AddNewPlayerView {
       .placeholder(when: viewModel.nameTextFieldText.isEmpty, placeholder: {
         Text(L10n.AddNewPlayerView.NameLabel.textfieldText)
           .foregroundColor(.gray)
-          .overlayedAlert(with: viewModel.alertMessage, alertIsShown: !viewModel.nameIsValid)
       })
+      .overlayedAlert(with: viewModel.alertMessage ?? "No alert set", alertIsShown: viewModel.nameValidationState != .isValid)
       .borderedTextFieldStyle()
       .padding(.horizontal, 20)
       .textInputAutocapitalization(.words)
@@ -66,7 +66,7 @@ extension AddNewPlayerView {
         viewModel.createPlayer(dismiss.callAsFunction)
       }
       .introspectTextField { $0.becomeFirstResponder() }
-      .overlay(viewModel.nameTextFieldText.isEmpty
+      .overlay(viewModel.nameValidationState == .isValid
                ? nil
                : deleteButton.transition(.opacity), alignment: .trailing)
   }
