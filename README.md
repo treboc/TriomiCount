@@ -12,9 +12,9 @@ Me and my wife like playing the game, but I was annoyed that I'd to write down o
 I learn a lot better when building something, than rebuild the next to-do app or just follow tutorials.
 
 ## Key features
+* track a game of *n* player
 * add and list players
 * show statistics about single players *(e.g. highscores, last score, games played, games won, etc.)*
-* track a game of *n* players *(singleplayer games are also possible)*
 * look into previous games and its statistics *(work in progress)*
 
 ## To-do
