@@ -11,8 +11,8 @@ import SwiftUI
 class SessionOnboardingViewModel: ObservableObject {
   @Published var chosenPlayers: [Player] = []
   @Published var session = SessionService.getLastNotFinishedSession()
-
   @Published var sessionIsShown: Bool = false
+  @Published var newPlayerSheetIsShown: Bool = false
 
   var startSessionButtonIsDisabled: Bool {
     if session != nil && chosenPlayers.count < 2 {
