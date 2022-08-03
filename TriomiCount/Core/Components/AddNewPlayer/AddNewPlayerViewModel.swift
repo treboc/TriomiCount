@@ -10,47 +10,45 @@ import Foundation
 import SwiftUI
 
 final class AddNewPlayerViewModel: ObservableObject {
-  @Published var textFieldIsFocused: Bool = false
-
-  @Published private(set) var alertMessage: String?
+  private(set) var alertMessage: String?
   @Published private(set) var nameValidationState: NameValidationState = .isValid
-
   @Published var nameTextFieldText: String = ""
-  @Published private(set) var nameIsValid: Bool = true
   @Published var favoriteColor: UIColor = UIColor.FavoriteColors.colors[0].color
 
   fileprivate var cancellables = Set<AnyCancellable>()
 
   init() {
     subscribeToTextfieldText()
+    subscribeToValidationState()
   }
 
-  func subscribeToTextfieldText() {
+  private func subscribeToTextfieldText() {
     $nameTextFieldText
       .dropFirst()
       .debounce(for: 0.2, scheduler: RunLoop.main)
-      .sink { [weak self] _ in
-        self?.callAlert()
+      .sink { [unowned self] _ in
+        self.nameValidationState = self.validate()
       }
       .store(in: &cancellables)
   }
 
+  private func subscribeToValidationState() {
+    $nameValidationState
+      .dropFirst()
+      .map(\.message)
+      .assign(to: \.alertMessage, on: self)
+      .store(in: &cancellables)
+  }
+
   func createPlayer(_ completion: () -> Void) {
-    guard validate(name: nameTextFieldText) == .isValid else { return }
+    guard nameValidationState == .isValid else { return }
     let name = nameTextFieldText.trimmingCharacters(in: .whitespacesAndNewlines)
     PlayerService.addNewPlayer(name, favoriteColor: favoriteColor)
     completion()
   }
 
-  func callAlert() {
-    withAnimation {
-      nameValidationState = validate(name: nameTextFieldText)
-      alertMessage = nameValidationState.message
-    }
-  }
-
-  func validate(name: String) -> NameValidationState {
-    let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+  func validate() -> NameValidationState {
+    let trimmedName = nameTextFieldText.trimmingCharacters(in: .whitespacesAndNewlines)
     if trimmedName.count == 0 {
       return .empty(L10n.AddNewPlayerView.AlertTextFieldEmpty.message)
     } else if trimmedName.count >= 25 {

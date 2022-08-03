@@ -80,7 +80,7 @@ extension AddNewPlayerView {
     }
     .buttonStyle(.shadowed)
     .padding(.horizontal, 20)
-    .disabled(!viewModel.nameIsValid)
+    .disabled(viewModel.nameValidationState != .isValid)
   }
 
   private var deleteButton: some View {

@@ -10,9 +10,6 @@ import PageSheetCore
 
 struct SessionOnboardingView: View {
   @StateObject var viewModel = SessionOnboardingViewModel()
-  @State private var newPlayerSheetIsShown: Bool = false
-  @State private var selectedSort: PlayerListSort = .default
-
   @FetchRequest(sortDescriptors: PlayerListSort.default.descriptors, animation: .spring())
   var players: FetchedResults<Player>
 
@@ -37,7 +34,7 @@ struct SessionOnboardingView: View {
       .onDisappear {
         viewModel.resetState(of: players)
       }
-      .pageSheet(isPresented: $newPlayerSheetIsShown, content: AddNewPlayerView.init)
+      .pageSheet(isPresented: $viewModel.newPlayerSheetIsShown, content: AddNewPlayerView.init)
     }
     .tint(.primaryAccentColor)
   }
@@ -88,7 +85,7 @@ extension SessionOnboardingView {
   @ToolbarContentBuilder
   func toolbarContent() -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
-      AddPlayerToolbarButton(newPlayerSheetIsShown: $newPlayerSheetIsShown)
+      AddPlayerToolbarButton(newPlayerSheetIsShown: $viewModel.newPlayerSheetIsShown)
     }
   }
 }
