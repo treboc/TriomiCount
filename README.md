@@ -3,7 +3,7 @@
 </p>
 
 # TriomiCount
-This is my first bigger project. Currently I'm working on it as my main project, while learning.
+This is my first real project, expandes while learning.
 TriomiCount is used to track the state of the games while playing the boardgame [Triominoes](https://en.wikipedia.org/wiki/Triominoes).
 
 It basically is a kind of dominoes but with triangle shaped tiles.
