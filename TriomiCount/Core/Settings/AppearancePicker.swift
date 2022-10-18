@@ -12,7 +12,7 @@ struct AppearancePicker: View {
   @Environment(\.colorScheme) private var colorScheme
 
   var body: some View {
-    Picker("Select Theme", selection: $appearanceManager.appearance) {
+    Picker(L10n.SettingsView.ColorScheme.pickerTitle, selection: $appearanceManager.appearance) {
       ForEach(AppearanceManager.Appearance.allCases, id: \.self) {
         Text($0.title)
       }

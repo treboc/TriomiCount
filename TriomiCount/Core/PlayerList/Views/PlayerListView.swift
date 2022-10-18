@@ -21,7 +21,7 @@ struct PlayerListView: View {
       ZStack {
         Background()
         if players.isEmpty {
-          Text("Kein Spieler vorhanden. Erstelle jetzt einen, indem du oben rechts auf das + tippst.")
+          Text(L10n.PlayerListView.noPlayersInfo)
             .multilineTextAlignment(.center)
             .font(.system(.headline, design: .rounded, weight: .semibold))
             .padding()

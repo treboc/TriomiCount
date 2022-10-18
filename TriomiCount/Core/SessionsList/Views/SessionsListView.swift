@@ -18,7 +18,16 @@ struct SessionsListView: View {
     NavigationView {
       ZStack {
         Background()
-        scrollView
+        if sessions.isEmpty {
+          Text(L10n.SessionListView.noSessionInfo)
+            .multilineTextAlignment(.center)
+            .font(.system(.headline, design: .rounded, weight: .semibold))
+            .padding()
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
+            .padding()
+        } else {
+          sessionsList
+        }
       }
       .navigationTitle(L10n.sessions)
       .roundedNavigationTitle()
@@ -33,6 +42,8 @@ struct SessionsListView: View {
 }
 
 extension SessionsListView {
+  private var sessionsList: some View {
+    List {
       ForEach(sessions) { session in
         NavigationLink(destination: SessionDetailView(session: session)) {
           SessionListRowView(session: session)

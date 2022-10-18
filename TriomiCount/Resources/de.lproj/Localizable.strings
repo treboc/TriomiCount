@@ -59,7 +59,11 @@
 "playerDetailView.deletePlayer.alertMessage %@" = "Bist du sicher, dass du %@ löschen möchtest? Die Daten können nicht widerhergestellt werden.";
 "playerDetailView.deletePlayer.confirmationButtonTitle" = "Ja, ich bin mir sicher.";
 
+// PlayerListView
+"playerListView.noPlayersInfo" = "Kein Spieler vorhanden. Erstelle jetzt einen, indem du oben rechts auf das + tippst.";
+
 // SessionListView
+"sessionListView.noSessionInfo" = "Noch keine Spiele gespielt! Spiele eine Runde, und komm zurück, um dir Details anzusehen.";
 "sessionListView.button.backToMainMenu" = "Zurück zum Hauptmenü";
 "sessionListView.sessions" = "Spiele";
 
@@ -73,14 +77,14 @@
 "sessionDetailView.points" = "Punkteverteilung";
 
 // SettingsView
-"settingsView.settings" = "Einstellungen";
-"settingsView.colorScheme.title" = "Erscheinungsbild";
+"settingsView.title" = "Einstellungen";
+"settingsView.colorScheme.pickerTitle" = "Theme wählen";
 "settingsView.colorScheme.light" = "Hell";
 "settingsView.colorScheme.dark" = "Dunkel";
-"settingsView.colorScheme.system" = "System";
+"settingsView.colorScheme.system" = "Automatisch";
 "settingsView.idleDimmingDisabled.options" = "Optionen";
-"settingsView.idleDimmingDisabled.pickerLabelText" = "Automatische Sperre in Spielen deaktivieren";
-"settingsView.idleDimmingDisabled.importantMessage" = "ACHTUNG: Dies wirkt sich negativ auf die Akkulaufzeit aus.";
+"settingsView.idleDimmingDisabled.pickerLabelText" = "Display aktiv lassen";
+"settingsView.idleDimmingDisabled.importantMessage" = "Aktivieren, um das Display während eines Spiels aktiv zu lassen. Dies wirkt sich negativ auf die Akkuleistung aus.";
 
 // Alerts
 "exitSessionAlert.title" = "Bist du sicher?";

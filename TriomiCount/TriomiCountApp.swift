@@ -27,6 +27,7 @@ struct TriomiCountApp: App {
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification),
                    perform: handleBecomeActive)
         .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+        .tint(.primaryAccentColor)
     }
   }
 

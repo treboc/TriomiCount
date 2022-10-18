@@ -59,7 +59,11 @@
 "playerDetailView.deletePlayer.alertMessage %@" = "Are you sure that you want to delete %@? The data can't be restored.";
 "playerDetailView.deletePlayer.confirmationButtonTitle" = "Yes, I'm sure.";
 
-// SessionsListView
+// PlayerListView
+"playerListView.noPlayersInfo" = "No player created yet, start creating one by tapping the + in the top right corner.";
+
+// SessionListView
+"sessionListView.noSessionInfo" = "No games played yet. Come back later after you played a round or two, to see some details.";
 "sessionListView.button.backToMainMenu" = "Back to Main Menu";
 "sessionListView.sessions" = "Sessions";
 
@@ -73,6 +77,8 @@
 "sessionDetailView.points" = "Points";
 
 // SettingsView
+"settingsView.title" = "Settings";
+"settingsView.colorScheme.pickerTitle" = "Select Theme";
 "settingsView.colorScheme.title" = "Appearance";
 "settingsView.colorScheme.light" = "Light";
 "settingsView.colorScheme.dark" = "Dark";

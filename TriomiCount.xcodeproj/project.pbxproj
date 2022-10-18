@@ -20,9 +20,6 @@
 		0835129E27DC123700065228 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835129627DC123700065228 /* Session.swift */; };
 		083512A927DC15DA00065228 /* OffsetStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083512A827DC15DA00065228 /* OffsetStyle.swift */; };
 		083974DB27D294F7002B90E4 /* SessionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083974DA27D294F7002B90E4 /* SessionsListView.swift */; };
-		083974E327D2C11D002B90E4 /* PageSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 083974E227D2C11D002B90E4 /* PageSheet */; };
-		083974E527D2C11D002B90E4 /* PageSheetCore in Frameworks */ = {isa = PBXBuildFile; productRef = 083974E427D2C11D002B90E4 /* PageSheetCore */; };
-		083974E727D2C11D002B90E4 /* PageSheetPlus in Frameworks */ = {isa = PBXBuildFile; productRef = 083974E627D2C11D002B90E4 /* PageSheetPlus */; };
 		083BFD5027CABB7200B5BE50 /* PointsSubmitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BFD4F27CABB7200B5BE50 /* PointsSubmitView.swift */; };
 		0855A22127DCD5AE00E882AC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0855A22027DCD5AE00E882AC /* Color.swift */; };
 		085924C927C6DCA300364259 /* PlayerListSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085924C827C6DCA300364259 /* PlayerListSort.swift */; };
@@ -514,10 +511,10 @@
 		8A5E0117281692C900703CE5 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				8A5E011A2816943500703CE5 /* AboutView.swift */,
-				8A5D706A288A039E00B5671B /* AppearancePicker.swift */,
-				8A5E011128154B3200703CE5 /* SettingsKeys.swift */,
 				08A2C64227A34BBB0076C196 /* SettingsView.swift */,
+				8A5D706A288A039E00B5671B /* AppearancePicker.swift */,
+				8A5E011A2816943500703CE5 /* AboutView.swift */,
+				8A5E011128154B3200703CE5 /* SettingsKeys.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
