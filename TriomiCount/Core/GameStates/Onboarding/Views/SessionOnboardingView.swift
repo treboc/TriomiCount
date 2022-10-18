@@ -25,18 +25,17 @@ struct SessionOnboardingView: View {
         }
         .overlay(onboardingText)
       }
-      .fullScreenCover(isPresented: $viewModel.sessionIsShown, onDismiss: viewModel.checkForUnfinishedSession) {
-        SessionMainView(session: viewModel.session!)
-      }
-      .navigationTitle(L10n.newSession)
-      .roundedNavigationTitle()
-      .toolbar(content: toolbarContent)
-      .onDisappear {
-        viewModel.resetState(of: players)
-      }
-      .pageSheet(isPresented: $viewModel.newPlayerSheetIsShown, content: AddNewPlayerView.init)
+      .fullScreenCover(isPresented: $viewModel.sessionIsShown,
+                       onDismiss: viewModel.checkForUnfinishedSession) {
+        SessionMainView(session: viewModel.session!) }
+        .navigationTitle(L10n.newSession)
+        .roundedNavigationTitle()
+        .toolbar(content: toolbarContent)
+        .onDisappear {
+          viewModel.resetState(of: players)
+        }
+        .sheet(isPresented: $viewModel.newPlayerSheetIsShown, content: AddNewPlayerView.init)
     }
-    .tint(.primaryAccentColor)
   }
 }
 

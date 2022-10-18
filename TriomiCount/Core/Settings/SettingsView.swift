@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Introspect
 
 struct SettingsView: View {
   @AppStorage(SettingsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
@@ -42,12 +41,10 @@ struct SettingsView: View {
           Section(footer: footer, content: { EmptyView() })
         }
       }
-      .navigationTitle(L10n.settings)
+      .scrollContentBackground(.hidden)
+      .background(Background())
+      .navigationTitle(L10n.SettingsView.title)
       .roundedNavigationTitle()
-    }
-    // Set the forms background
-    .introspectTableView {
-      $0.backgroundColor = .clear
     }
   }
 }

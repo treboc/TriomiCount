@@ -80,7 +80,7 @@ extension PointsSubmitView {
       .cornerRadius(Constants.cornerRadius)
       .keyboardType(.numberPad)
       .submitLabel(.go)
-      .introspectTextField { $0.becomeFirstResponder() }
+//      .introspectTextField { $0.becomeFirstResponder() }
       .focused($textFieldIsFocused)
       .overlayedAlert(with: L10n.PointsSubmitView.overlayAlertMessage, alertIsShown: !endPointsIsInt)
       .onSubmit(addPoints)
@@ -92,6 +92,9 @@ extension PointsSubmitView {
         if value.count > 3 {
           endPoints.removeLast()
         }
+      }
+      .onAppear {
+        textFieldIsFocused = true
       }
   }
 

@@ -5,7 +5,6 @@
 //  Created by Marvin Lee Kobert on 21.07.22.
 //
 
-import Introspect
 import SwiftUI
 
 struct AppearancePicker: View {
@@ -18,11 +17,6 @@ struct AppearancePicker: View {
         Text($0.title)
       }
     }
-    .pickerStyle(.segmented)
-    .introspectSegmentedControl { control in
-      let textColor: UIColor = colorScheme == .dark ? .black : .white
-      control.setTitleTextAttributes([.foregroundColor: textColor], for: .selected)
-      control.selectedSegmentTintColor = UIColor(.accentColor)
-    }
+    .pickerStyle(.menu)
   }
 }
