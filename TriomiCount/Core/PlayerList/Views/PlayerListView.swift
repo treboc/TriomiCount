@@ -7,7 +7,6 @@
 
 import CoreData
 import SwiftUI
-import PageSheet
 
 struct PlayerListView: View {
   @State private var newPlayerSheetIsShown: Bool = false
@@ -21,15 +20,21 @@ struct PlayerListView: View {
     NavigationView {
       ZStack {
         Background()
-
-        scrollView
+        if players.isEmpty {
+          Text("Kein Spieler vorhanden. Erstelle jetzt einen, indem du oben rechts auf das + tippst.")
+            .multilineTextAlignment(.center)
+            .font(.system(.headline, design: .rounded, weight: .semibold))
+            .padding()
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
+            .padding()
+        } else {
+          playerList
+        }
       }
-      .pageSheet(isPresented: $newPlayerSheetIsShown) {
-        AddNewPlayerView()
-      }
+      .sheet(isPresented: $newPlayerSheetIsShown, content: AddNewPlayerView.init)
       .navigationTitle(L10n.players)
-      .toolbar(content: toolbarContent)
       .roundedNavigationTitle()
+      .toolbar(content: toolbarContent)
     }
     .tint(.primaryAccentColor)
   }
@@ -51,7 +56,7 @@ extension PlayerListView {
       }
   }
 
-  private var scrollView: some View {
+  private var playerList: some View {
     ScrollView(showsIndicators: false) {
       ForEach(players) { player in
         NavigationLink(destination: PlayerDetailView.init(player: player)) {
