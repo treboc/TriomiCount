@@ -25,7 +25,8 @@ final class AddNewPlayerViewModel: ObservableObject {
   private func subscribeToTextfieldText() {
     $nameTextFieldText
       .dropFirst()
-      .debounce(for: 0.2, scheduler: RunLoop.main)
+      .removeDuplicates()
+      .debounce(for: 0.1, scheduler: RunLoop.main)
       .sink { [unowned self] _ in
         self.nameValidationState = self.validate()
       }
@@ -42,8 +43,7 @@ final class AddNewPlayerViewModel: ObservableObject {
 
   func createPlayer(_ completion: () -> Void) {
     guard nameValidationState == .isValid else { return }
-    let name = nameTextFieldText.trimmingCharacters(in: .whitespacesAndNewlines)
-    PlayerService.addNewPlayer(name, favoriteColor: favoriteColor)
+    PlayerService.addNewPlayer(nameTextFieldText, favoriteColor: favoriteColor)
     completion()
   }
 

@@ -6,31 +6,24 @@
 //
 
 import Combine
-import Introspect
-import PageSheet
 import SwiftUI
 import SFSafeSymbols
 
 struct AddNewPlayerView: View {
   @Environment(\.dismiss) var dismiss
   @StateObject private var viewModel = AddNewPlayerViewModel()
+  @FocusState private var nameTextFieldIsFocused
 
   var body: some View {
-    ZStack {
-      Color.primaryBackground
-        .ignoresSafeArea()
-
-      VStack(alignment: .leading, spacing: 30) {
-        textFieldLabel
-        nameTextField
-        FavoriteColorPicker(favoriteColor: $viewModel.favoriteColor)
-        createPlayerButton
-      }
-      .padding(.horizontal)
+    VStack(alignment: .leading, spacing: 30) {
+      textFieldLabel
+      nameTextField
+      FavoriteColorPicker(favoriteColor: $viewModel.favoriteColor)
+      createPlayerButton
     }
-    .sheetPreference(.detents([PageSheet.Detent.medium()]))
-    .sheetPreference(.cornerRadius(Constants.cornerRadius))
-    .sheetPreference(.grabberVisible(true))
+    .padding()
+    .presentationDetents([.medium])
+    .presentationDragIndicator(.visible)
   }
 }
 
@@ -65,10 +58,11 @@ extension AddNewPlayerView {
       .onSubmit {
         viewModel.createPlayer(dismiss.callAsFunction)
       }
-      .introspectTextField { $0.becomeFirstResponder() }
       .overlay(viewModel.nameValidationState == .isValid
                ? nil
                : deleteButton.transition(.opacity), alignment: .trailing)
+      .focused($nameTextFieldIsFocused)
+      .onAppear { nameTextFieldIsFocused = true }
   }
 
   private var createPlayerButton: some View {
