@@ -33,15 +33,6 @@ struct SessionsListView: View {
 }
 
 extension SessionsListView {
-  private var background: some View {
-    LinearGradient(colors: [.primaryBackground.opacity(0.8), .primaryBackground.opacity(0.2)],
-                   startPoint: .top,
-                   endPoint: .bottom)
-    .ignoresSafeArea()
-  }
-
-  private var scrollView: some View {
-    ScrollView(showsIndicators: false) {
       ForEach(sessions) { session in
         NavigationLink(destination: SessionDetailView(session: session)) {
           SessionListRowView(session: session)

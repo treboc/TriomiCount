@@ -41,13 +41,6 @@ struct PlayerListView: View {
 }
 
 extension PlayerListView {
-  private var background: some View {
-    LinearGradient(colors: [.primaryBackground.opacity(0.8), .primaryBackground.opacity(0.2)],
-                   startPoint: .top,
-                   endPoint: .bottom)
-    .ignoresSafeArea()
-  }
-
   private var sortView: some View {
     PlayerListSortView(selectedSortItem: $selectedSort)
       .labelStyle(.iconOnly)
