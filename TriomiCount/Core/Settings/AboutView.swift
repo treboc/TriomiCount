@@ -35,8 +35,10 @@ struct AboutView: View {
         Link("treb0c @ Twitter", destination: Constants.twitterURL)
       }
     }
-    .frame(maxWidth: .infinity, alignment: .center)
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     .tint(.accentColor)
+    .ignoresSafeArea()
+    .background(Background())
   }
 }
 
