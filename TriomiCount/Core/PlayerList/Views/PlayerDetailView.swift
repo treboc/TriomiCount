@@ -12,48 +12,46 @@ struct PlayerDetailView: View {
   @State private var showDeletePlayerAlert: Bool = false
 
   var body: some View {
-    ZStack {
-      Background()
-
-      VStack {
-        PlayerInitialsCircle(player: player)
-
-        ScrollView(.vertical, showsIndicators: false) {
-          VStack {
-            PlayerDetailSection(L10n.PlayerDetailView.highscore) {
-              "\(player.wrappedHighscore)"
-            }
-            PlayerDetailSection(L10n.PlayerDetailView.lastScore) {
-              "\(player.wrappedLastScore)"
-            }
-            PlayerDetailSection(L10n.PlayerDetailView.createdOn) {
-              "\(player.wrappedCreatedOn.formatted(date: .abbreviated, time: .omitted))"
-            }
-            PlayerDetailSection(L10n.PlayerDetailView.numberOfSessionsWon) {
-              "\(player.sessionsWon)"
-            }
-            PlayerDetailSection(L10n.PlayerDetailView.numberOfSessionsPlayed) {
-              "\(player.sessionsPlayed)"
-            }
-
-            Button(L10n.PlayerDetailView.DeleteButton.title, role: .destructive) {
-              showDeletePlayerAlert.toggle()
-            }
-            .buttonStyle(ShadowedStyle(role: .destructive))
-            .padding(.horizontal, 50)
-            .padding(.top)
+    VStack(spacing: 0) {
+      PlayerInitialsCircle(player: player)
+      RectangularDivider()
+      ScrollView(.vertical, showsIndicators: false) {
+        VStack {
+          PlayerDetailSection(L10n.PlayerDetailView.highscore) {
+            "\(player.wrappedHighscore)"
           }
-          .padding(.horizontal, 20)
+          PlayerDetailSection(L10n.PlayerDetailView.lastScore) {
+            "\(player.wrappedLastScore)"
+          }
+          PlayerDetailSection(L10n.PlayerDetailView.createdOn) {
+            "\(player.wrappedCreatedOn.formatted(date: .abbreviated, time: .omitted))"
+          }
+          PlayerDetailSection(L10n.PlayerDetailView.numberOfSessionsWon) {
+            "\(player.sessionsWon)"
+          }
+          PlayerDetailSection(L10n.PlayerDetailView.numberOfSessionsPlayed) {
+            "\(player.sessionsPlayed)"
+          }
+
+          Button(L10n.PlayerDetailView.DeleteButton.title, role: .destructive) {
+            showDeletePlayerAlert.toggle()
+          }
+          .buttonStyle(ShadowedStyle(role: .destructive))
+          .padding(.horizontal, 50)
+          .padding(.top)
         }
+        .padding(.horizontal, 20)
+        .padding(.top, 10)
       }
-      .padding(.vertical)
-      .alert(L10n.PlayerDetailView.DeletePlayer.alertTitle, isPresented: $showDeletePlayerAlert, actions: {
-        Button(L10n.PlayerDetailView.DeletePlayer.confirmationButtonTitle, role: .destructive) { deletePlayerAndDismissView() }
-      }, message: {
-        Text(L10n.PlayerDetailView.DeletePlayer.alertMessage(player.wrappedName))
-      })
     }
+    .padding(.vertical)
+    .alert(L10n.PlayerDetailView.DeletePlayer.alertTitle, isPresented: $showDeletePlayerAlert, actions: {
+      Button(L10n.PlayerDetailView.DeletePlayer.confirmationButtonTitle, role: .destructive) { deletePlayerAndDismissView() }
+    }, message: {
+      Text(L10n.PlayerDetailView.DeletePlayer.alertMessage(player.wrappedName))
+    })
     .navigationBarTitleDisplayMode(.inline)
+    .gradientBackground()
   }
 
   func deletePlayerAndDismissView() {
@@ -119,6 +117,7 @@ extension PlayerDetailView {
           )
         Text(player.wrappedName)
       }
+      .padding(.bottom, 10)
     }
   }
 }

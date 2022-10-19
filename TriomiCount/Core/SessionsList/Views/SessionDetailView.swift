@@ -14,39 +14,38 @@ struct SessionDetailView: View {
   var sessionScores: [Dictionary<String, Int16>.Element]
 
   var body: some View {
-    ZStack(alignment: .topLeading) {
-      Background()
+    VStack(alignment: .center) {
+      VStack {
+        SessionDetailSection(L10n.SessionDetailView.playedWith) {
+          Text(session.playedBy())
+            .multilineTextAlignment(.leading)
+        }
 
-      VStack(alignment: .center) {
-        VStack {
-          SessionDetailSection(L10n.SessionDetailView.playedWith) {
-            Text(session.playedBy())
-              .multilineTextAlignment(.leading)
+        if session.winner != nil {
+          SessionDetailSection(L10n.SessionDetailView.won) {
+            Text(session.winner ?? "Unknown")
           }
+        }
 
-          if session.winner != nil {
-            SessionDetailSection(L10n.SessionDetailView.won) {
-              Text(session.winner ?? "Unknown")
-            }
-          }
-
-          SessionDetailSection(L10n.SessionDetailView.points) {
-            VStack(alignment: .leading) {
-              ForEach(sessionScores, id: \.key) { key, value in
-                HStack {
-                  Text(key)
-                    .frame(minWidth: 50, alignment: .leading)
-                  Spacer()
-                  Text("\(value)")
-                    .frame(minWidth: 50, alignment: .trailing)
-                }
+        SessionDetailSection(L10n.SessionDetailView.points) {
+          VStack(alignment: .leading) {
+            ForEach(sessionScores, id: \.key) { key, value in
+              HStack {
+                Text(key)
+                  .frame(minWidth: 50, alignment: .leading)
+                Spacer()
+                Text("\(value)")
+                  .frame(minWidth: 50, alignment: .trailing)
               }
             }
           }
         }
-        .padding(.horizontal)
       }
+      .padding(.horizontal)
+
+      Spacer()
     }
+    .gradientBackground()
     .navigationTitle("Session #\(session.sessionCounter)")
     .roundedNavigationTitle()
   }

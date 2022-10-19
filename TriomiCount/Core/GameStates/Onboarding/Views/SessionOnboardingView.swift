@@ -15,11 +15,9 @@ struct SessionOnboardingView: View {
   var body: some View {
     NavigationView {
       ZStack {
-        Background()
-
-        VStack {
+        VStack(spacing: 0) {
           resumeLastSessionButton
-          Divider()
+          RectangularDivider()
           playerList
         }
         .overlay(onboardingText)
@@ -54,6 +52,7 @@ extension SessionOnboardingView {
         .padding(.horizontal)
       }
       .padding(.bottom, 20)
+      .padding(.top, 10)
     }
   }
 
@@ -78,6 +77,7 @@ extension SessionOnboardingView {
     }
     .buttonStyle(.shadowed)
     .padding(.horizontal)
+    .padding(.bottom, 10)
     .disabled(viewModel.startSessionButtonIsDisabled)
   }
 

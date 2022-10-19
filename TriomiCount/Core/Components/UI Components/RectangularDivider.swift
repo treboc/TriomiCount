@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct RectangularDivider: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+  var body: some View {
+    Rectangle()
+      .fill(Color.accentColor)
+      .frame(height: 2)
+      .frame(maxWidth: .infinity)
+      .shadow(radius: 3, y: 3)
+  }
 }
 
 struct RectangularDivider_Previews: PreviewProvider {
-    static var previews: some View {
-        RectangularDivider()
-    }
+  static var previews: some View {
+    RectangularDivider()
+  }
 }
