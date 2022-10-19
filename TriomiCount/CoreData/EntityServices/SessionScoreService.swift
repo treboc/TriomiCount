@@ -21,5 +21,4 @@ public class SessionScoreService: EntityServiceBase {
 
     return dict
   }
-
 }

@@ -30,7 +30,7 @@
 "sessionView.endSessionButton.labelText" = "Runde beenden";
 
 // PointsSubmitView
-"pointsSubmitView.labelText %@" = "%@,\nwie viele Punkte hast du noch auf dem Brett?";
+"pointsSubmitView.labelText %@" = "%@, wie viele Punkte hast du noch auf dem Brett?";
 "pointsSubmitView.overlayAlertMessage" = "Bitte gib eine Zahl ein!";
 
 // SessionResultsView
@@ -134,7 +134,7 @@
 "settings" = "Einstellungen";
 
 // Buttons
-"button.backToMainMenu" = "Zurück zum Hauptmenü";
+"button.backToMainMenu" = "Zurück zum Übersicht";
 "button.addNewPlayer" = "Spieler hinzufügen";
 "button.startNewSession" = "Neues Spiel Starten";
 "button.resumeLastSession" = "Zurück zum letzten Spiel";

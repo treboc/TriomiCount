@@ -30,6 +30,7 @@ struct PointsSubmitView: View {
           if viewModel.playerToAskForPointsIndex != 0 {
             Button(L10n.back) {
               viewModel.playerToAskForPointsIndex -= 1
+              endPoints.removeAll()
             }
           }
 
@@ -72,17 +73,18 @@ struct PointsSubmitView_Previews: PreviewProvider {
 
 extension PointsSubmitView {
   private var textField: some View {
-    TextField("e.g. 42", text: $endPoints)
-      .padding(.leading, 10)
-      .frame(height: Constants.buttonHeight)
-      .frame(maxWidth: .infinity)
-      .background(Color("SecondaryAccentColor").opacity(0.3))
-      .cornerRadius(Constants.cornerRadius)
+    TextField("", text: $endPoints)
+      .placeholder(when: endPoints.isEmpty, placeholder: {
+        Text("e.g. 42")
+          .foregroundColor(.gray)
+      })
+      .overlayedAlert(with: L10n.PointsSubmitView.overlayAlertMessage,
+                      alertIsShown: !endPointsIsInt)
+      .animation(.default, value: endPointsIsInt)
+      .borderedTextFieldStyle()
       .keyboardType(.numberPad)
       .submitLabel(.go)
-//      .introspectTextField { $0.becomeFirstResponder() }
       .focused($textFieldIsFocused)
-      .overlayedAlert(with: L10n.PointsSubmitView.overlayAlertMessage, alertIsShown: !endPointsIsInt)
       .onSubmit(addPoints)
       .onChange(of: endPoints, perform: checkEndpointsIsInt)
     /* Make sure the maximum input is 999 (no more as 3 digits),

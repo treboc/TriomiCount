@@ -44,6 +44,7 @@ extension SessionsListView {
       .padding()
       .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
       .padding()
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
   }
 
   private var sessionsList: some View {

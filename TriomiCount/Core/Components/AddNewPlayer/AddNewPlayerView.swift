@@ -54,6 +54,7 @@ extension AddNewPlayerView {
       .textInputAutocapitalization(.words)
       .disableAutocorrection(true)
       .keyboardType(.alphabet)
+      .scrollDismissesKeyboard(.immediately)
       .submitLabel(.done)
       .onSubmit {
         viewModel.createPlayer(dismiss.callAsFunction)

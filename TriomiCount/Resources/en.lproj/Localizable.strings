@@ -30,7 +30,7 @@
 "sessionView.endSessionButton.labelText" = "End Session";
 
 // PointsSubmitView
-"pointsSubmitView.labelText %@" = "How much points do you have left,\n%@?";
+"pointsSubmitView.labelText %@" = "How much points do you have left, %@?";
 "pointsSubmitView.overlayAlertMessage" = "Please enter a valid number!";
 
 // SessionResultsView
