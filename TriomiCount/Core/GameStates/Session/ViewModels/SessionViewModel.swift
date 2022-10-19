@@ -69,7 +69,8 @@ class SessionViewModel: ObservableObject {
   }
 
   private func subscribeToSession() {
-    session.publisher(for: \.turns)
+    session
+      .publisher(for: \.turns)
       .receive(on: RunLoop.main)
       .sink { [weak self] turns in
         guard let turns = turns else { return }

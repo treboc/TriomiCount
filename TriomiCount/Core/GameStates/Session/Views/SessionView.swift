@@ -114,11 +114,14 @@ extension SessionView {
         .padding()
         .frame(maxWidth: .infinity)
         .transition(.move(edge: .leading))
-        .overlay(viewModel.turnHasChanges
-                 ? resetButton
-          .scaleEffect(0.8)
-          .transition(.opacity)
-          .offset(y: -30) : nil, alignment: .topTrailing )
+        .overlay(
+          viewModel.turnHasChanges
+          ? resetButton
+            .scaleEffect(0.8)
+            .transition(.opacity)
+            .offset(y: -30)
+          : nil,
+          alignment: .topTrailing)
         .animation(.easeIn(duration: 0.2), value: viewModel.turnHasChanges)
       }
 
