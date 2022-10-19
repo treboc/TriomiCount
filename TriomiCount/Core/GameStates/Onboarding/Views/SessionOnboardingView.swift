@@ -24,6 +24,7 @@ struct SessionOnboardingView: View {
         }
         .overlay(onboardingText)
       }
+      .gradientBackground()
       .fullScreenCover(isPresented: $viewModel.sessionIsShown,
                        onDismiss: viewModel.checkForUnfinishedSession) {
         SessionMainView(session: viewModel.session!) }

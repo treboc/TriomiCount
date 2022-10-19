@@ -38,7 +38,7 @@ struct AboutView: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     .tint(.accentColor)
     .ignoresSafeArea()
-    .background(Background())
+    .gradientBackground()
   }
 }
 

@@ -62,7 +62,7 @@
 		8A22B9662878D4FB0045E09D /* RoundedNavigationTitle-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A22B9652878D4FB0045E09D /* RoundedNavigationTitle-ViewModifier.swift */; };
 		8A22B9682878D5140045E09D /* BorderedTextField-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A22B9672878D5140045E09D /* BorderedTextField-ViewModifier.swift */; };
 		8A2C8CF42827A7DD005136AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C8CF32827A7DD005136AD /* Constants.swift */; };
-		8A3525A8287202DF00393BCD /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3525A7287202DF00393BCD /* Background.swift */; };
+		8A3525A8287202DF00393BCD /* GradientBackground-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3525A7287202DF00393BCD /* GradientBackground-ViewModifier.swift */; };
 		8A5D706B288A039E00B5671B /* AppearancePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5D706A288A039E00B5671B /* AppearancePicker.swift */; };
 		8A5D847228286B8C00286F14 /* GlassStyledHeaderView-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5D847128286B8C00286F14 /* GlassStyledHeaderView-ViewModifier.swift */; };
 		8A5E01102813491E00703CE5 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E010F2813491E00703CE5 /* L10n.swift */; };
@@ -83,7 +83,6 @@
 		8AC4D137282DB81900C227F6 /* Button+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4D136282DB81900C227F6 /* Button+Extension.swift */; };
 		8ACA06E627F593B6000F6D4C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ACA06E527F593B6000F6D4C /* Launch Screen.storyboard */; };
 		8ACA06E827F596A0000F6D4C /* SessionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACA06E727F596A0000F6D4C /* SessionDetailView.swift */; };
-		8ACA06EA27F5A550000F6D4C /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACA06E927F5A550000F6D4C /* Rules.swift */; };
 		8AD1397B28379F1300A16EB0 /* AddNewPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1397A28379F1300A16EB0 /* AddNewPlayerViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -154,7 +153,7 @@
 		8A22B9652878D4FB0045E09D /* RoundedNavigationTitle-ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoundedNavigationTitle-ViewModifier.swift"; sourceTree = "<group>"; };
 		8A22B9672878D5140045E09D /* BorderedTextField-ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BorderedTextField-ViewModifier.swift"; sourceTree = "<group>"; };
 		8A2C8CF32827A7DD005136AD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		8A3525A7287202DF00393BCD /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
+		8A3525A7287202DF00393BCD /* GradientBackground-ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GradientBackground-ViewModifier.swift"; sourceTree = "<group>"; };
 		8A3525AF287205C200393BCD /* TriomiCountTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TriomiCountTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A5D706A288A039E00B5671B /* AppearancePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePicker.swift; sourceTree = "<group>"; };
 		8A5D847128286B8C00286F14 /* GlassStyledHeaderView-ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GlassStyledHeaderView-ViewModifier.swift"; sourceTree = "<group>"; };
@@ -235,6 +234,8 @@
 		083512A027DC13E500065228 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
+				45110C4828FFDE4C00E83143 /* RectangularDivider.swift */,
+				08B3E2F227B9AA02009E4DD7 /* Logo.swift */,
 				8A0D1EB028619A0500B392E7 /* AddPlayerToolbarButton.swift */,
 				8A5D706C288A051300B5671B /* ViewModifier */,
 				8A858C8327FF5C20002385E1 /* ButtonStyles */,
@@ -465,9 +466,6 @@
 				8A5E01132815A34800703CE5 /* AppearanceManager.swift */,
 				08AD236027AA912600BBDB16 /* HapticsManager.swift */,
 				8A2C8CF32827A7DD005136AD /* Constants.swift */,
-				08B3E2F227B9AA02009E4DD7 /* Logo.swift */,
-				8A3525A7287202DF00393BCD /* Background.swift */,
-				8ACA06E927F5A550000F6D4C /* Rules.swift */,
 				8AD1397C28379F4F00A16EB0 /* AddNewPlayer */,
 				087179DE27ADDD890005C074 /* Extensions */,
 				083512A027DC13E500065228 /* UI Components */,
@@ -499,6 +497,7 @@
 		8A5D706C288A051300B5671B /* ViewModifier */ = {
 			isa = PBXGroup;
 			children = (
+				8A3525A7287202DF00393BCD /* GradientBackground-ViewModifier.swift */,
 				8A5D847128286B8C00286F14 /* GlassStyledHeaderView-ViewModifier.swift */,
 				8A22B9652878D4FB0045E09D /* RoundedNavigationTitle-ViewModifier.swift */,
 				8A22B9672878D5140045E09D /* BorderedTextField-ViewModifier.swift */,
@@ -716,7 +715,6 @@
 				085B664427B02D00000CCC99 /* String+Extension.swift in Sources */,
 				8AB017A127FC3A3F00FFEF46 /* OverlayAlert-ViewModifier.swift in Sources */,
 				8AB0179D27FBABE900FFEF46 /* SessionListRowView.swift in Sources */,
-				8ACA06EA27F5A550000F6D4C /* Rules.swift in Sources */,
 				083BFD5027CABB7200B5BE50 /* PointsSubmitView.swift in Sources */,
 				8A5E01102813491E00703CE5 /* L10n.swift in Sources */,
 				8A5E011B2816943500703CE5 /* AboutView.swift in Sources */,
@@ -749,7 +747,7 @@
 				08BBB1F627A08F98001CD3DF /* SessionOnboardingView.swift in Sources */,
 				8A768C91288BEF6B005582BF /* SessionScoreService.swift in Sources */,
 				085924CF27C7685400364259 /* PlayerListSortView.swift in Sources */,
-				8A3525A8287202DF00393BCD /* Background.swift in Sources */,
+				8A3525A8287202DF00393BCD /* GradientBackground-ViewModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

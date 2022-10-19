@@ -17,7 +17,6 @@ struct SessionsListView: View {
   var body: some View {
     NavigationView {
       ZStack {
-        Background()
         if sessions.isEmpty {
           Text(L10n.SessionListView.noSessionInfo)
             .multilineTextAlignment(.center)
@@ -29,6 +28,7 @@ struct SessionsListView: View {
           sessionsList
         }
       }
+      .gradientBackground()
       .navigationTitle(L10n.sessions)
       .roundedNavigationTitle()
     }

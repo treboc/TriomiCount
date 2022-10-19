@@ -54,7 +54,7 @@ struct LegalNoticeView: View {
       .padding([.horizontal, .bottom])
     }
     .scrollContentBackground(.hidden)
-    .background(Background())
+    .gradientBackground()
     .navigationTitle(L10n.LegalNoticeView.title)
   }
 }

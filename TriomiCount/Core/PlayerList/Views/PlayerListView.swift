@@ -19,7 +19,6 @@ struct PlayerListView: View {
   var body: some View {
     NavigationView {
       ZStack {
-        Background()
         if players.isEmpty {
           Text(L10n.PlayerListView.noPlayersInfo)
             .multilineTextAlignment(.center)
@@ -31,6 +30,7 @@ struct PlayerListView: View {
           playerList
         }
       }
+      .gradientBackground()
       .sheet(isPresented: $newPlayerSheetIsShown, content: AddNewPlayerView.init)
       .navigationTitle(L10n.players)
       .roundedNavigationTitle()

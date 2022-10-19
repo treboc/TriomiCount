@@ -34,7 +34,7 @@ struct SettingsView: View {
         }
       }
       .scrollContentBackground(.hidden)
-      .background(Background())
+      .gradientBackground()
       .navigationTitle(L10n.SettingsView.title)
       .roundedNavigationTitle()
       .tint(.accentColor)
