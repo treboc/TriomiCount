@@ -11,35 +11,27 @@ struct SessionListRowView: View {
   let session: Session
 
   var body: some View {
-    ZStack(alignment: .topLeading) {
-      RoundedRectangle(cornerRadius: Constants.cornerRadius)
-        .fill(Color.primaryAccentColor)
-        .shadow(radius: 5)
+    HStack(alignment: .top) {
+      VStack(alignment: .leading, spacing: 3) {
+        Text("\(L10n.SessionListRowView.session) #\(session.sessionCounter)")
+          .font(.headline.bold())
 
-      HStack(alignment: .top) {
-        VStack(alignment: .leading, spacing: 3) {
-          Text("\(L10n.SessionListRowView.session) #\(session.sessionCounter)")
-            .font(.headline.bold())
-
-          HStack(alignment: .firstTextBaseline) {
-            Text(L10n.SessionListRowView.playedBy)
-              .fontWeight(.semibold)
-            Text(session.playedBy())
-              .multilineTextAlignment(.leading)
-          }
-          .font(.subheadline)
+        HStack(alignment: .firstTextBaseline) {
+          Text(L10n.SessionListRowView.playedBy)
+            .fontWeight(.semibold)
+          Text(session.playedBy())
+            .multilineTextAlignment(.leading)
         }
-
-        Spacer()
-
-        Text(session.startedOnAsString)
-          .font(.caption)
+        .font(.subheadline)
       }
-      .foregroundColor(.white)
-      .padding(.horizontal)
-      .padding(.vertical, 10)
+
+      Spacer()
+
+      Text(session.startedOnAsString)
+        .font(.caption)
     }
     .frame(maxWidth: .infinity)
-    .listRowSeparator(.hidden)
+    .padding()
+    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
   }
 }

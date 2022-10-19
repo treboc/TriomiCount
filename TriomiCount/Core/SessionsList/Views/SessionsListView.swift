@@ -43,13 +43,16 @@ struct SessionsListView: View {
 
 extension SessionsListView {
   private var sessionsList: some View {
-    List {
+    ScrollView {
       ForEach(sessions) { session in
         NavigationLink(destination: SessionDetailView(session: session)) {
           SessionListRowView(session: session)
         }
         .padding(.horizontal)
+        .buttonStyle(.plain)
+        .foregroundColor(.accentColor)
       }
     }
+    .scrollContentBackground(.hidden)
   }
 }

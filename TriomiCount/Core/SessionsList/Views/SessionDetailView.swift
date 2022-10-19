@@ -69,12 +69,12 @@ extension SessionDetailView {
 
     var body: some View {
       HStack {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
           Text(sectionTitle.uppercased())
             .font(.caption)
+            .foregroundColor(.secondary)
             .padding(.bottom, 2)
           content
-            .padding(.leading, 10)
         }
         Spacer()
       }
