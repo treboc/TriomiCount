@@ -49,6 +49,7 @@
 		08BE48F7279CA82E00EA431F /* SessionMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE48F6279CA82E00EA431F /* SessionMainView.swift */; };
 		08D562A427B30BA7009C72B1 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D562A327B30BA7009C72B1 /* View+Extension.swift */; };
 		08F6F36127E681A200FFBCFB /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F36027E681A200FFBCFB /* SessionView.swift */; };
+		45110C4728FFD21200E83143 /* LegalNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45110C4628FFD21200E83143 /* LegalNoticeView.swift */; };
 		8A06D67F282265540049EA9A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D67E282265540049EA9A /* UIColor+Extension.swift */; };
 		8A06D681282273F00049EA9A /* UIColorValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */; };
 		8A06D6832824FA160049EA9A /* RoundedCorner-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D6822824FA160049EA9A /* RoundedCorner-ViewModifier.swift */; };
@@ -141,6 +142,7 @@
 		08BE48F6279CA82E00EA431F /* SessionMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionMainView.swift; sourceTree = "<group>"; };
 		08D562A327B30BA7009C72B1 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		08F6F36027E681A200FFBCFB /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
+		45110C4628FFD21200E83143 /* LegalNoticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalNoticeView.swift; sourceTree = "<group>"; };
 		8A06D67E282265540049EA9A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorValueTransformer.swift; sourceTree = "<group>"; };
 		8A06D6822824FA160049EA9A /* RoundedCorner-ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoundedCorner-ViewModifier.swift"; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 				08A2C64227A34BBB0076C196 /* SettingsView.swift */,
 				8A5D706A288A039E00B5671B /* AppearancePicker.swift */,
 				8A5E011A2816943500703CE5 /* AboutView.swift */,
+				45110C4628FFD21200E83143 /* LegalNoticeView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -739,6 +742,7 @@
 				8A071650282CEE8B00AC8C87 /* Collection+Extension.swift in Sources */,
 				083512A927DC15DA00065228 /* OffsetStyle.swift in Sources */,
 				8A06D67F282265540049EA9A /* UIColor+Extension.swift in Sources */,
+				45110C4728FFD21200E83143 /* LegalNoticeView.swift in Sources */,
 				8A5D706B288A039E00B5671B /* AppearancePicker.swift in Sources */,
 				083974DB27D294F7002B90E4 /* SessionsListView.swift in Sources */,
 				8AB0179F27FC1F5B00FFEF46 /* BonusEventPicker.swift in Sources */,

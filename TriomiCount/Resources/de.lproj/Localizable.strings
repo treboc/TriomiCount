@@ -86,6 +86,9 @@
 "settingsView.idleDimmingDisabled.pickerLabelText" = "Display aktiv lassen";
 "settingsView.idleDimmingDisabled.importantMessage" = "Aktivieren, um das Display während eines Spiels aktiv zu lassen. Dies wirkt sich negativ auf die Akkuleistung aus.";
 
+// LegalNoticeView
+"legalNoticeView.title" = "Impressium";
+
 // Alerts
 "exitSessionAlert.title" = "Bist du sicher?";
 "exitSessionAlert.message" = "Du bist dabei, dass Spiel zu verlassen. Es könnte möglicherweise nicht gespeichert sein.";

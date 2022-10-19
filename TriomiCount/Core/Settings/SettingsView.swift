@@ -28,7 +28,7 @@ struct SettingsView: View {
         Section {
           NavigationLink("About", destination: AboutView.init)
           reviewLink
-          NavigationLink("About", destination: AboutView.init)
+          NavigationLink(L10n.LegalNoticeView.title, destination: LegalNoticeView.init)
         }
       }
       .scrollContentBackground(.hidden)

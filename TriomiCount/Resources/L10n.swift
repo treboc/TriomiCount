@@ -86,6 +86,10 @@ internal enum L10n {
     /// Are you sure?
     internal static let title = L10n.tr("Localizable", "exitSessionAlert.title", fallback: "Are you sure?")
   }
+  internal enum LegalNoticeView {
+    /// Legal Notice
+    internal static let title = L10n.tr("Localizable", "legalNoticeView.title", fallback: "Legal Notice")
+  }
   internal enum PlayerDetailView {
     /// Created On
     internal static let createdOn = L10n.tr("Localizable", "playerDetailView.createdOn", fallback: "Created On")

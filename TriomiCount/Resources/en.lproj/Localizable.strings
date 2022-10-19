@@ -87,6 +87,9 @@
 "settingsView.idleDimmingDisabled.pickerLabelText" = "Disable screen dimming in sessions";
 "settingsView.idleDimmingDisabled.importantMessage" = "IMPORTANT: This will reduce your battery life.";
 
+// LegalNoticeView
+"legalNoticeView.title" = "Legal Notice";
+
 // ExitSessionAlert
 "exitSessionAlert.title" = "Are you sure?";
 "exitSessionAlert.message" = "You're about to leave the session. It's possible that it is not saved..";
