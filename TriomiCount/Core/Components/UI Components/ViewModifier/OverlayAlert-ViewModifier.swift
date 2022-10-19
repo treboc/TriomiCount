@@ -19,7 +19,7 @@ struct OverlayedAlert: ViewModifier {
           .font(.subheadline)
           .foregroundColor(.red)
           .offset(y: 40)
-          .transition(.move(edge: .leading))
+          .transition(.opacity.combined(with: .move(edge: .leading)))
         : nil ,
         alignment: .bottomLeading
       )

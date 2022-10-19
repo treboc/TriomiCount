@@ -28,7 +28,9 @@ final class AddNewPlayerViewModel: ObservableObject {
       .removeDuplicates()
       .debounce(for: 0.1, scheduler: RunLoop.main)
       .sink { [unowned self] _ in
-        self.nameValidationState = self.validate()
+        withAnimation {
+          self.nameValidationState = self.validate()
+        }
       }
       .store(in: &cancellables)
   }
