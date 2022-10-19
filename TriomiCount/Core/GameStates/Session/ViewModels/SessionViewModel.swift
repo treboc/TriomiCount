@@ -156,6 +156,10 @@ class SessionViewModel: ObservableObject {
     playedCard = lastTurn.playedCard
   }
 
+  func triggerHaptics() {
+    HapticManager.shared.impact(style: .light)
+  }
+
   // MARK: - SessionState Ending
   // Alert for ending and exiting the session
   @Published var showEndSessionAlert: Bool = false

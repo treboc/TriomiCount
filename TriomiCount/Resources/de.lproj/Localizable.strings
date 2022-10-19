@@ -82,8 +82,9 @@
 "settingsView.colorScheme.light" = "Hell";
 "settingsView.colorScheme.dark" = "Dunkel";
 "settingsView.colorScheme.system" = "Automatisch";
+"settingsView.hapticsEnabled.toggleLabelText" = "Haptisches Feedback";
 "settingsView.idleDimmingDisabled.options" = "Optionen";
-"settingsView.idleDimmingDisabled.pickerLabelText" = "Display aktiv lassen";
+"settingsView.idleDimmingDisabled.toggleLabelText" = "Display aktiv lassen";
 "settingsView.idleDimmingDisabled.importantMessage" = "Aktivieren, um das Display während eines Spiels aktiv zu lassen. Dies wirkt sich negativ auf die Akkuleistung aus.";
 
 // LegalNoticeView

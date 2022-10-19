@@ -150,9 +150,7 @@ extension SessionView {
           .monospacedDigit()
           .frame(minWidth: 20)
         Slider(value: $viewModel.scoreSliderValue, in: 0...15, step: 1)
-          .onChange(of: viewModel.scoreSliderValue) { _ in
-            HapticManager.shared.impact(style: .light)
-          }
+          .onChange(of: viewModel.scoreSliderValue) { _ in viewModel.triggerHaptics() }
           .tint(.primaryAccentColor)
       }
       .padding(.horizontal)

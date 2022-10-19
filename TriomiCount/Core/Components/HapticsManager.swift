@@ -11,12 +11,16 @@ class HapticManager {
   static let shared = HapticManager()
 
   func notification(type: UINotificationFeedbackGenerator.FeedbackType) {
-    let generator = UINotificationFeedbackGenerator()
-    generator.notificationOccurred(type)
+    if UserDefaults.standard.bool(forKey: Constants.AppStorageKeys.hapticsEnabled) {
+      let generator = UINotificationFeedbackGenerator()
+      generator.notificationOccurred(type)
+    }
   }
 
   func impact(style: UIImpactFeedbackGenerator.FeedbackStyle) {
-    let generator = UIImpactFeedbackGenerator(style: style)
-    generator.impactOccurred()
+    if UserDefaults.standard.bool(forKey: Constants.AppStorageKeys.hapticsEnabled) {
+      let generator = UIImpactFeedbackGenerator(style: style)
+      generator.impactOccurred()
+    }
   }
 }

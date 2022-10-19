@@ -9,12 +9,14 @@ import SwiftUI
 
 struct SettingsView: View {
   @AppStorage(Constants.AppStorageKeys.idleDimmingDisabled) private var idleDimmingDisabled: Bool = true
+  @AppStorage(Constants.AppStorageKeys.hapticsEnabled) private var hapticsEnabled: Bool = true
 
   var body: some View {
     NavigationView {
       Form {
         Section {
           AppearancePicker()
+          Toggle(L10n.SettingsView.HapticsEnabled.toggleLabelText, isOn: $hapticsEnabled)
           Toggle(L10n.SettingsView.IdleDimmingDisabled.toggleLabelText, isOn: $idleDimmingDisabled)
         } header: {
           Text(L10n.SettingsView.IdleDimmingDisabled.options)

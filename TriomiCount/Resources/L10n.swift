@@ -304,13 +304,17 @@ internal enum L10n {
       /// Appearance
       internal static let title = L10n.tr("Localizable", "settingsView.colorScheme.title", fallback: "Appearance")
     }
+    internal enum HapticsEnabled {
+      /// Haptic Feedback
+      internal static let toggleLabelText = L10n.tr("Localizable", "settingsView.hapticsEnabled.toggleLabelText", fallback: "Haptic Feedback")
+    }
     internal enum IdleDimmingDisabled {
       /// IMPORTANT: This will reduce your battery life.
       internal static let importantMessage = L10n.tr("Localizable", "settingsView.idleDimmingDisabled.importantMessage", fallback: "IMPORTANT: This will reduce your battery life.")
       /// Options
       internal static let options = L10n.tr("Localizable", "settingsView.idleDimmingDisabled.options", fallback: "Options")
       /// Disable screen dimming in sessions
-      internal static let pickerLabelText = L10n.tr("Localizable", "settingsView.idleDimmingDisabled.pickerLabelText", fallback: "Disable screen dimming in sessions")
+      internal static let toggleLabelText = L10n.tr("Localizable", "settingsView.idleDimmingDisabled.toggleLabelText", fallback: "Disable screen dimming in sessions")
     }
   }
 }
