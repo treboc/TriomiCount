@@ -10,7 +10,7 @@ import SwiftUI
 struct SessionView: View {
   @EnvironmentObject var viewModel: SessionViewModel
   @Environment(\.dismiss) var dismiss
-  @AppStorage(SettingsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
+  @AppStorage(Constants.AppStorageKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
 
   @State private var sessionOverviewIsShown: Bool = false
   @State private var menuIsShown: Bool = false

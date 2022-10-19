@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct SettingsView: View {
-  @AppStorage(SettingsKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
+  @AppStorage(Constants.AppStorageKeys.idleDimmingDisabled) private var idleDimmingDisabled: Bool = true
 
   var body: some View {
     NavigationView {
       Form {
         Section {
           AppearancePicker()
-          Toggle(L10n.SettingsView.IdleDimmingDisabled.pickerLabelText, isOn: $idleDimmingDisabled)
+          Toggle(L10n.SettingsView.IdleDimmingDisabled.toggleLabelText, isOn: $idleDimmingDisabled)
         } header: {
           Text(L10n.SettingsView.IdleDimmingDisabled.options)
         } footer: {

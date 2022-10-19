@@ -65,7 +65,6 @@
 		8A5D706B288A039E00B5671B /* AppearancePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5D706A288A039E00B5671B /* AppearancePicker.swift */; };
 		8A5D847228286B8C00286F14 /* GlassStyledHeaderView-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5D847128286B8C00286F14 /* GlassStyledHeaderView-ViewModifier.swift */; };
 		8A5E01102813491E00703CE5 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E010F2813491E00703CE5 /* L10n.swift */; };
-		8A5E011228154B3200703CE5 /* SettingsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E011128154B3200703CE5 /* SettingsKeys.swift */; };
 		8A5E01142815A34800703CE5 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E01132815A34800703CE5 /* AppearanceManager.swift */; };
 		8A5E01162816929D00703CE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A5E01152816929D00703CE5 /* Images.xcassets */; };
 		8A5E011B2816943500703CE5 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E011A2816943500703CE5 /* AboutView.swift */; };
@@ -158,7 +157,6 @@
 		8A5D706A288A039E00B5671B /* AppearancePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePicker.swift; sourceTree = "<group>"; };
 		8A5D847128286B8C00286F14 /* GlassStyledHeaderView-ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GlassStyledHeaderView-ViewModifier.swift"; sourceTree = "<group>"; };
 		8A5E010F2813491E00703CE5 /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = L10n.swift; path = TriomiCount/Resources/L10n.swift; sourceTree = SOURCE_ROOT; };
-		8A5E011128154B3200703CE5 /* SettingsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsKeys.swift; sourceTree = "<group>"; };
 		8A5E01132815A34800703CE5 /* AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
 		8A5E01152816929D00703CE5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8A5E011A2816943500703CE5 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -514,7 +512,6 @@
 				08A2C64227A34BBB0076C196 /* SettingsView.swift */,
 				8A5D706A288A039E00B5671B /* AppearancePicker.swift */,
 				8A5E011A2816943500703CE5 /* AboutView.swift */,
-				8A5E011128154B3200703CE5 /* SettingsKeys.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -717,7 +714,6 @@
 				8AB017A127FC3A3F00FFEF46 /* OverlayAlert-ViewModifier.swift in Sources */,
 				8AB0179D27FBABE900FFEF46 /* SessionListRowView.swift in Sources */,
 				8ACA06EA27F5A550000F6D4C /* Rules.swift in Sources */,
-				8A5E011228154B3200703CE5 /* SettingsKeys.swift in Sources */,
 				083BFD5027CABB7200B5BE50 /* PointsSubmitView.swift in Sources */,
 				8A5E01102813491E00703CE5 /* L10n.swift in Sources */,
 				8A5E011B2816943500703CE5 /* AboutView.swift in Sources */,

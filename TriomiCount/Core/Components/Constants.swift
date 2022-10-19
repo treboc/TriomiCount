@@ -8,6 +8,13 @@
 import SwiftUI
 
 enum Constants {
+  enum AppStorageKeys {
+    // SettingsKeys for @AppStorage usage
+    static let selectedAppearance = "selectedAppearance"
+    static let idleDimmingDisabled = "idleDimmingDisabled"
+    static let hapticsEnabled = "hapticsEnabled"
+  }
+
   static let cornerRadius: CGFloat = 16
   static let shadowRadius: CGFloat = 3
   static let buttonHeight: CGFloat = 48
