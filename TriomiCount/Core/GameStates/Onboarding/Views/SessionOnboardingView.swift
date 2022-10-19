@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SessionOnboardingView: View {
   @StateObject var viewModel = SessionOnboardingViewModel()
-  @FetchRequest(sortDescriptors: PlayerListSort.default.descriptors, animation: .spring())
+  @FetchRequest(sortDescriptors: [], animation: .spring())
   var players: FetchedResults<Player>
 
   var body: some View {

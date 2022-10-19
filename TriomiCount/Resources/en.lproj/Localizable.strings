@@ -62,6 +62,11 @@
 // PlayerListView
 "playerListView.noPlayersInfo" = "No player created yet, start creating one by tapping the + in the top right corner.";
 
+// PlayerListSortView
+"playerListSortView.orderLabel.ascending" = "ascending";
+"playerListSortView.orderLabel.descending" = "descending";
+"playerListSortView.orderLabel.lastCreated" = "last created";
+
 // SessionListView
 "sessionListView.noSessionInfo" = "No games played yet. Come back later after you played a round or two, to see some details.";
 "sessionListView.button.backToMainMenu" = "Back to Main Menu";

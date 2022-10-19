@@ -10,21 +10,36 @@ import SFSafeSymbols
 
 struct PlayerListSortView: View {
   @Binding var selectedSortItem: PlayerListSort
-  let sorts: [PlayerListSort] = PlayerListSort.sorts
 
   var body: some View {
     Menu {
-      Picker("Sort By", selection: $selectedSortItem) {
-        ForEach(0..<sorts.count, id: \.self) { index in
-          SortMenuItem(sort: sorts[index]) { selectedSort in
-            selectedSortItem = selectedSort
+      Menu("Name") {
+        ForEach([PlayerListSort.nameAsc,
+                 PlayerListSort.nameDesc], id: \.hashValue) { sort in
+            Button {
+              selectedSortItem = sort
+            } label: {
+              Label(sort.sortItem.orderLabel, systemImage: sort.sortItem.image)
+            }
           }
-          .tag(sorts[index])
+      }
 
-          if index % 2 != 0 {
-            Divider()
+      Menu("Highscore") {
+        ForEach([PlayerListSort.highscoreAsc,
+                 PlayerListSort.highscoreDesc], id: \.hashValue) { sort in
+          Button {
+            selectedSortItem = sort
+          } label: {
+            Label(sort.sortItem.orderLabel, systemImage: sort.sortItem.image)
           }
         }
+      }
+
+      Button {
+        selectedSortItem = .lastCreated
+      } label: {
+        Label(PlayerListSort.lastCreated.sortItem.orderLabel,
+              systemImage: PlayerListSort.lastCreated.sortItem.image)
       }
     } label: {
       Label(
@@ -33,31 +48,5 @@ struct PlayerListSortView: View {
       .font(.system(.body, design: .rounded).bold())
       .foregroundColor(.accentColor)
     }
-  }
-}
-
-extension PlayerListSortView {
-  struct SortMenuItem: View {
-    let sort: PlayerListSort
-    let selectSort: ((PlayerListSort) -> Void)
-
-    var body: some View {
-      HStack {
-        Text(sort.name)
-        Spacer()
-        sort.image
-      }
-      .onTapGesture {
-        selectSort(sort)
-      }
-    }
-  }
-}
-
-struct PlayerListSortView_Previews: PreviewProvider {
-  @State static var sort = PlayerListSort.default
-
-  static var previews: some View {
-    PlayerListSortView(selectedSortItem: $sort)
   }
 }

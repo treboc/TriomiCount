@@ -10,10 +10,10 @@ import SwiftUI
 
 struct PlayerListView: View {
   @State private var newPlayerSheetIsShown: Bool = false
-  @State private var selectedSort: PlayerListSort = .default
+  @State private var selectedSort: PlayerListSort = .lastCreated
   @Environment(\.dismiss) private var dismiss
 
-  @FetchRequest(sortDescriptors: PlayerListSort.default.descriptors, animation: .spring())
+  @FetchRequest(sortDescriptors: [], animation: .spring())
   private var players: FetchedResults<Player>
 
   var body: some View {
@@ -41,14 +41,6 @@ struct PlayerListView: View {
 }
 
 extension PlayerListView {
-  private var sortView: some View {
-    PlayerListSortView(selectedSortItem: $selectedSort)
-      .labelStyle(.iconOnly)
-      .onChange(of: selectedSort) { _ in
-        players.sortDescriptors = selectedSort.descriptors
-      }
-  }
-
   private var playerList: some View {
     ScrollView(showsIndicators: false) {
       ForEach(players) { player in
@@ -69,6 +61,14 @@ extension PlayerListView {
         AddPlayerToolbarButton(newPlayerSheetIsShown: $newPlayerSheetIsShown)
       }
     }
+  }
+
+  private var sortView: some View {
+    PlayerListSortView(selectedSortItem: $selectedSort)
+      .labelStyle(.iconOnly)
+      .onChange(of: selectedSort) { _ in
+        players.sortDescriptors = selectedSort.sortItem.descriptors
+      }
   }
 }
 

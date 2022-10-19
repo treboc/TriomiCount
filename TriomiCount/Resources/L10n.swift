@@ -122,6 +122,16 @@ internal enum L10n {
       internal static let confirmationButtonTitle = L10n.tr("Localizable", "playerDetailView.deletePlayer.confirmationButtonTitle", fallback: "Yes, I'm sure.")
     }
   }
+  internal enum PlayerListSortView {
+    internal enum OrderLabel {
+      /// ascending
+      internal static let ascending = L10n.tr("Localizable", "playerListSortView.orderLabel.ascending", fallback: "ascending")
+      /// descending
+      internal static let descending = L10n.tr("Localizable", "playerListSortView.orderLabel.descending", fallback: "descending")
+      /// last created
+      internal static let lastCreated = L10n.tr("Localizable", "playerListSortView.orderLabel.lastCreated", fallback: "last created")
+    }
+  }
   internal enum PlayerListView {
     /// No player created yet, start creating one by tapping the + in the top right corner.
     internal static let noPlayersInfo = L10n.tr("Localizable", "playerListView.noPlayersInfo", fallback: "No player created yet, start creating one by tapping the + in the top right corner.")
