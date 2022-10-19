@@ -20,12 +20,7 @@ struct PlayerListView: View {
     NavigationView {
       ZStack {
         if players.isEmpty {
-          Text(L10n.PlayerListView.noPlayersInfo)
-            .multilineTextAlignment(.center)
-            .font(.system(.headline, design: .rounded, weight: .semibold))
-            .padding()
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
-            .padding()
+          placeholder
         } else {
           playerList
         }
@@ -41,14 +36,24 @@ struct PlayerListView: View {
 }
 
 extension PlayerListView {
+  private var placeholder: some View {
+    Text(L10n.PlayerListView.noPlayersInfo)
+      .multilineTextAlignment(.center)
+      .font(.system(.headline, design: .rounded, weight: .semibold))
+      .padding()
+      .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
+      .padding()
+  }
+
   private var playerList: some View {
     ScrollView(showsIndicators: false) {
       ForEach(players) { player in
         NavigationLink(destination: PlayerDetailView.init(player: player)) {
           PlayerListRowView(player: player)
         }
-        .buttonStyle(.shadowed)
         .padding(.horizontal)
+        .buttonStyle(.plain)
+        .foregroundColor(.accentColor)
       }
     }
   }

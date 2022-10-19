@@ -18,12 +18,7 @@ struct SessionsListView: View {
     NavigationView {
       ZStack {
         if sessions.isEmpty {
-          Text(L10n.SessionListView.noSessionInfo)
-            .multilineTextAlignment(.center)
-            .font(.system(.headline, design: .rounded, weight: .semibold))
-            .padding()
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
-            .padding()
+          placeholder
         } else {
           sessionsList
         }
@@ -42,6 +37,15 @@ struct SessionsListView: View {
 }
 
 extension SessionsListView {
+  private var placeholder: some View {
+    Text(L10n.SessionListView.noSessionInfo)
+      .multilineTextAlignment(.center)
+      .font(.system(.headline, design: .rounded, weight: .semibold))
+      .padding()
+      .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
+      .padding()
+  }
+
   private var sessionsList: some View {
     ScrollView {
       ForEach(sessions) { session in

@@ -32,6 +32,10 @@ struct SessionListRowView: View {
     }
     .frame(maxWidth: .infinity)
     .padding()
-    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
+    .background(
+      RoundedRectangle(cornerRadius: Constants.cornerRadius)
+        .fill(.ultraThinMaterial)
+        .shadow(radius: 3)
+    )
   }
 }

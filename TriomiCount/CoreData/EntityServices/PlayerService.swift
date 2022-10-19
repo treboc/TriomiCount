@@ -15,6 +15,7 @@ public class PlayerService: EntityServiceBase {
                            in context: NSManagedObjectContext = context) {
     let player = Player(context: context)
     player.id = UUID()
+    player.createdOn = .now
     player.name = name
     player.favoriteColor = favoriteColor
 

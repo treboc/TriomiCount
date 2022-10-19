@@ -11,25 +11,25 @@ struct PlayerListRowView: View {
   let player: Player
 
   var body: some View {
-    ZStack {
-      RoundedRectangle(cornerRadius: Constants.cornerRadius)
-        .fill(Color.primaryAccentColor)
-        .shadow(radius: 3)
+    HStack(alignment: .center) {
+      Text(player.wrappedName)
+        .font(.headline.bold())
 
-      HStack {
-        Text("\(player.wrappedName)")
-          .fontWeight(.medium)
-        Spacer()
-        VStack(alignment: .center) {
-          Text(player.highscore.roundedWithAbbreviations)
-          Text("Highscore")
-            .font(.caption)
-        }
+      Spacer()
+
+      VStack(alignment: .center) {
+        Text(player.highscore.roundedWithAbbreviations)
+        Text("Highscore")
+          .font(.caption)
+          .foregroundColor(.secondary)
       }
-      .foregroundColor(.white)
-      .padding(.horizontal)
     }
     .frame(maxWidth: .infinity)
-    .listRowSeparator(.hidden)
+    .padding()
+    .background(
+      RoundedRectangle(cornerRadius: Constants.cornerRadius)
+        .fill(.ultraThinMaterial)
+        .shadow(radius: 3)
+    )
   }
 }
