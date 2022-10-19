@@ -19,8 +19,8 @@ struct TriomiCountApp: App {
         .environment(\.managedObjectContext, context)
         .environmentObject(appearanceManager)
         .onAppear {
-          UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
           appearanceManager.setAppearance()
+          registerDefaults()
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification),
                    perform: handleResignActive)
@@ -37,5 +37,15 @@ struct TriomiCountApp: App {
 
   func handleBecomeActive(_ note: Notification) {
     // when app becomes active
+  }
+}
+
+extension TriomiCountApp {
+  private func registerDefaults() {
+    UserDefaults.standard.register(defaults: [
+      Constants.AppStorageKeys.hapticsEnabled: true,
+      Constants.AppStorageKeys.idleDimmingDisabled: true,
+      "_UIConstraintBasedLayoutLogUnsatisfiable": false,
+    ])
   }
 }
