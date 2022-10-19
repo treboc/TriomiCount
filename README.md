@@ -25,8 +25,7 @@ I learn a lot better when building something, than rebuild the next to-do app or
 - [ ] give players the possibility to add a profile picture or atleast an emoji for the beginning
     - [ ] work this into the gameView
 - [x] ~~some kind of quicklook feature in session (*maybe with tap on the header?*)~~
-    - [ ] add some onboarding for this feature
-- [ ] feature: favorite color of player, choose on creating, edit in PlayerDetailView
+- [x] feature: favorite color of player, choose on creating, edit in PlayerDetailView
 - [x] ~~color the GameView into player's favorite color?~~
 
 ## Screenshots
@@ -40,11 +39,8 @@ I learn a lot better when building something, than rebuild the next to-do app or
 ## Credits
 * Font used in logo is 'Photograph Signature' by [typeline](https://creativemarket.com/typeline)
 * Used Packages and helper tools:
-    * [PageSheet](https://github.com/ericlewis/PageSheet)
     * [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)
     * [Swiftgen](https://github.com/SwiftGen/SwiftGen)
-    * [Inject](https://github.com/krzysztofzablocki/Inject)
-    * [Introspect](https://github.com/siteline/SwiftUI-Introspect)
 
 ## Requirements
 * Xcode 13.0+ & Swift 5.5+

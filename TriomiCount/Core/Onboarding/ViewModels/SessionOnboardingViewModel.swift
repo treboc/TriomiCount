@@ -46,12 +46,12 @@ class SessionOnboardingViewModel: ObservableObject {
     return chosenPlayers.contains(player)
   }
 
-  func startSession() {
+  func startSession(sessionStart: @escaping (Bool) -> Void) {
     if chosenPlayers.count > 1 {
       session = SessionService.addSession(with: chosenPlayers)
-      sessionIsShown = true
+      sessionStart(true)
     } else if session != nil {
-      sessionIsShown = true
+      sessionStart(true)
     }
 
     for player in chosenPlayers {

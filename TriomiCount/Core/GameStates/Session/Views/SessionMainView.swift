@@ -15,9 +15,6 @@ struct SessionMainView: View {
   // MARK: Body
   var body: some View {
     ZStack {
-      Color.primaryBackground
-        .ignoresSafeArea()
-
       switch viewModel.state {
       case .playing:
         SessionView()
@@ -31,17 +28,16 @@ struct SessionMainView: View {
       case .didEnd:
         SessionResultsView()
       case .exited:
-        Text("Exited")
-          .onAppear { print("exited") }
+        EmptyView()
       }
     }
+    .gradientBackground()
     .environmentObject(viewModel)
-    .navigationBarHidden(true)
+    .toolbar(.hidden, for: .tabBar, .navigationBar)
   }
 
   init(session: Session) {
     self.session = session
     _viewModel = StateObject.init(wrappedValue: SessionViewModel(lastSession: session))
   }
-
 }

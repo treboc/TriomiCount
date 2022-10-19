@@ -8,31 +8,35 @@
 import SwiftUI
 
 struct SessionOnboardingView: View {
-  @StateObject var viewModel = SessionOnboardingViewModel()
+  @StateObject private var viewModel = SessionOnboardingViewModel()
+  @StateObject private var sessionPresentationManager = SessionPresentationManager()
   @FetchRequest(sortDescriptors: [], animation: .spring())
   var players: FetchedResults<Player>
 
+  @ViewBuilder
   var body: some View {
-    NavigationView {
-      ZStack {
+    if sessionPresentationManager.sessionIsShown,
+       let session = viewModel.session {
+        SessionMainView(session: session)
+          .environmentObject(sessionPresentationManager)
+    } else {
+      NavigationView {
         VStack(spacing: 0) {
           resumeLastSessionButton
           RectangularDivider()
           playerList
         }
         .overlay(onboardingText)
-      }
-      .gradientBackground()
-      .fullScreenCover(isPresented: $viewModel.sessionIsShown,
-                       onDismiss: viewModel.checkForUnfinishedSession) {
-        SessionMainView(session: viewModel.session!) }
+        .gradientBackground()
         .navigationTitle(L10n.newSession)
         .roundedNavigationTitle()
         .toolbar(content: toolbarContent)
         .onDisappear {
           viewModel.resetState(of: players)
         }
+        .onAppear(perform: viewModel.checkForUnfinishedSession)
         .sheet(isPresented: $viewModel.newPlayerSheetIsShown, content: AddNewPlayerView.init)
+      }
     }
   }
 }
@@ -61,14 +65,27 @@ extension SessionOnboardingView {
     if players.count < 2 {
       Text(L10n.SessionOnboardingView.addTwoPlayers)
         .font(.system(.headline, design: .rounded))
-        .padding(.horizontal, 100)
         .multilineTextAlignment(.center)
+        .padding()
+        .background(
+          RoundedRectangle(cornerRadius: Constants.cornerRadius)
+            .fill(.ultraThinMaterial)
+            .shadow(radius: Constants.shadowRadius)
+        )
+        .padding(.horizontal, 50)
+        .allowsHitTesting(false)
     }
   }
 
   @ViewBuilder
   private var resumeLastSessionButton: some View {
-    Button(action: viewModel.startSession) {
+    Button {
+      viewModel.startSession { sessionShouldShow in
+        if sessionShouldShow {
+          sessionPresentationManager.showSession()
+        }
+      }
+    } label: {
       Text(viewModel.session != nil && viewModel.chosenPlayers.count < 2
            ? L10n.Button.resumeLastSession
            : L10n.Button.startNewSession

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SessionResultsView: View {
   @EnvironmentObject var viewModel: SessionViewModel
-  @Environment(\.dismiss) var dismiss
+  @EnvironmentObject var sessionPresentationManager: SessionPresentationManager
 
   var body: some View {
     ZStack {
@@ -39,11 +39,9 @@ struct SessionResultsView: View {
 
         Spacer()
 
-        Button(L10n.Button.backToMainMenu) {
-          dismiss()
-        }
-        .buttonStyle(.shadowed)
-        .padding(.bottom, 50)
+        Button(L10n.Button.backToMainMenu, action: sessionPresentationManager.hideSession)
+          .buttonStyle(.shadowed)
+          .padding(.bottom, 50)
       }
       .padding(.horizontal, 30)
 

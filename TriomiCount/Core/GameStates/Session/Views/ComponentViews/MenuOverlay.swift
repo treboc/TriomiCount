@@ -14,11 +14,11 @@ extension SessionView {
   /// Shows buttons for ending or leaving the session and undo the last turn, if any were made in the current session.
   struct MenuOverlay: View {
     @EnvironmentObject var viewModel: SessionViewModel
+    @EnvironmentObject var sessionPresentationManager: SessionPresentationManager
     @Binding var menuIsShown: Bool
     @State private var isAnimated: Bool = false
 
     @Environment(\.dismiss) var dismiss
-    var toggleScaleAnimation: () -> Void
 
     var body: some View {
       ZStack(alignment: .bottomTrailing) {
@@ -46,7 +46,9 @@ extension SessionView {
           }
 
           // Exit Session
-          button(symbol: .houseFill, title: L10n.SessionView.ExitSessionButton.labelText, action: dismiss.callAsFunction)
+          button(symbol: .houseFill,
+                 title: L10n.SessionView.ExitSessionButton.labelText,
+                 action: sessionPresentationManager.hideSession)
 
           // Close Menu
           closeMenuButton

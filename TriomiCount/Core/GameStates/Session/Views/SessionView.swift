@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SessionView: View {
   @EnvironmentObject var viewModel: SessionViewModel
-  @Environment(\.dismiss) var dismiss
   @AppStorage(Constants.AppStorageKeys.idleDimmingDisabled) var idleDimmingDisabled: Bool = true
 
   @State private var sessionOverviewIsShown: Bool = false
@@ -36,8 +35,7 @@ struct SessionView: View {
       }
 
       if menuIsShown {
-        MenuOverlay(menuIsShown: $menuIsShown,
-                    toggleScaleAnimation: toggleScaleAnimation)
+        MenuOverlay(menuIsShown: $menuIsShown)
         .zIndex(1)
       }
     }
