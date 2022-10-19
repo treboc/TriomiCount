@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import PageSheetCore
 
 struct SessionOnboardingView: View {
   @StateObject var viewModel = SessionOnboardingViewModel()

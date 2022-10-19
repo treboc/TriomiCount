@@ -8,9 +8,6 @@
 import SwiftUI
 
 struct AboutView: View {
-  let twitterUrl = URL(string: "https://twitter.com/treb0c")!
-  let githubUrl = URL(string: "https://github.com/treboc")!
-
   var body: some View {
     VStack(spacing: 10) {
       Text("Made with ☕️ and 💚 by")
@@ -26,7 +23,7 @@ struct AboutView: View {
           .scaledToFit()
           .frame(width: 32, height: 32)
 
-        Link("treboc @ GitHub", destination: githubUrl)
+        Link("treboc @ GitHub", destination: Constants.githubURL)
       }
 
       HStack(spacing: 20) {
@@ -35,11 +32,11 @@ struct AboutView: View {
           .scaledToFit()
           .frame(width: 32, height: 32)
 
-        Link("treb0c @ Twitter", destination: twitterUrl)
+        Link("treb0c @ Twitter", destination: Constants.twitterURL)
       }
     }
     .frame(maxWidth: .infinity, alignment: .center)
-    .tint(.primaryAccentColor)
+    .tint(.accentColor)
   }
 }
 

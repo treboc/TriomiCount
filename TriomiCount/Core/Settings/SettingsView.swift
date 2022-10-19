@@ -27,12 +27,27 @@ struct SettingsView: View {
 
         Section {
           NavigationLink("About", destination: AboutView.init)
+          reviewLink
+          NavigationLink("About", destination: AboutView.init)
         }
       }
       .scrollContentBackground(.hidden)
       .background(Background())
       .navigationTitle(L10n.SettingsView.title)
       .roundedNavigationTitle()
+      .tint(.accentColor)
+    }
+  }
+}
+
+extension SettingsView {
+  private var reviewLink: some View {
+    Link(destination: Constants.reviewURL) {
+      HStack {
+        Text("Rate This App ❤️")
+        Spacer()
+        Image(systemName: "arrow.up.right")
+      }
     }
   }
 }
