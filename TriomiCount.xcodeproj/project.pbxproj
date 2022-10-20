@@ -56,7 +56,6 @@
 		8A06D681282273F00049EA9A /* UIColorValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */; };
 		8A06D6832824FA160049EA9A /* RoundedCorner-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D6822824FA160049EA9A /* RoundedCorner-ViewModifier.swift */; };
 		8A07164B282B961100AC8C87 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A07164A282B961100AC8C87 /* UINavigationController+Extension.swift */; };
-		8A07164E282B9CAA00AC8C87 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 8A07164D282B9CAA00AC8C87 /* Introspect */; };
 		8A071650282CEE8B00AC8C87 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A07164F282CEE8B00AC8C87 /* Collection+Extension.swift */; };
 		8A0D1EB128619A0500B392E7 /* AddPlayerToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0D1EB028619A0500B392E7 /* AddPlayerToolbarButton.swift */; };
 		8A0D1EB628645A4600B392E7 /* ShadowedButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0D1EB528645A4600B392E7 /* ShadowedButtonStyle.swift */; };
@@ -187,7 +186,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A07164E282B9CAA00AC8C87 /* Introspect in Frameworks */,
 				0897300027DC197D0029C94B /* SFSafeSymbols in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,7 +371,7 @@
 				8ACA06E527F593B6000F6D4C /* Launch Screen.storyboard */,
 				08BE48D7279CA0FA00EA431F /* TriomiCountApp.swift */,
 				08DEBD6127A19597005A0990 /* Core */,
-				082C53F627ABE69000AB5CD7 /* CoreData */,
+				459E767C290136A3009664BF /* Persistence */,
 				08BE48DD279CA0FB00EA431F /* Preview Content */,
 				083974DE27D2BECE002B90E4 /* Resources */,
 			);
@@ -477,6 +475,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		459E767C290136A3009664BF /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				082C53F627ABE69000AB5CD7 /* CoreData */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 		8A2C8CF228270A0C005136AD /* ComponentViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -571,7 +577,6 @@
 			name = TriomiCount;
 			packageProductDependencies = (
 				08972FFF27DC197D0029C94B /* SFSafeSymbols */,
-				8A07164D282B9CAA00AC8C87 /* Introspect */,
 			);
 			productName = TriomiCount;
 			productReference = 08BE48D4279CA0FA00EA431F /* TriomiCount.app */;
@@ -626,7 +631,6 @@
 			mainGroup = 08BE48CB279CA0FA00EA431F;
 			packageReferences = (
 				08972FFE27DC197D0029C94B /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
-				8A07164C282B9CAA00AC8C87 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 08BE48D5279CA0FA00EA431F /* Products */;
 			projectDirPath = "";
@@ -1069,14 +1073,6 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		8A07164C282B9CAA00AC8C87 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.4;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1084,11 +1080,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 08972FFE27DC197D0029C94B /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
 			productName = SFSafeSymbols;
-		};
-		8A07164D282B9CAA00AC8C87 /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8A07164C282B9CAA00AC8C87 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
 		};
 /* End XCSwiftPackageProductDependency section */
 
