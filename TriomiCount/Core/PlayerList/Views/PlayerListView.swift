@@ -25,6 +25,7 @@ struct PlayerListView: View {
           playerList
         }
       }
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
       .gradientBackground()
       .sheet(isPresented: $newPlayerSheetIsShown, content: AddNewPlayerView.init)
       .navigationTitle(L10n.players)
