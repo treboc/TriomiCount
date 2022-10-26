@@ -123,7 +123,7 @@ extension PlayerDetailView {
           .overlay(alignment: .bottomTrailing) {
             Image(systemSymbol: .pencilCircleFill)
               .symbolRenderingMode(.palette)
-              .foregroundStyle(.black, Color.accentColor)
+              .foregroundStyle(.black, .ultraThickMaterial)
               .font(.title)
           }
         Text(player.wrappedName)
