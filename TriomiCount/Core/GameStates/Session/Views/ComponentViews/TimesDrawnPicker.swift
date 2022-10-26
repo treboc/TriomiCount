@@ -22,6 +22,10 @@ struct TimesDrawnPicker: View {
           selection = number
         }
       }
+      .animation(.interpolatingSpring(stiffness: 300, damping: 15), value: selection)
+      .onChange(of: selection) { _ in
+        HapticManager.shared.impact(style: .soft)
+      }
     }
   }
 
@@ -58,9 +62,7 @@ struct TimesDrawnPicker: View {
       .frame(maxWidth: .infinity)
       .contentShape(Rectangle())
       .onTapGesture {
-        withAnimation(.linear) {
-          action()
-        }
+        action()
       }
       .disabled(isSelected)
     }

@@ -23,7 +23,7 @@ struct PlayedCardPicker: View {
         self.selection = false
       }
     }
-    .animation(.default, value: selection)
+    .animation(.interpolatingSpring(stiffness: 300, damping: 15), value: selection)
     .onChange(of: selection) { _ in
       HapticManager.shared.impact(style: .soft)
     }

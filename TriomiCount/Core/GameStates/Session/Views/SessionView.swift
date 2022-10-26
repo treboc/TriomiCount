@@ -13,8 +13,7 @@ struct SessionView: View {
 
   @State private var sessionOverviewIsShown: Bool = false
   @State private var menuIsShown: Bool = false
-
-  @State private var scale: CGFloat = 1
+  @State private var headerID: UUID = .init()
 
   var body: some View {
     ZStack(alignment: .top) {
@@ -39,7 +38,6 @@ struct SessionView: View {
         .zIndex(1)
       }
     }
-    .scaleEffect(scale)
     .confirmationDialog(L10n.EndSessionConfirmationDialogue.title, isPresented: $viewModel.showEndSessionAlert, titleVisibility: .visible) {
       Button(action: viewModel.sessionWillEnd) {
         Text(L10n.EndSessionConfirmationDialogue.messageWinner(viewModel.playerOnTurn?.wrappedName ?? "Unknown"))
@@ -92,7 +90,11 @@ extension SessionView {
       }
     }
     .glassStyled(withColor: viewModel.playerOnTurn?.wrappedFavoriteColor ?? .orange)
-    .animation(.none, value: viewModel.playerOnTurn)
+    .id(headerID)
+    .transition(
+      .asymmetric(insertion: .move(edge: .leading),
+                  removal: .move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
+    )
     .overlay(sessionInfoButton.padding(.trailing), alignment: .topTrailing)
   }
 
@@ -200,8 +202,10 @@ extension SessionView {
 
   private var nextPlayerButton: some View {
     Button(L10n.SessionView.NextPlayerButton.labelText) {
+      withAnimation(.spring()) {
+        headerID = .init()
+      }
       viewModel.endTurn()
-      toggleScaleAnimation()
       HapticManager.shared.notification(type: .success)
     }
   }
@@ -290,16 +294,6 @@ extension SessionView {
 
 // MARK: - UI Methods
 extension SessionView {
-  private func toggleScaleAnimation() {
-    withAnimation(.linear(duration: 0.3)) {
-      scale = 1.01
-    }
-
-    withAnimation(.linear.delay(0.3)) {
-      scale = 1
-    }
-  }
-
   func toggleSessionOverview() {
     withAnimation {
       sessionOverviewIsShown.toggle()
