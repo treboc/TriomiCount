@@ -44,8 +44,8 @@ internal enum L10n {
       internal static let message = L10n.tr("Localizable", "addNewPlayerView.alertNameToLong.message", fallback: "I'm sorry, your name is too long!")
     }
     internal enum AlertTextFieldEmpty {
-      /// Textfield is empty!
-      internal static let message = L10n.tr("Localizable", "addNewPlayerView.alertTextFieldEmpty.message", fallback: "Textfield is empty!")
+      /// Please enter a name
+      internal static let message = L10n.tr("Localizable", "addNewPlayerView.alertTextFieldEmpty.message", fallback: "Please enter a name")
     }
     internal enum CreateButton {
       /// Create
@@ -54,8 +54,8 @@ internal enum L10n {
     internal enum NameLabel {
       /// Tell me your name, please!
       internal static let labelText = L10n.tr("Localizable", "addNewPlayerView.nameLabel.labelText", fallback: "Tell me your name, please!")
-      /// Name's coming..
-      internal static let textfieldText = L10n.tr("Localizable", "addNewPlayerView.nameLabel.textfieldText", fallback: "Name's coming..")
+      /// John
+      internal static let textfieldText = L10n.tr("Localizable", "addNewPlayerView.nameLabel.textfieldText", fallback: "John")
     }
   }
   internal enum Button {
@@ -137,10 +137,9 @@ internal enum L10n {
     internal static let noPlayersInfo = L10n.tr("Localizable", "playerListView.noPlayersInfo", fallback: "No player created yet, start creating one by tapping the + in the top right corner.")
   }
   internal enum PointsSubmitView {
-    /// How much points do you have left,
-    /// %@?
+    /// How much points do you have left, %@?
     internal static func labelText(_ p1: Any) -> String {
-      return L10n.tr("Localizable", "pointsSubmitView.labelText %@", String(describing: p1), fallback: "How much points do you have left,\n%@?")
+      return L10n.tr("Localizable", "pointsSubmitView.labelText %@", String(describing: p1), fallback: "How much points do you have left, %@?")
     }
     /// Please enter a valid number!
     internal static let overlayAlertMessage = L10n.tr("Localizable", "pointsSubmitView.overlayAlertMessage", fallback: "Please enter a valid number!")
@@ -203,6 +202,10 @@ internal enum L10n {
     internal static let playedWith = L10n.tr("Localizable", "sessionDetailView.playedWith", fallback: "Played with")
     /// Points
     internal static let points = L10n.tr("Localizable", "sessionDetailView.points", fallback: "Points")
+    /// Turn
+    internal static let turn = L10n.tr("Localizable", "sessionDetailView.turn", fallback: "Turn")
+    /// Overview
+    internal static let turnOverview = L10n.tr("Localizable", "sessionDetailView.turnOverview", fallback: "Overview")
     /// Winner
     internal static let won = L10n.tr("Localizable", "sessionDetailView.won", fallback: "Winner")
   }

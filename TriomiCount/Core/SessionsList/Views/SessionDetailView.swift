@@ -7,6 +7,12 @@
 
 import CoreData
 import SwiftUI
+import Charts
+
+struct ChartTurnData {
+  let id: Int
+  let score: Int
+}
 
 struct SessionDetailView: View {
   @Environment(\.dismiss) var dismiss
@@ -15,7 +21,7 @@ struct SessionDetailView: View {
 
   var body: some View {
     VStack(alignment: .center) {
-      VStack {
+      ScrollView {
         SessionDetailSection(L10n.SessionDetailView.playedWith) {
           Text(session.playedBy())
             .multilineTextAlignment(.leading)
@@ -27,9 +33,22 @@ struct SessionDetailView: View {
           }
         }
 
+        SessionDetailSection(L10n.SessionDetailView.turnOverview) {
+          Chart {
+            ForEach(0..<session.turnsArray.count, id: \.self) { index in
+              BarMark(
+                x: .value(L10n.SessionDetailView.turn, index),
+                y: .value(L10n.SessionDetailView.points, session.turnsArray[index].playersScoreTilNow)
+              )
+              .foregroundStyle(by: .value("Player", session.turnsArray[index].wrappedPlayerName))
+            }
+          }
+          .frame(height: 300)
+        }
+
         SessionDetailSection(L10n.SessionDetailView.points) {
           VStack(alignment: .leading) {
-            ForEach(sessionScores, id: \.key) { key, value in
+            ForEach(sessionScores.sorted { $0.value > $1.value }, id: \.key) { key, value in
               HStack {
                 Text(key)
                   .frame(minWidth: 50, alignment: .leading)

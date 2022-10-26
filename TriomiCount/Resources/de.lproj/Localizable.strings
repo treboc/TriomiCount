@@ -80,6 +80,8 @@
 "sessionDetailView.playedWith" = "Mitgespielt haben";
 "sessionDetailView.won" = "Gewonnen hat";
 "sessionDetailView.points" = "Punkteverteilung";
+"sessionDetailView.turn" = "Zug";
+"sessionDetailView.turnOverview" = "Übersicht der Züge";
 
 // SettingsView
 "settingsView.title" = "Einstellungen";

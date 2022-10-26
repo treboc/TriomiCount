@@ -18,6 +18,7 @@ extension Turn {
   @NSManaged public var playersScoreInTurn: Int16
   @NSManaged public var playersScoreTilNow: Int16
   @NSManaged public var playerID: UUID?
+  @NSManaged public var playerName: String?
   @NSManaged public var scoreSliderValue: Int16
   @NSManaged public var timesDrawn: Int16
   @NSManaged public var playedCard: Bool
@@ -36,6 +37,7 @@ extension Turn {
     self.playersScoreInTurn = scoreInTurn
     self.playersScoreTilNow = scoreTilNow
     self.playerID = player.id
+    self.playerName = player.wrappedName
     self.scoreSliderValue = scoreSliderValue
     self.timesDrawn = timesDrawn
     self.playedCard = playedCard
@@ -43,6 +45,11 @@ extension Turn {
 
   @nonobjc public class func fetchRequest() -> NSFetchRequest<Turn> {
     return NSFetchRequest<Turn>(entityName: "Turn")
+  }
+
+  public var wrappedPlayerName: String {
+    get { playerName ?? "Unknown" }
+    set { playerName = newValue }
   }
 
   public var wrappedCreatedOn: Date {

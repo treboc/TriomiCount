@@ -36,6 +36,7 @@
         <attribute name="createdOn" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="playedCard" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="playerID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="playerName" optional="YES" attributeType="String"/>
         <attribute name="playersScoreInTurn" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="playersScoreTilNow" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="scoreSliderValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

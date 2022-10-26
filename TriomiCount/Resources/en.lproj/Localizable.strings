@@ -80,6 +80,8 @@
 "sessionDetailView.playedWith" = "Played with";
 "sessionDetailView.won" = "Winner";
 "sessionDetailView.points" = "Points";
+"sessionDetailView.turn" = "Turn";
+"sessionDetailView.turnOverview" = "Overview";
 
 // SettingsView
 "settingsView.title" = "Settings";
