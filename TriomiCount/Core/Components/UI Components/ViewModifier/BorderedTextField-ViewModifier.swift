@@ -22,7 +22,7 @@ struct BorderedTextField: ViewModifier {
       .frame(maxWidth: .infinity)
       .background(
         RoundedRectangle(cornerRadius: Constants.cornerRadius)
-          .fill(Color.secondaryBackground)
+          .fill(.ultraThinMaterial)
           .shadow(radius: 3)
       )
   }

@@ -123,6 +123,7 @@
 // Simple constants
 "yes" = "Yes";
 "no" = "No";
+"save" = "Save";
 "reset" = "Reset";
 "cancel" = "Cancel";
 "back" = "Back";

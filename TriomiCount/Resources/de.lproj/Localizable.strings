@@ -122,6 +122,7 @@
 // Simple constants
 "yes" = "Ja";
 "no" = "Nein";
+"save" = "Speichern";
 "reset" = "Zurücksetzen";
 "cancel" = "Abbrechen";
 "back" = "Zurück";

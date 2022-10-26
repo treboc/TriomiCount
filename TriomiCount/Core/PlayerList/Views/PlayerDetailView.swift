@@ -122,8 +122,8 @@ extension PlayerDetailView {
           )
           .overlay(alignment: .bottomTrailing) {
             Image(systemSymbol: .pencilCircleFill)
-              .symbolRenderingMode(.palette)
-              .foregroundStyle(.black, .ultraThickMaterial)
+              .symbolRenderingMode(.multicolor)
+              .foregroundStyle(Color.accentColor)
               .font(.title)
           }
         Text(player.wrappedName)
@@ -191,12 +191,12 @@ extension PlayerDetailView {
           .animation(.none, value: colorName)
 
         HStack {
-          Button("Save") {
+          Button(L10n.save) {
             PlayerService.updateFavColor(player, with: favoriteColor)
             hideColorPicker()
           }
 
-          Button("Cancel", role: .cancel) {
+          Button(L10n.cancel, role: .cancel) {
             hideColorPicker()
           }
         }
@@ -210,7 +210,7 @@ extension PlayerDetailView {
       .frame(maxWidth: .infinity)
       .background(
         RoundedRectangle(cornerRadius: Constants.cornerRadius)
-          .fill(Color.secondaryBackground)
+          .fill(.thinMaterial)
           .shadow(radius: 3)
       )
       .padding(20)

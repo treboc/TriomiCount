@@ -41,7 +41,11 @@ extension PlayerListView {
       .multilineTextAlignment(.center)
       .font(.system(.headline, design: .rounded, weight: .semibold))
       .padding()
-      .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
+      .background(
+        RoundedRectangle(cornerRadius: Constants.cornerRadius)
+          .fill(.ultraThinMaterial)
+          .shadow(radius: Constants.shadowRadius)
+      )
       .padding()
   }
 

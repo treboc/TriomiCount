@@ -26,6 +26,8 @@ internal enum L10n {
   internal static let players = L10n.tr("Localizable", "players", fallback: "Players")
   /// Reset
   internal static let reset = L10n.tr("Localizable", "reset", fallback: "Reset")
+  /// Save
+  internal static let save = L10n.tr("Localizable", "save", fallback: "Save")
   /// Score
   internal static let score = L10n.tr("Localizable", "score", fallback: "Score")
   /// Session Overview
