@@ -20,8 +20,8 @@ struct SessionDetailView: View {
   var sessionScores: [Dictionary<String, Int16>.Element]
 
   var body: some View {
-    VStack(alignment: .center) {
-      ScrollView {
+    ScrollView {
+      VStack {
         SessionDetailSection(L10n.SessionDetailView.playedWith) {
           Text(session.playedBy())
             .multilineTextAlignment(.leading)
