@@ -10,10 +10,11 @@ struct PlayerDetailView: View {
   let player: Player
   @Environment(\.dismiss) private var dismiss
   @State private var showDeletePlayerAlert: Bool = false
+  @State private var showColorPicker: Bool = false
 
   var body: some View {
     VStack(spacing: 0) {
-      PlayerInitialsCircle(player: player)
+      playerInitialsCircle
       RectangularDivider()
       ScrollView(.vertical, showsIndicators: false) {
         VStack {
@@ -42,6 +43,13 @@ struct PlayerDetailView: View {
         }
         .padding(.horizontal, 20)
         .padding(.top, 10)
+      }
+    }
+    .blur(radius: showColorPicker ? 5 : 0)
+    .overlay {
+      if showColorPicker {
+        FavoriteColorPicker(player: player, favoriteColor: player.wrappedFavoriteColor, showColorPicker: $showColorPicker)
+          .transition(.opacity.combined(with: .scale))
       }
     }
     .padding(.vertical)
@@ -93,10 +101,7 @@ extension PlayerDetailView {
     }
   }
 
-  struct PlayerInitialsCircle: View {
-    let player: Player
-
-    var body: some View {
+  private var playerInitialsCircle: some View {
       VStack {
         Circle()
           .fill(
@@ -115,9 +120,106 @@ extension PlayerDetailView {
             Circle()
               .strokeBorder(.primary, lineWidth: 2)
           )
+          .overlay(alignment: .bottomTrailing) {
+            Image(systemSymbol: .pencilCircleFill)
+              .symbolRenderingMode(.palette)
+              .foregroundStyle(.black, Color.accentColor)
+              .font(.title)
+          }
         Text(player.wrappedName)
       }
       .padding(.bottom, 10)
+      .onTapGesture {
+        withAnimation {
+          showColorPicker = true
+        }
+      }
+  }
+}
+
+extension PlayerDetailView {
+  struct FavoriteColorPicker: View {
+    let player: Player
+    @Binding var showColorPicker: Bool
+    @State private var favoriteColor: UIColor
+    @State var colorName: String = UIColor.FavoriteColors.colors[0].name
+    @Namespace private var namespace
+
+    init(player: Player,
+         favoriteColor: UIColor,
+         showColorPicker: Binding<Bool>) {
+      self.player = player
+      self.favoriteColor = favoriteColor
+      _showColorPicker = showColorPicker
+    }
+
+    var body: some View {
+      VStack(spacing: 20) {
+        ScrollView(.horizontal, showsIndicators: false) {
+          HStack {
+            ForEach(UIColor.FavoriteColors.colors, id: \.name) { favColor in
+              Circle()
+                .fill(favColor.color.asColor)
+                .padding(4)
+                .background(
+                  favoriteColor == favColor.color
+                  ? Circle()
+                    .stroke(favColor.color.asColor, lineWidth: 3)
+                    .matchedGeometryEffect(id: "background-stroke", in: namespace)
+                  : nil
+                )
+                .shadow(radius: Constants.shadowRadius)
+                .frame(width: 40, height: 34.66)
+                .rotationEffect(Angle(degrees:
+                                        UIColor.FavoriteColors.colors.firstIndex(of: favColor)?.isMultiple(of: 2) ?? true ? 180 : 0
+                                     ))
+                .frame(width: 32, height: 32)
+                .onTapGesture {
+                  withAnimation {
+                    favoriteColor = favColor.color
+                    colorName = favColor.name
+                  }
+                }
+                .padding(.vertical, 7)
+            }
+          }
+          .padding(.leading, 3)
+        }
+
+        Text(colorName)
+          .font(.system(.headline, design: .rounded))
+          .animation(.none, value: colorName)
+
+        HStack {
+          Button("Save") {
+            PlayerService.updateFavColor(player, with: favoriteColor)
+            hideColorPicker()
+          }
+
+          Button("Cancel", role: .cancel) {
+            hideColorPicker()
+          }
+        }
+        .buttonStyle(.borderedProminent)
+        .controlSize(.regular)
+        .foregroundColor(Color(uiColor: .systemBackground))
+      }
+      .frame(maxWidth: .infinity)
+      .foregroundColor(.primary)
+      .padding(10)
+      .frame(maxWidth: .infinity)
+      .background(
+        RoundedRectangle(cornerRadius: Constants.cornerRadius)
+          .fill(Color.secondaryBackground)
+          .shadow(radius: 3)
+      )
+      .padding(20)
+    }
+
+    private func hideColorPicker() {
+      withAnimation {
+        showColorPicker = false
+      }
     }
   }
 }

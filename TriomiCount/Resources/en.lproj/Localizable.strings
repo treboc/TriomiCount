@@ -41,9 +41,9 @@
 
 // AddNewPlayerView
 "addNewPlayerView.nameLabel.labelText" = "Tell me your name, please!";
-"addNewPlayerView.nameLabel.textfieldText" = "Name's coming..";
+"addNewPlayerView.nameLabel.textfieldText" = "John";
 "addNewPlayerView.createButton.labelText" = "Create";
-"addNewPlayerView.alertTextFieldEmpty.message" = "Textfield is empty!";
+"addNewPlayerView.alertTextFieldEmpty.message" = "Please enter a name";
 "addNewPlayerView.alertNameToLong.message" = "I'm sorry, your name is too long!";
 
 // PlayerDetailView

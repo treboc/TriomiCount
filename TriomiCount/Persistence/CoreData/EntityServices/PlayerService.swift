@@ -10,6 +10,8 @@ import CoreData
 import UIKit
 
 public class PlayerService: EntityServiceBase {
+  static let moc = CoreDataManager.shared.context
+
   static func addNewPlayer(_ name: String,
                            favoriteColor: UIColor = .red,
                            in context: NSManagedObjectContext = context) {
@@ -22,26 +24,27 @@ public class PlayerService: EntityServiceBase {
     CoreDataManager.shared.save()
   }
 
-  static func toggleChosenState(_ player: Player, in context: NSManagedObjectContext? = nil) {
-    let context = context ?? CoreDataManager.shared.context
+  static func updateFavColor(_ player: Player, with color: UIColor, in context: NSManagedObjectContext = moc) {
+    player.wrappedFavoriteColor = color
+    try? moc.save()
+  }
+
+  static func toggleChosenState(_ player: Player, in context: NSManagedObjectContext = moc) {
     player.isChosen.toggle()
     CoreDataManager.shared.save(context: context)
   }
 
-  static func updateScore(of player: Player, with score: Int16, in context: NSManagedObjectContext? = nil) {
-    let context = context ?? CoreDataManager.shared.context
+  static func updateScore(of player: Player, with score: Int16, in context: NSManagedObjectContext = moc) {
     player.currentScore += score
     CoreDataManager.shared.save(context: context)
   }
 
-  static func incrementSessionsWon(of player: Player, in context: NSManagedObjectContext? = nil) {
-    let context = context ?? CoreDataManager.shared.context
+  static func incrementSessionsWon(of player: Player, in context: NSManagedObjectContext = moc) {
     player.sessionsWon += 1
     CoreDataManager.shared.save(context: context)
   }
 
-  static func increaseSessionsPlayed(of player: Player, in context: NSManagedObjectContext? = nil) {
-    let context = context ?? CoreDataManager.shared.context
+  static func increaseSessionsPlayed(of player: Player, in context: NSManagedObjectContext = moc) {
     player.sessionsPlayed += 1
     CoreDataManager.shared.save(context: context)
   }
@@ -53,7 +56,7 @@ public class PlayerService: EntityServiceBase {
     return nil
   }
 
-  static func delete(_ player: Player, in context: NSManagedObjectContext = CoreDataManager.shared.context) {
+  static func delete(_ player: Player, in context: NSManagedObjectContext = moc) {
     if let _ = player.sessions {
       player.wasDeleted = true
     } else {
