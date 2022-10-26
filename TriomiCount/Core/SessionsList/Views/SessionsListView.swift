@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct SessionsListView: View {
-  @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Session.id, ascending: false)],
+  @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Session.sessionCounter, ascending: false)],
                 predicate: NSPredicate(format: "hasEnded == TRUE"),
                 animation: .default)
   private var sessions: FetchedResults<Session>

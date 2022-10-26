@@ -213,7 +213,6 @@
 			children = (
 				082C53F727ABE69D00AB5CD7 /* TriomiCount.xcdatamodeld */,
 				082C540027ABE88F00AB5CD7 /* CoreDataManager.swift */,
-				8A9DFD1E28738C9400E77DD0 /* EntityServiceBase.swift */,
 				0835129F27DC123C00065228 /* Entities */,
 				8A9DFD2028738CA500E77DD0 /* EntityServices */,
 			);
@@ -541,6 +540,7 @@
 		8A9DFD2028738CA500E77DD0 /* EntityServices */ = {
 			isa = PBXGroup;
 			children = (
+				8A9DFD1E28738C9400E77DD0 /* EntityServiceBase.swift */,
 				8A9DFD1A2873866600E77DD0 /* PlayerService.swift */,
 				8A768C90288BEF6B005582BF /* SessionScoreService.swift */,
 				8A9DFD2C2876B69600E77DD0 /* SessionService.swift */,

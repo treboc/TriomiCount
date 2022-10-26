@@ -13,6 +13,13 @@ import SwiftUI
 
 @objc(Player)
 public class Player: NSManagedObject {
+  @nonobjc public class func fetchAvailablePlayers() -> NSFetchRequest<Player> {
+    let fetchRequest = NSFetchRequest<Player>(entityName: "Player")
+    fetchRequest.predicate = NSPredicate(format: "wasDeleted == FALSE")
+    fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Player.name, ascending: true)]
+    return fetchRequest
+  }
+
   @NSManaged public var id: UUID?
   @NSManaged public var createdOn: Date?
   @NSManaged public var currentScore: Int16
@@ -25,6 +32,7 @@ public class Player: NSManagedObject {
   @NSManaged public var playerInTurn: Turn?
   @NSManaged public var favoriteColor: UIColor?
   @NSManaged public var sessionScores: NSSet?
+  @NSManaged public var wasDeleted: Bool
 
   var isChosen: Bool = false
 
@@ -79,7 +87,6 @@ extension Player: Identifiable {}
 
 // MARK: Generated accessors for sessionScores
 extension Player {
-
   @objc(addSessionScoresObject:)
   @NSManaged public func addToSessionScores(_ value: SessionScore)
 
@@ -91,5 +98,4 @@ extension Player {
 
   @objc(removeSessionScores:)
   @NSManaged public func removeFromSessionScores(_ values: NSSet)
-
 }

@@ -32,7 +32,6 @@ struct PlayerListView: View {
       .roundedNavigationTitle()
       .toolbar(content: toolbarContent)
     }
-    .tint(.primaryAccentColor)
   }
 }
 
@@ -48,7 +47,7 @@ extension PlayerListView {
 
   private var playerList: some View {
     ScrollView(showsIndicators: false) {
-      ForEach(players) { player in
+      ForEach(players.filter { $0.wasDeleted == false }) { player in
         NavigationLink(destination: PlayerDetailView.init(player: player)) {
           PlayerListRowView(player: player)
         }

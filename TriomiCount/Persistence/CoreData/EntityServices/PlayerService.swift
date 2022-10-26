@@ -52,4 +52,18 @@ public class PlayerService: EntityServiceBase {
     }
     return nil
   }
+
+  static func delete(_ player: Player, in context: NSManagedObjectContext = CoreDataManager.shared.context) {
+    if let _ = player.sessions {
+      player.wasDeleted = true
+    } else {
+      context.delete(player)
+    }
+    
+    do {
+      try context.save()
+    } catch {
+      print(error.localizedDescription)
+    }
+  }
 }
