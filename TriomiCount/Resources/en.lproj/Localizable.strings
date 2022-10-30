@@ -54,8 +54,8 @@
 "playerDetailView.createdOn" = "Created On";
 "playerDetailView.numberOfSessionsWon" = "Number Of Sessions Won";
 "playerDetailView.numberOfSessionsPlayed" = "Number Of Sessions Played";
-"playerDetailView.deleteButton.title" = "Delete Player";
 "playerDetailView.backButton.title" = "Back";
+"playerDetailView.deletePlayer.buttonTitle" = "Delete Session";
 "playerDetailView.deletePlayer.alertTitle" = "Warning!";
 "playerDetailView.deletePlayer.alertMessage %@" = "Are you sure that you want to delete %@? The data can't be restored.";
 "playerDetailView.deletePlayer.confirmationButtonTitle" = "Yes, I'm sure.";
@@ -83,6 +83,10 @@
 "sessionDetailView.points" = "Points";
 "sessionDetailView.turn" = "Turn";
 "sessionDetailView.turnOverview" = "Overview";
+"sessionDetailView.deleteSession.buttonTitle" = "Delete Session";
+"sessionDetailView.deleteSession.alertTitle" = "Warning!";
+"sessionDetailView.deleteSession.alertMessage" = "Are you sure that you want to delete this session? The data can't be restored.";
+"sessionDetailView.deleteSession.confirmationButtonTitle" = "Yes, I'm sure.";
 
 // SettingsView
 "settingsView.title" = "Settings";

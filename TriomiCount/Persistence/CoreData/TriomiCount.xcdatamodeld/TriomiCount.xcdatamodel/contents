@@ -43,6 +43,6 @@
         <attribute name="timesDrawn" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="turnCounter" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="turns" inverseEntity="Player"/>
-        <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="turns" inverseEntity="Session"/>
+        <relationship name="session" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Session" inverseName="turns" inverseEntity="Session"/>
     </entity>
 </model>

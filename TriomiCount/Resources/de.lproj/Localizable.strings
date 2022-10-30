@@ -54,11 +54,11 @@
 "playerDetailView.createdOn" = "Erstellt am";
 "playerDetailView.numberOfSessionsWon" = "Gewonnene Spiele";
 "playerDetailView.numberOfSessionsPlayed" = "Gespielte Spiele";
-"playerDetailView.deleteButton.title" = "Spieler löschen";
 "playerDetailView.backButton.title" = "Zurück";
+"playerDetailView.deletePlayer.buttonTitle" = "Spieler löschen";
 "playerDetailView.deletePlayer.alertTitle" = "Warnung!";
 "playerDetailView.deletePlayer.alertMessage %@" = "Bist du sicher, dass du %@ löschen möchtest? Die Daten können nicht widerhergestellt werden.";
-"playerDetailView.deletePlayer.confirmationButtonTitle" = "Ja, ich bin mir sicher.";
+"playerDetailView.deletePlayer.confirmationButtonTitle" = "Ja, sicher.";
 
 // PlayerListView
 "playerListView.noPlayersInfo" = "Kein Spieler vorhanden. Erstelle jetzt einen, indem du oben rechts auf das + tippst.";
@@ -83,6 +83,10 @@
 "sessionDetailView.points" = "Punkteverteilung";
 "sessionDetailView.turn" = "Zug";
 "sessionDetailView.turnOverview" = "Übersicht der Züge";
+"sessionDetailView.deleteSession.buttonTitle" = "Spiel löschen";
+"sessionDetailView.deleteSession.alertTitle" = "Warnung!";
+"sessionDetailView.deleteSession.alertMessage" = "Bist du sicher, dass du dieses Spiel löschen möchtest? Die Daten können nicht widerhergestellt werden.";
+"sessionDetailView.deleteSession.confirmationButtonTitle" = "Ja, sicher.";
 
 // SettingsView
 "settingsView.title" = "Einstellungen";

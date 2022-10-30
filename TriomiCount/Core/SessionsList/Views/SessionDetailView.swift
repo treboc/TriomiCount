@@ -74,6 +74,7 @@ struct SessionDetailView: View {
             barMarkWidth = size.width
           }
         }
+        deleteSessionBtn
       }
       .padding(.horizontal)
 
@@ -91,6 +92,16 @@ struct SessionDetailView: View {
   }
 }
 
+
+  private func deleteSession() {
+    do {
+      try SessionService.delete(session)
+      dismiss()
+    } catch {
+      print("Can't delete session!", error)
+    }
+  }
+}
 extension SessionDetailView {
   struct SessionDetailSection<Content: View>: View {
     let sectionTitle: String

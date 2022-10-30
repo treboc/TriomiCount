@@ -47,71 +47,24 @@ public class SessionService: EntityServiceBase {
     }
     return nil
   }
-}
 
-struct PersistedSession: Codable, Identifiable {
-  struct PersistedTurn: Codable {
-    let name: String
-    let points: Int
-  }
-
-  let id: UUID
-  let sessionCount: Int
-  let startedOn: Date
-  let endedOn: Date
-  let winner: String
-  let turns: [PersistedTurn]
-  let players: [String]
-}
-
-struct PersistedSessionService {
-  static let fileURL: URL = .documentsDirectory.appending(path: "sessions.json")
-
-  static func convertSession(_ session: Session) -> PersistedSession {
-    var persistedTurns: [PersistedSession.PersistedTurn] = []
-    session.turnsArray.forEach { turn in
-      if let id = turn.playerID,
-         let player = Player.object(id: id, context: CoreDataManager.shared.context) {
-        let pTurn = PersistedSession.PersistedTurn(name: player.wrappedName,
-                                                   points: Int(turn.playersScoreInTurn))
-        persistedTurns.append(pTurn)
-      }
-    }
-
-    let persistedSession: PersistedSession = .init(
-      id: session.id,
-      sessionCount: Int(session.sessionCounter),
-      startedOn: session.wrappedStartedOn,
-      endedOn: session.wrappedEndedOn,
-      winner: session.winner ?? "No Winner",
-      turns: persistedTurns,
-      players: session.playersArray.map(\.wrappedName))
-    return persistedSession
-  }
-
-  static func saveSession(_ session: Session) {
-    var allSessions = Self.loadSessions()
-    let persistedSession = Self.convertSession(session)
-    allSessions.append(persistedSession)
+  static func delete(_ session: Session, in context: NSManagedObjectContext = CoreDataManager.shared.context) throws {
+    guard
+      let moc = session.managedObjectContext,
+      let sessionScores = SessionScore.allObjects(context: context) as? [SessionScore]
+    else { return }
 
     do {
-      let data = try JSONEncoder().encode(allSessions)
-      try data.write(to: Self.fileURL, options: .atomic)
+      let _ = sessionScores
+        .map { item in
+          if item.sessionID == session.id {
+            moc.delete(item)
+          }
+        }
+      moc.delete(session)
+      try moc.save()
     } catch {
-      print(error.localizedDescription)
+      throw error
     }
-  }
-
-  static func loadSessions() -> [PersistedSession] {
-    var sessions: [PersistedSession] = []
-
-    do {
-      let data = try Data(contentsOf: Self.fileURL)
-      sessions = try JSONDecoder().decode([PersistedSession].self, from: data)
-    } catch {
-      print(error.localizedDescription)
-    }
-
-    return sessions
   }
 }

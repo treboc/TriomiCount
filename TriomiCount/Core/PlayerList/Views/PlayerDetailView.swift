@@ -35,7 +35,7 @@ struct PlayerDetailView: View {
             "\(player.sessionsPlayed)"
           }
 
-          Button(L10n.PlayerDetailView.DeleteButton.title, role: .destructive) {
+          Button(L10n.PlayerDetailView.DeletePlayer.buttonTitle, role: .destructive) {
             showDeletePlayerAlert.toggle()
           }
           .buttonStyle(ShadowedStyle(role: .destructive))

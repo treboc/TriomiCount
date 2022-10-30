@@ -113,10 +113,6 @@ internal enum L10n {
       /// Back
       internal static let title = L10n.tr("Localizable", "playerDetailView.backButton.title", fallback: "Back")
     }
-    internal enum DeleteButton {
-      /// Delete Player
-      internal static let title = L10n.tr("Localizable", "playerDetailView.deleteButton.title", fallback: "Delete Player")
-    }
     internal enum DeletePlayer {
       /// Are you sure that you want to delete %@? The data can't be restored.
       internal static func alertMessage(_ p1: Any) -> String {
@@ -124,6 +120,8 @@ internal enum L10n {
       }
       /// Warning!
       internal static let alertTitle = L10n.tr("Localizable", "playerDetailView.deletePlayer.alertTitle", fallback: "Warning!")
+      /// Delete Session
+      internal static let buttonTitle = L10n.tr("Localizable", "playerDetailView.deletePlayer.buttonTitle", fallback: "Delete Session")
       /// Yes, I'm sure.
       internal static let confirmationButtonTitle = L10n.tr("Localizable", "playerDetailView.deletePlayer.confirmationButtonTitle", fallback: "Yes, I'm sure.")
     }
@@ -214,6 +212,16 @@ internal enum L10n {
     internal static let turnOverview = L10n.tr("Localizable", "sessionDetailView.turnOverview", fallback: "Overview")
     /// Winner
     internal static let won = L10n.tr("Localizable", "sessionDetailView.won", fallback: "Winner")
+    internal enum DeleteSession {
+      /// Are you sure that you want to delete this session? The data can't be restored.
+      internal static let alertMessage = L10n.tr("Localizable", "sessionDetailView.deleteSession.alertMessage", fallback: "Are you sure that you want to delete this session? The data can't be restored.")
+      /// Warning!
+      internal static let alertTitle = L10n.tr("Localizable", "sessionDetailView.deleteSession.alertTitle", fallback: "Warning!")
+      /// Delete Session
+      internal static let buttonTitle = L10n.tr("Localizable", "sessionDetailView.deleteSession.buttonTitle", fallback: "Delete Session")
+      /// Yes, I'm sure.
+      internal static let confirmationButtonTitle = L10n.tr("Localizable", "sessionDetailView.deleteSession.confirmationButtonTitle", fallback: "Yes, I'm sure.")
+    }
   }
   internal enum SessionListRowView {
     /// Played with:

@@ -11,7 +11,7 @@ enum StorageType {
   case persistent, inMemory
 }
 
-class CoreDataManager {
+struct CoreDataManager {
   static let shared = CoreDataManager()
 
   var persistentContainer: NSPersistentContainer
