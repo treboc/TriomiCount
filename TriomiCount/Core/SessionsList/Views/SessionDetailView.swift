@@ -9,15 +9,26 @@ import CoreData
 import SwiftUI
 import Charts
 
-struct ChartTurnData {
-  let id: Int
-  let score: Int
-}
+
 
 struct SessionDetailView: View {
   @Environment(\.dismiss) var dismiss
   let session: Session
   var sessionScores: [Dictionary<String, Int16>.Element]
+  @State private var barMarkWidth: CGFloat = 0
+
+  @State private var chartData: [ChartTurnData] = []
+
+  private func prepareChartData() {
+    var counter = 1
+    session.turnsArray.forEach { turn in
+      let turnData = ChartTurnData(turnNumber: counter,
+                                   score: Int(turn.playersScoreTilNow + turn.playersScoreInTurn),
+                                   player: turn.playerName ?? "Unknown Player")
+      chartData.append(turnData)
+      counter += 1
+    }
+  }
 
   var body: some View {
     ScrollView {
@@ -33,19 +44,6 @@ struct SessionDetailView: View {
           }
         }
 
-        SessionDetailSection(L10n.SessionDetailView.turnOverview) {
-          Chart {
-            ForEach(0..<session.turnsArray.count, id: \.self) { index in
-              BarMark(
-                x: .value(L10n.SessionDetailView.turn, index),
-                y: .value(L10n.SessionDetailView.points, session.turnsArray[index].playersScoreTilNow)
-              )
-              .foregroundStyle(by: .value("Player", session.turnsArray[index].wrappedPlayerName))
-            }
-          }
-          .frame(height: 300)
-        }
-
         SessionDetailSection(L10n.SessionDetailView.points) {
           VStack(alignment: .leading) {
             ForEach(sessionScores.sorted { $0.value > $1.value }, id: \.key) { key, value in
@@ -59,6 +57,23 @@ struct SessionDetailView: View {
             }
           }
         }
+
+        SessionDetailSection(L10n.SessionDetailView.turnOverview) {
+          Chart {
+            ForEach(chartData) { turn in
+              BarMark(
+                x: .value(L10n.SessionDetailView.turn, turn.turnNumber),
+                y: .value(L10n.SessionDetailView.points, turn.score),
+                width: .fixed((barMarkWidth / Double(chartData.count)) - 10)
+              )
+              .foregroundStyle(by: .value("Player", turn.player))
+            }
+          }
+          .frame(height: 300)
+          .readSize { size in
+            barMarkWidth = size.width
+          }
+        }
       }
       .padding(.horizontal)
 
@@ -67,6 +82,7 @@ struct SessionDetailView: View {
     .gradientBackground()
     .navigationTitle("Session #\(session.sessionCounter)")
     .roundedNavigationTitle()
+    .onAppear(perform: prepareChartData)
   }
 
   init(session: Session) {
@@ -107,5 +123,14 @@ extension SessionDetailView {
       )
       .padding(.top, 5)
     }
+  }
+
+  struct ChartTurnData: Identifiable {
+    var id: Int {
+      turnNumber
+    }
+    let turnNumber: Int
+    let score: Int
+    let player: String
   }
 }

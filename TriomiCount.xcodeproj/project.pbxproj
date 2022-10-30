@@ -52,6 +52,7 @@
 		45110C4728FFD21200E83143 /* LegalNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45110C4628FFD21200E83143 /* LegalNoticeView.swift */; };
 		45110C4928FFDE4C00E83143 /* RectangularDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45110C4828FFDE4C00E83143 /* RectangularDivider.swift */; };
 		45AD1CAC29001A2A00063D5A /* SessionPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AD1CAB29001A2A00063D5A /* SessionPresentationManager.swift */; };
+		45F99CEC290E87020050AC6F /* ReadSize-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F99CEB290E87020050AC6F /* ReadSize-ViewModifier.swift */; };
 		8A06D67F282265540049EA9A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D67E282265540049EA9A /* UIColor+Extension.swift */; };
 		8A06D681282273F00049EA9A /* UIColorValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */; };
 		8A06D6832824FA160049EA9A /* RoundedCorner-ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A06D6822824FA160049EA9A /* RoundedCorner-ViewModifier.swift */; };
@@ -145,6 +146,7 @@
 		45110C4628FFD21200E83143 /* LegalNoticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalNoticeView.swift; sourceTree = "<group>"; };
 		45110C4828FFDE4C00E83143 /* RectangularDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularDivider.swift; sourceTree = "<group>"; };
 		45AD1CAB29001A2A00063D5A /* SessionPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPresentationManager.swift; sourceTree = "<group>"; };
+		45F99CEB290E87020050AC6F /* ReadSize-ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReadSize-ViewModifier.swift"; sourceTree = "<group>"; };
 		8A06D67E282265540049EA9A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8A06D680282273F00049EA9A /* UIColorValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorValueTransformer.swift; sourceTree = "<group>"; };
 		8A06D6822824FA160049EA9A /* RoundedCorner-ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoundedCorner-ViewModifier.swift"; sourceTree = "<group>"; };
@@ -508,6 +510,7 @@
 			children = (
 				8A3525A7287202DF00393BCD /* GradientBackground-ViewModifier.swift */,
 				8A5D847128286B8C00286F14 /* GlassStyledHeaderView-ViewModifier.swift */,
+				45F99CEB290E87020050AC6F /* ReadSize-ViewModifier.swift */,
 				8A22B9652878D4FB0045E09D /* RoundedNavigationTitle-ViewModifier.swift */,
 				8A22B9672878D5140045E09D /* BorderedTextField-ViewModifier.swift */,
 				8A06D6822824FA160049EA9A /* RoundedCorner-ViewModifier.swift */,
@@ -698,6 +701,7 @@
 				8A5E01142815A34800703CE5 /* AppearanceManager.swift in Sources */,
 				8AC4D137282DB81900C227F6 /* Button+Extension.swift in Sources */,
 				089CA6F9279EA4B9007E34E8 /* PlayerListView.swift in Sources */,
+				45F99CEC290E87020050AC6F /* ReadSize-ViewModifier.swift in Sources */,
 				8AD1397B28379F1300A16EB0 /* AddNewPlayerViewModel.swift in Sources */,
 				0835129D27DC123700065228 /* SessionScore.swift in Sources */,
 				085B664427B02D00000CCC99 /* String+Extension.swift in Sources */,
@@ -906,7 +910,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"TriomiCount/Preview Content\"";
 				DEVELOPMENT_TEAM = X9DJ8STXP5;
 				ENABLE_PREVIEWS = YES;
@@ -944,7 +948,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"TriomiCount/Preview Content\"";
 				DEVELOPMENT_TEAM = X9DJ8STXP5;
 				ENABLE_PREVIEWS = YES;

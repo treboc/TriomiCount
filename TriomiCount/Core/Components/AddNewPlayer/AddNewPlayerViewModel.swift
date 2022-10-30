@@ -14,6 +14,7 @@ final class AddNewPlayerViewModel: ObservableObject {
   @Published private(set) var nameValidationState: NameValidationState = .isValid
   @Published var nameTextFieldText: String = ""
   @Published var favoriteColor: UIColor = UIColor.FavoriteColors.colors[0].color
+  let allPlayerNames = EntityServiceBase.allObjects(Player.self).map(\.wrappedName)
 
   fileprivate var cancellables = Set<AnyCancellable>()
 
@@ -51,10 +52,13 @@ final class AddNewPlayerViewModel: ObservableObject {
 
   func validate() -> NameValidationState {
     let trimmedName = nameTextFieldText.trimmingCharacters(in: .whitespacesAndNewlines)
+
     if trimmedName.count == 0 {
       return .empty(L10n.AddNewPlayerView.AlertTextFieldEmpty.message)
     } else if trimmedName.count >= 25 {
       return .tooLong(L10n.AddNewPlayerView.AlertNameToLong.message)
+    } else if allPlayerNames.contains(trimmedName) {
+      return .inUse(L10n.AddNewPlayerView.AlertInUse.message)
     } else {
       return .isValid
     }
@@ -63,6 +67,7 @@ final class AddNewPlayerViewModel: ObservableObject {
 
 extension AddNewPlayerViewModel {
   enum NameValidationState: Equatable {
+    case inUse(String)
     case empty(String)
     case tooLong(String)
     case isValid
@@ -74,6 +79,8 @@ extension AddNewPlayerViewModel {
       case .empty(let message):
         return message
       case .tooLong(let message):
+        return message
+      case .inUse(let message):
         return message
       }
     }

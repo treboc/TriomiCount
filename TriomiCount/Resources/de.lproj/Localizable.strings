@@ -45,6 +45,7 @@
 "addNewPlayerView.createButton.labelText" = "Erstellen";
 "addNewPlayerView.alertTextFieldEmpty.message" = "Bitte gib einen Namen an";
 "addNewPlayerView.alertNameToLong.message" = "Sorry, dein Name ist zu lang!";
+"addNewPlayerView.alertInUse.message" = "Der Name ist nicht verfügbar.";
 
 // PlayerDetailView
 "playerDetailView.name" = "Name";

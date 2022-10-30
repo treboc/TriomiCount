@@ -41,6 +41,10 @@ internal enum L10n {
   /// Yes
   internal static let yes = L10n.tr("Localizable", "yes", fallback: "Yes")
   internal enum AddNewPlayerView {
+    internal enum AlertInUse {
+      /// Name is not available.
+      internal static let message = L10n.tr("Localizable", "addNewPlayerView.alertInUse.message", fallback: "Name is not available.")
+    }
     internal enum AlertNameToLong {
       /// I'm sorry, your name is too long!
       internal static let message = L10n.tr("Localizable", "addNewPlayerView.alertNameToLong.message", fallback: "I'm sorry, your name is too long!")
