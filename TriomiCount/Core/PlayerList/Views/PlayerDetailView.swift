@@ -9,6 +9,7 @@ import SwiftUI
 struct PlayerDetailView: View {
   let player: Player
   @Environment(\.dismiss) private var dismiss
+  @Environment(\.colorScheme) private var colorScheme
   @State private var showDeletePlayerAlert: Bool = false
   @State private var showColorPicker: Bool = false
 
@@ -122,8 +123,9 @@ extension PlayerDetailView {
           )
           .overlay(alignment: .bottomTrailing) {
             Image(systemSymbol: .pencilCircleFill)
-              .symbolRenderingMode(.multicolor)
-              .foregroundStyle(Color.accentColor)
+              .symbolRenderingMode(.palette)
+              .foregroundStyle(colorScheme == .light ? .white : .black,
+                               Color.accentColor.gradient)
               .font(.title)
           }
         Text(player.wrappedName)
