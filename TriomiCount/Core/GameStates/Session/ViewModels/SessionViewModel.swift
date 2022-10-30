@@ -207,6 +207,16 @@ class SessionViewModel: ObservableObject {
 
         // add points from all the other players
         lastPlayer.currentScore += scoreOfPlayersWithoutLastPlayer
+
+        let turnProperties = TurnService.TurnProperties(session: session,
+                                                        calculatedScore: 0,
+                                                        playersScoreTilNow: lastPlayer.currentScore,
+                                                        player: lastPlayer,
+                                                        scoreSliderValue: Int16(0),
+                                                        timesDrawn: Int16(0),
+                                                        playedCard: playedCard)
+
+        TurnService.addTurn(with: turnProperties)
       }
 
       // get winner with highest score
